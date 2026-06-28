@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Outlet, ScrollRestoration, createRootRouteWithContext } from '@tanstack/react-router'
+import { Outlet, ScrollRestoration, createRootRouteWithContext, redirect } from '@tanstack/react-router'
 import { HeadContent, Scripts } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import '../styles.css'
@@ -9,6 +9,11 @@ interface RouterContext {
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
+  beforeLoad: ({ location }) => {
+    if (location.pathname === '/' || location.pathname === '') {
+      throw redirect({ to: '/leap/' })
+    }
+  },
   component: RootComponent,
 })
 
