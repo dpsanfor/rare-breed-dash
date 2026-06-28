@@ -78,16 +78,16 @@ function WeeklyAuditPage() {
                 day: "numeric",
               })}
             </p>
-            <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-[rgba(201,168,76,0.1)]">
+            <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-[rgba(74,18,89,0.1)]">
               <div
                 className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
                 style={{
                   width: `${((dimIndex + 1) / WEEKLY_AUDIT_DIMENSIONS.length) * 100}%`,
-                  background: "linear-gradient(90deg, #6b21a8, #d946ef)",
+                  background: "linear-gradient(90deg, #4A1259, #E0249C)",
                 }}
               />
             </div>
-            <p className="mt-2 font-mono text-[10px] text-rb-fuchsia/50">
+            <p className="mt-2 font-mono text-[10px] text-[#E0249C]/50">
               {dimIndex + 1} of {WEEKLY_AUDIT_DIMENSIONS.length}
             </p>
           </div>
@@ -105,17 +105,15 @@ function WeeklyAuditPage() {
                 onClick={() => selectScore(dim.key, n)}
                 className={`flex w-full items-center gap-6 rounded-2xl border px-6 py-5 text-left transition-all hover:-translate-y-0.5 ${
                   scores[dim.key] === n
-                    ? "border-rb-fuchsia bg-rb-violet/40"
-                    : "border-[rgba(201,168,76,0.18)] bg-[rgba(21,8,40,0.5)] hover:border-rb-fuchsia/40 hover:bg-rb-violet/15"
+                    ? "border-[#E0249C] bg-[#E0249C]/8"
+                    : "border-[rgba(74,18,89,0.15)] bg-white/60 hover:border-[#E0249C]/40 hover:bg-[#E0249C]/5"
                 }`}
               >
                 <span
                   className="font-display text-3xl tracking-wide"
                   style={{
                     color:
-                      scores[dim.key] === n
-                        ? "#d946ef"
-                        : "rgba(240,223,160,0.45)",
+                      scores[dim.key] === n ? "#E0249C" : "rgba(74,18,89,0.4)",
                   }}
                 >
                   {n}
@@ -126,19 +124,19 @@ function WeeklyAuditPage() {
                     style={{
                       color:
                         scores[dim.key] === n
-                          ? "rgba(240,223,160,0.9)"
-                          : "rgba(240,223,160,0.6)",
+                          ? "#1F1623"
+                          : "rgba(74,18,89,0.6)",
                     }}
                   >
                     {SCORE_LABELS[n]}
                   </p>
                   {n === 1 && (
-                    <p className="font-mono text-[10px] text-[rgba(240,223,160,0.3)]">
+                    <p className="font-mono text-[10px] text-[#4A1259]/30">
                       {dim.low}
                     </p>
                   )}
                   {n === 5 && (
-                    <p className="font-mono text-[10px] text-[rgba(240,223,160,0.3)]">
+                    <p className="font-mono text-[10px] text-[#4A1259]/30">
                       {dim.high}
                     </p>
                   )}
@@ -150,7 +148,7 @@ function WeeklyAuditPage() {
           {dimIndex > 0 && (
             <button
               onClick={() => setDimIndex((i) => i - 1)}
-              className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-[rgba(240,223,160,0.3)] hover:text-rb-champagne"
+              className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/30 hover:text-[#1F1623]"
             >
               ← Back
             </button>
@@ -170,8 +168,7 @@ function WeeklyAuditPage() {
             <div
               className="h-[2px] w-full rounded-full"
               style={{
-                background:
-                  "linear-gradient(90deg, #6b21a8, #d946ef, #ec4899)",
+                background: "linear-gradient(90deg, #4A1259, #E0249C, #ec4899)",
               }}
             />
           </div>
@@ -179,7 +176,7 @@ function WeeklyAuditPage() {
           <h2 className="mb-4 font-display text-5xl leading-tight tracking-wide text-shimmer">
             What does this week need you to know?
           </h2>
-          <p className="mb-8 font-serif font-light italic text-[rgba(240,223,160,0.5)]">
+          <p className="mb-8 font-serif font-light italic text-[#4A1259]/50">
             One line. The truth you'd rather avoid looking at.
           </p>
 
@@ -188,30 +185,28 @@ function WeeklyAuditPage() {
             onChange={(e) => setNotes(e.target.value)}
             placeholder="This week taught me..."
             rows={4}
-            className="mb-8 w-full resize-none rounded-2xl border border-[rgba(201,168,76,0.2)] bg-[rgba(21,8,40,0.7)] px-6 py-5 font-serif text-base font-light italic leading-relaxed text-rb-champagne outline-none placeholder:text-[rgba(240,223,160,0.22)] focus:border-rb-fuchsia/40"
+            className="mb-8 w-full resize-none rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white/80 px-6 py-5 font-serif text-base font-light italic leading-relaxed text-[#1F1623] outline-none placeholder:text-[#4A1259]/25 focus:border-[#E0249C]/40"
           />
 
           {/* Score summary */}
-          <div className="mb-10 rounded-xl border border-[rgba(201,168,76,0.15)] bg-[rgba(21,8,40,0.5)] px-6 py-5">
+          <div className="mb-10 rounded-xl border border-[rgba(74,18,89,0.1)] bg-white/60 px-6 py-5">
             <p className="label-soft mb-3">This week's OS score</p>
             <div className="flex items-end gap-3">
               <p className="font-display text-5xl text-shimmer">
                 {avg.toFixed(1)}
               </p>
-              <p className="mb-1 font-serif italic text-[rgba(240,223,160,0.4)]">
-                / 5
-              </p>
+              <p className="mb-1 font-serif italic text-[#4A1259]/40">/ 5</p>
             </div>
           </div>
 
           <button
             onClick={submit}
             disabled={saving}
-            className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-display text-[15px] tracking-[0.2em] text-rb-black transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-60"
+            className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-display text-[15px] tracking-[0.2em] text-white transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-60"
             style={{
               background:
-                "linear-gradient(135deg, #d946ef 0%, #ec4899 50%, #c9a84c 100%)",
-              boxShadow: "0 10px 40px -10px rgba(217,70,239,0.5)",
+                "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
+              boxShadow: "0 10px 40px -10px rgba(224,36,156,0.4)",
             }}
           >
             {saving ? "Saving..." : "Complete Audit →"}
@@ -227,20 +222,18 @@ function WeeklyAuditPage() {
       <div className="mx-auto max-w-xl text-center">
         <div className="mb-16 mt-16">
           <p className="eyebrow mb-8">Audit Complete</p>
-          <div className="mb-8 font-mono text-sm text-[rgba(240,223,160,0.4)]">
+          <div className="mb-8 font-mono text-sm text-[#4A1259]/40">
             <p>████████████ 100%</p>
           </div>
           <h2 className="font-display text-6xl leading-[0.9] tracking-wide text-shimmer">
             Operating system checked.
           </h2>
-          <p className="mt-6 font-serif text-xl font-light italic text-[rgba(240,223,160,0.6)]">
+          <p className="mt-6 font-serif text-xl font-light italic text-[#4A1259]/60">
             See you next Friday.
           </p>
-          <div className="mt-10 inline-flex items-end gap-3 rounded-2xl border border-[rgba(201,168,76,0.18)] bg-[rgba(21,8,40,0.7)] px-10 py-6">
+          <div className="mt-10 inline-flex items-end gap-3 rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 px-10 py-6">
             <p className="font-display text-6xl text-shimmer">{avg.toFixed(1)}</p>
-            <p className="mb-2 font-serif italic text-[rgba(240,223,160,0.4)]">
-              / 5
-            </p>
+            <p className="mb-2 font-serif italic text-[#4A1259]/40">/ 5</p>
           </div>
         </div>
       </div>

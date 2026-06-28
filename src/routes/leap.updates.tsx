@@ -35,7 +35,7 @@ function UpdatesPage() {
                 </h3>
               </div>
               {i === 0 && (
-                <span className="rounded-full border border-rb-fuchsia/40 bg-rb-fuchsia/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.25em] text-rb-fuchsia">
+                <span className="rounded-full border border-[#E0249C]/40 bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.25em] text-[#E0249C]">
                   Current
                 </span>
               )}
@@ -43,7 +43,7 @@ function UpdatesPage() {
 
             {i === 0 && (
               <div className="mb-6">
-                <p className="font-mono text-[10px] text-[rgba(240,223,160,0.4)]">
+                <p className="font-mono text-[10px] text-[#4A1259]/40">
                   Installing...
                 </p>
                 <div className="mt-2 flex items-center gap-2">
@@ -54,14 +54,12 @@ function UpdatesPage() {
                         className="h-3 w-2 rounded-sm"
                         style={{
                           background:
-                            j < 8
-                              ? "#d946ef"
-                              : "rgba(201,168,76,0.15)",
+                            j < 8 ? "#E0249C" : "rgba(74,18,89,0.12)",
                         }}
                       />
                     ))}
                   </div>
-                  <span className="font-mono text-[10px] text-rb-fuchsia/60">
+                  <span className="font-mono text-[10px] text-[#E0249C]/60">
                     64%
                   </span>
                 </div>
@@ -75,9 +73,9 @@ function UpdatesPage() {
                 const desc = dashIdx > -1 ? item.slice(dashIdx + 3) : null;
                 return (
                   <div key={item} className="flex items-start gap-4">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-rb-fuchsia" />
-                    <p className="font-serif text-base text-[rgba(240,223,160,0.75)]">
-                      <span className="not-italic font-medium text-rb-champagne">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#E0249C]" />
+                    <p className="font-serif text-base text-[#4A1259]/75">
+                      <span className="not-italic font-medium text-[#1F1623]">
                         {title}
                       </span>
                       {desc && ` — ${desc}`}
@@ -92,10 +90,10 @@ function UpdatesPage() {
         {/* Coming soon */}
         <VelvetCard className="opacity-50">
           <p className="label-soft mb-4">Coming · Version 1.3</p>
-          <h3 className="font-display text-3xl tracking-wide text-[rgba(240,223,160,0.4)]">
+          <h3 className="font-display text-3xl tracking-wide text-[#4A1259]/40">
             Community Feed
           </h3>
-          <p className="mt-2 font-serif text-sm italic text-[rgba(240,223,160,0.3)]">
+          <p className="mt-2 font-serif text-sm italic text-[#4A1259]/30">
             Q4 2026
           </p>
         </VelvetCard>

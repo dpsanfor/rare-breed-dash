@@ -34,17 +34,18 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Rare Breed palette */
-  --color-rb-black: #0a0a0a;
-  --color-rb-deep-plum: #1a0533;
-  --color-rb-violet: #2d0a4e;
-  --color-rb-amethyst: #6b21a8;
-  --color-rb-fuchsia: #d946ef;
+  /* Rare Breed palette — Palm Springs Magenta Edge */
+  --color-rb-bone: #F5EFE0;
+  --color-rb-cream: #FDFAF5;
+  --color-rb-charcoal: #1F1623;
+  --color-rb-plum: #4A1259;
+  --color-rb-electric-magenta: #E0249C;
+  --color-rb-fuchsia: #E0249C;
   --color-rb-hot-pink: #ec4899;
   --color-rb-gold: #c9a84c;
   --color-rb-champagne: #f0dfa0;
   --color-rb-iridescent: #e879f9;
-  --color-rb-white: #faf7ff;
+  --color-rb-black: #1F1623;
 
   --font-display: "Bebas Neue", sans-serif;
   --font-serif: "Cormorant Garamond", serif;
@@ -54,26 +55,26 @@
 :root {
   --radius: 0.5rem;
 
-  /* Dark-only mapping to brand */
-  --background: #0a0a0a;
-  --foreground: #faf7ff;
-  --card: #120821;
-  --card-foreground: #faf7ff;
-  --popover: #120821;
-  --popover-foreground: #faf7ff;
-  --primary: #d946ef;
-  --primary-foreground: #0a0a0a;
-  --secondary: #1a0533;
-  --secondary-foreground: #f0dfa0;
-  --muted: #1a0533;
-  --muted-foreground: rgba(240, 223, 160, 0.6);
+  /* Bone base — Palm Springs Magenta Edge */
+  --background: #F5EFE0;
+  --foreground: #1F1623;
+  --card: #FDFAF5;
+  --card-foreground: #1F1623;
+  --popover: #FDFAF5;
+  --popover-foreground: #1F1623;
+  --primary: #E0249C;
+  --primary-foreground: #FDFAF5;
+  --secondary: #4A1259;
+  --secondary-foreground: #F5EFE0;
+  --muted: #EDE8DC;
+  --muted-foreground: rgba(74, 18, 89, 0.55);
   --accent: #c9a84c;
-  --accent-foreground: #0a0a0a;
-  --destructive: #ec4899;
-  --destructive-foreground: #0a0a0a;
-  --border: rgba(201, 168, 76, 0.18);
-  --input: rgba(201, 168, 76, 0.25);
-  --ring: #d946ef;
+  --accent-foreground: #1F1623;
+  --destructive: #E0249C;
+  --destructive-foreground: #FDFAF5;
+  --border: rgba(74, 18, 89, 0.12);
+  --input: rgba(224, 36, 156, 0.15);
+  --ring: #E0249C;
 }
 
 @layer base {
@@ -91,8 +92,8 @@
   }
 
   ::selection {
-    background: rgba(217, 70, 239, 0.35);
-    color: #faf7ff;
+    background: rgba(224, 36, 156, 0.2);
+    color: #1F1623;
   }
 }
 
@@ -108,13 +109,14 @@
     font-family: var(--font-sans);
   }
 
+  /* Shimmer reads on bone: deep plum → electric magenta → gold */
   .text-shimmer {
     background: linear-gradient(
       135deg,
-      var(--color-rb-champagne) 0%,
-      var(--color-rb-gold) 30%,
-      var(--color-rb-fuchsia) 65%,
-      var(--color-rb-champagne) 100%
+      #4A1259 0%,
+      #E0249C 40%,
+      #c9a84c 75%,
+      #4A1259 100%
     );
     background-size: 200% 200%;
     -webkit-background-clip: text;
@@ -124,7 +126,7 @@
   }
 
   .text-gold-grad {
-    background: linear-gradient(135deg, var(--color-rb-champagne), var(--color-rb-gold));
+    background: linear-gradient(135deg, #c9a84c, #a07830);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -153,7 +155,7 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(201, 168, 76, 0.5),
+      rgba(201, 168, 76, 0.4),
       transparent
     );
   }
@@ -164,7 +166,7 @@
     font-weight: 700;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: var(--color-rb-gold);
+    color: #E0249C;
   }
 
   .label-soft {
@@ -173,14 +175,23 @@
     font-weight: 500;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(240, 223, 160, 0.55);
+    color: rgba(74, 18, 89, 0.5);
   }
 
+  /* Palm Springs — bone base with electric magenta glow */
+  .surface-bone {
+    background:
+      radial-gradient(ellipse 80% 50% at 15% 0%, rgba(224,36,156,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 85%, rgba(201,168,76,0.09) 0%, transparent 50%),
+      #F5EFE0;
+  }
+
+  /* Keep surface-velvet as alias so anything that still references it renders */
   .surface-velvet {
     background:
-      radial-gradient(ellipse 90% 70% at 20% 20%, rgba(107, 33, 168, 0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 70% 60% at 90% 80%, rgba(217, 70, 239, 0.1) 0%, transparent 55%),
-      #0a0a0a;
+      radial-gradient(ellipse 80% 50% at 15% 0%, rgba(224,36,156,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 40% at 90% 85%, rgba(201,168,76,0.09) 0%, transparent 50%),
+      #F5EFE0;
   }
 }
 

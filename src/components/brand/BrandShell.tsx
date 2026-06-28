@@ -21,17 +21,17 @@ export function BrandShell({
   const path = location.pathname;
 
   return (
-    <div className="surface-velvet min-h-screen text-foreground">
+    <div className="surface-bone min-h-screen text-foreground">
       {/* Top nav */}
-      <header className="sticky top-0 z-40 border-b border-[rgba(201,168,76,0.12)] bg-[rgba(10,10,10,0.85)] backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-[rgba(74,18,89,0.1)] bg-[rgba(245,239,224,0.92)] backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           {/* Logo */}
-          <Link to="/leap/" className="flex items-center gap-3 group">
+          <Link to="/leap/" className="group flex items-center gap-3">
             <div className="flex flex-col leading-none">
               <span className="font-display text-[22px] tracking-[0.14em] text-shimmer">
                 RARE BREED
               </span>
-              <span className="font-mono text-[8px] tracking-[0.5em] text-[rgba(201,168,76,0.5)] uppercase">
+              <span className="font-mono text-[8px] uppercase tracking-[0.5em] text-[rgba(74,18,89,0.4)]">
                 OS™ · 10X Leap
               </span>
             </div>
@@ -50,8 +50,8 @@ export function BrandShell({
                   to={n.to}
                   className={`text-[10px] uppercase tracking-[0.3em] transition-colors ${
                     active
-                      ? "text-rb-champagne"
-                      : "text-[rgba(240,223,160,0.4)] hover:text-rb-fuchsia"
+                      ? "text-[#E0249C]"
+                      : "text-[rgba(74,18,89,0.4)] hover:text-[#E0249C]"
                   }`}
                 >
                   {n.label}
@@ -87,7 +87,7 @@ export function PageHeader({
         {title}
       </h1>
       {subtitle && (
-        <p className="mt-5 max-w-2xl font-serif text-xl italic font-light text-[rgba(240,223,160,0.75)]">
+        <p className="mt-5 max-w-2xl font-serif text-xl font-light italic text-[#4A1259]/60">
           {subtitle}
         </p>
       )}
@@ -96,7 +96,7 @@ export function PageHeader({
   );
 }
 
-export function VelvetCard({
+export function EdgeCard({
   children,
   className = "",
 }: {
@@ -105,9 +105,12 @@ export function VelvetCard({
 }) {
   return (
     <div
-      className={`relative rounded-2xl border border-[rgba(201,168,76,0.18)] bg-gradient-to-br from-[#150828] via-[#0e0518] to-[#0a0a0a] p-8 ${className}`}
+      className={`relative rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 p-8 ${className}`}
     >
       {children}
     </div>
   );
 }
+
+// Alias so existing imports don't break
+export const VelvetCard = EdgeCard;

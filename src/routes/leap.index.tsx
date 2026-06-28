@@ -111,7 +111,7 @@ function LeapHome() {
         <h1 className="font-display text-[80px] leading-[0.88] tracking-wide text-shimmer md:text-[120px]">
           {greeting}
         </h1>
-        <p className="mt-6 max-w-xl font-serif text-xl font-light italic text-[rgba(240,223,160,0.7)]">
+        <p className="mt-6 max-w-xl font-serif text-xl font-light italic text-[#4A1259]/65">
           {completedInstallations.length === INSTALLATIONS.length
             ? "Your operating system is installed. Run everything through the filter."
             : currentInstallation
@@ -126,12 +126,12 @@ function LeapHome() {
           <p className="label-soft">Operating System</p>
           <p className="label-soft">{pct}% installed</p>
         </div>
-        <div className="relative h-[3px] w-full overflow-hidden rounded-full bg-[rgba(201,168,76,0.12)]">
+        <div className="relative h-[3px] w-full overflow-hidden rounded-full bg-[rgba(74,18,89,0.1)]">
           <div
             className="absolute inset-y-0 left-0 rounded-full transition-all duration-1000"
             style={{
               width: `${pct}%`,
-              background: "linear-gradient(90deg, #6b21a8, #d946ef, #ec4899)",
+              background: "linear-gradient(90deg, #4A1259, #E0249C, #ec4899)",
             }}
           />
         </div>
@@ -143,8 +143,8 @@ function LeapHome() {
               style={{
                 color:
                   i < completedInstallations.length
-                    ? "#d946ef"
-                    : "rgba(240,223,160,0.25)",
+                    ? "#E0249C"
+                    : "rgba(74,18,89,0.3)",
               }}
             >
               {i < completedInstallations.length ? "✓" : "○"} {inst.name}
@@ -154,9 +154,9 @@ function LeapHome() {
       </div>
 
       {/* Today's operating instruction */}
-      <div className="mb-16 rounded-2xl border border-[rgba(201,168,76,0.18)] bg-gradient-to-br from-[#150828] via-[#0e0518] to-[#0a0a0a] p-10">
+      <div className="mb-16 rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 p-10">
         <p className="eyebrow mb-4">Today's Operating Instruction</p>
-        <p className="font-serif text-2xl font-light italic leading-relaxed text-rb-champagne">
+        <p className="font-serif text-2xl font-light italic leading-relaxed text-[#1F1623]">
           "{instruction}"
         </p>
       </div>
@@ -167,17 +167,17 @@ function LeapHome() {
           <Link
             to="/leap/installations/$id"
             params={{ id: currentInstallation.id }}
-            className="rounded-2xl border border-rb-fuchsia/30 bg-gradient-to-br from-rb-violet/40 to-rb-deep-plum/60 p-7 transition-all hover:-translate-y-0.5 hover:border-rb-fuchsia/60"
+            className="rounded-2xl border border-[#E0249C]/30 bg-[#E0249C]/5 p-7 transition-all hover:-translate-y-0.5 hover:border-[#E0249C]/60 hover:bg-[#E0249C]/8"
           >
             <p className="label-soft mb-2">Continue</p>
             <p className="font-display text-2xl tracking-wide text-shimmer">
               Installation {currentInstallation.number}
             </p>
-            <p className="mt-1 font-serif italic text-rb-champagne/70">
+            <p className="mt-1 font-serif italic text-[#1F1623]/70">
               {currentInstallation.name}
             </p>
             {totalExercises > 0 && (
-              <p className="mt-3 text-[11px] text-rb-fuchsia/60">
+              <p className="mt-3 text-[11px] text-[#E0249C]/70">
                 {completedSteps} of {totalExercises} steps complete
               </p>
             )}
@@ -186,38 +186,38 @@ function LeapHome() {
         {!currentInstallation && (
           <Link
             to="/leap/installations/"
-            className="rounded-2xl border border-rb-fuchsia/30 bg-gradient-to-br from-rb-violet/40 to-rb-deep-plum/60 p-7 transition-all hover:-translate-y-0.5 hover:border-rb-fuchsia/60"
+            className="rounded-2xl border border-[#E0249C]/30 bg-[#E0249C]/5 p-7 transition-all hover:-translate-y-0.5 hover:border-[#E0249C]/60"
           >
             <p className="label-soft mb-2">Complete</p>
             <p className="font-display text-2xl tracking-wide text-shimmer">
               All Installations
             </p>
-            <p className="mt-1 font-serif italic text-rb-champagne/70">
+            <p className="mt-1 font-serif italic text-[#1F1623]/70">
               OS fully active
             </p>
           </Link>
         )}
         <Link
           to="/leap/decision-filter"
-          className="rounded-2xl border border-[rgba(201,168,76,0.18)] bg-gradient-to-br from-[#150828] to-[#0a0a0a] p-7 transition-all hover:-translate-y-0.5 hover:border-[rgba(201,168,76,0.4)]"
+          className="rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/60 p-7 transition-all hover:-translate-y-0.5 hover:border-[#E0249C]/30"
         >
           <p className="label-soft mb-2">Tool</p>
-          <p className="font-display text-2xl tracking-wide text-rb-champagne">
+          <p className="font-display text-2xl tracking-wide text-[#1F1623]">
             Decision Filter
           </p>
-          <p className="mt-1 text-sm font-serif italic text-[rgba(240,223,160,0.5)]">
+          <p className="mt-1 text-sm font-serif italic text-[#4A1259]/55">
             Run a decision through the OS
           </p>
         </Link>
         <Link
           to="/leap/weekly-audit"
-          className="rounded-2xl border border-[rgba(201,168,76,0.18)] bg-gradient-to-br from-[#150828] to-[#0a0a0a] p-7 transition-all hover:-translate-y-0.5 hover:border-[rgba(201,168,76,0.4)]"
+          className="rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/60 p-7 transition-all hover:-translate-y-0.5 hover:border-[#E0249C]/30"
         >
           <p className="label-soft mb-2">Friday Ritual</p>
-          <p className="font-display text-2xl tracking-wide text-rb-champagne">
+          <p className="font-display text-2xl tracking-wide text-[#1F1623]">
             Weekly Audit
           </p>
-          <p className="mt-1 text-sm font-serif italic text-[rgba(240,223,160,0.5)]">
+          <p className="mt-1 text-sm font-serif italic text-[#4A1259]/55">
             5-minute operating check-in
           </p>
         </Link>
@@ -230,10 +230,10 @@ function LeapHome() {
           {wins.slice(0, 3).map((w, i) => (
             <div
               key={i}
-              className="flex items-start gap-4 rounded-xl border border-[rgba(201,168,76,0.12)] bg-[rgba(21,8,40,0.6)] px-5 py-4"
+              className="flex items-start gap-4 rounded-xl border border-[rgba(74,18,89,0.1)] bg-white/70 px-5 py-4"
             >
-              <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rb-fuchsia" />
-              <p className="font-serif italic text-[rgba(240,223,160,0.8)]">{w}</p>
+              <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#E0249C]" />
+              <p className="font-serif italic text-[#1F1623]/80">{w}</p>
             </div>
           ))}
           <div className="flex gap-3 pt-2">
@@ -243,12 +243,12 @@ function LeapHome() {
               onChange={(e) => setNewWin(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addWin()}
               placeholder="Drop a win..."
-              className="flex-1 rounded-xl border border-[rgba(201,168,76,0.2)] bg-[rgba(21,8,40,0.6)] px-4 py-3 font-serif text-sm italic text-rb-champagne outline-none placeholder:text-[rgba(240,223,160,0.3)] focus:border-rb-fuchsia/50"
+              className="flex-1 rounded-xl border border-[rgba(74,18,89,0.15)] bg-white/70 px-4 py-3 font-serif text-sm italic text-[#1F1623] outline-none placeholder:text-[#4A1259]/30 focus:border-[#E0249C]/50"
             />
             <button
               onClick={addWin}
               disabled={!newWin.trim()}
-              className="rounded-xl border border-rb-fuchsia/40 bg-rb-violet/40 px-5 py-3 font-display text-sm tracking-[0.15em] text-rb-champagne hover:bg-rb-violet/60 disabled:opacity-40"
+              className="rounded-xl border border-[#E0249C]/30 bg-[#E0249C]/10 px-5 py-3 font-display text-sm tracking-[0.15em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
             >
               Add
             </button>

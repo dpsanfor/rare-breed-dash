@@ -84,15 +84,13 @@ function InstallationsPage() {
             return (
               <div
                 key={inst.id}
-                className="rounded-2xl border border-[rgba(201,168,76,0.08)] bg-[rgba(10,10,10,0.5)] p-8 opacity-40"
+                className="rounded-2xl border border-[rgba(74,18,89,0.08)] bg-white/40 p-8 opacity-40"
               >
-                <p className="label-soft mb-2">
-                  Day {inst.number} · Locked
-                </p>
-                <h3 className="font-display text-4xl tracking-wide text-[rgba(240,223,160,0.4)]">
+                <p className="label-soft mb-2">Day {inst.number} · Locked</p>
+                <h3 className="font-display text-4xl tracking-wide text-[#4A1259]/40">
                   {inst.name}
                 </h3>
-                <p className="mt-2 text-sm font-serif italic text-[rgba(240,223,160,0.3)]">
+                <p className="mt-2 text-sm font-serif italic text-[#4A1259]/30">
                   {inst.goal}
                 </p>
               </div>
@@ -104,16 +102,16 @@ function InstallationsPage() {
               key={inst.id}
               to="/leap/installations/$id"
               params={{ id: inst.id }}
-              className="block rounded-2xl border transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-15px_rgba(217,70,239,0.25)]"
+              className="block rounded-2xl border transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-15px_rgba(224,36,156,0.2)]"
               style={{
                 borderColor:
                   status === "complete"
-                    ? "rgba(217,70,239,0.3)"
-                    : "rgba(201,168,76,0.18)",
+                    ? "rgba(224,36,156,0.3)"
+                    : "rgba(74,18,89,0.12)",
                 background:
                   status === "complete"
-                    ? "linear-gradient(135deg, #1a0533, #0e0518, #0a0a0a)"
-                    : "linear-gradient(135deg, #150828, #0e0518, #0a0a0a)",
+                    ? "rgba(224,36,156,0.05)"
+                    : "rgba(255,255,255,0.8)",
               }}
             >
               <div className="p-8">
@@ -130,14 +128,14 @@ function InstallationsPage() {
                     <h3 className="font-display text-4xl tracking-wide text-shimmer">
                       {inst.name}
                     </h3>
-                    <p className="mt-2 text-base font-serif italic text-[rgba(240,223,160,0.65)]">
+                    <p className="mt-2 text-base font-serif italic text-[#4A1259]/65">
                       {inst.goal}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                       {inst.deliverables.map((d) => (
                         <span
                           key={d}
-                          className="rounded-full border border-[rgba(201,168,76,0.18)] px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-[rgba(240,223,160,0.45)]"
+                          className="rounded-full border border-[rgba(74,18,89,0.15)] px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A1259]/45"
                         >
                           {d}
                         </span>
@@ -146,12 +144,12 @@ function InstallationsPage() {
                   </div>
                   <div className="ml-6 text-right">
                     {status === "complete" && (
-                      <span className="font-display text-3xl text-rb-fuchsia">
+                      <span className="font-display text-3xl text-[#E0249C]">
                         ✓
                       </span>
                     )}
                     {status === "installing" && (
-                      <span className="font-mono text-[11px] text-rb-fuchsia">
+                      <span className="font-mono text-[11px] text-[#E0249C]">
                         {pct}%
                       </span>
                     )}
@@ -160,17 +158,16 @@ function InstallationsPage() {
 
                 {status === "installing" && (
                   <div className="mt-6">
-                    <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-[rgba(201,168,76,0.1)]">
+                    <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-[rgba(74,18,89,0.1)]">
                       <div
                         className="absolute inset-y-0 left-0 rounded-full"
                         style={{
                           width: `${pct}%`,
-                          background:
-                            "linear-gradient(90deg, #6b21a8, #d946ef)",
+                          background: "linear-gradient(90deg, #4A1259, #E0249C)",
                         }}
                       />
                     </div>
-                    <p className="mt-2 font-mono text-[10px] text-rb-fuchsia/50">
+                    <p className="mt-2 font-mono text-[10px] text-[#E0249C]/50">
                       Installing... {completed} of {totalExercises} steps
                     </p>
                   </div>

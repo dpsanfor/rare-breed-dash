@@ -38,7 +38,7 @@ type OsRow = {
 };
 
 const OUTPUT_COLORS: Record<string, string> = {
-  proceed: "#d946ef",
+  proceed: "#E0249C",
   pause: "#c9a84c",
   not_yours: "#ec4899",
 };
@@ -170,7 +170,7 @@ function OSDashboard() {
       {osRow?.expansion_goal && (
         <VelvetCard className="mb-10">
           <p className="label-soft mb-3">Current Expansion Goal</p>
-          <p className="font-serif text-xl italic text-rb-champagne">
+          <p className="font-serif text-xl italic text-[#1F1623]">
             {osRow.expansion_goal}
           </p>
         </VelvetCard>
@@ -183,15 +183,15 @@ function OSDashboard() {
           {KEY_DELIVERABLES.map(({ label, value, hint }) => (
             <div
               key={label}
-              className="rounded-2xl border border-[rgba(201,168,76,0.12)] bg-[rgba(21,8,40,0.6)] px-7 py-6"
+              className="rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/70 px-7 py-6"
             >
               <p className="label-soft mb-3">{label}</p>
               {value ? (
-                <p className="line-clamp-3 font-serif text-base italic leading-relaxed text-rb-champagne/80">
+                <p className="line-clamp-3 font-serif text-base italic leading-relaxed text-[#1F1623]/80">
                   {value}
                 </p>
               ) : (
-                <p className="font-serif text-sm italic text-[rgba(240,223,160,0.28)]">
+                <p className="font-serif text-sm italic text-[#4A1259]/28">
                   Not yet installed — {hint}
                 </p>
               )}
@@ -207,7 +207,7 @@ function OSDashboard() {
             <p className="eyebrow">Decision History</p>
             <Link
               to="/leap/decision-filter"
-              className="font-mono text-[10px] uppercase tracking-[0.25em] text-rb-fuchsia/60 hover:text-rb-fuchsia"
+              className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#E0249C]/60 hover:text-[#E0249C]"
             >
               Run Filter →
             </Link>
@@ -216,7 +216,7 @@ function OSDashboard() {
             {decisions.slice(0, 6).map((d) => (
               <div
                 key={d.id}
-                className="flex items-center gap-4 rounded-xl border border-[rgba(201,168,76,0.1)] bg-[rgba(21,8,40,0.5)] px-5 py-4"
+                className="flex items-center gap-4 rounded-xl border border-[rgba(74,18,89,0.1)] bg-white/60 px-5 py-4"
               >
                 <span
                   className="shrink-0 rounded-full border px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em]"
@@ -227,7 +227,7 @@ function OSDashboard() {
                 >
                   {d.output.replace("_", " ")}
                 </span>
-                <p className="flex-1 line-clamp-1 font-serif text-sm italic text-[rgba(240,223,160,0.7)]">
+                <p className="flex-1 line-clamp-1 font-serif text-sm italic text-[#4A1259]/70">
                   {d.decision_text}
                 </p>
                 <span className="label-soft shrink-0">
@@ -246,7 +246,7 @@ function OSDashboard() {
             <p className="eyebrow">Audit History</p>
             <Link
               to="/leap/weekly-audit"
-              className="font-mono text-[10px] uppercase tracking-[0.25em] text-rb-fuchsia/60 hover:text-rb-fuchsia"
+              className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#E0249C]/60 hover:text-[#E0249C]"
             >
               This Week →
             </Link>
@@ -255,7 +255,7 @@ function OSDashboard() {
             {audits.map((a) => (
               <div
                 key={a.id}
-                className="rounded-xl border border-[rgba(201,168,76,0.12)] bg-[rgba(21,8,40,0.5)] p-4 text-center"
+                className="rounded-xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-4 text-center"
               >
                 <p className="label-soft mb-2">
                   {new Date(a.week_date).toLocaleDateString(undefined, {
@@ -273,7 +273,7 @@ function OSDashboard() {
       )}
 
       {/* Navigation */}
-      <div className="border-t border-[rgba(201,168,76,0.12)] pt-10">
+      <div className="border-t border-[rgba(74,18,89,0.1)] pt-10">
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
             { to: "/leap/installations/", label: "Installations" },
@@ -284,7 +284,7 @@ function OSDashboard() {
             <Link
               key={to}
               to={to}
-              className="rounded-xl border border-[rgba(201,168,76,0.15)] p-4 text-center font-display text-sm tracking-[0.15em] text-[rgba(240,223,160,0.55)] transition hover:border-rb-fuchsia/30 hover:text-rb-champagne"
+              className="rounded-xl border border-[rgba(74,18,89,0.12)] bg-white/50 p-4 text-center font-display text-sm tracking-[0.15em] text-[#4A1259]/55 transition hover:border-[#E0249C]/30 hover:text-[#1F1623]"
             >
               {label}
             </Link>

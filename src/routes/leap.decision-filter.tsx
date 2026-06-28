@@ -26,7 +26,7 @@ const OUTPUT_CONFIG: Record<
     label: "PROCEED",
     headline: "This is yours.",
     body: "Your operating system says yes. Move forward with full commitment — not tentatively, not halfway. This decision expands your vision and requires your genius. Proceed.",
-    color: "#d946ef",
+    color: "#E0249C",
   },
   pause: {
     label: "PAUSE",
@@ -101,7 +101,7 @@ function DecisionFilterPage() {
             <h1 className="font-display text-6xl leading-[0.9] tracking-wide text-shimmer md:text-7xl">
               What decision are you filtering?
             </h1>
-            <p className="mt-6 font-serif text-lg font-light italic text-[rgba(240,223,160,0.6)]">
+            <p className="mt-6 font-serif text-lg font-light italic text-[#4A1259]/60">
               Be specific. Name the actual decision — not the feeling around it.
             </p>
           </div>
@@ -111,7 +111,7 @@ function DecisionFilterPage() {
             onChange={(e) => setDecisionText(e.target.value)}
             placeholder="I'm deciding whether to..."
             rows={5}
-            className="mb-8 w-full resize-none rounded-2xl border border-[rgba(201,168,76,0.2)] bg-[rgba(21,8,40,0.7)] px-6 py-5 font-serif text-lg font-light italic leading-relaxed text-rb-champagne outline-none placeholder:text-[rgba(240,223,160,0.22)] focus:border-rb-fuchsia/40"
+            className="mb-8 w-full resize-none rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white/80 px-6 py-5 font-serif text-lg font-light italic leading-relaxed text-[#1F1623] outline-none placeholder:text-[#4A1259]/25 focus:border-[#E0249C]/40"
           />
 
           <button
@@ -119,11 +119,11 @@ function DecisionFilterPage() {
               if (decisionText.trim()) setPhase("questions");
             }}
             disabled={!decisionText.trim()}
-            className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-display text-[15px] tracking-[0.2em] text-rb-black transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-40"
+            className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-display text-[15px] tracking-[0.2em] text-white transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-40"
             style={{
               background:
-                "linear-gradient(135deg, #d946ef 0%, #ec4899 50%, #c9a84c 100%)",
-              boxShadow: "0 10px 40px -10px rgba(217,70,239,0.5)",
+                "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
+              boxShadow: "0 10px 40px -10px rgba(224,36,156,0.4)",
             }}
           >
             Run the Filter →
@@ -147,27 +147,27 @@ function DecisionFilterPage() {
               {currentQ > 0 && (
                 <button
                   onClick={() => setCurrentQ((i) => i - 1)}
-                  className="font-mono text-[10px] uppercase tracking-[0.3em] text-[rgba(240,223,160,0.35)] hover:text-rb-fuchsia"
+                  className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#E0249C]"
                 >
                   ← Back
                 </button>
               )}
             </div>
-            <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-[rgba(201,168,76,0.1)]">
+            <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-[rgba(74,18,89,0.1)]">
               <div
                 className="absolute inset-y-0 left-0 rounded-full transition-all duration-500"
                 style={{
                   width: `${((currentQ + 1) / DECISION_FILTER_QUESTIONS.length) * 100}%`,
-                  background: "linear-gradient(90deg, #6b21a8, #d946ef)",
+                  background: "linear-gradient(90deg, #4A1259, #E0249C)",
                 }}
               />
             </div>
           </div>
 
           {/* Decision reminder */}
-          <div className="mb-10 rounded-xl border border-[rgba(201,168,76,0.12)] bg-[rgba(21,8,40,0.5)] px-5 py-4">
+          <div className="mb-10 rounded-xl border border-[rgba(74,18,89,0.1)] bg-white/60 px-5 py-4">
             <p className="label-soft mb-1">Filtering</p>
-            <p className="line-clamp-2 font-serif text-sm italic text-[rgba(240,223,160,0.7)]">
+            <p className="line-clamp-2 font-serif text-sm italic text-[#4A1259]/70">
               {decisionText}
             </p>
           </div>
@@ -176,7 +176,7 @@ function DecisionFilterPage() {
           <h2 className="mb-4 font-display text-5xl leading-tight tracking-wide text-shimmer md:text-6xl">
             {q.question}
           </h2>
-          <p className="mb-12 font-serif text-base font-light italic text-[rgba(240,223,160,0.5)]">
+          <p className="mb-12 font-serif text-base font-light italic text-[#4A1259]/50">
             {q.subtext}
           </p>
 
@@ -188,8 +188,8 @@ function DecisionFilterPage() {
                 onClick={() => selectAnswer(q.key, opt.value)}
                 className={`w-full rounded-2xl border px-8 py-5 text-left font-display text-2xl tracking-[0.15em] transition-all hover:-translate-y-0.5 ${
                   answers[q.key] === opt.value
-                    ? "border-rb-fuchsia bg-rb-violet/40 text-shimmer"
-                    : "border-[rgba(201,168,76,0.18)] bg-[rgba(21,8,40,0.5)] text-[rgba(240,223,160,0.72)] hover:border-rb-fuchsia/40 hover:bg-rb-violet/20"
+                    ? "border-[#E0249C] bg-[#E0249C]/8 text-shimmer"
+                    : "border-[rgba(74,18,89,0.15)] bg-white/60 text-[#1F1623]/72 hover:border-[#E0249C]/40 hover:bg-[#E0249C]/5"
                 }`}
               >
                 {opt.label}
@@ -223,15 +223,15 @@ function DecisionFilterPage() {
           <h2 className="mt-6 font-display text-6xl leading-[0.9] tracking-wide text-shimmer md:text-7xl">
             {o.headline}
           </h2>
-          <p className="mx-auto mt-8 max-w-md font-serif text-xl font-light italic leading-relaxed text-[rgba(240,223,160,0.68)]">
+          <p className="mx-auto mt-8 max-w-md font-serif text-xl font-light italic leading-relaxed text-[#4A1259]/68">
             {o.body}
           </p>
         </div>
 
         {/* The filtered decision */}
-        <div className="mb-12 rounded-2xl border border-[rgba(201,168,76,0.15)] bg-[rgba(21,8,40,0.7)] px-8 py-6 text-left">
+        <div className="mb-12 rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 px-8 py-6 text-left">
           <p className="label-soft mb-3">The decision</p>
-          <p className="font-serif italic text-rb-champagne">{decisionText}</p>
+          <p className="font-serif italic text-[#1F1623]">{decisionText}</p>
         </div>
 
         <div className="flex flex-col items-center gap-5">
@@ -239,18 +239,18 @@ function DecisionFilterPage() {
             <button
               onClick={saveDecision}
               disabled={saving}
-              className="inline-flex items-center gap-2 rounded-full border border-[rgba(201,168,76,0.3)] bg-[rgba(201,168,76,0.08)] px-7 py-3.5 font-display text-[13px] tracking-[0.2em] text-rb-champagne transition hover:border-rb-gold disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-full border border-[rgba(201,168,76,0.35)] bg-[rgba(201,168,76,0.08)] px-7 py-3.5 font-display text-[13px] tracking-[0.2em] text-[#1F1623] transition hover:border-[#c9a84c] disabled:opacity-50"
             >
               {saving ? "Saving..." : "Save to Decision History"}
             </button>
           ) : (
-            <p className="font-serif text-sm italic text-rb-fuchsia/70">
+            <p className="font-serif text-sm italic text-[#E0249C]/70">
               Saved to your Operating System.
             </p>
           )}
           <button
             onClick={reset}
-            className="font-mono text-[10px] uppercase tracking-[0.3em] text-[rgba(240,223,160,0.35)] hover:text-rb-champagne"
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#1F1623]"
           >
             Filter another decision
           </button>
