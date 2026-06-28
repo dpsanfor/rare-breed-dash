@@ -1,13 +1,19 @@
 import * as React from 'react'
-import { Outlet, ScrollRestoration, createRootRoute } from '@tanstack/react-router'
+import { Outlet, ScrollRestoration, createRootRouteWithContext } from '@tanstack/react-router'
 import { HeadContent, Scripts } from '@tanstack/react-router'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import '../styles.css'
 
-export const Route = createRootRoute({
+interface RouterContext {
+  queryClient: QueryClient
+}
+
+export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
 })
 
 function RootComponent() {
+  const { queryClient } = Route.useRouteContext()
   return (
     <html lang="en">
       <head>
@@ -16,7 +22,9 @@ function RootComponent() {
         <HeadContent />
       </head>
       <body>
-        <Outlet />
+        <QueryClientProvider client={queryClient}>
+          <Outlet />
+        </QueryClientProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
