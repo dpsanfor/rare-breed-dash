@@ -26,6 +26,7 @@ export interface UserProfile {
   offer_suite?: string;
   signature_curriculum?: string;
   framework_library?: string;
+  gumdrop_kitchen?: string;
   sales_page?: string;
   email_playbook?: string;
   content_strategy?: string;

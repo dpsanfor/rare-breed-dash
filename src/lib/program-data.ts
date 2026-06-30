@@ -321,8 +321,21 @@ export const PHASES: Phase[] = [
         generatePrompt: "I'm ready. Generate my Framework Playbook.",
       },
       {
-        id: "sales-page",
+        id: "gumdrop-test-kitchen",
         number: 6,
+        name: "Gumdrop Test Kitchen™",
+        tagline: "Validate, refine, and strengthen your positioning before you scale.",
+        purpose:
+          "Every launch should produce two equally valuable outcomes: Revenue and Intelligence. The Gumdrop Test Kitchen™ is the founder's market intelligence engine — where she designs intentional Gumdrop experiments from her existing Zone of Genius, runs them, conducts a Post-Gumdrop Intelligence Review, and uses the data to sharpen her Dream Client, Messaging, Offer, and Content Playbooks before building any sales or launch infrastructure. The system gets smarter after every campaign.",
+        type: "conversation",
+        outputName: "Gumdrop Intelligence Report™",
+        outputKey: "gumdrop_kitchen",
+        nextDecision: "What did this Gumdrop teach me about what my market actually wants?",
+        generatePrompt: "I'm ready. Generate my Gumdrop Intelligence Report.",
+      },
+      {
+        id: "sales-page",
+        number: 7,
         name: "Sales Page Builder™",
         tagline: "Conversion-ready copy built from your identity.",
         purpose:
@@ -335,7 +348,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "email",
-        number: 7,
+        number: 8,
         name: "Email Builder™",
         tagline: "Relationship sequences that move belief — not inboxes.",
         purpose:
@@ -348,7 +361,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "content-engine",
-        number: 8,
+        number: 9,
         name: "Content Builder™",
         tagline: "A content operating system that eliminates daily content decisions.",
         purpose:
@@ -361,7 +374,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "brand",
-        number: 9,
+        number: 10,
         name: "Brand Builder™",
         tagline: "Visual and experiential identity built from your philosophy.",
         purpose:
@@ -374,7 +387,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "launch-planner",
-        number: 10,
+        number: 11,
         name: "Launch Planner™",
         tagline: "A complete launch built from everything you've created.",
         purpose:
@@ -387,7 +400,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "rare-breed-hq",
-        number: 11,
+        number: 12,
         name: "Rare Breed HQ™",
         tagline: "Your complete business — in one living document.",
         purpose:

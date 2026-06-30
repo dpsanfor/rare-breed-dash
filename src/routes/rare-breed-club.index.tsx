@@ -23,6 +23,11 @@ const BUILDER_GROUPS = [
     phase: "phase3",
   },
   {
+    label: "Validation",
+    ids: ["gumdrop-test-kitchen"],
+    phase: "phase3",
+  },
+  {
     label: "Marketing",
     ids: ["sales-page", "email", "content-engine", "launch-planner"],
     phase: "phase3",
