@@ -207,14 +207,18 @@ export const PHASES: Phase[] = [
         id: "zone-of-genius",
         number: 5,
         name: "Zone of Genius™",
-        tagline: "The precise intersection of calling and capability.",
+        tagline: "The conditions where your greatest contribution naturally emerges.",
         purpose:
-          "The AI synthesizes your X vs Y, Magic Gumdrop, energy patterns, and Constitution to define exactly where you are irreplaceable.",
-        type: "synthesis",
+          "Your Zone of Genius is not what you're capable of. It's the work that expands you while creating the greatest transformation for others. This engine finds where your energy, your calling, and your irreplaceable perspective converge.",
+        danasPrinciple:
+          "Your Zone of Genius isn't what you're capable of. It's the work that expands you while creating the greatest transformation for others.",
+        type: "conversation",
         outputName: "Zone of Genius Report™",
         outputKey: "zone_of_genius",
         nextDecision:
           "What would I build if I fully committed to my zone of genius?",
+        generatePrompt:
+          "I'm ready. Generate my Zone of Genius Report based on everything we've discussed.",
       },
       {
         id: "category-of-one",
@@ -231,17 +235,17 @@ export const PHASES: Phase[] = [
         generatePrompt: "I'm ready. Generate my Category of One based on everything we've discussed.",
       },
       {
-        id: "business-blueprint",
+        id: "operating-manual",
         number: 7,
-        name: "Build the Business Only You Could Build™",
-        tagline: "The final synthesis. Your Rare Breed Business Blueprint™.",
+        name: "Your Rare Breed Operating Manual™",
+        tagline: "The complete synthesis. Your permanent source of truth.",
         purpose:
-          "Every artifact you've built feeds into this final synthesis. The AI generates your complete Business Blueprint — the document that removes all uncertainty about what you're building and why.",
+          "Every artifact from Phase Two feeds into this final synthesis. The AI generates your Rare Breed Operating Manual™ — the comprehensive document that becomes the required input for every AI Builder inside Rare Breed Club™. Identity, beliefs, decision filters, standards, leadership philosophy, Magic Gumdrop, Zone of Genius, Category of One, core teachings, legacy, business philosophy — all in one place.",
         type: "synthesis",
-        outputName: "Rare Breed Business Blueprint™",
-        outputKey: "business_blueprint",
+        outputName: "Rare Breed Operating Manual™",
+        outputKey: "operating_manual",
         nextDecision:
-          "What is the first move I make from this blueprint this week?",
+          "What is the first move I make from this operating manual this week?",
       },
     ],
   },

@@ -16,8 +16,7 @@ import {
   sendModuleMessage,
   generateModuleReport,
   generateReleasePlan,
-  generateZoneOfGenius,
-  generateBusinessBlueprint,
+  generateOperatingManual,
   type ChatMessage,
 } from "@/lib/anthropic";
 
@@ -64,12 +63,9 @@ function Phase2SynthesisRunner({
             biggerVision: profile.bigger_vision ?? "",
           },
         });
-      } else if (moduleId === "zone-of-genius") {
+      } else if (moduleId === "operating-manual") {
         const ctx = buildPhase2Context(profile);
-        result = await generateZoneOfGenius({ data: { context: ctx } });
-      } else if (moduleId === "business-blueprint") {
-        const ctx = buildPhase2Context(profile);
-        result = await generateBusinessBlueprint({ data: { context: ctx } });
+        result = await generateOperatingManual({ data: { context: ctx } });
       } else {
         setError("Unknown synthesis module.");
         setGenerating(false);
@@ -90,11 +86,8 @@ function Phase2SynthesisRunner({
     if (moduleId === "release-80") {
       return "Your Dead Weight Audit from Phase One and your Bigger Vision from this phase. The AI makes the release decision.";
     }
-    if (moduleId === "zone-of-genius") {
-      return "Every artifact from Phase One and Phase Two synthesized into one clear definition of where you are irreplaceable.";
-    }
-    if (moduleId === "business-blueprint") {
-      return "Everything. Every artifact, every conversation, every artifact across both phases. This is the final synthesis.";
+    if (moduleId === "operating-manual") {
+      return "Every artifact from both phases — identity, beliefs, decision filters, standards, leadership philosophy, Magic Gumdrop, Zone of Genius, Category of One, bigger vision, legacy. This becomes the source of truth for every AI Builder in Rare Breed Club.";
     }
     return "Everything collected across all previous modules.";
   };
@@ -233,11 +226,11 @@ function Phase2ConversationRunner({
   async function initConversation() {
     setLoading(true);
     try {
-      // Pass Phase 1 context into opening message for Phase 2 modules that need it
-      const phase1Ctx = buildPhase1Context(profile);
+      // Pass accumulated context into opening message so AI doesn't re-ask
+      const fullCtx = buildPhase2Context(profile);
       const openingNote =
-        phase1Ctx.trim()
-          ? `I'm ready to begin. Here's what's been established so far:\n\n${phase1Ctx.slice(0, 800)}`
+        fullCtx.trim()
+          ? `I'm ready to begin. Here's what's been established so far across both phases:\n\n${fullCtx.slice(0, 2000)}`
           : "I'm ready to begin.";
 
       const greeting = await sendModuleMessage({
@@ -739,7 +732,7 @@ function PhaseTwoModule() {
                 boxShadow: "0 8px 32px -8px rgba(74,18,89,0.35)",
               }}
             >
-              OS Installed. Return to Dashboard →
+              Operating Manual Complete. Enter Rare Breed Club™ →
             </Link>
           )}
           <Link

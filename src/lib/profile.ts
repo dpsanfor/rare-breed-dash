@@ -18,7 +18,13 @@ export interface UserProfile {
   magic_gumdrop?: string;
   zone_of_genius?: string;
   category_of_one?: string;
-  business_blueprint?: string;
+  operating_manual?: string;
+
+  // Background intelligence (continuously refined across all engines)
+  discernment_signals?: string;
+  decision_filters?: string;
+  faith_framework?: string;
+  identity_evolution?: string;
 
   // Raw module inputs (used by synthesis modules)
   module_inputs?: Record<string, Record<string, string>>;
@@ -146,6 +152,7 @@ export function buildPhase2Context(profile: UserProfile): string {
   if (profile.magic_gumdrop) parts.push(`MAGIC GUMDROP:\n${profile.magic_gumdrop}`);
   if (profile.zone_of_genius) parts.push(`ZONE OF GENIUS:\n${profile.zone_of_genius}`);
   if (profile.category_of_one) parts.push(`CATEGORY OF ONE:\n${profile.category_of_one}`);
+  if (profile.operating_manual) parts.push(`RARE BREED OPERATING MANUAL:\n${profile.operating_manual}`);
 
   return parts.join("\n\n---\n\n");
 }

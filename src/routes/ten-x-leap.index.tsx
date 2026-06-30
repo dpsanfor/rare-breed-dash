@@ -164,7 +164,7 @@ function TenXLeapIndex() {
             Rare Breed OS™ Installed
           </p>
           <p className="font-serif italic text-[#4A1259]/65 mb-6">
-            You no longer have to wonder what business to build. You've become the woman capable of building the business only you could build.
+            You've installed your Rare Breed Operating System and created your Operating Manual. Inside Rare Breed Club, your Operating Manual powers an entire suite of AI builders that transform your identity into a complete business.
           </p>
           <Link
             to="/dash/"
