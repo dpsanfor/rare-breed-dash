@@ -108,7 +108,7 @@ function LeapHome() {
         <p className="eyebrow mb-4">
           Rare Breed OS™ · Version {version}
         </p>
-        <h1 className="font-display text-[80px] leading-[0.88] tracking-wide text-shimmer md:text-[120px]">
+        <h1 className="font-display text-[52px] leading-[1] tracking-wide text-shimmer sm:text-[72px] md:text-[96px] lg:text-[120px]">
           {greeting}
         </h1>
         <p className="mt-6 max-w-xl font-serif text-xl font-light italic text-[#4A1259]/65">
@@ -139,7 +139,7 @@ function LeapHome() {
           {INSTALLATIONS.map((inst, i) => (
             <span
               key={inst.id}
-              className="flex-1 text-center font-mono text-[9px] uppercase tracking-[0.15em]"
+              className="flex-1 text-center font-mono text-[12px] uppercase tracking-[0.1em]"
               style={{
                 color:
                   i < completedInstallations.length
@@ -177,7 +177,7 @@ function LeapHome() {
               {currentInstallation.name}
             </p>
             {totalExercises > 0 && (
-              <p className="mt-3 text-[11px] text-[#E0249C]/70">
+              <p className="mt-3 text-[13px] text-[#E0249C]/70">
                 {completedSteps} of {totalExercises} steps complete
               </p>
             )}

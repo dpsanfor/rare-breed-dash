@@ -207,7 +207,7 @@ function OSDashboard() {
             <p className="eyebrow">Decision History</p>
             <Link
               to="/leap/decision-filter"
-              className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#E0249C]/60 hover:text-[#E0249C]"
+              className="font-mono text-[13px] uppercase tracking-[0.18em] text-[#E0249C]/60 hover:text-[#E0249C]"
             >
               Run Filter →
             </Link>
@@ -246,7 +246,7 @@ function OSDashboard() {
             <p className="eyebrow">Audit History</p>
             <Link
               to="/leap/weekly-audit"
-              className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#E0249C]/60 hover:text-[#E0249C]"
+              className="font-mono text-[13px] uppercase tracking-[0.18em] text-[#E0249C]/60 hover:text-[#E0249C]"
             >
               This Week →
             </Link>

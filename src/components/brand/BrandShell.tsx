@@ -31,7 +31,7 @@ export function BrandShell({
               <span className="font-display text-[22px] tracking-[0.14em] text-shimmer">
                 RARE BREED
               </span>
-              <span className="font-mono text-[8px] uppercase tracking-[0.5em] text-[rgba(74,18,89,0.4)]">
+              <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-[rgba(74,18,89,0.4)]">
                 OS™ · 10X Leap
               </span>
             </div>
@@ -48,10 +48,10 @@ export function BrandShell({
                 <Link
                   key={n.to}
                   to={n.to}
-                  className={`text-[10px] uppercase tracking-[0.3em] transition-colors ${
+                  className={`text-[13px] uppercase tracking-[0.2em] transition-colors ${
                     active
                       ? "text-[#E0249C]"
-                      : "text-[rgba(74,18,89,0.4)] hover:text-[#E0249C]"
+                      : "text-[rgba(74,18,89,0.45)] hover:text-[#E0249C]"
                   }`}
                 >
                   {n.label}

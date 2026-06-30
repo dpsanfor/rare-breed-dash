@@ -135,7 +135,7 @@ function InstallationsPage() {
                       {inst.deliverables.map((d) => (
                         <span
                           key={d}
-                          className="rounded-full border border-[rgba(74,18,89,0.15)] px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A1259]/45"
+                          className="rounded-full border border-[rgba(74,18,89,0.15)] px-3 py-1 font-mono text-[12px] uppercase tracking-[0.12em] text-[#4A1259]/55"
                         >
                           {d}
                         </span>
@@ -167,7 +167,7 @@ function InstallationsPage() {
                         }}
                       />
                     </div>
-                    <p className="mt-2 font-mono text-[10px] text-[#E0249C]/50">
+                    <p className="mt-2 font-mono text-[13px] text-[#E0249C]/60">
                       Installing... {completed} of {totalExercises} steps
                     </p>
                   </div>

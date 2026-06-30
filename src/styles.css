@@ -162,18 +162,18 @@
 
   .eyebrow {
     font-family: var(--font-sans);
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: #E0249C;
   }
 
   .label-soft {
     font-family: var(--font-sans);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(74, 18, 89, 0.5);
   }

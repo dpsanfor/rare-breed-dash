@@ -108,7 +108,7 @@ function InstallationPage() {
           <div className="mb-10 mt-8 flex items-center gap-3">
             <Link
               to="/leap/installations/"
-              className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#E0249C]"
+              className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#E0249C]"
             >
               ← Installations
             </Link>
@@ -117,7 +117,7 @@ function InstallationPage() {
           </div>
 
           <p className="eyebrow mb-6">Before we begin</p>
-          <h1 className="font-display text-5xl leading-[0.92] tracking-wide text-shimmer md:text-6xl">
+          <h1 className="font-display text-5xl leading-[1.05] tracking-wide text-shimmer md:text-6xl">
             {step.title}
           </h1>
 
@@ -168,7 +168,7 @@ function InstallationPage() {
               <p>Installing...</p>
               <p className="mt-2">████████████ 100%</p>
             </div>
-            <h1 className="font-display text-6xl leading-[0.9] tracking-wide text-shimmer md:text-7xl">
+            <h1 className="font-display text-6xl leading-[1.05] tracking-wide text-shimmer md:text-7xl">
               {step.title}
             </h1>
             <p className="mt-6 font-serif text-xl font-light italic text-[#4A1259]/65">
@@ -209,7 +209,7 @@ function InstallationPage() {
             </button>
             <Link
               to="/leap/installations/"
-              className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#1F1623]"
+              className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#1F1623]"
             >
               Back to Installations
             </Link>
@@ -231,7 +231,7 @@ function InstallationPage() {
                 ? setStepIndex((i) => i - 1)
                 : navigate({ to: "/leap/installations/" })
             }
-            className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#E0249C]"
+            className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#E0249C]"
           >
             ← Back
           </button>
@@ -251,7 +251,7 @@ function InstallationPage() {
               }}
             />
           </div>
-          <p className="mt-2 font-mono text-[10px] text-[#E0249C]/50">
+          <p className="mt-2 font-mono text-[13px] text-[#E0249C]/60">
             Installing... {installation.name} · Step {exerciseIndex + 1} of{" "}
             {totalExercises}
           </p>
@@ -297,7 +297,7 @@ function InstallationPage() {
           >
             {saving ? "Saving..." : "Save & Continue →"}
           </button>
-          <p className="font-serif text-xs italic text-[#4A1259]/30">
+          <p className="font-serif text-sm italic text-[#4A1259]/40">
             Your response is saved automatically
           </p>
         </div>

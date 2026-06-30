@@ -98,7 +98,7 @@ function DecisionFilterPage() {
         <div className="mx-auto max-w-2xl">
           <div className="mb-14 mt-8">
             <p className="eyebrow mb-6">Decision Filter · Rare Breed OS™</p>
-            <h1 className="font-display text-6xl leading-[0.9] tracking-wide text-shimmer md:text-7xl">
+            <h1 className="font-display text-6xl leading-[1.05] tracking-wide text-shimmer md:text-7xl">
               What decision are you filtering?
             </h1>
             <p className="mt-6 font-serif text-lg font-light italic text-[#4A1259]/60">
@@ -147,7 +147,7 @@ function DecisionFilterPage() {
               {currentQ > 0 && (
                 <button
                   onClick={() => setCurrentQ((i) => i - 1)}
-                  className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#E0249C]"
+                  className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#E0249C]"
                 >
                   ← Back
                 </button>
@@ -220,7 +220,7 @@ function DecisionFilterPage() {
             {o.label}
           </div>
 
-          <h2 className="mt-6 font-display text-6xl leading-[0.9] tracking-wide text-shimmer md:text-7xl">
+          <h2 className="mt-6 font-display text-6xl leading-[1.05] tracking-wide text-shimmer md:text-7xl">
             {o.headline}
           </h2>
           <p className="mx-auto mt-8 max-w-md font-serif text-xl font-light italic leading-relaxed text-[#4A1259]/68">
@@ -250,7 +250,7 @@ function DecisionFilterPage() {
           )}
           <button
             onClick={reset}
-            className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#1F1623]"
+            className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#1F1623]"
           >
             Filter another decision
           </button>

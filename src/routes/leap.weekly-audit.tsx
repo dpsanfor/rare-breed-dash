@@ -87,7 +87,7 @@ function WeeklyAuditPage() {
                 }}
               />
             </div>
-            <p className="mt-2 font-mono text-[10px] text-[#E0249C]/50">
+            <p className="mt-2 font-mono text-[13px] text-[#E0249C]/60">
               {dimIndex + 1} of {WEEKLY_AUDIT_DIMENSIONS.length}
             </p>
           </div>
@@ -131,12 +131,12 @@ function WeeklyAuditPage() {
                     {SCORE_LABELS[n]}
                   </p>
                   {n === 1 && (
-                    <p className="font-mono text-[10px] text-[#4A1259]/30">
+                    <p className="font-mono text-[12px] text-[#4A1259]/40">
                       {dim.low}
                     </p>
                   )}
                   {n === 5 && (
-                    <p className="font-mono text-[10px] text-[#4A1259]/30">
+                    <p className="font-mono text-[12px] text-[#4A1259]/40">
                       {dim.high}
                     </p>
                   )}
@@ -148,7 +148,7 @@ function WeeklyAuditPage() {
           {dimIndex > 0 && (
             <button
               onClick={() => setDimIndex((i) => i - 1)}
-              className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/30 hover:text-[#1F1623]"
+              className="mt-8 font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/40 hover:text-[#1F1623]"
             >
               ← Back
             </button>
@@ -222,10 +222,10 @@ function WeeklyAuditPage() {
       <div className="mx-auto max-w-xl text-center">
         <div className="mb-16 mt-16">
           <p className="eyebrow mb-8">Audit Complete</p>
-          <div className="mb-8 font-mono text-sm text-[#4A1259]/40">
+          <div className="mb-8 font-mono text-base text-[#4A1259]/40">
             <p>████████████ 100%</p>
           </div>
-          <h2 className="font-display text-6xl leading-[0.9] tracking-wide text-shimmer">
+          <h2 className="font-display text-6xl leading-[1.05] tracking-wide text-shimmer">
             Operating system checked.
           </h2>
           <p className="mt-6 font-serif text-xl font-light italic text-[#4A1259]/60">
