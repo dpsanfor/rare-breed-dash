@@ -2,12 +2,11 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { type ReactNode } from "react";
 
 const NAV = [
-  { to: "/dash/", label: "Dashboard" },
+  { to: "/dash/", label: "Home" },
   { to: "/prison-break/", label: "Phase One" },
   { to: "/ten-x-leap/", label: "Phase Two" },
-  { to: "/rare-breed-club/", label: "Club" },
+  { to: "/rare-breed-club/", label: "Build Suite" },
   { to: "/leap/decision-filter", label: "Filter" },
-  { to: "/leap/weekly-audit", label: "Audit" },
 ];
 
 export function BrandShell({
