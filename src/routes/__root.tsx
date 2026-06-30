@@ -11,7 +11,7 @@ interface RouterContext {
 export const Route = createRootRouteWithContext<RouterContext>()({
   beforeLoad: ({ location }) => {
     if (location.pathname === '/' || location.pathname === '') {
-      throw redirect({ to: '/leap/' })
+      throw redirect({ to: '/dash/' })
     }
   },
   component: RootComponent,

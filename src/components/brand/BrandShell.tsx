@@ -2,13 +2,12 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { type ReactNode } from "react";
 
 const NAV = [
-  { to: "/leap/", label: "OS" },
-  { to: "/leap/installations/", label: "Installations" },
+  { to: "/dash/", label: "Dashboard" },
+  { to: "/prison-break/", label: "Phase One" },
+  { to: "/ten-x-leap/", label: "Phase Two" },
   { to: "/leap/constitution", label: "Constitution" },
-  { to: "/leap/decision-filter", label: "Decision Filter" },
+  { to: "/leap/decision-filter", label: "Filter" },
   { to: "/leap/weekly-audit", label: "Audit" },
-  { to: "/leap/os", label: "Dashboard" },
-  { to: "/leap/updates", label: "Updates" },
 ];
 
 export function BrandShell({
@@ -27,13 +26,13 @@ export function BrandShell({
       <header className="sticky top-0 z-40 border-b border-[rgba(74,18,89,0.1)] bg-[rgba(245,239,224,0.92)] backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           {/* Logo */}
-          <Link to="/leap/" className="group flex items-center gap-3">
+          <Link to="/dash/" className="group flex items-center gap-3">
             <div className="flex flex-col leading-none">
               <span className="font-display text-[22px] tracking-[0.14em] text-shimmer">
                 RARE BREED
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-[rgba(74,18,89,0.4)]">
-                OS™ · 10X Leap
+                OS™
               </span>
             </div>
           </Link>
@@ -41,10 +40,7 @@ export function BrandShell({
           {/* Nav */}
           <nav className="hidden items-center gap-6 sm:flex">
             {NAV.map((n) => {
-              const active =
-                n.to === "/leap/"
-                  ? path === "/leap/" || path === "/leap"
-                  : path.startsWith(n.to);
+              const active = path.startsWith(n.to);
               return (
                 <Link
                   key={n.to}
