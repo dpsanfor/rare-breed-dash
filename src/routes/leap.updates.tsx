@@ -68,9 +68,9 @@ function UpdatesPage() {
 
             <div className="space-y-3">
               {update.items.map((item) => {
-                const dashIdx = item.indexOf(" — ");
-                const title = dashIdx > -1 ? item.slice(0, dashIdx) : item;
-                const desc = dashIdx > -1 ? item.slice(dashIdx + 3) : null;
+                const colonIdx = item.indexOf(": ");
+                const title = colonIdx > -1 ? item.slice(0, colonIdx) : item;
+                const desc = colonIdx > -1 ? item.slice(colonIdx + 2) : null;
                 return (
                   <div key={item} className="flex items-start gap-4">
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#E0249C]" />
@@ -78,7 +78,7 @@ function UpdatesPage() {
                       <span className="not-italic font-medium text-[#1F1623]">
                         {title}
                       </span>
-                      {desc && ` — ${desc}`}
+                      {desc && `: ${desc}`}
                     </p>
                   </div>
                 );

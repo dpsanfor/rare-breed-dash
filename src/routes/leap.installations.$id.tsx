@@ -174,7 +174,7 @@ function InstallationPage() {
             <p className="mt-6 font-serif text-xl font-light italic text-[#4A1259]/65">
               {isLast
                 ? "You are the operating system now."
-                : installation.deliverables.join(" · ") + " — saved."}
+                : installation.deliverables.join(" · ") + ". Saved."}
             </p>
           </div>
 

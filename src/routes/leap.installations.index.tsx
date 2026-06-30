@@ -19,6 +19,16 @@ type ProgressRow = {
 
 function InstallationsPage() {
   const [progress, setProgress] = useState<ProgressRow[]>([]);
+  const [adminMode, setAdminMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("rb_admin") === "1";
+  });
+
+  function toggleAdmin() {
+    const next = !adminMode;
+    setAdminMode(next);
+    localStorage.setItem("rb_admin", next ? "1" : "");
+  }
 
   useEffect(() => {
     supabase
@@ -28,7 +38,7 @@ function InstallationsPage() {
   }, []);
 
   function getStatus(id: string, index: number) {
-    if (index > 0) {
+    if (!adminMode && index > 0) {
       const prevId = INSTALLATIONS[index - 1].id;
       const prevDone = progress.some(
         (p) =>
@@ -65,8 +75,21 @@ function InstallationsPage() {
       <PageHeader
         eyebrow="The 10X Leap · 5-Day Workshop"
         title="Installations"
-        subtitle="Five installations. One operating system. Work in sequence — each installation prepares the next."
+        subtitle="Five installations. One operating system. Work in sequence. Each installation prepares the next."
       />
+
+      <div className="mb-6 flex justify-end">
+        <button
+          onClick={toggleAdmin}
+          className={`rounded-full border px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors ${
+            adminMode
+              ? "border-[#E0249C]/50 bg-[#E0249C]/10 text-[#E0249C]"
+              : "border-[rgba(74,18,89,0.2)] text-[#4A1259]/40 hover:border-[rgba(74,18,89,0.4)] hover:text-[#4A1259]/70"
+          }`}
+        >
+          {adminMode ? "Preview Mode: On" : "Preview Mode"}
+        </button>
+      </div>
 
       <div className="space-y-4">
         {INSTALLATIONS.map((inst, i) => {

@@ -33,7 +33,7 @@ export const INSTALLATIONS: Installation[] = [
         key: "recap",
         type: "recap",
         title: "Why We Envision First",
-        body: `Most women build their business from where they are.\n\nThey price from their current bank account. They market to who's already following them. They offer what they think people can afford.\n\nThe Rare Breed Operating System starts somewhere different.\n\nIt starts with a vision so large that your current circumstances become irrelevant.\n\nYou are not building a business that fits your life.\n\nYou are installing a vision that expands your life to fit it.\n\nIn this installation, you will see — clearly and completely — who you are becoming and what you are building.\n\nLet's begin.`,
+        body: `Most women build their business from where they are right now.\n\nFrom their current bank account. From whoever's already following. From what they think people can afford.\n\nThe Rare Breed Operating System starts from a different place entirely.\n\nA vision so big your current circumstances stop mattering.\n\nYou're not building a business that fits your life. You're installing a vision that makes your life expand to fit it.\n\nToday you'll see exactly who you're becoming and what you're building.\n\nLet's go.`,
       },
       {
         key: "vision",
@@ -86,7 +86,7 @@ export const INSTALLATIONS: Installation[] = [
         key: "recap",
         type: "recap",
         title: "Why Calling and Capability Are Not the Same",
-        body: `There is a version of you that is very, very good at things that have nothing to do with your calling.\n\nYou are capable of working 80-hour weeks. That doesn't mean it's your calling.\n\nYou are capable of serving clients who drain you. That doesn't mean it's your calling.\n\nYou are capable of building a business that makes money but hollows you out. That is not your calling.\n\nIn this installation, we separate three things:\n\n• What you're called to do.\n• What you're capable of doing.\n• What you've been conditioned to do.\n\nThe magic lives in the overlap of calling and capability.\n\nEverything else — even if you're brilliant at it — belongs on someone else's list.`,
+        body: `There is a version of you that is VERY good at things that have nothing to do with your calling.\n\nWorking 80-hour weeks. Serving clients who drain you. Building a business that makes money but hollows you out. All of that is capability. Not calling.\n\nToday we separate three things:\n\n• What you're called to do.\n• What you're capable of doing.\n• What you've been conditioned to do.\n\nThe magic lives in the overlap of calling and capability.\n\nEverything else, even the things you're brilliant at, belongs on someone else's list.`,
       },
       {
         key: "calling",
@@ -149,7 +149,7 @@ export const INSTALLATIONS: Installation[] = [
         key: "recap",
         type: "recap",
         title: "Why You Must Release Before You Build",
-        body: `You cannot install a new operating system without clearing the old one.\n\nThe women who struggle to build what they want are usually holding too much of what they don't.\n\nClients that have outgrown you. Offers that were for a previous version of you. Beliefs that kept you safe when you were smaller. Roles that were never yours to play.\n\nRelease is not failure.\n\nRelease is the most sophisticated move a Rare Breed makes.\n\nIn this installation, you will create space — not by forcing yourself to let go, but by getting honest about what you've already outgrown.\n\nThe space you create here is exactly the size of the vision you installed yesterday.`,
+        body: `You cannot install a new operating system without clearing the old one.\n\nThe women who can't build what they want are usually holding too much of what they don't.\n\nClients you've outgrown. Offers built for a previous version of you. Beliefs that kept you safe when you were smaller. Roles that were never yours to play.\n\nRelease is the most sophisticated move a Rare Breed makes.\n\nToday you'll create space. No forcing. Just honesty about what you've already outgrown.\n\nThe space you create here is exactly the size of the vision you installed yesterday.`,
       },
       {
         key: "release",
@@ -211,7 +211,7 @@ export const INSTALLATIONS: Installation[] = [
         key: "recap",
         type: "recap",
         title: "Build From Genius, Not From Fear",
-        body: `Most coaches build their business from what sold before.\n\nThey reverse-engineer their offer from what the market will tolerate. They position themselves based on what competitors are charging. They create content for the algorithm.\n\nThe Rare Breed builds differently.\n\nShe starts with her genius — the thing that is uniquely, irreplaceably hers — and she builds the business around it.\n\nThis is not a marketing exercise.\n\nThis is architecture.\n\nIn this installation, you will design the blueprint of a business that could not exist without you.\n\nNot a business that sounds like everyone else.\n\nYours. Specifically. Undeniably. Yours.`,
+        body: `Most coaches build their business from what sold before.\n\nReverse-engineering offers from what the market will tolerate. Positioning based on what competitors are charging. Creating content for the algorithm.\n\nThe Rare Breed builds differently.\n\nShe starts with her genius (the thing that is uniquely, irreplaceably hers) and builds the business around it.\n\nThis is ARCHITECTURE.\n\nToday you'll design the blueprint of a business that could not exist without you.\n\nNot a business that sounds like everyone else. Yours. SPECIFICALLY yours.`,
       },
       {
         key: "blueprint",
@@ -282,7 +282,7 @@ export const INSTALLATIONS: Installation[] = [
         key: "recap",
         type: "recap",
         title: "The Operating System Is You",
-        body: `You have done the work.\n\nYou have installed a vision larger than your current circumstances.\n\nYou have separated your calling from your conditioning.\n\nYou have released what was never yours.\n\nYou have built the architecture of a business that couldn't exist without you.\n\nNow we install the operating system.\n\nThe operating system is not a set of rules you follow.\n\nIt's a set of commitments you have made to yourself — permanently, unconditionally, without exception.\n\nAfter today, every decision you make runs through this filter.\n\nWelcome to the Rare Breed OS™.`,
+        body: `You've done the work.\n\nA vision larger than your current circumstances: installed. Calling separated from conditioning: done. What was never yours: released. The architecture of a business that couldn't exist without you: built.\n\nNow we install the operating system.\n\nThis is a set of commitments you've made to yourself. Permanently. Unconditionally. Without exception.\n\nFrom today, every decision runs through this filter.\n\nWelcome to the Rare Breed OS™.`,
       },
       {
         key: "standards",
@@ -377,7 +377,7 @@ export const DECISION_FILTER_QUESTIONS = [
     key: "q5_future_self",
     question: "Would my future self choose this?",
     subtext:
-      "The woman you envisioned in Installation 1 — would she say yes to this?",
+      "The woman you envisioned in Installation 1: would she say yes to this?",
     options: [
       { value: "yes", label: "Yes" },
       { value: "unsure", label: "Unsure" },
@@ -469,9 +469,9 @@ export const OS_UPDATES = [
     title: "Leadership Update",
     date: "2026-07-01",
     items: [
-      "Leadership Update — Decision Filter calibration for scale",
-      "Identity Calibration — The woman who leads from the front",
-      "Content Challenge — 7 days of calling-first content",
+      "Leadership Update: Decision Filter calibration for scale",
+      "Identity Calibration: The woman who leads from the front",
+      "Content Challenge: 7 days of calling-first content",
     ],
   },
   {
@@ -479,9 +479,9 @@ export const OS_UPDATES = [
     title: "Expansion Protocol",
     date: "2026-06-01",
     items: [
-      "Pricing Update — Charging from value, not apology",
-      "Client Filter — Who gets access to your genius",
-      "Offer Architecture — One offer, infinite expansion",
+      "Pricing Update: Charging from value, not apology",
+      "Client Filter: Who gets access to your genius",
+      "Offer Architecture: One offer, infinite expansion",
     ],
   },
 ];

@@ -25,13 +25,13 @@ const OUTPUT_CONFIG: Record<
   proceed: {
     label: "PROCEED",
     headline: "This is yours.",
-    body: "Your operating system says yes. Move forward with full commitment — not tentatively, not halfway. This decision expands your vision and requires your genius. Proceed.",
+    body: "Your operating system says yes. Full commitment. This decision expands your vision and requires your genius. Go.",
     color: "#E0249C",
   },
   pause: {
     label: "PAUSE",
     headline: "Hold here.",
-    body: "Something in this decision needs more clarity before you move. It's not a no — it's a not yet. Sit with the questions that didn't fully land. Return when you have more clarity.",
+    body: "Something in this decision needs more clarity before you move. Sit with the questions that didn't fully land. Return when you're clear.",
     color: "#c9a84c",
   },
   not_yours: {
@@ -102,7 +102,7 @@ function DecisionFilterPage() {
               What decision are you filtering?
             </h1>
             <p className="mt-6 font-serif text-lg font-light italic text-[#4A1259]/60">
-              Be specific. Name the actual decision — not the feeling around it.
+              Be specific. Name the actual decision, not the feeling around it.
             </p>
           </div>
 
