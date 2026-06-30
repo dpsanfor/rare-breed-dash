@@ -5,7 +5,7 @@ const NAV = [
   { to: "/dash/", label: "Dashboard" },
   { to: "/prison-break/", label: "Phase One" },
   { to: "/ten-x-leap/", label: "Phase Two" },
-  { to: "/leap/constitution", label: "Constitution" },
+  { to: "/rare-breed-club/", label: "Club" },
   { to: "/leap/decision-filter", label: "Filter" },
   { to: "/leap/weekly-audit", label: "Audit" },
 ];

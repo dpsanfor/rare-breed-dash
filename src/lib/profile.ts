@@ -20,6 +20,18 @@ export interface UserProfile {
   category_of_one?: string;
   operating_manual?: string;
 
+  // Rare Breed Club builder artifacts
+  dream_client?: string;
+  messaging_blueprint?: string;
+  offer_suite?: string;
+  signature_curriculum?: string;
+  framework_library?: string;
+  sales_page?: string;
+  content_strategy?: string;
+  brand_blueprint?: string;
+  launch_blueprint?: string;
+  business_blueprint?: string;
+
   // Background intelligence (continuously refined across all engines)
   discernment_signals?: string;
   decision_filters?: string;
