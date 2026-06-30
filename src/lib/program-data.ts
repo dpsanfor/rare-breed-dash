@@ -334,12 +334,25 @@ export const PHASES: Phase[] = [
         generatePrompt: "I'm ready. Generate my Sales Playbook.",
       },
       {
-        id: "content-engine",
+        id: "email",
         number: 7,
-        name: "Content Engine™",
-        tagline: "90 days of content built from your Zone of Genius.",
+        name: "Email Builder™",
+        tagline: "Relationship sequences that move belief — not inboxes.",
         purpose:
-          "Hooks, captions, thought leadership, launch content, email ideas — all emerging from your Magic Gumdrop and messaging. Never content for content's sake.",
+          "Email is not for convincing. It is for creating repeated moments of recognition. This Builder constructs complete email sequences — welcome, nurture, sales, launch, re-engagement, and story emails — all sourced from the Dream Client Playbook's exact language and the Messaging Playbook's belief shift architecture. Every email answers one question: what does this reader need to feel understood today?",
+        type: "conversation",
+        outputName: "Email Playbook™",
+        outputKey: "email_playbook",
+        nextDecision: "Which sequence do I build and send first?",
+        generatePrompt: "I'm ready. Generate my Email Playbook.",
+      },
+      {
+        id: "content-engine",
+        number: 8,
+        name: "Content Builder™",
+        tagline: "A content operating system that eliminates daily content decisions.",
+        purpose:
+          "This Builder first learns how the founder naturally creates — creative style, launch rhythm, energy patterns, content capacity — before generating anything. Then it combines her Brand Voice, Operating Manual, Dream Client Playbook, and Messaging Playbook into a complete content operating system: content pillars, hook library, 90-day calendar, daily mode protocol, and a weekly and monthly evolution process.",
         type: "conversation",
         outputName: "Content Playbook™",
         outputKey: "content_strategy",
@@ -348,7 +361,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "brand",
-        number: 8,
+        number: 9,
         name: "Brand Builder™",
         tagline: "Visual and experiential identity built from your philosophy.",
         purpose:
@@ -361,7 +374,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "launch-planner",
-        number: 9,
+        number: 10,
         name: "Launch Planner™",
         tagline: "A complete launch built from everything you've created.",
         purpose:
@@ -374,7 +387,7 @@ export const PHASES: Phase[] = [
       },
       {
         id: "rare-breed-hq",
-        number: 10,
+        number: 11,
         name: "Rare Breed HQ™",
         tagline: "Your complete business — in one living document.",
         purpose:

@@ -24,7 +24,7 @@ const BUILDER_GROUPS = [
   },
   {
     label: "Marketing",
-    ids: ["sales-page", "content-engine", "launch-planner"],
+    ids: ["sales-page", "email", "content-engine", "launch-planner"],
     phase: "phase3",
   },
   {

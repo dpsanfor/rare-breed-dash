@@ -27,6 +27,7 @@ export interface UserProfile {
   signature_curriculum?: string;
   framework_library?: string;
   sales_page?: string;
+  email_playbook?: string;
   content_strategy?: string;
   brand_blueprint?: string;
   launch_blueprint?: string;
