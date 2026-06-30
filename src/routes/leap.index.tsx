@@ -162,7 +162,7 @@ function LeapHome() {
       </div>
 
       {/* Primary actions — one decision per column */}
-      <div className="mb-20 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="mb-20 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {currentInstallation && (
           <Link
             to="/leap/installations/$id"
@@ -219,6 +219,18 @@ function LeapHome() {
           </p>
           <p className="mt-1 text-sm font-serif italic text-[#4A1259]/55">
             5-minute operating check-in
+          </p>
+        </Link>
+        <Link
+          to="/leap/constitution"
+          className="rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/60 p-7 transition-all hover:-translate-y-0.5 hover:border-[#E0249C]/30"
+        >
+          <p className="label-soft mb-2">Installation 04</p>
+          <p className="font-display text-2xl tracking-wide text-[#1F1623]">
+            Constitution
+          </p>
+          <p className="mt-1 text-sm font-serif italic text-[#4A1259]/55">
+            Build your Rare Breed OS™
           </p>
         </Link>
       </div>

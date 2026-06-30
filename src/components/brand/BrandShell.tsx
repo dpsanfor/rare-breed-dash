@@ -4,6 +4,7 @@ import { type ReactNode } from "react";
 const NAV = [
   { to: "/leap/", label: "OS" },
   { to: "/leap/installations/", label: "Installations" },
+  { to: "/leap/constitution", label: "Constitution" },
   { to: "/leap/decision-filter", label: "Decision Filter" },
   { to: "/leap/weekly-audit", label: "Audit" },
   { to: "/leap/os", label: "Dashboard" },
