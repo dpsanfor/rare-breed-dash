@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Outlet, ScrollRestoration, createRootRouteWithContext, redirect } from '@tanstack/react-router'
+import { Outlet, ScrollRestoration, createRootRouteWithContext, redirect, useNavigate, useRouterState } from '@tanstack/react-router'
 import { HeadContent, Scripts } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AuthProvider, useAuth } from '@/contexts/AuthContext'
 import '../styles.css'
 
 interface RouterContext {
@@ -17,6 +18,34 @@ export const Route = createRootRouteWithContext<RouterContext>()({
   component: RootComponent,
 })
 
+function AuthGuard({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useAuth()
+  const navigate = useNavigate()
+  const location = useRouterState({ select: (s) => s.location })
+
+  React.useEffect(() => {
+    if (!loading && !user && location.pathname !== '/login') {
+      navigate({ to: '/login' })
+    }
+  }, [user, loading, location.pathname])
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center" style={{ background: "#F9F5F0" }}>
+        <div className="flex gap-1.5">
+          <span className="h-2 w-2 animate-bounce rounded-full bg-[#E0249C]" style={{ animationDelay: "0ms" }} />
+          <span className="h-2 w-2 animate-bounce rounded-full bg-[#E0249C]" style={{ animationDelay: "150ms" }} />
+          <span className="h-2 w-2 animate-bounce rounded-full bg-[#E0249C]" style={{ animationDelay: "300ms" }} />
+        </div>
+      </div>
+    )
+  }
+
+  if (!user && location.pathname !== '/login') return null
+
+  return <>{children}</>
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext()
   return (
@@ -31,7 +60,11 @@ function RootComponent() {
       </head>
       <body className="overflow-x-hidden">
         <QueryClientProvider client={queryClient}>
-          <Outlet />
+          <AuthProvider>
+            <AuthGuard>
+              <Outlet />
+            </AuthGuard>
+          </AuthProvider>
         </QueryClientProvider>
         <ScrollRestoration />
         <Scripts />

@@ -12,6 +12,8 @@ import {
   type UserProfile,
 } from "@/lib/profile";
 import { sendModuleMessage, generateModuleReport, type ChatMessage } from "@/lib/anthropic";
+import { getUserAccess } from "@/lib/supabase-profile";
+import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
 
 export const Route = createFileRoute("/rare-breed-club/$builder")({
   component: RareBreedClubBuilder,
@@ -30,9 +32,46 @@ function RareBreedClubBuilder() {
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
+  const [listening, setListening] = useState(false);
+  const [access, setAccess] = useState<boolean | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
+  const baseTextRef = useRef("");
+
+  function toggleMic() {
+    if (listening) {
+      recognitionRef.current?.stop();
+      setListening(false);
+      return;
+    }
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+    const rec = new SR();
+    rec.lang = "en-US";
+    rec.continuous = true;
+    rec.interimResults = true;
+    baseTextRef.current = input;
+    rec.onresult = (e: any) => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        const t = e.results[i][0].transcript;
+        if (e.results[i].isFinal) {
+          baseTextRef.current = (baseTextRef.current + " " + t).trim();
+        } else {
+          interim += t;
+        }
+      }
+      setInput(interim ? (baseTextRef.current + " " + interim).trim() : baseTextRef.current);
+    };
+    rec.onend = () => setListening(false);
+    rec.onerror = () => setListening(false);
+    recognitionRef.current = rec;
+    rec.start();
+    setListening(true);
+  }
 
   useEffect(() => {
+    getUserAccess().then((a) => setAccess(a.phase3));
     const p = readProfile();
     setProfile(p);
     if (!mod) return;
@@ -46,6 +85,9 @@ function RareBreedClubBuilder() {
       initConversation(p, mod.id);
     }
   }, []);
+
+  if (access === null) return null;
+  if (!access) return <PhaseLockedScreen phase="rare-breed-club" />;
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -98,17 +140,23 @@ function RareBreedClubBuilder() {
   async function send() {
     const text = input.trim();
     if (!text || loading) return;
+    if (listening) {
+      recognitionRef.current?.stop();
+      setListening(false);
+    }
     setInput("");
     const updated: ChatMessage[] = [...messages, { role: "user", content: text }];
     setMessages(updated);
+    saveConversation(mod!.id, updated);
     setLoading(true);
     try {
       const reply = await sendModuleMessage({ data: { moduleId: mod!.id, messages: updated } });
       const withReply: ChatMessage[] = [...updated, { role: "assistant", content: reply }];
       setMessages(withReply);
       saveConversation(mod!.id, withReply);
-    } catch {
-      setError("Something went wrong. Try again.");
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : typeof e === "object" ? JSON.stringify(e) : String(e);
+      setError(msg || "Something went wrong. Try again.");
       setMessages(messages);
     } finally {
       setLoading(false);
@@ -139,17 +187,17 @@ function RareBreedClubBuilder() {
         <div className="mb-4 flex items-center gap-4">
           <Link
             to="/rare-breed-club/"
-            className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35 hover:text-[#E0249C] transition-colors"
+            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-[#4A1259]/55 hover:text-[#E0249C] transition-colors"
           >
-            Rare Breed Club
+            ← Back
           </Link>
-          <span className="font-mono text-[10px] text-[#4A1259]/25">/</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#4A1259]/35">
-            Builder {mod.number}
+          <span className="font-mono text-[11px] text-[#4A1259]/25">/</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#4A1259]/55">
+            {mod.outputName}
           </span>
         </div>
         <div className="mb-2 flex items-center gap-3">
-          <span className="font-mono text-[10px] tracking-[0.3em] text-[#E0249C]/60">
+          <span className="font-mono tracking-[0.3em] text-[#E0249C]/70" style={{ fontSize: "25px" }}>
             {mod.number.toString().padStart(2, "0")} / {phase3.modules.length.toString().padStart(2, "0")}
           </span>
           {isComplete && (
@@ -158,7 +206,7 @@ function RareBreedClubBuilder() {
             </span>
           )}
         </div>
-        <h1 className="font-display text-[40px] leading-[1.05] tracking-wide text-shimmer sm:text-[56px] md:text-[72px]">
+        <h1 className="font-display text-[24px] leading-[1.05] tracking-wide text-shimmer sm:text-[32px] md:text-[40px]">
           {mod.name}
         </h1>
         <p className="mt-3 font-serif text-lg font-light italic text-[#4A1259]/65">
@@ -168,9 +216,9 @@ function RareBreedClubBuilder() {
 
       {!artifact && (
         <div className="mb-6 rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-6">
-          <p className="eyebrow mb-2">What this builder produces</p>
-          <p className="font-serif text-sm italic text-[#4A1259]/65">{mod.purpose}</p>
-          <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/35">
+          <p className="eyebrow mb-4" style={{ fontSize: "21px" }}>What this builder produces</p>
+          <p className="font-serif italic leading-snug" style={{ fontSize: "21px", color: "rgba(74,18,89,0.95)" }}>{mod.purpose}</p>
+          <p className="mt-4 font-mono uppercase tracking-[0.2em]" style={{ fontSize: "15px", color: "rgba(74,18,89,0.65)" }}>
             Reads: your Operating Manual + all previous artifacts
           </p>
         </div>
@@ -225,16 +273,21 @@ function RareBreedClubBuilder() {
         <div>
           <div className="mb-4 max-h-[480px] min-h-[280px] overflow-y-auto rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 p-6">
             {messages.length === 0 && loading && (
-              <div className="flex items-center gap-1 text-[#4A1259]/40">
-                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" style={{ animationDelay: "0ms" }} />
-                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" style={{ animationDelay: "150ms" }} />
-                <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" style={{ animationDelay: "300ms" }} />
+              <div className="flex flex-col items-start gap-3">
+                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#E0249C]/70">
+                  Reading your Rare Breed Operating Manual...
+                </p>
+                <div className="flex items-center gap-1 text-[#4A1259]/40">
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" style={{ animationDelay: "0ms" }} />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" style={{ animationDelay: "150ms" }} />
+                  <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" style={{ animationDelay: "300ms" }} />
+                </div>
               </div>
             )}
             <div className="space-y-5">
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[82%] rounded-2xl px-5 py-3.5 font-serif text-sm leading-relaxed ${
+                  <div style={{ fontSize: "21px" }} className={`max-w-[82%] rounded-2xl px-5 py-3.5 font-serif leading-relaxed ${
                     m.role === "user"
                       ? "bg-[#E0249C]/10 text-[#1F1623]"
                       : "bg-[rgba(74,18,89,0.06)] text-[#1F1623]/90"
@@ -271,13 +324,41 @@ function RareBreedClubBuilder() {
               rows={3}
               className="flex-1 resize-none rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white/80 px-5 py-3.5 font-serif text-sm text-[#1F1623] outline-none placeholder:text-[#4A1259]/30 focus:border-[#E0249C]/40"
             />
-            <button
-              onClick={send}
-              disabled={!input.trim() || loading}
-              className="rounded-2xl border border-[#E0249C]/30 bg-[#E0249C]/10 px-5 font-display text-sm tracking-[0.12em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
-            >
-              Send
-            </button>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={toggleMic}
+                title={listening ? "Stop recording" : "Speak your answer"}
+                className="flex items-center justify-center rounded-2xl border px-4 py-2 transition-all"
+                style={{
+                  borderColor: listening ? "#E0249C" : "rgba(74,18,89,0.2)",
+                  background: listening ? "rgba(224,36,156,0.12)" : "rgba(255,255,255,0.7)",
+                  boxShadow: listening ? "0 0 0 3px rgba(224,36,156,0.2)" : "none",
+                }}
+              >
+                {listening ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="5" fill="#E0249C">
+                      <animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite" />
+                      <animate attributeName="opacity" values="1;0.4;1" dur="1s" repeatCount="indefinite" />
+                    </circle>
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(74,18,89,0.55)" strokeWidth="1.8" strokeLinecap="round">
+                    <rect x="9" y="2" width="6" height="11" rx="3" />
+                    <path d="M5 10a7 7 0 0 0 14 0" />
+                    <line x1="12" y1="19" x2="12" y2="22" />
+                    <line x1="9" y1="22" x2="15" y2="22" />
+                  </svg>
+                )}
+              </button>
+              <button
+                onClick={send}
+                disabled={!input.trim() || loading}
+                className="rounded-2xl border border-[#E0249C]/30 bg-[#E0249C]/10 px-5 py-2 font-display text-sm tracking-[0.12em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
+              >
+                Send
+              </button>
+            </div>
           </div>
 
           {canGenerate && (
@@ -298,6 +379,15 @@ function RareBreedClubBuilder() {
               </button>
             </div>
           )}
+
+          <div className="mt-10 pt-8 border-t border-[rgba(74,18,89,0.08)]">
+            <Link
+              to="/rare-breed-club/"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
+            >
+              ← Back to Rare Breed Club
+            </Link>
+          </div>
         </div>
       )}
     </BrandShell>

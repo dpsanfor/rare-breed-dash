@@ -31,12 +31,15 @@ function PrisonBreakIndex() {
   return (
     <BrandShell hideStickyCta>
       <div className="mb-12 mt-8">
-        <p className="eyebrow mb-4">Phase 01 · Good Girl Prison Break™</p>
-        <h1 className="font-display text-[48px] leading-[1.0] tracking-wide text-shimmer sm:text-[64px] md:text-[80px]">
-          Discover the operating system<br />you've been living from.
+        <p className="eyebrow mb-2">Phase 01 · Good Girl Prison Break™</p>
+        <h1 className="font-display text-[24px] leading-[1.0] tracking-wide text-shimmer sm:text-[32px] md:text-[40px]">
+          Discover the outdated operating system that has been running your life.
         </h1>
-        <p className="mt-6 max-w-xl font-serif text-lg font-light italic text-[#4A1259]/65">
-          {completedCount} of {phase.modules.length} modules installed.
+        <p className="mt-5 max-w-2xl font-serif text-2xl font-light italic text-[#4A1259]/80">
+          Because until you can see the system, you can't choose a new one.
+        </p>
+        <p className="mt-4 font-mono text-[14px] uppercase tracking-[0.2em] text-[#4A1259]/55">
+          {completedCount} of {phase.modules.length} modules installed
         </p>
       </div>
 
@@ -71,7 +74,44 @@ function PrisonBreakIndex() {
         </div>
       )}
 
+      {/* Call Replays */}
+      <div className="mb-12">
+        <p className="eyebrow mb-5">Call Replays</p>
+        <div className="space-y-3">
+          {[
+            { number: "01", title: "Calculate the Escape", description: "The full session where we map exactly what it costs to stay." },
+            { number: "02", title: "Liberation Day", description: "The live call where we install your new operating system together." },
+          ].map((call) => (
+            <div
+              key={call.number}
+              className="flex items-center gap-6 rounded-2xl border p-6"
+              style={{
+                borderColor: "rgba(224,36,156,0.2)",
+                background: "linear-gradient(135deg, rgba(224,36,156,0.05) 0%, rgba(74,18,89,0.04) 100%)",
+              }}
+            >
+              <div
+                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[11px] tracking-[0.15em]"
+                style={{ background: "rgba(224,36,156,0.12)", color: "#E0249C" }}
+              >
+                {call.number}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="font-display text-lg tracking-[0.05em] text-[#1F1623]">{call.title}</p>
+                <p className="mt-0.5 font-serif text-sm italic text-[#4A1259]/55">{call.description}</p>
+              </div>
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A1259]/30">
+                Coming Soon
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Module list */}
+      <div className="mb-5">
+        <p className="eyebrow">Liberation Modules</p>
+      </div>
       <div className="space-y-3">
         {phase.modules.map((mod) => {
           const complete = completedKeys.includes(`phase1_${mod.id}`);
@@ -84,33 +124,36 @@ function PrisonBreakIndex() {
               className="flex items-center gap-6 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
               style={{
                 borderColor: complete
-                  ? "rgba(201,168,76,0.25)"
+                  ? "rgba(201,168,76,0.3)"
                   : isNext
-                    ? "rgba(224,36,156,0.3)"
+                    ? "rgba(224,36,156,0.5)"
                     : "rgba(74,18,89,0.1)",
                 background: complete
-                  ? "rgba(201,168,76,0.04)"
+                  ? "linear-gradient(135deg, rgba(201,168,76,0.09) 0%, rgba(240,223,160,0.04) 100%)"
                   : isNext
-                    ? "rgba(224,36,156,0.04)"
-                    : "rgba(255,255,255,0.7)",
+                    ? "linear-gradient(135deg, rgba(224,36,156,0.1) 0%, rgba(236,72,153,0.04) 100%)"
+                    : "rgba(255,255,255,0.6)",
+                boxShadow: isNext ? "0 4px 24px -6px rgba(224,36,156,0.2)" : "none",
               }}
             >
               <div
                 className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[11px] tracking-[0.15em]"
                 style={{
                   background: complete
-                    ? "rgba(201,168,76,0.15)"
-                    : "rgba(74,18,89,0.08)",
-                  color: complete ? "#c9a84c" : "#4A1259",
+                    ? "linear-gradient(135deg, rgba(201,168,76,0.25), rgba(201,168,76,0.12))"
+                    : isNext
+                      ? "linear-gradient(135deg, #E0249C, #EC4899)"
+                      : "rgba(74,18,89,0.08)",
+                  color: complete ? "#c9a84c" : isNext ? "#fff" : "#4A1259",
                 }}
               >
                 {complete ? "✓" : mod.number.toString().padStart(2, "0")}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-display text-lg tracking-[0.05em] text-[#1F1623]">
+                <p className="font-display text-2xl tracking-[0.05em] text-[#1F1623]">
                   {mod.name}
                 </p>
-                <p className="mt-0.5 font-serif text-sm italic text-[#4A1259]/55">
+                <p className="mt-1 font-serif text-[28px] italic leading-snug text-[#4A1259]/55">
                   {mod.tagline}
                 </p>
               </div>

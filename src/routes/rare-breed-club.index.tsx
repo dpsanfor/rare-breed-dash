@@ -2,7 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
 import { PHASES } from "@/lib/program-data";
-import { readProfile, isModuleComplete } from "@/lib/profile";
+import { readProfile } from "@/lib/profile";
+import { getUserAccess } from "@/lib/supabase-profile";
+import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
 
 export const Route = createFileRoute("/rare-breed-club/")({
   head: () => ({
@@ -13,32 +15,32 @@ export const Route = createFileRoute("/rare-breed-club/")({
 
 const BUILDER_GROUPS = [
   {
-    label: "Foundation",
+    label: "Your Operating Manual",
     ids: ["operating-manual"],
     phase: "phase2",
   },
   {
-    label: "Business",
+    label: "Identity & Positioning",
     ids: ["dream-client", "messaging", "offer-suite", "curriculum", "framework"],
     phase: "phase3",
   },
   {
-    label: "Validation",
+    label: "Market Intelligence",
     ids: ["gumdrop-test-kitchen"],
     phase: "phase3",
   },
   {
-    label: "Marketing",
+    label: "Content, Launches & Growth",
     ids: ["sales-page", "email", "content-engine", "launch-planner"],
     phase: "phase3",
   },
   {
-    label: "Brand",
+    label: "Brand & Identity",
     ids: ["brand"],
     phase: "phase3",
   },
   {
-    label: "Business HQ",
+    label: "Business Vault",
     ids: ["rare-breed-hq"],
     phase: "phase3",
   },
@@ -46,27 +48,18 @@ const BUILDER_GROUPS = [
 
 function RareBreedClubIndex() {
   const [completedKeys, setCompletedKeys] = useState<string[]>([]);
-  const [phase2Complete, setPhase2Complete] = useState(false);
+  const [access, setAccess] = useState<boolean | null>(null);
   const phase3 = PHASES[2];
   const phase2 = PHASES[1];
 
   useEffect(() => {
     const profile = readProfile();
-    const completed = profile.completed_modules ?? [];
-    setCompletedKeys(completed);
-    const p2Done = phase2.modules.every((m) =>
-      completed.includes(`phase2_${m.id}`)
-    );
-    setPhase2Complete(p2Done);
+    setCompletedKeys(profile.completed_modules ?? []);
+    getUserAccess().then((a) => setAccess(a.phase3));
   }, []);
 
-  // Builders unlock sequentially: a builder unlocks when the previous one is complete
-  function isBuilderUnlocked(builderNumber: number): boolean {
-    if (!phase2Complete) return false;
-    if (builderNumber === 1) return true;
-    const prevId = phase3.modules[builderNumber - 2]?.id;
-    return prevId ? completedKeys.includes(`phase3_${prevId}`) : false;
-  }
+  if (access === null) return null;
+  if (!access) return <PhaseLockedScreen phase="rare-breed-club" />;
 
   function isBuilderComplete(builderId: string): boolean {
     return completedKeys.includes(`phase3_${builderId}`);
@@ -76,45 +69,47 @@ function RareBreedClubIndex() {
     completedKeys.includes(`phase3_${m.id}`)
   ).length;
 
-  if (!phase2Complete) {
-    return (
-      <BrandShell hideStickyCta>
-        <div className="py-24 text-center">
-          <p className="eyebrow mb-6">Phase 03 · Rare Breed Club™</p>
-          <h1 className="font-display text-[40px] leading-[1.05] tracking-wide text-[#1F1623]/50 sm:text-[56px]">
-            Complete Phase Two first.
-          </h1>
-          <p className="mt-6 font-serif text-base italic text-[#4A1259]/50">
-            Rare Breed Club uses your Operating Manual to build your business. You need the manual first.
-          </p>
-          <Link
-            to="/ten-x-leap/"
-            className="mt-10 inline-flex items-center gap-2 rounded-full border border-[rgba(74,18,89,0.2)] px-7 py-3.5 font-display text-[12px] tracking-[0.18em] text-[#4A1259]/60 hover:border-[#E0249C]/30 hover:text-[#E0249C]"
-          >
-            Go to Phase Two →
-          </Link>
-        </div>
-      </BrandShell>
-    );
-  }
-
   return (
     <BrandShell hideStickyCta>
       <div className="mb-12 mt-8">
-        <p className="eyebrow mb-4">Phase 03 · Rare Breed Club™</p>
-        <h1 className="font-display text-[48px] leading-[1.0] tracking-wide text-shimmer sm:text-[64px] md:text-[80px]">
-          Your Operating Manual<br />becomes your business.
+        <p className="eyebrow mb-2">Phase 03 · Rare Breed Club™</p>
+        <h1 className="font-display text-[24px] leading-[1.0] tracking-wide text-shimmer sm:text-[32px] md:text-[40px]">
+          You're finally living inside<br />the business you've been building toward.
         </h1>
-        <p className="mt-6 max-w-xl font-serif text-lg font-light italic text-[#4A1259]/65">
-          Each Builder reads your Operating Manual and every previous artifact before generating anything. You never start from scratch.
+        <p className="mt-6 max-w-xl font-serif text-xl font-light italic text-[#4A1259]/80">
+          Every Studio reads your Operating Manual before generating anything. Rare Breed OS™ already knows who you are. You never start from scratch again.
         </p>
       </div>
 
-      {/* Overall progress */}
+      {/* BRING YOUR OPERATING MANUAL TO LIFE section header */}
+      <div
+        className="mb-10 rounded-2xl p-8"
+        style={{
+          background: "linear-gradient(160deg, rgba(74,18,89,0.06) 0%, rgba(224,36,156,0.06) 100%)",
+          border: "1px solid rgba(224,36,156,0.15)",
+        }}
+      >
+        <p
+          className="font-mono uppercase tracking-[0.3em] text-[#E0249C] mb-3"
+          style={{ fontSize: "11px" }}
+        >
+          ✦ Activate Your Studios
+        </p>
+        <p
+          className="font-display leading-[0.95] tracking-[0.04em] text-shimmer mb-4"
+          style={{ fontSize: "clamp(22px, 5vw, 32px)" }}
+        >
+          Bring Your Operating Manual<br />to Life.
+        </p>
+        <p className="font-serif italic leading-relaxed text-[#1F1623]/75" style={{ fontSize: "17px", maxWidth: "560px" }}>
+          Everything you built in The 10X Leap becomes the intelligence these Studios use to generate a business built from your unique genius—not someone else's template.
+        </p>
+      </div>
+
       {completedBuilders > 0 && (
         <div className="mb-12">
           <div className="mb-1.5 flex items-center justify-between">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/40">
+            <p className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/55">
               {completedBuilders} of {phase3.modules.length} builders complete
             </p>
           </div>
@@ -130,7 +125,6 @@ function RareBreedClubIndex() {
         </div>
       )}
 
-      {/* Builder groups */}
       <div className="space-y-10">
         {BUILDER_GROUPS.map((group) => {
           const groupModules = group.phase === "phase2"
@@ -142,7 +136,6 @@ function RareBreedClubIndex() {
               <p className="eyebrow mb-4">{group.label}</p>
               <div className="space-y-3">
                 {groupModules.map((mod) => {
-                  // For the foundation (Operating Manual from Phase 2)
                   if (group.phase === "phase2") {
                     const done = completedKeys.includes(`phase2_${mod.id}`);
                     return (
@@ -150,38 +143,32 @@ function RareBreedClubIndex() {
                         key={mod.id}
                         to="/ten-x-leap/$module"
                         params={{ module: String(mod.number) }}
-                        className="flex items-center gap-6 rounded-2xl border p-6"
+                        className="flex items-center gap-6 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
                         style={{
-                          borderColor: done
-                            ? "rgba(201,168,76,0.25)"
-                            : "rgba(74,18,89,0.1)",
-                          background: done
-                            ? "rgba(201,168,76,0.04)"
-                            : "rgba(255,255,255,0.7)",
+                          borderColor: done ? "rgba(201,168,76,0.25)" : "rgba(74,18,89,0.1)",
+                          background: done ? "rgba(201,168,76,0.04)" : "rgba(255,255,255,0.7)",
                         }}
                       >
                         <div
-                          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[11px]"
+                          className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full font-mono text-[14px]"
                           style={{
-                            background: done
-                              ? "rgba(201,168,76,0.15)"
-                              : "rgba(74,18,89,0.08)",
+                            background: done ? "rgba(201,168,76,0.15)" : "rgba(74,18,89,0.08)",
                             color: done ? "#c9a84c" : "#4A1259",
                           }}
                         >
                           {done ? "✓" : "OS"}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-display text-lg tracking-[0.05em] text-[#1F1623]">
+                          <p className="font-display text-2xl tracking-[0.05em] text-[#1F1623]">
                             {mod.outputName}
                           </p>
-                          <p className="mt-0.5 font-serif text-sm italic text-[#4A1259]/55">
+                          <p className="mt-1 font-serif text-[32px] italic leading-snug text-[#4A1259]/70">
                             Required input for every builder
                           </p>
                         </div>
                         <span
-                          className="font-mono text-[9px] uppercase tracking-[0.2em]"
-                          style={{ color: done ? "#c9a84c" : "rgba(74,18,89,0.3)" }}
+                          className="font-mono text-[13px] uppercase tracking-[0.2em]"
+                          style={{ color: done ? "#c9a84c" : "rgba(74,18,89,0.4)" }}
                         >
                           {done ? "Complete" : "Needed"}
                         </span>
@@ -189,69 +176,43 @@ function RareBreedClubIndex() {
                     );
                   }
 
-                  // Phase 3 builders
                   const complete = isBuilderComplete(mod.id);
-                  const unlocked = isBuilderUnlocked(mod.number);
 
                   return (
-                    <div
+                    <Link
                       key={mod.id}
-                      className="flex items-center gap-6 rounded-2xl border p-6 transition-all"
+                      to="/rare-breed-club/$builder"
+                      params={{ builder: String(mod.number) }}
+                      className="flex items-center gap-6 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
                       style={{
-                        borderColor: complete
-                          ? "rgba(201,168,76,0.25)"
-                          : unlocked
-                            ? "rgba(224,36,156,0.2)"
-                            : "rgba(74,18,89,0.08)",
-                        background: complete
-                          ? "rgba(201,168,76,0.04)"
-                          : unlocked
-                            ? "rgba(224,36,156,0.04)"
-                            : "rgba(255,255,255,0.5)",
-                        opacity: !unlocked && !complete ? 0.6 : 1,
+                        borderColor: complete ? "rgba(201,168,76,0.25)" : "rgba(224,36,156,0.18)",
+                        background: complete ? "rgba(201,168,76,0.04)" : "rgba(255,255,255,0.7)",
                       }}
                     >
                       <div
-                        className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[11px] tracking-[0.1em]"
+                        className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full font-mono text-[14px] tracking-[0.1em]"
                         style={{
-                          background: complete
-                            ? "rgba(201,168,76,0.15)"
-                            : unlocked
-                              ? "rgba(224,36,156,0.1)"
-                              : "rgba(74,18,89,0.06)",
-                          color: complete ? "#c9a84c" : unlocked ? "#E0249C" : "#4A1259",
+                          background: complete ? "rgba(201,168,76,0.15)" : "rgba(224,36,156,0.1)",
+                          color: complete ? "#c9a84c" : "#E0249C",
                         }}
                       >
                         {complete ? "✓" : mod.number.toString().padStart(2, "0")}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-display text-lg tracking-[0.05em] text-[#1F1623]">
+                        <p className="font-display text-2xl tracking-[0.05em] text-[#1F1623]">
                           {mod.name}
                         </p>
-                        <p className="mt-0.5 font-serif text-sm italic text-[#4A1259]/55">
+                        <p className="mt-1 font-serif text-[32px] italic leading-snug text-[#4A1259]/70">
                           {mod.tagline}
                         </p>
                       </div>
-                      <div className="flex-shrink-0">
-                        {complete ? (
-                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#c9a84c]">
-                            Complete
-                          </span>
-                        ) : unlocked ? (
-                          <Link
-                            to="/rare-breed-club/$builder"
-                            params={{ builder: String(mod.number) }}
-                            className="rounded-full border border-[#E0249C]/30 px-4 py-1.5 font-display text-[11px] tracking-[0.12em] text-[#E0249C] hover:bg-[#E0249C]/10"
-                          >
-                            Start →
-                          </Link>
-                        ) : (
-                          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A1259]/25">
-                            Locked
-                          </span>
-                        )}
-                      </div>
-                    </div>
+                      <span
+                        className="flex-shrink-0 font-mono text-[13px] uppercase tracking-[0.2em]"
+                        style={{ color: complete ? "#c9a84c" : "#E0249C" }}
+                      >
+                        {complete ? "Complete" : "Start →"}
+                      </span>
+                    </Link>
                   );
                 })}
               </div>
@@ -262,8 +223,8 @@ function RareBreedClubIndex() {
 
       <div className="mt-16 rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-8">
         <p className="eyebrow mb-3">How this works</p>
-        <p className="font-serif text-base leading-relaxed italic text-[#4A1259]/65">
-          Every Builder reads your complete Rare Breed Operating Manual before generating anything. Each completed Builder makes the next one smarter. You are not filling out forms — you are building a living business powered by your own identity.
+        <p className="font-serif text-lg leading-relaxed italic text-[#4A1259]/75">
+          Every Studio reads your complete Rare Breed Operating Manual before generating anything. Each completed Studio makes the next one smarter. You are not filling out forms. You are building a living business powered by your own identity.
         </p>
       </div>
     </BrandShell>

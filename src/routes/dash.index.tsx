@@ -6,123 +6,398 @@ import { readProfile, type UserProfile } from "@/lib/profile";
 
 export const Route = createFileRoute("/dash/")({
   head: () => ({
-    meta: [{ title: "Rare Breed OS™ · Dashboard" }],
+    meta: [{ title: "Rare Breed OS™" }],
   }),
   component: DashHome,
 });
 
-const PHASE1_IDS = PHASES[0].modules.map((m) => m.id);
-const PHASE2_IDS = PHASES[1].modules.map((m) => m.id);
-const PHASE3_IDS = PHASES[2].modules.map((m) => m.id);
+const P1 = PHASES[0].modules;
+const P2 = PHASES[1].modules;
+const P3 = PHASES[2].modules;
 
-function p1Progress(profile: UserProfile) {
+function completedCount(ids: string[], prefix: string, profile: UserProfile) {
   const c = profile.completed_modules ?? [];
-  return PHASE1_IDS.filter((id) => c.includes(`phase1_${id}`)).length;
+  return ids.filter((id) => c.includes(`${prefix}_${id}`)).length;
 }
-function p2Progress(profile: UserProfile) {
+
+function allDone(ids: string[], prefix: string, profile: UserProfile) {
+  return completedCount(ids, prefix, profile) === ids.length;
+}
+
+function nextModuleIndex(modules: typeof P1, prefix: string, profile: UserProfile) {
   const c = profile.completed_modules ?? [];
-  return PHASE2_IDS.filter((id) => c.includes(`phase2_${id}`)).length;
-}
-function p3Progress(profile: UserProfile) {
-  const c = profile.completed_modules ?? [];
-  return PHASE3_IDS.filter((id) => c.includes(`phase3_${id}`)).length;
-}
-function nextIncomplete(ids: string[], prefix: string, profile: UserProfile) {
-  const c = profile.completed_modules ?? [];
-  const idx = ids.findIndex((id) => !c.includes(`${prefix}_${id}`));
-  return idx === -1 ? ids.length - 1 : idx;
-}
-function isComplete(ids: string[], prefix: string, profile: UserProfile) {
-  const c = profile.completed_modules ?? [];
-  return ids.every((id) => c.includes(`${prefix}_${id}`));
+  const idx = modules.findIndex((m) => !c.includes(`${prefix}_${m.id}`));
+  return idx === -1 ? modules.length - 1 : idx;
 }
 
-// Derive Today's Focus items from profile state
-function getTodaysFocus(profile: UserProfile, mounted: boolean) {
-  if (!mounted) return [];
-  const items: { label: string; path: string; params?: Record<string, string> }[] = [];
-  const p1Done = isComplete(PHASE1_IDS, "phase1", profile);
-  const p2Done = isComplete(PHASE2_IDS, "phase2", profile);
+const PHASE_ACCENTS = {
+  p1: {
+    color: "#E0249C",
+    bg: "linear-gradient(160deg, rgba(224,36,156,0.11) 0%, rgba(236,72,153,0.05) 100%)",
+    border: "rgba(224,36,156,0.35)",
+    shadow: "0 12px 48px -12px rgba(224,36,156,0.35)",
+  },
+  p2: {
+    color: "#4A1259",
+    bg: "linear-gradient(160deg, rgba(74,18,89,0.12) 0%, rgba(192,132,252,0.06) 100%)",
+    border: "rgba(74,18,89,0.28)",
+    shadow: "0 12px 48px -12px rgba(74,18,89,0.28)",
+  },
+  p3: {
+    color: "#a07830",
+    bg: "rgba(201,168,76,0.07)",
+    border: "rgba(201,168,76,0.28)",
+    shadow: "0 8px 40px -12px rgba(201,168,76,0.25)",
+  },
+};
 
-  if (!p1Done) {
-    const idx = nextIncomplete(PHASE1_IDS, "phase1", profile);
-    const mod = PHASES[0].modules[idx];
-    items.push({ label: `Complete: ${mod.name}`, path: `/prison-break/${idx + 1}` });
-  } else if (!p2Done) {
-    const idx = nextIncomplete(PHASE2_IDS, "phase2", profile);
-    const mod = PHASES[1].modules[idx];
-    items.push({ label: `Complete: ${mod.name}`, path: `/ten-x-leap/${idx + 1}` });
-  } else {
-    const idx = nextIncomplete(PHASE3_IDS, "phase3", profile);
-    const mod = PHASES[2].modules[idx];
-    items.push({ label: `Build: ${mod.name}`, path: `/rare-breed-club/${idx + 1}` });
-  }
+// ── STANDARD PHASE CARD (P1 + P2) ───────────────────────────────────────────
+function PhaseCard({
+  phaseNum,
+  name,
+  descriptor,
+  result,
+  status,
+  completed,
+  total,
+  accent,
+  continueTo,
+  continueParams,
+}: {
+  phaseNum: string;
+  name: string;
+  descriptor: string;
+  result: string;
+  status: "complete" | "active";
+  completed: number;
+  total: number;
+  accent: { color: string; bg: string; border: string; shadow: string };
+  continueTo?: string;
+  continueParams?: Record<string, string>;
+}) {
+  const isComplete = status === "complete";
+  const isActive = status === "active";
+  const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-  if (!profile.dream_client) items.push({ label: "Build your Dream Client Playbook™", path: "/rare-breed-club/1" });
-  if (!profile.messaging_blueprint && profile.dream_client) items.push({ label: "Translate dream client language into messaging", path: "/rare-breed-club/2" });
-  if (!profile.content_strategy && profile.operating_manual) items.push({ label: "Set up your Content Operating System™", path: "/rare-breed-club/9" });
-
-  return items.slice(0, 5);
-}
-
-// Contextual AI Coach message
-function getCoachMessage(profile: UserProfile, mounted: boolean): string {
-  if (!mounted) return "";
-  const p1Done = isComplete(PHASE1_IDS, "phase1", profile);
-  const p2Done = isComplete(PHASE2_IDS, "phase2", profile);
-  const p3Count = p3Progress(profile);
-
-  if (!p1Done) {
-    const count = p1Progress(profile);
-    if (count === 0) return "Your operating system has been running quietly in the background your entire life. Phase One makes it visible for the first time. This is the most important work you'll do.";
-    if (count < 4) return "I'm noticing patterns in what you've shared. The woman who keeps showing up is more capable than she's letting herself believe. Keep going.";
-    return "You're in the final stretch of Phase One. The patterns are becoming clear. What you're discovering isn't a problem to fix — it's an operating system to upgrade.";
-  }
-  if (!p2Done) {
-    return "Phase Two is where identity shifts from discovered to installed. Every module you complete is a decision the woman you're becoming would make. You're not learning this — you're becoming it.";
-  }
-  if (p3Count === 0) {
-    return "Your Operating Manual is the foundation. Everything built in Rare Breed Club reads from it. The business you're about to build isn't a collection of offers — it's a physical expression of who you've become.";
-  }
-  if (p3Count < 4) {
-    return "The Builders are reading your Operating Manual before they ask you anything. That's by design. Every recommendation is traced back to your identity — not a template.";
-  }
-  if (!profile.content_strategy) {
-    return "Your offer infrastructure is building. The Content Operating System™ is what makes it visible to the market. Once it's running, your business starts finding people — not the other way around.";
-  }
-  return "You're building something that only you could build. The next move is refinement, not creation. What's already here — what's the highest-leverage thing to make more irresistible?";
-}
-
-// Business snapshot status
-function builderStatus(key: keyof UserProfile, profile: UserProfile): "complete" | "in-progress" | "locked" {
-  if (profile[key]) return "complete";
-  return "locked";
-}
-
-const SNAPSHOT_ITEMS = [
-  { label: "Dream Client", key: "dream_client" as keyof UserProfile, icon: "🍬", path: "/rare-breed-club/1" },
-  { label: "Messaging", key: "messaging_blueprint" as keyof UserProfile, icon: "💎", path: "/rare-breed-club/2" },
-  { label: "Offers", key: "offer_suite" as keyof UserProfile, icon: "🦄", path: "/rare-breed-club/3" },
-  { label: "Brand", key: "brand_blueprint" as keyof UserProfile, icon: "💾", path: "/rare-breed-club/10" },
-  { label: "Content", key: "content_strategy" as keyof UserProfile, icon: "🌱", path: "/rare-breed-club/9" },
-  { label: "Launch", key: "launch_blueprint" as keyof UserProfile, icon: "🔥", path: "/rare-breed-club/11" },
-];
-
-function StatusBadge({ status }: { status: "complete" | "in-progress" | "locked" }) {
-  if (status === "complete") return (
-    <span className="rounded-full border border-[rgba(201,168,76,0.35)] px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.15em] text-[#c9a84c]">
-      Complete
-    </span>
-  );
-  if (status === "in-progress") return (
-    <span className="rounded-full border border-[rgba(224,36,156,0.3)] px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.15em] text-[#E0249C]">
-      In Progress
-    </span>
-  );
   return (
-    <span className="rounded-full border border-[rgba(74,18,89,0.15)] px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.15em] text-[#4A1259]/35">
-      Not Started
-    </span>
+    <div
+      className="flex flex-col rounded-2xl p-6 h-full"
+      style={{
+        minHeight: "640px",
+        background: isComplete ? "rgba(201,168,76,0.06)" : accent.bg,
+        border: `1.5px solid ${isComplete ? "rgba(201,168,76,0.25)" : accent.border}`,
+        boxShadow: isActive ? accent.shadow : "none",
+      }}
+    >
+      {/* Phase label + status */}
+      <div className="flex items-center justify-between mb-5">
+        <p
+          className="font-mono text-[11px] uppercase tracking-[0.28em] font-semibold"
+          style={{ color: isComplete ? "rgba(201,168,76,0.8)" : accent.color }}
+        >
+          Phase {phaseNum}
+        </p>
+        {isComplete && (
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "#c9a84c" }}>
+            ✦ Done
+          </p>
+        )}
+        {isActive && completed > 0 && (
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: accent.color }}>
+            ○ Active
+          </p>
+        )}
+      </div>
+
+      {/* Phase name */}
+      <p
+        className="font-display leading-[0.88] tracking-[0.02em] mb-6"
+        style={{ fontSize: "clamp(26px, 6vw, 34px)", color: "#1F1623" }}
+      >
+        {name}
+      </p>
+
+      {/* Descriptor — large serif italic */}
+      <p
+        className="font-serif italic leading-[1.25] mb-5"
+        style={{
+          fontSize: "clamp(16px, 3.75vw, 21px)",
+          color: isComplete ? "rgba(74,18,89,0.6)" : "#1F1623",
+        }}
+      >
+        {descriptor}
+      </p>
+
+      {/* Result — serif italic, secondary */}
+      <p
+        className="font-serif italic leading-[1.3] flex-1 mb-6"
+        style={{
+          fontSize: "clamp(16px, 3.75vw, 21px)",
+          color: isComplete ? "rgba(74,18,89,0.4)" : "#1F1623",
+        }}
+      >
+        {result}
+      </p>
+
+      {/* Progress + CTA */}
+      {isActive && (
+        <div className="mt-auto">
+          <div className="flex gap-[5px] mb-2 flex-wrap">
+            {Array.from({ length: Math.min(total, 8) }).map((_, i) => (
+              <div
+                key={i}
+                className="h-[7px] w-[7px] rounded-full flex-shrink-0"
+                style={{ background: i < completed ? accent.color : "rgba(74,18,89,0.12)" }}
+              />
+            ))}
+            {total > 8 && (
+              <span className="font-mono text-[10px]" style={{ color: "rgba(74,18,89,0.4)" }}>
+                +{total - 8}
+              </span>
+            )}
+          </div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(74,18,89,0.5)" }}>
+            {completed}/{total} · {pct}%
+          </p>
+          {continueTo && (
+            <Link
+              to={continueTo as any}
+              params={continueParams as any}
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+              style={{
+                background: `linear-gradient(135deg, ${accent.color} 0%, #c9a84c 100%)`,
+                boxShadow: accent.shadow,
+              }}
+            >
+              Continue →
+            </Link>
+          )}
+        </div>
+      )}
+
+      {isComplete && (
+        <p className="font-mono text-[11px] uppercase tracking-[0.18em] mt-auto" style={{ color: "rgba(201,168,76,0.7)" }}>
+          ✦ {total}/{total} installed
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ── FEATURED RBC CARD (Phase 03) ────────────────────────────────────────────
+function FeaturedCard({
+  descriptor,
+  result,
+  status,
+  completed,
+  total,
+  continueTo,
+  continueParams,
+}: {
+  descriptor: string;
+  result: string;
+  status: "complete" | "active";
+  completed: number;
+  total: number;
+  continueTo?: string;
+  continueParams?: Record<string, string>;
+}) {
+  const isComplete = status === "complete";
+  const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+  return (
+    <div
+      className="flex flex-col rounded-2xl p-6 h-full relative overflow-hidden"
+      style={{
+        minHeight: "640px",
+        background: isComplete
+          ? "rgba(201,168,76,0.08)"
+          : "linear-gradient(160deg, rgba(224,36,156,0.42) 0%, rgba(192,132,252,0.52) 28%, rgba(217,70,239,0.58) 52%, rgba(192,132,252,0.52) 76%, rgba(224,36,156,0.42) 100%)",
+        border: "1.5px solid rgba(224,36,156,0.45)",
+        boxShadow: "0 16px 70px -12px rgba(224,36,156,0.45), 0 0 0 1px rgba(224,36,156,0.1) inset",
+      }}
+    >
+      {/* Iridescent shimmer overlays */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl"
+        style={{
+          background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.18) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(217,70,239,0.35) 0%, transparent 45%), radial-gradient(ellipse at 15% 90%, rgba(192,132,252,0.3) 0%, transparent 45%)",
+        }}
+      />
+
+      {/* Left side glow */}
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-[50px] rounded-l-2xl"
+        style={{
+          background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.55) 25%, rgba(255,255,255,0.75) 50%, rgba(255,255,255,0.55) 75%, transparent 100%)",
+          filter: "blur(8px)",
+          animation: "rb-side-shimmer 3.2s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 w-[10px] rounded-l-2xl"
+        style={{
+          background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.5) 70%, transparent 100%)",
+          animation: "rb-side-shimmer 3.2s ease-in-out infinite",
+        }}
+      />
+
+      {/* Right side glow */}
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-[50px] rounded-r-2xl"
+        style={{
+          background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.5) 25%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0.5) 75%, transparent 100%)",
+          filter: "blur(8px)",
+          animation: "rb-side-shimmer 3.2s ease-in-out infinite 1.6s",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 w-[10px] rounded-r-2xl"
+        style={{
+          background: "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.45) 28%, rgba(255,255,255,0.65) 52%, rgba(255,255,255,0.45) 74%, transparent 100%)",
+          animation: "rb-side-shimmer 3.2s ease-in-out infinite 1.6s",
+        }}
+      />
+
+      {/* Sparkle stars — left edge */}
+      {[
+        { top: "14%", delay: "0s", size: "11px" },
+        { top: "38%", delay: "0.7s", size: "8px" },
+        { top: "62%", delay: "1.3s", size: "10px" },
+        { top: "84%", delay: "0.4s", size: "7px" },
+      ].map((s, i) => (
+        <span
+          key={`sl-${i}`}
+          className="pointer-events-none absolute select-none"
+          style={{
+            top: s.top,
+            left: "6px",
+            fontSize: s.size,
+            color: i % 2 === 0 ? "#E0249C" : "#c9a84c",
+            animation: `rb-twinkle 2.2s ease-in-out infinite ${s.delay}`,
+            lineHeight: 1,
+          }}
+        >
+          ✦
+        </span>
+      ))}
+
+      {/* Sparkle stars — right edge */}
+      {[
+        { top: "22%", delay: "1.1s", size: "9px" },
+        { top: "46%", delay: "0.3s", size: "11px" },
+        { top: "70%", delay: "1.6s", size: "8px" },
+        { top: "90%", delay: "0.8s", size: "10px" },
+      ].map((s, i) => (
+        <span
+          key={`sr-${i}`}
+          className="pointer-events-none absolute select-none"
+          style={{
+            top: s.top,
+            right: "6px",
+            fontSize: s.size,
+            color: i % 2 === 0 ? "#c9a84c" : "#D946EF",
+            animation: `rb-twinkle 2.2s ease-in-out infinite ${s.delay}`,
+            lineHeight: 1,
+          }}
+        >
+          ✦
+        </span>
+      ))}
+
+      {/* Phase label + badge */}
+      <div className="flex items-center justify-between mb-5 relative">
+        <p className="font-mono text-[11px] uppercase tracking-[0.28em] font-semibold" style={{ color: "rgba(31,22,35,0.6)" }}>
+          Phase 03 · Embody
+        </p>
+        {isComplete ? (
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "#c9a84c" }}>
+            ✦ Installed
+          </p>
+        ) : (
+          <p
+            className="font-mono text-[9px] uppercase tracking-[0.2em] rounded-full px-2 py-0.5"
+            style={{
+              color: "#fff",
+              background: "linear-gradient(135deg, #E0249C, #D946EF)",
+              border: "1px solid rgba(224,36,156,0.4)",
+              boxShadow: "0 2px 10px -2px rgba(217,70,239,0.4)",
+            }}
+          >
+            ✦ Flagship
+          </p>
+        )}
+      </div>
+
+      {/* Phase name — shimmer */}
+      <p
+        className="font-display text-shimmer leading-[0.88] tracking-[0.02em] mb-6 relative"
+        style={{ fontSize: "clamp(26px, 6vw, 34px)" }}
+      >
+        Rare Breed Club™
+      </p>
+
+      {/* Descriptor — large serif italic */}
+      <p
+        className="font-serif italic leading-[1.25] mb-5 relative"
+        style={{
+          fontSize: "clamp(16px, 3.75vw, 21px)",
+          color: isComplete ? "rgba(74,18,89,0.6)" : "#1F1623",
+        }}
+      >
+        {descriptor}
+      </p>
+
+      {/* Result — serif bold italic */}
+      <p
+        className="font-serif font-bold italic leading-[1.3] flex-1 mb-6 relative"
+        style={{
+          fontSize: "clamp(16px, 3.75vw, 21px)",
+          color: isComplete ? "rgba(74,18,89,0.4)" : "rgba(31,22,35,0.82)",
+        }}
+      >
+        {result}
+      </p>
+
+      {/* Progress + CTA */}
+      <div className="mt-auto relative">
+        <div className="flex gap-[5px] mb-2 flex-wrap">
+          {Array.from({ length: Math.min(total, 8) }).map((_, i) => (
+            <div
+              key={i}
+              className="h-[7px] w-[7px] rounded-full flex-shrink-0"
+              style={{ background: i < completed ? "#c9a84c" : "rgba(201,168,76,0.2)" }}
+            />
+          ))}
+          {total > 8 && (
+            <span className="font-mono text-[10px]" style={{ color: "rgba(31,22,35,0.7)" }}>
+              +{total - 8}
+            </span>
+          )}
+        </div>
+        <p className="font-mono text-[11px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(31,22,35,0.65)" }}>
+          {completed}/{total} · {pct}%
+        </p>
+        {continueTo && !isComplete && (
+          <Link
+            to={continueTo as any}
+            params={continueParams as any}
+            className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+            style={{
+              background: "linear-gradient(135deg, #D946EF 0%, #E0249C 50%, #c9a84c 100%)",
+              boxShadow: "0 8px 36px -8px rgba(217,70,239,0.55)",
+            }}
+          >
+            {completed === 0 ? "Enter Phase Three →" : "Continue →"}
+          </Link>
+        )}
+        {isComplete && (
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: "#c9a84c" }}>
+            ✦ {total}/{total} installed
+          </p>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -135,354 +410,85 @@ function DashHome() {
     setMounted(true);
   }, []);
 
-  const p1Done = mounted && isComplete(PHASE1_IDS, "phase1", profile);
-  const p2Done = mounted && isComplete(PHASE2_IDS, "phase2", profile);
-  const p1Count = p1Progress(profile);
-  const p2Count = p2Progress(profile);
-  const p3Count = p3Progress(profile);
-  const focus = getTodaysFocus(profile, mounted);
-  const coachMessage = getCoachMessage(profile, mounted);
+  const p1Ids = P1.map((m) => m.id);
+  const p2Ids = P2.map((m) => m.id);
+  const p3Ids = P3.map((m) => m.id);
 
-  const hour = new Date().getHours();
-  const greeting = hour < 12 ? "Good morning." : hour < 17 ? "Good afternoon." : "Good evening.";
+  const p1Count = completedCount(p1Ids, "phase1", profile);
+  const p2Count = completedCount(p2Ids, "phase2", profile);
+  const p3Count = completedCount(p3Ids, "phase3", profile);
 
-  const currentPhaseLabel = !p1Done ? "Phase One" : !p2Done ? "Phase Two" : "Rare Breed Club™";
-  const overallPct = mounted
-    ? Math.round(((p1Count + p2Count + p3Count) / (PHASE1_IDS.length + PHASE2_IDS.length + PHASE3_IDS.length)) * 100)
-    : 0;
+  const p1Done = mounted && allDone(p1Ids, "phase1", profile);
+  const p2Done = mounted && allDone(p2Ids, "phase2", profile);
+
+  const nextP1Idx = nextModuleIndex(P1, "phase1", profile);
+  const nextP2Idx = nextModuleIndex(P2, "phase2", profile);
+  const nextP3Idx = nextModuleIndex(P3, "phase3", profile);
+
+  const p1Status: "complete" | "active" = p1Done ? "complete" : "active";
+  const p2Status: "complete" | "active" = p2Done ? "complete" : "active";
+  const p3Status: "complete" | "active" = p3Count === P3.length ? "complete" : "active";
 
   return (
     <BrandShell hideStickyCta>
-      {/* ── GREETING ── */}
-      <div className="mb-10 mt-8">
-        <p className="font-mono text-[13px] uppercase tracking-[0.28em] text-[#4A1259]/40">{greeting}</p>
-      </div>
 
-      {/* ── HERO: WHO YOU'RE BECOMING ── */}
-      <div
-        className="mb-6 overflow-hidden rounded-3xl border p-8 sm:p-10"
-        style={{
-          borderColor: "rgba(224,36,156,0.2)",
-          background: "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(245,239,224,0.8) 100%)",
-        }}
-      >
-        <p className="font-mono text-[12px] uppercase tracking-[0.3em] text-[#E0249C]/55 mb-4">
-          Who You're Becoming
-        </p>
-        {profile.bigger_vision ? (
-          <p className="font-serif text-lg font-light italic leading-relaxed text-[#1F1623]/80 max-w-2xl">
-            "{profile.bigger_vision.slice(0, 220)}{profile.bigger_vision.length > 220 ? "…" : ""}"
-          </p>
-        ) : (
-          <p className="font-serif text-lg font-light italic text-[#4A1259]/40">
-            Your Bigger Vision installs in Phase Two.
-          </p>
-        )}
-
-        <div className="mt-8 flex flex-wrap items-center gap-8">
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/35 mb-1">Current Phase</p>
-            <p className="font-display text-[17px] tracking-[0.08em] text-[#1F1623]">{currentPhaseLabel}</p>
-          </div>
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/35 mb-1">OS Installation</p>
-            <div className="flex items-center gap-3">
-              <div className="relative h-[5px] w-36 overflow-hidden rounded-full bg-[rgba(74,18,89,0.1)]">
-                <div
-                  className="absolute inset-y-0 left-0 rounded-full transition-all duration-1000"
-                  style={{
-                    width: `${overallPct}%`,
-                    background: "linear-gradient(90deg, #4A1259, #E0249C, #c9a84c)",
-                  }}
-                />
-              </div>
-              <span className="font-mono text-[12px] text-[#E0249C]/70">{overallPct}%</span>
-            </div>
-          </div>
-          {profile.operating_manual && (
-            <Link
-              to="/ten-x-leap/$module"
-              params={{ module: "7" }}
-              className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-[#c9a84c] hover:text-[#E0249C] transition-colors"
-            >
-              <span>💾</span> View Operating Manual
-            </Link>
-          )}
-        </div>
-      </div>
-
-      {/* ── TWO-COLUMN MIDDLE ── */}
-      <div className="mb-6 grid gap-6 lg:grid-cols-[1fr_340px]">
-
-        {/* TODAY'S FOCUS */}
-        <div className="rounded-3xl border border-[rgba(74,18,89,0.1)] bg-white/80 p-7">
-          <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[#4A1259]/40 mb-5">
-            Today's Focus
-          </p>
-          {focus.length === 0 ? (
-            <p className="font-serif text-base italic text-[#4A1259]/40">Calculating your priorities…</p>
-          ) : (
-            <ul className="space-y-3.5">
-              {focus.map((item, i) => (
-                <li key={i}>
-                  <Link
-                    to={item.path as any}
-                    className="group flex items-start gap-3.5"
-                  >
-                    <span
-                      className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-[rgba(224,36,156,0.3)] font-mono text-[10px] text-[#E0249C]/60 group-hover:bg-[#E0249C]/10"
-                    >
-                      {i + 1}
-                    </span>
-                    <span className="font-serif text-[15px] leading-snug text-[#1F1623]/80 group-hover:text-[#E0249C]">
-                      {item.label}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* AI COACH */}
-        <div
-          className="rounded-3xl border p-7"
-          style={{
-            borderColor: "rgba(74,18,89,0.12)",
-            background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(224,36,156,0.04) 100%)",
-          }}
+      {/* ── BRAND MARK ───────────────────────────────────────── */}
+      <div className="mb-10 mt-4">
+        <h1
+          className="font-display text-shimmer leading-[0.82] tracking-[0.1em]"
+          style={{ fontSize: "clamp(64px, 20vw, 96px)" }}
         >
-          <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[#E0249C]/55 mb-4">
-            AI Coach
-          </p>
-          <p className="font-serif text-[15px] font-light italic leading-relaxed text-[#1F1623]/75">
-            {coachMessage || "Loading your coaching insight…"}
-          </p>
-          <div className="mt-5 h-px bg-[rgba(74,18,89,0.08)]" />
-          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/30">
-            Dana Hayes · Rare Breed AI
-          </p>
-        </div>
-      </div>
-
-      {/* ── YOUR JOURNEY ── */}
-      <div className="mb-6 rounded-3xl border border-[rgba(74,18,89,0.1)] bg-white/80 p-7">
-        <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[#4A1259]/40 mb-6">
-          Your Journey
-        </p>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            {
-              phase: "01",
-              name: "Good Girl Prison Break™",
-              tagline: "Discover the operating system you've been living from.",
-              count: p1Count,
-              total: PHASE1_IDS.length,
-              done: p1Done,
-              active: !p1Done,
-              path: "/prison-break/",
-              continuePath: "/prison-break/$module" as const,
-              continueParams: { module: String(nextIncomplete(PHASE1_IDS, "phase1", profile) + 1) },
-              milestone: p1Done ? "All patterns revealed." : p1Count > 0 ? "OS becoming visible." : "Ready to begin.",
-            },
-            {
-              phase: "02",
-              name: "The 10X Leap™",
-              tagline: "Install the Rare Breed Operating System™.",
-              count: p2Count,
-              total: PHASE2_IDS.length,
-              done: p2Done,
-              active: p1Done && !p2Done,
-              path: "/ten-x-leap/",
-              continuePath: "/ten-x-leap/$module" as const,
-              continueParams: { module: String(nextIncomplete(PHASE2_IDS, "phase2", profile) + 1) },
-              milestone: p2Done ? "New OS installed." : p2Count > 0 ? "Identity shifting." : p1Done ? "Ready to install." : "Unlocks after Phase One.",
-            },
-            {
-              phase: "03",
-              name: "Rare Breed Club™",
-              tagline: "Your Operating Manual becomes your business.",
-              count: p3Count,
-              total: PHASE3_IDS.length,
-              done: p3Count === PHASE3_IDS.length,
-              active: p2Done,
-              path: "/rare-breed-club/",
-              continuePath: "/rare-breed-club/$builder" as const,
-              continueParams: { builder: String(nextIncomplete(PHASE3_IDS, "phase3", profile) + 1) },
-              milestone: p3Count === PHASE3_IDS.length ? "Business complete." : p3Count > 0 ? `${p3Count} playbooks built.` : p2Done ? "Ready to build." : "Unlocks after Phase Two.",
-            },
-          ].map((phase) => (
-            <div
-              key={phase.phase}
-              className="rounded-2xl border p-5 transition-all"
-              style={{
-                borderColor: phase.done
-                  ? "rgba(201,168,76,0.25)"
-                  : phase.active
-                    ? "rgba(224,36,156,0.2)"
-                    : "rgba(74,18,89,0.08)",
-                background: phase.done
-                  ? "rgba(201,168,76,0.04)"
-                  : phase.active
-                    ? "rgba(224,36,156,0.03)"
-                    : "rgba(255,255,255,0.4)",
-                opacity: !phase.active && !phase.done ? 0.5 : 1,
-              }}
-            >
-              <div className="mb-3 flex items-center justify-between">
-                <span
-                  className="font-mono text-[12px] uppercase tracking-[0.2em]"
-                  style={{ color: phase.done ? "#c9a84c" : phase.active ? "#E0249C" : "rgba(74,18,89,0.35)" }}
-                >
-                  Phase {phase.phase}
-                </span>
-                {phase.done && <span className="text-[#c9a84c] text-sm">✓</span>}
-              </div>
-              <h3 className="font-display text-[18px] leading-snug tracking-[0.04em] text-[#1F1623] mb-1.5">
-                {phase.name}
-              </h3>
-              <p className="font-mono text-[11px] tracking-[0.08em] text-[#4A1259]/45 mb-4">
-                {phase.milestone}
-              </p>
-              {/* Progress dots */}
-              <div className="mb-4 flex gap-1 flex-wrap">
-                {Array.from({ length: phase.total }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-1.5 w-1.5 rounded-full"
-                    style={{
-                      background: i < phase.count
-                        ? phase.done ? "#c9a84c" : "#E0249C"
-                        : "rgba(74,18,89,0.12)",
-                    }}
-                  />
-                ))}
-              </div>
-              {phase.active && !phase.done && (
-                <Link
-                  to={phase.continuePath}
-                  params={phase.continueParams as any}
-                  className="font-mono text-[12px] uppercase tracking-[0.18em] text-[#E0249C] hover:text-[#4A1259] transition-colors"
-                >
-                  Continue →
-                </Link>
-              )}
-              {phase.done && (
-                <Link
-                  to={phase.path}
-                  className="font-mono text-[12px] uppercase tracking-[0.18em] text-[#c9a84c] hover:text-[#E0249C] transition-colors"
-                >
-                  Review →
-                </Link>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ── BUSINESS SNAPSHOT ── */}
-      {p2Done && (
-        <div className="mb-6 rounded-3xl border border-[rgba(74,18,89,0.1)] bg-white/80 p-7">
-          <div className="mb-6 flex items-center justify-between">
-            <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[#4A1259]/40">
-              Business Snapshot
-            </p>
-            <Link
-              to="/rare-breed-club/"
-              className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#E0249C] transition-colors"
-            >
-              All Builders →
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {SNAPSHOT_ITEMS.map(({ label, key, icon, path }) => {
-              const status = builderStatus(key, profile);
-              return (
-                <Link
-                  key={key}
-                  to={path as any}
-                  className="group rounded-2xl border p-4 transition-all hover:-translate-y-0.5"
-                  style={{
-                    borderColor: status === "complete"
-                      ? "rgba(201,168,76,0.25)"
-                      : "rgba(74,18,89,0.1)",
-                    background: status === "complete"
-                      ? "rgba(201,168,76,0.04)"
-                      : "rgba(255,255,255,0.6)",
-                  }}
-                >
-                  <div className="mb-3 text-xl">{icon}</div>
-                  <p className="font-display text-[15px] tracking-[0.05em] text-[#1F1623] mb-1.5">{label}</p>
-                  <StatusBadge status={status} />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
-      {/* ── OPERATING MANUAL (heart of the product) ── */}
-      {profile.operating_manual && (
-        <div
-          className="mb-6 rounded-3xl border p-7 sm:p-9"
-          style={{
-            borderColor: "rgba(201,168,76,0.3)",
-            background: "linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(255,255,255,0.9) 100%)",
-          }}
+          RARE
+          <br />
+          BREED
+        </h1>
+        <p
+          className="font-mono uppercase tracking-[0.32em] mt-3"
+          style={{ fontSize: "clamp(11px, 2.2vw, 14px)", color: "rgba(74,18,89,0.45)" }}
         >
-          <div className="mb-4 flex items-center gap-3">
-            <span className="text-xl">💾</span>
-            <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[#c9a84c]">
-              Rare Breed Operating Manual™
-            </p>
-          </div>
-          <p className="font-serif text-[15px] font-light italic leading-relaxed text-[#1F1623]/70 max-w-2xl mb-5">
-            {profile.operating_manual.slice(0, 280)}{profile.operating_manual.length > 280 ? "…" : ""}
-          </p>
-          <Link
-            to="/ten-x-leap/$module"
-            params={{ module: "7" }}
-            className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#c9a84c] hover:text-[#E0249C] transition-colors"
-          >
-            Read Full Manual →
-          </Link>
-        </div>
-      )}
+          identity x business builder
+        </p>
+      </div>
 
-      {/* ── QUICK TOOLS ── */}
-      <div className="mb-6">
-        <p className="font-mono text-[12px] uppercase tracking-[0.28em] text-[#4A1259]/40 mb-5">Quick Tools</p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {[
-            { to: "/leap/decision-filter", label: "Decision Filter", desc: "Run a decision through the OS" },
-            { to: "/leap/weekly-audit", label: "Weekly Audit", desc: "Friday operating check-in" },
-            { to: "/leap/constitution", label: "Constitution", desc: "Your Rare Breed Constitution™" },
-            { to: "/leap/os", label: "OS Dashboard", desc: "Installed artifacts and history" },
-          ].map(({ to, label, desc }) => (
-            <Link
-              key={to}
-              to={to as any}
-              className="rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-5 transition-all hover:-translate-y-0.5 hover:border-[#E0249C]/25"
-            >
-              <p className="font-display text-[15px] tracking-[0.08em] text-[#1F1623]">{label}</p>
-              <p className="mt-1 font-serif text-[13px] italic text-[#4A1259]/50">{desc}</p>
-            </Link>
-          ))}
+      {/* ── YOUR JOURNEY — 3-column grid ─────────────────────── */}
+      <div className="mb-8">
+        <div className="grid grid-cols-3 gap-3 items-stretch">
+          <PhaseCard
+            phaseNum="01 · Liberate"
+            name="Good Girl Prison Break™"
+            descriptor="Reveal the outdated operating system you've been living from—and get complete clarity on what deserves to be left behind and what deserves to be built."
+            result="You leave knowing exactly what isn't yours, what you've outgrown, and which 20% of your work has been waiting to lead. Not a business plan. The clarity that makes every future business decision obvious."
+            status={p1Status}
+            completed={p1Count}
+            total={P1.length}
+            accent={PHASE_ACCENTS.p1}
+            continueTo="/prison-break/"
+            continueParams={undefined}
+          />
+          <PhaseCard
+            phaseNum="02 · Create"
+            name="The 10X Leap™"
+            descriptor="Create the life and business that naturally emerge from your Zone of Genius. Every exercise becomes structured intelligence stored in your Rare Breed Operating Manual™."
+            result="You are not building assets. You are building the intelligence your future business will run from. When your Operating Manual is complete, Rare Breed OS™ brings the rest to life."
+            status={p2Status}
+            completed={p2Count}
+            total={P2.length}
+            accent={PHASE_ACCENTS.p2}
+            continueTo="/ten-x-leap/"
+            continueParams={undefined}
+          />
+          <FeaturedCard
+            descriptor="Install your Rare Breed Operating Manual™ into Rare Breed OS™. Every Studio already knows who you are—and uses that intelligence to generate your messaging, offers, content, emails, launches, curriculum, brand, and business systems."
+            result="Everything generated from your Operating Manual. Not from generic AI. Not from someone else's template. From your unique genius. Watch your business come to life."
+            status={p3Status}
+            completed={p3Count}
+            total={P3.length}
+            continueTo="/rare-breed-club/"
+            continueParams={undefined}
+          />
         </div>
       </div>
 
-      {/* ── FLOATING QUICK CAPTURE ── */}
-      <button
-        onClick={() => alert("Quick Capture — coming soon. Ideas, voice notes, client insights, and stories save directly to your Content Vault™.")}
-        className="fixed bottom-8 right-8 z-50 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-2xl transition-all hover:scale-105 active:scale-95"
-        style={{
-          background: "linear-gradient(135deg, #4A1259 0%, #E0249C 100%)",
-          boxShadow: "0 8px 32px -4px rgba(224,36,156,0.45)",
-        }}
-        title="Quick Capture"
-      >
-        <span className="text-2xl leading-none">+</span>
-      </button>
     </BrandShell>
   );
 }

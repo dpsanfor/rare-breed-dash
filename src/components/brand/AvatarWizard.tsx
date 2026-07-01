@@ -278,7 +278,7 @@ export function AvatarWizard({
             <div>
               <h2 className="font-display text-3xl text-shimmer">Tell me about your offer</h2>
               <p className="mt-2 font-serif text-lg italic text-[rgba(240,223,160,0.7)]">
-                Tell me what type of offer you're creating — include as much info as you have about
+                Tell me what type of offer you're creating. Include as much info as you have about
                 your ideal client and the offer itself. Don't worry about being clear, just give me
                 everything you've got. Send a voice memo brain dump if that's easier. I'll help you
                 articulate this offer and buyer as we go.
@@ -303,7 +303,7 @@ export function AvatarWizard({
                 }`}
               >
                 <span className="text-base">{listening ? "●" : "🎙"}</span>
-                {listening ? "Recording — tap to stop" : "Voice Memo"}
+                {listening ? "Recording. Tap to stop." : "Voice Memo"}
               </button>
 
               <button
@@ -323,7 +323,7 @@ export function AvatarWizard({
             <div>
               <h2 className="font-display text-3xl text-shimmer">Who resonates?</h2>
               <p className="mt-2 font-serif text-lg italic text-[rgba(240,223,160,0.7)]">
-                The goal is to find the woman who is most like <em>you yesterday</em> — that's who
+                The goal is to find the woman who is most like <em>you yesterday</em>. That's who
                 you'll be most able to sell to and work with. You can refine any of them by telling
                 me what you'd change, or select two or more to blend the best parts together.
               </p>
@@ -410,7 +410,7 @@ export function AvatarWizard({
                   value={blendNotes}
                   onChange={(e) => setBlendNotes(e.target.value)}
                   rows={2}
-                  placeholder="Tell me what you want from each — e.g. 'I love Riley's family situation and Maya's business stage…'"
+                  placeholder="Tell me what you want from each. e.g. 'I love Riley's family situation and Maya's business stage…'"
                   className="w-full resize-none rounded-lg border border-[rgba(201,168,76,0.25)] bg-black/40 px-4 py-3 font-serif text-sm text-rb-champagne placeholder:font-sans placeholder:text-xs placeholder:text-[rgba(240,223,160,0.25)] focus:border-rb-fuchsia focus:outline-none"
                 />
               </div>
@@ -447,13 +447,13 @@ export function AvatarWizard({
               </h2>
               <p className="mt-2 font-serif text-lg italic text-[rgba(240,223,160,0.7)]">
                 Tell me what you'd change, what to keep, or what's almost right. Be as specific or
-                as vague as you want — I'll work with whatever you give me.
+                as vague as you want. I'll work with whatever you give me.
               </p>
             </div>
 
             <div className="rounded-xl border border-[rgba(201,168,76,0.2)] bg-black/20 p-5 space-y-2 text-sm">
               <p className="font-display text-lg text-rb-champagne">
-                {refiningCard.emoji} {refiningCard.name} — {refiningCard.title}
+                {refiningCard.emoji} {refiningCard.name}, {refiningCard.title}
               </p>
               <p className="text-[rgba(240,223,160,0.35)] text-xs">{refiningCard.demographics_summary}</p>
               <p className="font-serif text-[rgba(240,223,160,0.8)] leading-relaxed">{refiningCard.who_she_is}</p>
@@ -503,7 +503,7 @@ export function AvatarWizard({
           <div className="space-y-6">
             <div>
               <h2 className="font-display text-4xl text-shimmer">
-                {fullAvatar.emoji} {fullAvatar.name} — {fullAvatar.title}
+                {fullAvatar.emoji} {fullAvatar.name}, {fullAvatar.title}
               </h2>
               <p className="mt-2 font-serif text-base italic text-[rgba(240,223,160,0.55)]">
                 Click the items that resonate most. For your tagline you'll need to pick one from
@@ -620,7 +620,7 @@ export function AvatarWizard({
               <h2 className="font-display text-3xl text-shimmer">Your tagline</h2>
               <p className="mt-2 font-serif text-lg italic text-[rgba(240,223,160,0.7)]">
                 Pick the one that hits, or edit it below. This becomes the heartbeat of your
-                positioning — it lives in your sales page, your content, everywhere.
+                positioning. It lives in your sales page, your content, everywhere.
               </p>
             </div>
 
@@ -628,7 +628,7 @@ export function AvatarWizard({
             <div className="rounded-xl border border-[rgba(201,168,76,0.15)] bg-black/20 p-5 space-y-3">
               <p className="label-soft">Your Positioning Summary</p>
               <p className="font-display text-lg text-rb-champagne">
-                {fullAvatar.emoji} {fullAvatar.name} — {fullAvatar.title}
+                {fullAvatar.emoji} {fullAvatar.name}, {fullAvatar.title}
               </p>
               <p className="text-xs text-[rgba(240,223,160,0.4)]">
                 {Object.values(fullAvatar.demographics ?? {}).join(" · ")}
@@ -664,7 +664,7 @@ export function AvatarWizard({
                 />
               ))}
               <div>
-                <p className="label-soft mb-2">Recommended — refined for conversion</p>
+                <p className="label-soft mb-2">Recommended. Refined for conversion.</p>
                 <ResonanceBtn
                   text={taglines.recommended}
                   chosen={chosenTagline === taglines.recommended}

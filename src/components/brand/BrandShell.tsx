@@ -1,64 +1,126 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { type ReactNode } from "react";
 
-const NAV = [
-  { to: "/dash/", label: "Home" },
-  { to: "/prison-break/", label: "Phase One" },
-  { to: "/ten-x-leap/", label: "Phase Two" },
-  { to: "/rare-breed-club/", label: "Build Suite" },
-  { to: "/leap/decision-filter", label: "Filter" },
+// Only use routes that exist in routeTree.gen.ts to avoid runtime Link errors.
+// New routes must be registered before adding here.
+const TOP_NAV = [
+  { to: "/prison-break/", label: "Become" },
+  { to: "/ten-x-leap/", label: "Build" },
+  { to: "/rare-breed-club/", label: "Refine" },
+];
+
+// Bottom nav uses Dana's three methodology verbs instead of phase names.
+// Logo (top-left) taps to /dash/ — no "Home" item needed.
+const BOTTOM_NAV = [
+  { to: "/prison-break/", label: "Become" },
+  { to: "/ten-x-leap/", label: "Build" },
+  { to: "/rare-breed-club/", label: "Refine" },
 ];
 
 export function BrandShell({
   children,
   hideStickyCta = false,
+  showBottomNav = false,
 }: {
   children: ReactNode;
   hideStickyCta?: boolean;
+  showBottomNav?: boolean;
 }) {
   const { location } = useRouterState();
   const path = location.pathname;
 
   return (
     <div className="surface-bone min-h-screen text-foreground">
-      {/* Top nav */}
-      <header className="sticky top-0 z-40 border-b border-[rgba(74,18,89,0.1)] bg-[rgba(245,239,224,0.92)] backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          {/* Logo */}
-          <Link to="/dash/" className="group flex items-center gap-3">
-            <div className="flex flex-col leading-none">
-              <span className="font-display text-[22px] tracking-[0.14em] text-shimmer">
+      {/* TOP HEADER */}
+      <header
+        className="sticky top-0 z-40"
+        style={{
+          background: "rgba(245,239,224,0.96)",
+          backdropFilter: "blur(24px)",
+          borderBottom: "1px solid rgba(74,18,89,0.07)",
+          boxShadow: "0 1px 0 0 rgba(224,36,156,0.08)",
+        }}
+      >
+        {/* Magenta → plum → gold accent line */}
+        <div
+          className="h-[3px] w-full"
+          style={{
+            background: "linear-gradient(90deg, #E0249C 0%, #4A1259 35%, #EC4899 60%, #c9a84c 100%)",
+            opacity: 0.85,
+          }}
+        />
+        <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
+          {/* Logo — 2× larger, "OPERATING SYSTEM™" spelled out */}
+          <Link to="/dash/" className="group flex items-center">
+            <div className="flex flex-col leading-none gap-[6px]">
+              <span className="font-display text-[30px] tracking-[0.16em] text-shimmer leading-none">
                 RARE BREED
               </span>
-              <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-[rgba(74,18,89,0.4)]">
-                OS™
+              <span
+                className="font-mono text-[15px] uppercase tracking-[0.45em] leading-none"
+                style={{ color: "rgba(74,18,89,0.78)" }}
+              >
+                Operating System™
               </span>
             </div>
           </Link>
 
-          {/* Nav */}
-          <nav className="hidden items-center gap-6 sm:flex">
-            {NAV.map((n) => {
-              const active = path.startsWith(n.to);
-              return (
-                <Link
-                  key={n.to}
-                  to={n.to}
-                  className={`text-[13px] uppercase tracking-[0.2em] transition-colors ${
-                    active
-                      ? "text-[#E0249C]"
-                      : "text-[rgba(74,18,89,0.45)] hover:text-[#E0249C]"
-                  }`}
-                >
-                  {n.label}
-                </Link>
-              );
-            })}
-          </nav>
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-6 pb-40 pt-12">{children}</main>
+      {/* MAIN */}
+      <main
+        className={`mx-auto px-6 pt-10 ${
+          showBottomNav ? "max-w-2xl pb-44" : "max-w-6xl pb-40"
+        }`}
+      >
+        {children}
+      </main>
+
+      {/* BOTTOM NAV — only on pages that opt in with showBottomNav=true */}
+      {showBottomNav && (
+        <nav
+          className="fixed inset-x-0 bottom-0 z-40 border-t"
+          style={{
+            borderColor: "rgba(74,18,89,0.07)",
+            background: "rgba(245,239,224,0.97)",
+            backdropFilter: "blur(24px)",
+            paddingBottom: "env(safe-area-inset-bottom, 0px)",
+          }}
+        >
+          <div className="mx-auto flex h-24 max-w-2xl items-center justify-around px-6">
+            {BOTTOM_NAV.map((n) => {
+              const active =
+                path === n.to ||
+                (n.to !== "/dash/" && path.startsWith(n.to));
+              return (
+                <Link
+                  key={n.to}
+                  to={n.to as any}
+                  className="flex flex-col items-center gap-2 px-4 py-2 transition-all"
+                >
+                  <span
+                    className="font-display text-[22px] tracking-[0.18em] transition-colors"
+                    style={{
+                      color: active ? "#E0249C" : "rgba(74,18,89,0.55)",
+                    }}
+                  >
+                    {n.label}
+                  </span>
+                  {active && (
+                    <div
+                      className="h-[3px] w-8 rounded-full"
+                      style={{
+                        background: "linear-gradient(90deg, #E0249C, #c9a84c)",
+                      }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </nav>
+      )}
     </div>
   );
 }

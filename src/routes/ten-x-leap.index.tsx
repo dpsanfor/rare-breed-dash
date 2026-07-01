@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
 import { PHASES } from "@/lib/program-data";
 import { readProfile } from "@/lib/profile";
+import { getUserAccess } from "@/lib/supabase-profile";
+import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
 
 export const Route = createFileRoute("/ten-x-leap/")({
   head: () => ({
@@ -13,19 +15,17 @@ export const Route = createFileRoute("/ten-x-leap/")({
 
 function TenXLeapIndex() {
   const [completedKeys, setCompletedKeys] = useState<string[]>([]);
-  const [phase1Complete, setPhase1Complete] = useState(false);
+  const [access, setAccess] = useState<boolean | null>(null);
   const phase = PHASES[1];
-  const phase1 = PHASES[0];
 
   useEffect(() => {
     const profile = readProfile();
-    const completed = profile.completed_modules ?? [];
-    setCompletedKeys(completed);
-    const p1Done = phase1.modules.every((m) =>
-      completed.includes(`phase1_${m.id}`)
-    );
-    setPhase1Complete(p1Done);
+    setCompletedKeys(profile.completed_modules ?? []);
+    getUserAccess().then((a) => setAccess(a.phase2));
   }, []);
+
+  if (access === null) return null;
+  if (!access) return <PhaseLockedScreen phase="10x-leap" />;
 
   const completedCount = phase.modules.filter((m) =>
     completedKeys.includes(`phase2_${m.id}`)
@@ -35,41 +35,18 @@ function TenXLeapIndex() {
     (m) => !completedKeys.includes(`phase2_${m.id}`)
   );
 
-  if (!phase1Complete) {
-    return (
-      <BrandShell hideStickyCta>
-        <div className="py-24 text-center">
-          <p className="eyebrow mb-6">Phase 02 · The 10X Leap™</p>
-          <h1 className="font-display text-[40px] leading-[1.05] tracking-wide text-[#1F1623]/50 sm:text-[56px]">
-            Complete Phase One first.
-          </h1>
-          <p className="mt-6 font-serif text-base italic text-[#4A1259]/50">
-            The 10X Leap installs a new operating system. You need to understand the current one first.
-          </p>
-          <Link
-            to="/prison-break/"
-            className="mt-10 inline-flex items-center gap-2 rounded-full border border-[rgba(74,18,89,0.2)] px-7 py-3.5 font-display text-[12px] tracking-[0.18em] text-[#4A1259]/60 hover:border-[#E0249C]/30 hover:text-[#E0249C]"
-          >
-            Go to Phase One →
-          </Link>
-        </div>
-      </BrandShell>
-    );
-  }
-
   return (
     <BrandShell hideStickyCta>
       <div className="mb-12 mt-8">
-        <p className="eyebrow mb-4">Phase 02 · The 10X Leap™</p>
-        <h1 className="font-display text-[48px] leading-[1.0] tracking-wide text-shimmer sm:text-[64px] md:text-[80px]">
-          Install the Rare Breed<br />Operating System™.
+        <p className="eyebrow mb-2">Phase 02 · The 10X Leap™</p>
+        <h1 className="font-display text-[24px] leading-[1.0] tracking-wide text-shimmer sm:text-[32px] md:text-[40px]">
+          Create the life and business<br />your Zone of Genius has been waiting for.
         </h1>
-        <p className="mt-6 max-w-xl font-serif text-lg font-light italic text-[#4A1259]/65">
-          {completedCount} of {phase.modules.length} modules installed.
+        <p className="mt-6 max-w-xl font-serif text-xl font-light italic text-[#4A1259]/80">
+          {completedCount} of {phase.modules.length} modules complete.
         </p>
       </div>
 
-      {/* Progress bar */}
       <div className="mb-12">
         <div className="relative h-[3px] w-full overflow-hidden rounded-full bg-[rgba(74,18,89,0.1)]">
           <div
@@ -87,10 +64,9 @@ function TenXLeapIndex() {
           <Link
             to="/ten-x-leap/$module"
             params={{ module: String(nextIncomplete.number) }}
-            className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
+            className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[20px] tracking-[0.14em] text-white"
             style={{
-              background:
-                "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
+              background: "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
               boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)",
             }}
           >
@@ -111,69 +87,92 @@ function TenXLeapIndex() {
               className="flex items-center gap-6 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
               style={{
                 borderColor: complete
-                  ? "rgba(201,168,76,0.25)"
+                  ? "rgba(201,168,76,0.3)"
                   : isNext
-                    ? "rgba(224,36,156,0.3)"
+                    ? "rgba(74,18,89,0.45)"
                     : "rgba(74,18,89,0.1)",
                 background: complete
-                  ? "rgba(201,168,76,0.04)"
+                  ? "linear-gradient(135deg, rgba(201,168,76,0.09) 0%, rgba(240,223,160,0.04) 100%)"
                   : isNext
-                    ? "rgba(224,36,156,0.04)"
-                    : "rgba(255,255,255,0.7)",
+                    ? "linear-gradient(135deg, rgba(74,18,89,0.1) 0%, rgba(192,132,252,0.05) 100%)"
+                    : "rgba(255,255,255,0.6)",
+                boxShadow: isNext ? "0 4px 24px -6px rgba(74,18,89,0.2)" : "none",
               }}
             >
               <div
-                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[11px] tracking-[0.15em]"
+                className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full font-mono text-[14px] tracking-[0.15em]"
                 style={{
                   background: complete
-                    ? "rgba(201,168,76,0.15)"
-                    : "rgba(74,18,89,0.08)",
-                  color: complete ? "#c9a84c" : "#4A1259",
+                    ? "linear-gradient(135deg, rgba(201,168,76,0.25), rgba(201,168,76,0.12))"
+                    : isNext
+                      ? "linear-gradient(135deg, #4A1259, #6B21A8)"
+                      : "rgba(74,18,89,0.08)",
+                  color: complete ? "#c9a84c" : isNext ? "#fff" : "#4A1259",
                 }}
               >
                 {complete ? "✓" : mod.number.toString().padStart(2, "0")}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-display text-lg tracking-[0.05em] text-[#1F1623]">
+                <p className="font-display text-2xl tracking-[0.05em] text-[#1F1623]">
                   {mod.name}
                 </p>
-                <p className="mt-0.5 font-serif text-sm italic text-[#4A1259]/55">
+                <p className="mt-1 font-serif text-[32px] italic leading-snug text-[#4A1259]/75">
                   {mod.tagline}
                 </p>
               </div>
-              <span
-                className="flex-shrink-0 font-mono text-[9px] uppercase tracking-[0.2em]"
-                style={{
-                  color: complete
-                    ? "#c9a84c"
-                    : isNext
-                      ? "#E0249C"
-                      : "rgba(74,18,89,0.3)",
-                }}
-              >
-                {complete ? "Installed" : isNext ? "Active" : "Queued"}
-              </span>
+              <div className="flex-shrink-0">
+                <span
+                  className="font-mono text-[13px] uppercase tracking-[0.2em]"
+                  style={{
+                    color: complete
+                      ? "#c9a84c"
+                      : isNext
+                        ? "#E0249C"
+                        : "rgba(74,18,89,0.4)",
+                  }}
+                >
+                  {complete ? "Installed" : isNext ? "Active" : "Queued"}
+                </span>
+              </div>
             </Link>
           );
         })}
       </div>
 
-      {completedCount === phase.modules.length && (
-        <div className="mt-12 rounded-2xl border border-[rgba(224,36,156,0.2)] bg-[rgba(224,36,156,0.04)] p-8 text-center">
-          <p className="font-display text-3xl tracking-wide text-shimmer mb-4">
-            Rare Breed OS™ Installed
+      <div
+          className="mt-12 rounded-2xl p-10 text-center"
+          style={{
+            background: "linear-gradient(160deg, rgba(224,36,156,0.1) 0%, rgba(74,18,89,0.12) 50%, rgba(201,168,76,0.08) 100%)",
+            border: "1.5px solid rgba(224,36,156,0.3)",
+            boxShadow: "0 16px 60px -12px rgba(224,36,156,0.25)",
+          }}
+        >
+          <p className="font-mono uppercase tracking-[0.3em] text-[#E0249C] mb-4" style={{ fontSize: "12px" }}>
+            Your Operating Manual is Ready
           </p>
-          <p className="font-serif italic text-[#4A1259]/65 mb-6">
-            You've installed your Rare Breed Operating System and created your Operating Manual. Inside Rare Breed Club, your Operating Manual powers an entire suite of AI builders that transform your identity into a complete business.
+          <p className="font-display text-shimmer leading-[1.0] tracking-wide mb-6" style={{ fontSize: "clamp(28px, 6vw, 42px)" }}>
+            You've Built the Blueprint.
+            <br />
+            Now It's Time to Bring It to Life.
+          </p>
+          <p className="font-serif italic text-[#1F1623] mx-auto mb-4 leading-relaxed" style={{ fontSize: "18px", maxWidth: "560px" }}>
+            Everything you've created inside The 10X Leap becomes the intelligence Rare Breed OS™ uses to generate a business built from your unique genius — not someone else's template.
+          </p>
+          <p className="font-serif italic text-[rgba(31,22,35,0.65)] mx-auto mb-10 leading-relaxed" style={{ fontSize: "17px", maxWidth: "520px" }}>
+            Instead of spending months figuring out what to sell, say, and build, you'll begin with a business generated from who you are — then continuously refine it as you grow.
           </p>
           <Link
-            to="/dash/"
-            className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,18,89,0.2)] px-7 py-3.5 font-display text-[12px] tracking-[0.18em] text-[#4A1259]/60 hover:border-[#E0249C]/30 hover:text-[#E0249C]"
+            to="/rare-breed-club/"
+            className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display tracking-[0.18em] text-white"
+            style={{
+              fontSize: "clamp(14px, 3vw, 18px)",
+              background: "linear-gradient(135deg, #D946EF 0%, #E0249C 50%, #c9a84c 100%)",
+              boxShadow: "0 12px 40px -8px rgba(217,70,239,0.5)",
+            }}
           >
-            Return to Dashboard →
+            {completedCount === phase.modules.length ? "Activate My Operating Manual™ →" : "Preview Rare Breed Club™ →"}
           </Link>
         </div>
-      )}
     </BrandShell>
   );
 }

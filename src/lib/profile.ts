@@ -34,6 +34,15 @@ export interface UserProfile {
   launch_blueprint?: string;
   business_blueprint?: string;
 
+  // Operating Manual sections (editable by founder)
+  current_identity?: string;
+  core_beliefs?: string;
+  non_negotiables_business?: string;
+  non_negotiables_life?: string;
+  non_negotiables_leadership?: string;
+  current_focus?: string;
+  operating_manual_updated_at?: string;
+
   // Background intelligence (continuously refined across all engines)
   discernment_signals?: string;
   decision_filters?: string;
@@ -48,9 +57,41 @@ export interface UserProfile {
 
   // Module completion
   completed_modules?: string[];
+
+  // Evolution Timeline entries
+  evolution_timeline?: EvolutionEntry[];
+}
+
+export type EvolutionEntryType =
+  | "module_complete"
+  | "manual_update"
+  | "reflection"
+  | "business_milestone"
+  | "phase_complete"
+  | "breakthrough";
+
+export interface EvolutionEntry {
+  id: string;
+  date: string;
+  type: EvolutionEntryType;
+  title: string;
+  description?: string;
+  reflection?: string;
+  sectionKey?: string;
+  previousValue?: string;
 }
 
 const PROFILE_KEY = "rb_profile";
+
+// Lazily imported to avoid circular dependency
+async function bgSync(profile: UserProfile) {
+  try {
+    const { syncProfileToSupabase } = await import("./supabase-profile");
+    await syncProfileToSupabase(profile);
+  } catch {
+    // silently skip if not logged in or offline
+  }
+}
 
 export function readProfile(): UserProfile {
   if (typeof window === "undefined") return {};
@@ -74,6 +115,7 @@ export function writeProfile(update: Partial<UserProfile>): UserProfile {
     ),
   };
   localStorage.setItem(PROFILE_KEY, JSON.stringify(merged));
+  bgSync(merged);
   return merged;
 }
 
@@ -107,6 +149,35 @@ export function markModuleComplete(moduleKey: string): void {
 
 export function isModuleComplete(moduleKey: string): boolean {
   return readProfile().completed_modules?.includes(moduleKey) ?? false;
+}
+
+export function addEvolutionEntry(entry: Omit<EvolutionEntry, "id" | "date">): void {
+  const current = readProfile();
+  const newEntry: EvolutionEntry = {
+    ...entry,
+    id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+    date: new Date().toISOString(),
+  };
+  const existing = current.evolution_timeline ?? [];
+  writeProfile({ evolution_timeline: [newEntry, ...existing] });
+}
+
+export function updateManualSection(key: keyof UserProfile, value: string): void {
+  const current = readProfile();
+  const previous = current[key] as string | undefined;
+  if (previous && previous !== value) {
+    addEvolutionEntry({
+      type: "manual_update",
+      title: `Operating Manual updated`,
+      description: `${key.replace(/_/g, " ")} was revised`,
+      sectionKey: key,
+      previousValue: previous,
+    });
+  }
+  writeProfile({
+    [key]: value,
+    operating_manual_updated_at: new Date().toISOString(),
+  } as Partial<UserProfile>);
 }
 
 export function buildPhase1Context(profile: UserProfile): string {
