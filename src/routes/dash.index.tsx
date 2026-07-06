@@ -210,6 +210,7 @@ function FeaturedCard({
   total,
   continueTo,
   continueParams,
+  locked,
 }: {
   descriptor: string;
   result: string;
@@ -218,6 +219,7 @@ function FeaturedCard({
   total: number;
   continueTo?: string;
   continueParams?: Record<string, string>;
+  locked?: boolean;
 }) {
   const isComplete = status === "complete";
   const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
@@ -344,54 +346,82 @@ function FeaturedCard({
 
       {/* Progress + CTA */}
       <div className="mt-auto relative">
-        <div className="flex gap-[5px] mb-2 flex-wrap">
-          {Array.from({ length: Math.min(total, 8) }).map((_, i) => (
-            <div
-              key={i}
-              className="h-[7px] w-[7px] rounded-full flex-shrink-0"
-              style={{ background: i < completed ? "#c9a84c" : "rgba(201,168,76,0.2)" }}
-            />
-          ))}
-          {total > 8 && (
-            <span className="font-mono text-[10px]" style={{ color: "rgba(31,22,35,0.7)" }}>
-              +{total - 8}
-            </span>
-          )}
-        </div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(31,22,35,0.65)" }}>
-          {completed}/{total} · {pct}%
-        </p>
-        {continueTo && !isComplete && (
-          <Link
-            to={continueTo as any}
-            params={continueParams as any}
-            className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
-            style={{
-              background: "linear-gradient(135deg, #D946EF 0%, #E0249C 50%, #c9a84c 100%)",
-              boxShadow: "0 8px 36px -8px rgba(217,70,239,0.55)",
-            }}
-          >
-            {completed === 0 ? "Enter Phase Three →" : "Continue →"}
-          </Link>
-        )}
-        {isComplete && (
+        {locked ? (
+          <div className="flex flex-col gap-3">
+            <Link
+              to={continueTo as any}
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+              style={{
+                background: "linear-gradient(135deg, #D946EF 0%, #E0249C 50%, #c9a84c 100%)",
+                boxShadow: "0 8px 36px -8px rgba(217,70,239,0.55)",
+              }}
+            >
+              Learn More →
+            </Link>
+            <Link
+              to={"/login" as any}
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+              style={{
+                color: "#1F1623",
+                border: "1.5px solid rgba(255,255,255,0.5)",
+                background: "rgba(255,255,255,0.25)",
+              }}
+            >
+              Log In →
+            </Link>
+          </div>
+        ) : (
           <>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4" style={{ color: "#c9a84c" }}>
-              ✦ {total}/{total} installed
+            <div className="flex gap-[5px] mb-2 flex-wrap">
+              {Array.from({ length: Math.min(total, 8) }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-[7px] w-[7px] rounded-full flex-shrink-0"
+                  style={{ background: i < completed ? "#c9a84c" : "rgba(201,168,76,0.2)" }}
+                />
+              ))}
+              {total > 8 && (
+                <span className="font-mono text-[10px]" style={{ color: "rgba(31,22,35,0.7)" }}>
+                  +{total - 8}
+                </span>
+              )}
+            </div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(31,22,35,0.65)" }}>
+              {completed}/{total} · {pct}%
             </p>
-            {continueTo && (
+            {continueTo && !isComplete && (
               <Link
                 to={continueTo as any}
                 params={continueParams as any}
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
                 style={{
-                  color: "#1F1623",
-                  border: "1.5px solid rgba(201,168,76,0.5)",
-                  background: "rgba(201,168,76,0.1)",
+                  background: "linear-gradient(135deg, #D946EF 0%, #E0249C 50%, #c9a84c 100%)",
+                  boxShadow: "0 8px 36px -8px rgba(217,70,239,0.55)",
                 }}
               >
-                Revisit →
+                {completed === 0 ? "Enter Phase Three →" : "Continue →"}
               </Link>
+            )}
+            {isComplete && (
+              <>
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4" style={{ color: "#c9a84c" }}>
+                  ✦ {total}/{total} installed
+                </p>
+                {continueTo && (
+                  <Link
+                    to={continueTo as any}
+                    params={continueParams as any}
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+                    style={{
+                      color: "#1F1623",
+                      border: "1.5px solid rgba(201,168,76,0.5)",
+                      background: "rgba(201,168,76,0.1)",
+                    }}
+                  >
+                    Revisit →
+                  </Link>
+                )}
+              </>
             )}
           </>
         )}
@@ -573,15 +603,28 @@ function DashHome() {
               enterTo="/ten-x-leap"
             />
           )}
-          <FeaturedCard
-            descriptor="Install your Rare Breed Operating Manual™ into Rare Breed OS™. Every Studio already knows who you are—and uses that intelligence to generate your messaging, offers, content, emails, launches, curriculum, brand, and business systems."
-            result="Everything generated from your Operating Manual. Not from generic AI. Not from someone else's template. From your unique genius. Watch your business come to life."
-            status={p3Status}
-            completed={p3Count}
-            total={P3.length}
-            continueTo="/rare-breed-club"
-            continueParams={undefined}
-          />
+          {access?.phase3 ? (
+            <FeaturedCard
+              descriptor="Install your Rare Breed Operating Manual™ into Rare Breed OS™. Every Studio already knows who you are—and uses that intelligence to generate your messaging, offers, content, emails, launches, curriculum, brand, and business systems."
+              result="Everything generated from your Operating Manual. Not from generic AI. Not from someone else's template. From your unique genius. Watch your business come to life."
+              status={p3Status}
+              completed={p3Count}
+              total={P3.length}
+              continueTo="/rare-breed-club"
+              continueParams={undefined}
+            />
+          ) : (
+            <FeaturedCard
+              descriptor="Your Rare Breed Operating Manual™ plugs into twelve AI Studios that already know who you are — generating your messaging, offers, sales pages, content, launches, and brand from one source."
+              result="You did the deep thinking once. You never start from a blank page again."
+              status={p3Status}
+              completed={p3Count}
+              total={P3.length}
+              continueTo="/rare-breed-club"
+              continueParams={undefined}
+              locked
+            />
+          )}
         </div>
       </div>
 

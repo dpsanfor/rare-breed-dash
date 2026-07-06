@@ -143,12 +143,18 @@ function TenXLeapLockedScreen() {
   );
 }
 
-const CLUB_INCLUDES = [
-  "Twelve AI Studios that read your Operating Manual™ before generating anything: messaging, offer suite, sales pages, emails, content engine, launches, brand",
-  "The Gumdrop Test Kitchen™: every launch produces revenue AND intelligence, so your next one is always smarter",
-  "Rare Breed Calls: live coaching on X factor, positioning, and being undeniable in the premium market",
-  "Infinite Edge Calls: clear, connect, contribute. The spiritual foundation underneath the whole thing",
-  "The Telegram community: a curated room of unicorns who are building the same way you are",
+const CLUB_WHAT_YOU_GET = [
+  "Twelve AI Studios — each one reads your Operating Manual™ before generating a single word",
+  "Your Messaging Suite — positioning, bio, hooks, brand voice, all from your Zone of Genius",
+  "Your Offer Ecosystem — built, priced, and packaged from your Operating Manual™",
+  "Your Sales Pages — generated from your story, your client, your promise",
+  "Your Content Engine — posts, scripts, and reels that sound like you because they ARE you",
+  "Your Email Sequences — nurture, launch, and follow-up written from your voice",
+  "Your Launch System — the Gumdrop Test Kitchen™ runs every launch and makes the next one smarter",
+  "Your Brand Direction — name, aesthetic, visual identity, and proof all in one place",
+  "Rare Breed Calls — live coaching on positioning, X factor, and being undeniable in the premium market",
+  "Infinite Edge Calls — clear, connect, contribute. The spiritual foundation underneath everything",
+  "The Telegram Room — a curated community of unicorns building the same way you are",
 ];
 
 function RareBreedClubLockedScreen() {
@@ -158,34 +164,33 @@ function RareBreedClubLockedScreen() {
         <p className="eyebrow mb-6">Phase 03 · Delivered × Rare Breed Club</p>
 
         <h1 className="font-display text-[36px] leading-[1.0] tracking-wide text-shimmer mb-6 sm:text-[48px]">
-          You designed the business.<br />Now it gets built.
+          Your Operating Manual is built.<br />Now watch your business come to life.
         </h1>
 
-        <p className="font-serif text-[20px] italic leading-relaxed text-[#4A1259]/70 mb-10 max-w-lg">
-          Your Rare Breed Operating Manual™ plugs into Rare Breed OS™ and becomes your actual business. One source document generates all of it, which is why everything finally matches: your offers, your message, your brand, your 10X life. You did the deep thinking ONCE. You never start from a blank page again.
+        <p className="font-serif text-[24px] italic leading-relaxed text-[#4A1259]/70 mb-6 max-w-xl">
+          10X Leap™ gave you the blueprint.
         </p>
 
-        {/* Price callout */}
-        <div
-          className="mb-10 inline-flex items-baseline gap-3 rounded-2xl px-8 py-5"
-          style={{
-            background: "linear-gradient(160deg, rgba(74,18,89,0.06) 0%, rgba(224,36,156,0.06) 100%)",
-            border: "1px solid rgba(224,36,156,0.18)",
-          }}
-        >
-          <span className="font-display text-[42px] tracking-tight text-shimmer">$11,111</span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/45">
-            per year · or $1,111/month
-          </span>
+        <p className="font-serif text-[24px] leading-relaxed text-[#4A1259]/80 mb-6 max-w-xl">
+          Delivered × Rare Breed Club is where that blueprint becomes your actual business.
+        </p>
+
+        <p className="font-serif text-[22px] leading-relaxed text-[#4A1259]/70 mb-10 max-w-xl">
+          Your Rare Breed Operating Manual™ plugs into twelve AI Studios — and every one of them already knows who you are. Your messaging, your offers, your sales pages, your content, your launches, your brand. All of it generated from one source. All of it sounding like you. Because it IS you.
+        </p>
+
+        <div className="mb-10 space-y-2 max-w-xl">
+          <p className="font-serif text-[22px] italic text-[#4A1259]/60">You did the deep thinking once.</p>
+          <p className="font-serif text-[22px] font-semibold text-[#1F1623]">You never start from a blank page again.</p>
         </div>
 
-        {/* What's inside */}
+        {/* What you get */}
         <div className="mb-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-4">What's inside</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-5">What's Inside</p>
           <div className="space-y-3">
-            {CLUB_INCLUDES.map((item, i) => (
+            {CLUB_WHAT_YOU_GET.map((item, i) => (
               <div key={item} className="flex items-start gap-4">
-                <span className="font-mono text-[10px] tracking-[0.15em] pt-1" style={{ color: "#E0249C" }}>
+                <span className="font-mono text-[10px] tracking-[0.15em] pt-1 flex-shrink-0" style={{ color: "#E0249C" }}>
                   {`0${i + 1}`}
                 </span>
                 <span className="font-serif text-[17px] leading-snug text-[#1F1623]/85">{item}</span>
@@ -194,24 +199,60 @@ function RareBreedClubLockedScreen() {
           </div>
         </div>
 
-        <a
-          href="https://danahayes.com/rare-breed-club"
-          className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[14px] tracking-[0.18em] text-white"
+        {/* Why this matters */}
+        <div className="mb-10 max-w-xl space-y-4 border-l-2 border-[rgba(224,36,156,0.2)] pl-6">
+          <p className="font-display text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/50">Why This Is Different</p>
+          <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/75">
+            Most business tools generate generic content and call it personalized.
+          </p>
+          <p className="font-serif text-[17px] font-semibold text-[#1F1623]">Rare Breed OS™ reads your Operating Manual™ first.</p>
+          <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/75">
+            That means every studio output — every sales page, email, post, offer, and launch plan — is built from your actual Zone of Genius. Not a template. Not someone else's voice. Yours.
+          </p>
+        </div>
+
+        {/* When finished */}
+        <div className="mb-10 max-w-xl rounded-2xl p-6" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.05) 0%, rgba(224,36,156,0.05) 100%)", border: "1px solid rgba(224,36,156,0.15)" }}>
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-3">The Result</p>
+          <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/80">
+            A fully operational business that compounds. Every launch makes the next one smarter. Every piece of content builds the brand. Every client you serve deepens the intelligence the system runs from. This is what it looks like when your genius runs the whole thing.
+          </p>
+        </div>
+
+        {/* Price */}
+        <div
+          className="mb-8 rounded-2xl px-8 py-6"
           style={{
-            background: "linear-gradient(135deg, #4A1259 0%, #E0249C 50%, #c9a84c 100%)",
-            boxShadow: "0 12px 40px -8px rgba(74,18,89,0.45)",
+            background: "linear-gradient(160deg, rgba(74,18,89,0.06) 0%, rgba(224,36,156,0.06) 100%)",
+            border: "1px solid rgba(224,36,156,0.18)",
           }}
         >
-          Claim Your Seat →
-        </a>
+          <div className="flex flex-wrap items-baseline gap-3 mb-2">
+            <span className="font-display text-[42px] tracking-tight text-shimmer">$11,111</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/45">per year</span>
+          </div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4A1259]/40">or $1,111 / month · by application only</p>
+        </div>
 
-        <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/30">
-          Already a member? Contact{" "}
-          <a href="mailto:dana@danahayes.com" className="underline hover:text-[#E0249C]/60 transition-colors">
-            dana@danahayes.com
-          </a>{" "}
-          to activate access.
-        </p>
+        {/* CTAs */}
+        <div className="flex flex-wrap gap-4">
+          <a
+            href="mailto:dana@danahayes.com?subject=Rare%20Breed%20Club%20%E2%80%94%20I%27m%20Ready%20to%20Apply"
+            className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[14px] tracking-[0.18em] text-white"
+            style={{
+              background: "linear-gradient(135deg, #4A1259 0%, #E0249C 50%, #c9a84c 100%)",
+              boxShadow: "0 12px 40px -8px rgba(74,18,89,0.45)",
+            }}
+          >
+            Claim My Seat →
+          </a>
+          <a
+            href="/login"
+            className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,18,89,0.25)] bg-white/70 px-8 py-5 font-display text-[14px] tracking-[0.18em] text-[#4A1259]/70 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+          >
+            Already a member? Log In
+          </a>
+        </div>
       </div>
     </BrandShell>
   );
