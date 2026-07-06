@@ -445,9 +445,21 @@ function LockedPhaseCard({
         {name}
       </p>
 
-      <p className="font-serif italic leading-[1.3] flex-1 mb-8 text-[#4A1259]/70" style={{ fontSize: "clamp(16px, 3.75vw, 20px)" }}>
+      <p className="font-serif italic leading-[1.3] mb-6 text-[#4A1259]/70" style={{ fontSize: "clamp(16px, 3.75vw, 20px)" }}>
         {tagline}
       </p>
+
+      <div className="flex-1 space-y-4 mb-8">
+        <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/60">
+          Five AI-guided design phases that transform your Zone of Genius into a complete business blueprint — your Rare Breed Operating Manual™.
+        </p>
+        <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/60">
+          Every future offer, client, launch, and piece of content built from the same foundation.
+        </p>
+        <p className="font-serif text-[17px] font-semibold text-[#1F1623]">
+          Not another strategy. A business designed around you.
+        </p>
+      </div>
 
       <div className="mt-auto flex flex-col gap-3">
         <a
