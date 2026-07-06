@@ -120,17 +120,19 @@ function TenXLeapLockedScreen() {
         {/* CTAs */}
         <div className="flex flex-wrap gap-4">
           <a
-            href="https://danahayes.com/ten-x-leap"
+            href="https://moderndayhealer.thrivecart.com/the-10x-leap/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[14px] tracking-[0.18em] text-white"
             style={{
               background: "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
               boxShadow: "0 12px 40px -8px rgba(224,36,156,0.45)",
             }}
           >
-            Enroll in 10X Leap™ →
+            Enter the 10X Leap™ →
           </a>
           <a
-            href="mailto:dana@danahayes.com"
+            href="/login"
             className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,18,89,0.25)] bg-white/70 px-8 py-5 font-display text-[14px] tracking-[0.18em] text-[#4A1259]/70 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
           >
             Already enrolled? Log In
