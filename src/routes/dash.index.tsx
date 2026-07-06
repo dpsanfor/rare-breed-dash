@@ -406,7 +406,6 @@ function LockedPhaseCard({
   name,
   tagline,
   accent,
-  learnMoreHref,
   enterTo,
 }: {
   phaseNum: string;
