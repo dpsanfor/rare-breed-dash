@@ -31,21 +31,21 @@ function TenXLeapLockedScreen() {
           You've discovered your Zone of Genius.<br />Now design the business it deserves.
         </h1>
 
-        <p className="font-serif text-[20px] italic leading-relaxed text-[#4A1259]/70 mb-6 max-w-lg">
+        <p className="font-serif text-[24px] italic leading-relaxed text-[#4A1259]/70 mb-6 max-w-xl">
           Good Girl Prison Break helped you uncover what you were actually meant to build.
         </p>
 
-        <p className="font-serif text-[20px] leading-relaxed text-[#4A1259]/80 mb-6 max-w-lg">
+        <p className="font-serif text-[24px] leading-relaxed text-[#4A1259]/80 mb-6 max-w-xl">
           10X Leap™ is where you design the business around it.
         </p>
 
-        <p className="font-serif text-[18px] leading-relaxed text-[#4A1259]/70 mb-10 max-w-lg">
+        <p className="font-serif text-[22px] leading-relaxed text-[#4A1259]/70 mb-10 max-w-xl">
           Over five AI-guided design phases, you'll transform your Zone of Genius into a complete business blueprint — so every future offer, client, launch, and piece of content is built from the same foundation.
         </p>
 
-        <div className="mb-10 space-y-2 max-w-md">
-          <p className="font-serif text-[18px] italic text-[#4A1259]/60">Not another business strategy.</p>
-          <p className="font-serif text-[18px] font-semibold text-[#1F1623]">A business designed around you.</p>
+        <div className="mb-10 space-y-2 max-w-xl">
+          <p className="font-serif text-[22px] italic text-[#4A1259]/60">Not another business strategy.</p>
+          <p className="font-serif text-[22px] font-semibold text-[#1F1623]">A business designed around you.</p>
         </div>
 
         {/* Deliverables */}
