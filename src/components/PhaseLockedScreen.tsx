@@ -202,8 +202,8 @@ function RareBreedClubLockedScreen() {
           </div>
 
           <div className="rounded-2xl p-6" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(201,168,76,0.06) 100%)", border: "1px solid rgba(201,168,76,0.2)" }}>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]/80 mb-3">12 Months RBC Access</p>
-            <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]/80">3 calls per month with Dana to mastermind, refine, and take your business as far as possible as fast as possible — for a full year after your build is complete.</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] mb-3">12 Months RBC Access</p>
+            <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]/80">3 calls per month with Dana to mastermind, refine, and take it as far as possible as fast as possible — starting the day you begin your build, running alongside your entire 1:1 and continuing for a full year.</p>
           </div>
         </div>
 

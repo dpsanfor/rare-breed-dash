@@ -631,7 +631,7 @@ function DashHome() {
       {/* Voice Library — always accessible, add to it anytime */}
       <Link
         to={"/voice-library" as any}
-        className="mb-8 flex items-center justify-between gap-4 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
+        className="mb-8 flex w-full items-center justify-between gap-4 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
         style={{
           borderColor: "rgba(224,36,156,0.25)",
           background: "linear-gradient(135deg, rgba(224,36,156,0.05) 0%, rgba(201,168,76,0.05) 100%)",
