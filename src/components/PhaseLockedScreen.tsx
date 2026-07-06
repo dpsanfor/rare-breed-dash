@@ -102,11 +102,12 @@ function TenXLeapLockedScreen() {
             border: "1px solid rgba(224,36,156,0.18)",
           }}
         >
-          <div className="flex items-baseline gap-3 mb-4">
-            <span className="font-display text-[42px] tracking-tight text-shimmer">$2,222</span>
+          <div className="flex flex-wrap items-baseline gap-3 mb-2">
+            <span className="font-display text-[42px] tracking-tight text-shimmer">$1,111</span>
             <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/45">one time</span>
-            <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E0249C]">$1,111 thru July 12</span>
+            <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E0249C]">First Round Pricing</span>
           </div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4A1259]/40 mb-4">Rises to $2,222 after July 12</p>
           <div className="space-y-2">
             {INCLUDES.map((item) => (
               <div key={item} className="flex items-center gap-2">
