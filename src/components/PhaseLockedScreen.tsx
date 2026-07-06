@@ -144,19 +144,16 @@ function TenXLeapLockedScreen() {
   );
 }
 
-const CLUB_WHAT_YOU_GET = [
-  "Dream Client + Messaging Studio — her complete psychological playbook plus the messaging built straight from it",
-  "Offer Studio — every offer fully built: promise, structure, deliverables, and pricing sequenced for ascension",
-  "Framework Studio — your named IP: the frameworks and methods that make your work impossible to copy",
-  "Brand Studio — complete visual direction, brand playbook, and photography brief built from your taste map",
-  "Sales Page Studio — a complete sales page in your voice, built from your dream client's own words",
-  "Website Studio — your complete homepage, every section, all copy in your voice ready to hand to a builder",
-  "Content + Email Studio — content pillars, hook library, 90-day calendar, plus every email sequence written",
-  "Launch Studio — your complete launch plan: timeline, emails, content, and promotion sequenced to build demand",
-  "Delivered HQ — every playbook unified into one living Business Playbook, one source of truth for everything",
-  "Rare Breed Calls — live coaching on positioning, X factor, and being undeniable in the premium market",
-  "Infinite Edge Calls — clear, connect, contribute. The spiritual foundation underneath everything",
-  "The Telegram Room — a curated community of unicorns building the same way you are",
+const CLUB_STUDIOS = [
+  "Dream Client + Messaging Studio",
+  "Offer Studio",
+  "Framework Studio",
+  "Brand Studio",
+  "Sales Page Studio",
+  "Website Studio",
+  "Content + Email Studio",
+  "Launch Studio",
+  "Delivered HQ",
 ];
 
 function RareBreedClubLockedScreen() {
@@ -166,7 +163,7 @@ function RareBreedClubLockedScreen() {
         <p className="eyebrow mb-6">Phase 03 · Delivered × Rare Breed Club</p>
 
         <h1 className="font-display text-[36px] leading-[1.0] tracking-wide text-shimmer mb-6 sm:text-[48px]">
-          Your Operating Manual is built.<br />Now watch your business come to life.
+          Your business, completely built.<br />In as little as two weeks.
         </h1>
 
         <p className="font-serif text-[24px] italic leading-relaxed text-[#4A1259]/70 mb-6 max-w-xl">
@@ -174,51 +171,41 @@ function RareBreedClubLockedScreen() {
         </p>
 
         <p className="font-serif text-[24px] leading-relaxed text-[#4A1259]/80 mb-6 max-w-xl">
-          Delivered × Rare Breed Club is where that blueprint becomes your actual business.
+          Delivered × Rare Breed Club is where Dana builds it with you.
         </p>
 
         <p className="font-serif text-[22px] leading-relaxed text-[#4A1259]/70 mb-10 max-w-xl">
-          Your Rare Breed Operating Manual™ plugs into twelve AI Studios — and every one of them already knows who you are. Your messaging, your offers, your sales pages, your content, your launches, your brand. All of it generated from one source. All of it sounding like you. Because it IS you.
+          3 months of done-with-you business building — 1:1 with Dana — using Rare Breed OS™ with all 9 Studios powered by your Rare Breed Operating Manual™ and Zone of Genius Code™. Your most complete, most aligned business, built out as fast as possible. Most clients are done in 2 weeks. You have up to 3 months.
         </p>
 
         <div className="mb-10 space-y-2 max-w-xl">
-          <p className="font-serif text-[22px] italic text-[#4A1259]/60">You did the deep thinking once.</p>
-          <p className="font-serif text-[22px] font-semibold text-[#1F1623]">You never start from a blank page again.</p>
+          <p className="font-serif text-[22px] italic text-[#4A1259]/60">Not a course. Not a community.</p>
+          <p className="font-serif text-[22px] font-semibold text-[#1F1623]">Dana, your genius, and the OS — building your business together.</p>
         </div>
 
-        {/* What you get */}
+        {/* What's included */}
         <div className="mb-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-5">What's Inside</p>
-          <div className="space-y-3">
-            {CLUB_WHAT_YOU_GET.map((item, i) => (
-              <div key={item} className="flex items-start gap-4">
-                <span className="font-mono text-[10px] tracking-[0.15em] pt-1 flex-shrink-0" style={{ color: "#E0249C" }}>
-                  {`0${i + 1}`}
-                </span>
-                <span className="font-serif text-[17px] leading-snug text-[#1F1623]/85">{item}</span>
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-5">What's Included</p>
+
+          <div className="mb-6 rounded-2xl p-6 space-y-3" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(224,36,156,0.04) 100%)", border: "1px solid rgba(224,36,156,0.12)" }}>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C]/70 mb-3">3 Months Done-With-You</p>
+            <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]/80">All 9 Rare Breed OS™ Studios powered by your Operating Manual™ and Zone of Genius Code™ — built 1:1 with Dana until your business is complete.</p>
+          </div>
+
+          <div className="mb-6 rounded-2xl p-6 space-y-2" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(224,36,156,0.04) 100%)", border: "1px solid rgba(224,36,156,0.12)" }}>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C]/70 mb-3">The 9 Studios</p>
+            {CLUB_STUDIOS.map((studio, i) => (
+              <div key={studio} className="flex items-center gap-3">
+                <span className="font-mono text-[10px] text-[#E0249C] flex-shrink-0">{`0${i + 1}`}</span>
+                <span className="font-serif text-[16px] text-[#1F1623]/80">{studio}</span>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* Why this matters */}
-        <div className="mb-10 max-w-xl space-y-4 border-l-2 border-[rgba(224,36,156,0.2)] pl-6">
-          <p className="font-display text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/50">Why This Is Different</p>
-          <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/75">
-            Most business tools generate generic content and call it personalized.
-          </p>
-          <p className="font-serif text-[17px] font-semibold text-[#1F1623]">Rare Breed OS™ reads your Operating Manual™ first.</p>
-          <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/75">
-            That means every studio output — every sales page, email, post, offer, and launch plan — is built from your actual Zone of Genius. Not a template. Not someone else's voice. Yours.
-          </p>
-        </div>
-
-        {/* When finished */}
-        <div className="mb-10 max-w-xl rounded-2xl p-6" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.05) 0%, rgba(224,36,156,0.05) 100%)", border: "1px solid rgba(224,36,156,0.15)" }}>
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-3">The Result</p>
-          <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/80">
-            A fully operational business that compounds. Every launch makes the next one smarter. Every piece of content builds the brand. Every client you serve deepens the intelligence the system runs from. This is what it looks like when your genius runs the whole thing.
-          </p>
+          <div className="rounded-2xl p-6" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(201,168,76,0.06) 100%)", border: "1px solid rgba(201,168,76,0.2)" }}>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]/80 mb-3">12 Months RBC Access</p>
+            <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]/80">3 calls per month with Dana to mastermind, refine, and take your business as far as possible as fast as possible — for a full year after your build is complete.</p>
+          </div>
         </div>
 
         {/* Price */}
@@ -231,15 +218,15 @@ function RareBreedClubLockedScreen() {
         >
           <div className="flex flex-wrap items-baseline gap-3 mb-2">
             <span className="font-display text-[42px] tracking-tight text-shimmer">$11,111</span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/45">per year</span>
+            <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E0249C]">First 5 Only</span>
           </div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4A1259]/40">or $1,111 / month · by application only</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4A1259]/40">Doubles after the first 5 · By inquiry only</p>
         </div>
 
         {/* CTAs */}
         <div className="flex flex-wrap gap-4">
           <a
-            href="mailto:dana@danahayes.com?subject=Rare%20Breed%20Club%20%E2%80%94%20I%27m%20Ready%20to%20Apply"
+            href="mailto:dana@danahayes.com?subject=Delivered%20%C3%97%20Rare%20Breed%20Club%20%E2%80%94%20I%27m%20Ready%20to%20Inquire"
             className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[14px] tracking-[0.18em] text-white"
             style={{
               background: "linear-gradient(135deg, #4A1259 0%, #E0249C 50%, #c9a84c 100%)",
