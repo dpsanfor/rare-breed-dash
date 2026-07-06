@@ -413,7 +413,6 @@ function LockedPhaseCard({
   name: string;
   tagline: string;
   accent: { color: string; bg: string; border: string; shadow: string };
-  learnMoreHref: string;
   enterTo: string;
 }) {
   return (
@@ -462,10 +461,8 @@ function LockedPhaseCard({
       </div>
 
       <div className="mt-auto flex flex-col gap-3">
-        <a
-          href={learnMoreHref}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to={enterTo as any}
           className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5"
           style={{
             background: `linear-gradient(135deg, ${accent.color} 0%, #c9a84c 100%)`,
@@ -473,9 +470,9 @@ function LockedPhaseCard({
           }}
         >
           Learn More →
-        </a>
+        </Link>
         <Link
-          to={enterTo as any}
+          to={"/login" as any}
           className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5"
           style={{
             color: accent.color,
@@ -575,7 +572,6 @@ function DashHome() {
               name="10X Leap™"
               tagline="Design your complete business around your Zone of Genius."
               accent={PHASE_ACCENTS.p2}
-              learnMoreHref="https://danahayes.com/ten-x-leap"
               enterTo="/ten-x-leap"
             />
           )}
