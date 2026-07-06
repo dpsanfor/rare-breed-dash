@@ -145,14 +145,15 @@ function TenXLeapLockedScreen() {
 }
 
 const CLUB_WHAT_YOU_GET = [
-  "Twelve AI Studios — each one reads your Operating Manual™ before generating a single word",
-  "Your Messaging Suite — positioning, bio, hooks, brand voice, all from your Zone of Genius",
-  "Your Offer Ecosystem — built, priced, and packaged from your Operating Manual™",
-  "Your Sales Pages — generated from your story, your client, your promise",
-  "Your Content Engine — posts, scripts, and reels that sound like you because they ARE you",
-  "Your Email Sequences — nurture, launch, and follow-up written from your voice",
-  "Your Launch System — the Gumdrop Test Kitchen™ runs every launch and makes the next one smarter",
-  "Your Brand Direction — name, aesthetic, visual identity, and proof all in one place",
+  "Dream Client + Messaging Studio — her complete psychological playbook plus the messaging built straight from it",
+  "Offer Studio — every offer fully built: promise, structure, deliverables, and pricing sequenced for ascension",
+  "Framework Studio — your named IP: the frameworks and methods that make your work impossible to copy",
+  "Brand Studio — complete visual direction, brand playbook, and photography brief built from your taste map",
+  "Sales Page Studio — a complete sales page in your voice, built from your dream client's own words",
+  "Website Studio — your complete homepage, every section, all copy in your voice ready to hand to a builder",
+  "Content + Email Studio — content pillars, hook library, 90-day calendar, plus every email sequence written",
+  "Launch Studio — your complete launch plan: timeline, emails, content, and promotion sequenced to build demand",
+  "Delivered HQ — every playbook unified into one living Business Playbook, one source of truth for everything",
   "Rare Breed Calls — live coaching on positioning, X factor, and being undeniable in the premium market",
   "Infinite Edge Calls — clear, connect, contribute. The spiritual foundation underneath everything",
   "The Telegram Room — a curated community of unicorns building the same way you are",
