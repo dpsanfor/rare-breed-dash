@@ -421,7 +421,6 @@ function LockedPhaseCard({
         minHeight: "640px",
         background: accent.bg,
         border: `1.5px solid ${accent.border}`,
-        opacity: 0.82,
       }}
     >
       <div className="flex items-center justify-between mb-5">
