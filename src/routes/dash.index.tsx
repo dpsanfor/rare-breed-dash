@@ -84,7 +84,7 @@ function PhaseCard({
     <div
       className="flex flex-col rounded-2xl p-6 h-full"
       style={{
-        minHeight: "640px",
+        minHeight: "clamp(420px, 60vh, 640px)",
         background: isComplete ? "rgba(201,168,76,0.06)" : accent.bg,
         border: `1.5px solid ${isComplete ? "rgba(201,168,76,0.25)" : accent.border}`,
         boxShadow: isActive ? accent.shadow : "none",
@@ -226,7 +226,7 @@ function FeaturedCard({
     <div
       className="flex flex-col rounded-2xl p-6 h-full relative overflow-hidden"
       style={{
-        minHeight: "640px",
+        minHeight: "clamp(420px, 60vh, 640px)",
         background: isComplete
           ? "rgba(201,168,76,0.08)"
           : "linear-gradient(160deg, rgba(224,36,156,0.42) 0%, rgba(192,132,252,0.52) 28%, rgba(217,70,239,0.58) 52%, rgba(192,132,252,0.52) 76%, rgba(224,36,156,0.42) 100%)",
@@ -418,7 +418,7 @@ function LockedPhaseCard({
     <div
       className="flex flex-col rounded-2xl p-6 h-full"
       style={{
-        minHeight: "640px",
+        minHeight: "clamp(420px, 60vh, 640px)",
         background: accent.bg,
         border: `1.5px solid ${accent.border}`,
       }}
@@ -536,9 +536,9 @@ function DashHome() {
         </p>
       </div>
 
-      {/* ── YOUR JOURNEY — 3-column grid ─────────────────────── */}
+      {/* ── YOUR JOURNEY — responsive grid ─────────────────────── */}
       <div className="mb-8">
-        <div className="grid grid-cols-3 gap-3 items-stretch">
+        <div className="grid grid-cols-1 gap-4 items-stretch lg:grid-cols-3">
           <PhaseCard
             phaseNum="01 · Discover"
             name="Good Girl Prison Break™"
