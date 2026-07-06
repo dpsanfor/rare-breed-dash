@@ -1,5 +1,6 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { type ReactNode } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Only use routes that exist in routeTree.gen.ts to avoid runtime Link errors.
 // New routes must be registered before adding here.
@@ -28,6 +29,13 @@ export function BrandShell({
 }) {
   const { location } = useRouterState();
   const path = location.pathname;
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleSignOut() {
+    await signOut();
+    navigate({ to: "/login" });
+  }
 
   return (
     <div className="surface-bone min-h-screen text-foreground">
@@ -65,6 +73,13 @@ export function BrandShell({
             </div>
           </Link>
 
+          <button
+            onClick={handleSignOut}
+            className="font-mono text-[10px] uppercase tracking-[0.2em] transition-colors hover:text-[#E0249C]"
+            style={{ color: "rgba(74,18,89,0.35)" }}
+          >
+            Sign Out
+          </button>
         </div>
       </header>
 
