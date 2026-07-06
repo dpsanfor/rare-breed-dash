@@ -178,8 +178,7 @@ function RareBreedClubLockedScreen() {
           3 months of done-with-you business building — 1:1 with Dana — using Rare Breed OS™ with all 9 Studios powered by your Rare Breed Operating Manual™ and Zone of Genius Code™. Your most complete, most aligned business, built out as fast as possible. Most clients are done in 2 weeks. You have up to 3 months.
         </p>
 
-        <div className="mb-10 space-y-2 max-w-xl">
-          <p className="font-serif text-[22px] italic text-[#4A1259]/60">Not a course. Not a community.</p>
+        <div className="mb-10 max-w-xl">
           <p className="font-serif text-[22px] font-semibold text-[#1F1623]">Dana, your genius, and the OS — building your business together.</p>
         </div>
 
