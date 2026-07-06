@@ -1,6 +1,7 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
+import { Markdown } from "@/components/Markdown";
 import { getModule, PHASES } from "@/lib/program-data";
 import {
   readProfile,
@@ -16,8 +17,11 @@ import {
   generateModuleReport,
   generateLanguageReport,
   generateGoodGirlOS,
+  generateDeclaration,
   type ChatMessage,
 } from "@/lib/anthropic";
+import { getUserAccess } from "@/lib/supabase-profile";
+import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
 
 export const Route = createFileRoute("/prison-break/$module")({
   component: PhaseOneModule,
@@ -32,6 +36,7 @@ function SynthesisRunner({
   nextDecision,
   profile,
   onComplete,
+  autoAdvance,
 }: {
   moduleId: string;
   outputKey: string;
@@ -39,6 +44,7 @@ function SynthesisRunner({
   nextDecision?: string;
   profile: UserProfile;
   onComplete: () => void;
+  autoAdvance?: boolean;
 }) {
   const [generating, setGenerating] = useState(false);
   const [artifact, setArtifact] = useState<string | null>(null);
@@ -67,6 +73,9 @@ function SynthesisRunner({
       } else if (moduleId === "good-girl-os") {
         const ctx = buildPhase1Context(profile);
         result = await generateGoodGirlOS({ data: { phase1Context: ctx } });
+      } else if (moduleId === "declaration") {
+        const ctx = buildPhase1Context(profile);
+        result = await generateDeclaration({ data: { phase1Context: ctx } });
       } else {
         setError("Unknown synthesis module.");
         setGenerating(false);
@@ -74,6 +83,10 @@ function SynthesisRunner({
       }
       saveArtifact(outputKey as keyof UserProfile, result);
       markModuleComplete(`phase1_${moduleId}`);
+      if (autoAdvance) {
+        onComplete();
+        return;
+      }
       setArtifact(result);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Generation failed.");
@@ -83,6 +96,7 @@ function SynthesisRunner({
   }
 
   const complete = !!artifact;
+  const isDeclaration = moduleId === "declaration";
 
   return (
     <div>
@@ -97,29 +111,60 @@ function SynthesisRunner({
         </div>
       )}
 
-      {artifact && (
+      {artifact && !isDeclaration && (
         <div className="mb-10 rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white/90 p-10">
-          <p className="eyebrow mb-4">{outputName}</p>
-          <div className="prose prose-sm max-w-none font-serif text-[#1F1623]/85 leading-relaxed">
-            {artifact.split("\n").map((line, i) => {
-              if (line.startsWith("## ")) {
-                return (
-                  <h3
-                    key={i}
-                    className="font-display mt-8 mb-2 text-xl tracking-wide text-[#1F1623]"
-                  >
-                    {line.replace("## ", "")}
-                  </h3>
-                );
-              }
-              if (line.trim() === "") return <br key={i} />;
-              return (
-                <p key={i} className="mb-2">
-                  {line}
-                </p>
-              );
-            })}
+          <p className="eyebrow mb-4">{outputName} · Saved to your progress</p>
+          <Markdown
+            text={artifact}
+            className="prose prose-sm max-w-none font-serif leading-relaxed text-[#1F1623]/85"
+          />
+        </div>
+      )}
+
+      {artifact && isDeclaration && (
+        <div>
+          {/* The Declaration, presented as a declaration */}
+          <div
+            className="mb-10 rounded-3xl border-2 p-12 text-center"
+            style={{
+              borderColor: "rgba(201,168,76,0.5)",
+              background:
+                "linear-gradient(180deg, rgba(255,253,248,0.95) 0%, rgba(201,168,76,0.06) 100%)",
+              boxShadow: "0 20px 60px -20px rgba(201,168,76,0.35)",
+            }}
+          >
+            <p className="eyebrow mb-6" style={{ color: "#c9a84c" }}>
+              Your Prison Break Declaration
+            </p>
+            <Markdown
+              text={artifact}
+              className="mx-auto max-w-2xl font-serif text-2xl italic leading-relaxed text-[#1F1623]"
+            />
+            <div className="mt-10 flex items-center justify-center gap-3">
+              <span className="h-px w-12" style={{ background: "rgba(201,168,76,0.5)" }} />
+              <span
+                className="font-mono text-[11px] uppercase tracking-[0.28em]"
+                style={{ color: "rgba(201,168,76,0.85)" }}
+              >
+                Declared. Signed. Yours.
+              </span>
+              <span className="h-px w-12" style={{ background: "rgba(201,168,76,0.5)" }} />
+            </div>
           </div>
+
+          {/* Reveal trigger, leads to the Zone of Genius Code page */}
+          <Link
+            to={"/zone-of-genius-code" as any}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full px-8 py-6 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+            style={{
+              fontSize: "clamp(20px, 4vw, 30px)",
+              background:
+                "linear-gradient(135deg, #4A1259 0%, #E0249C 50%, #c9a84c 100%)",
+              boxShadow: "0 16px 50px -12px rgba(224,36,156,0.55)",
+            }}
+          >
+            Get My Zone of Genius Code →
+          </Link>
         </div>
       )}
 
@@ -140,20 +185,14 @@ function SynthesisRunner({
             boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)",
           }}
         >
-          {generating ? "Analyzing..." : `Generate ${outputName}`}
+          {generating
+            ? autoAdvance ? "Locking it in..." : "Analyzing..."
+            : autoAdvance ? "Lock It In + Continue →" : `Generate ${outputName}`}
         </button>
       )}
 
-      {complete && (
+      {complete && !isDeclaration && (
         <div className="mt-8">
-          {nextDecision && (
-            <div className="mb-6 rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-6">
-              <p className="eyebrow mb-2">Decision Installed</p>
-              <p className="font-serif text-[18px] italic text-[#1F1623]/90">
-                {nextDecision}
-              </p>
-            </div>
-          )}
           <button
             onClick={onComplete}
             className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
@@ -173,7 +212,6 @@ function SynthesisRunner({
 
 // ─── CONVERSATION MODULE RUNNER ───────────────────────────────────────────────
 
-const PHASE1_SAVED_TO = ["Good Girl Prison Break™", "The 10X Leap™", "Rare Breed Operating Manual™"];
 
 function ConversationRunner({
   moduleId,
@@ -188,6 +226,7 @@ function ConversationRunner({
   generatePrompt,
   profile,
   onComplete,
+  autoAdvance,
 }: {
   moduleId: string;
   outputKey: string;
@@ -199,17 +238,31 @@ function ConversationRunner({
   danasPrinciple?: string;
   nextDecision?: string;
   generatePrompt?: string;
+  autoAdvance?: boolean;
+  feedsInto?: string;
   profile: UserProfile;
   onComplete: () => void;
 }) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => {
+    const p = readProfile();
+    return p.conversations?.[moduleId] ?? [];
+  });
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [artifact, setArtifact] = useState<string | null>(null);
+  const [artifact, setArtifact] = useState<string | null>(() => {
+    const p = readProfile();
+    return (p[outputKey as keyof UserProfile] as string | undefined) ?? null;
+  });
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [followUpAnswer, setFollowUpAnswer] = useState("");
   const [listening, setListening] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(() => {
+    const p = readProfile();
+    const saved = p.conversations?.[moduleId];
+    const art = p[outputKey as keyof UserProfile] as string | undefined;
+    return !!(saved?.length || art);
+  });
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const recognitionRef = useRef<any>(null);
@@ -247,42 +300,41 @@ function ConversationRunner({
     setListening(true);
   }
 
-  const existingArtifact = profile[outputKey as keyof UserProfile] as string | undefined;
-  const existingConvo = profile.conversations?.[moduleId];
   const userTurns = messages.filter((m) => m.role === "user").length;
-  const canGenerate = userTurns >= 4 && !artifact;
-
-  useEffect(() => {
-    if (existingArtifact) {
-      setArtifact(existingArtifact);
-      setStarted(true);
-    } else if (existingConvo && existingConvo.length > 0) {
-      setMessages(existingConvo);
-      setStarted(true);
-    }
-  }, []);
+  // The AI can decide it already has enough and unlock generation early by
+  // emitting [[READY]] (e.g. when prior sessions answered the questions).
+  const aiReady = messages.some(
+    (m) => m.role === "assistant" && m.content.includes("[[READY]]")
+  );
+  const canGenerate = (aiReady || userTurns >= 8) && !artifact;
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   async function initConversation() {
-    if (openingQuestion) {
-      const initial: ChatMessage[] = [{ role: "assistant", content: openingQuestion }];
-      setMessages(initial);
-      saveConversation(moduleId, initial);
-      return;
-    }
     setLoading(true);
     try {
+      const fullCtx = buildPhase1Context(profile);
+      const kickoff = openingQuestion
+        ? fullCtx.trim()
+          ? `Begin this element. First, in ONE short warm sentence, reference something specific she has already surfaced in her earlier sessions (use her context) so she feels you know her work. Then ask this opening question: "${openingQuestion}"`
+          : `Begin this element. Ask this opening question warmly: "${openingQuestion}"`
+        : "I'm ready to begin. Reference what I've already surfaced in my earlier sessions where it's relevant.";
       const greeting = await sendModuleMessage({
-        data: { moduleId, messages: [{ role: "user", content: "I'm ready to begin." }] },
+        data: { moduleId, messages: [{ role: "user", content: kickoff }], context: fullCtx },
       });
       const initial: ChatMessage[] = [{ role: "assistant", content: greeting }];
       setMessages(initial);
       saveConversation(moduleId, initial);
     } catch {
-      setError("Failed to start conversation.");
+      if (openingQuestion) {
+        const initial: ChatMessage[] = [{ role: "assistant", content: openingQuestion }];
+        setMessages(initial);
+        saveConversation(moduleId, initial);
+      } else {
+        setError("Failed to start conversation.");
+      }
     } finally {
       setLoading(false);
     }
@@ -314,7 +366,7 @@ function ConversationRunner({
           ? [{ role: "user", content: "I'm ready to begin." }, ...updated]
           : updated;
       const reply = await sendModuleMessage({
-        data: { moduleId, messages: apiMessages },
+        data: { moduleId, messages: apiMessages, context: buildPhase1Context(profile) },
       });
       const withReply: ChatMessage[] = [
         ...updated,
@@ -336,10 +388,70 @@ function ConversationRunner({
     setError(null);
     try {
       const result = await generateModuleReport({
-        data: { moduleId, messages, generatePrompt },
+        data: { moduleId, messages, generatePrompt, context: buildPhase1Context(profile) },
       });
       saveArtifact(outputKey as keyof UserProfile, result);
       markModuleComplete(`phase1_${moduleId}`);
+      if (autoAdvance) {
+        onComplete();
+        return;
+      }
+      setArtifact(result);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Generation failed.");
+    } finally {
+      setGenerating(false);
+    }
+  }
+
+  function resetModule() {
+    const raw = localStorage.getItem('rare_breed_profile');
+    const p = raw ? JSON.parse(raw) : {};
+    delete p[outputKey];
+    if (p.completed_modules) {
+      p.completed_modules = p.completed_modules.filter((k: string) => k !== `phase1_${moduleId}`);
+    }
+    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    setArtifact(null);
+  }
+
+  async function restartConversation() {
+    const raw = localStorage.getItem('rare_breed_profile');
+    const p = raw ? JSON.parse(raw) : {};
+    if (p.conversations) delete p.conversations[moduleId];
+    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    setMessages([]);
+    setInput("");
+    await initConversation();
+  }
+
+  function looksLikeQuestion(text: string): boolean {
+    const t = text.trim();
+    return t.length < 700 && t.includes('?') && !t.includes('##');
+  }
+
+  async function generateWithOptionalAnswer() {
+    setGenerating(true);
+    setError(null);
+    const raw = localStorage.getItem('rare_breed_profile');
+    const p = raw ? JSON.parse(raw) : {};
+    delete p[outputKey];
+    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    try {
+      const extra = followUpAnswer.trim();
+      let finalMessages = messages;
+      if (extra) {
+        finalMessages = [...messages, { role: "user" as const, content: extra }];
+        setMessages(finalMessages);
+        saveConversation(moduleId, finalMessages);
+      }
+      const result = await generateModuleReport({ data: { moduleId, messages: finalMessages, generatePrompt, context: buildPhase1Context(profile) } });
+      saveArtifact(outputKey as keyof UserProfile, result);
+      markModuleComplete(`phase1_${moduleId}`);
+      if (autoAdvance) {
+        onComplete();
+        return;
+      }
       setArtifact(result);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Generation failed.");
@@ -349,55 +461,109 @@ function ConversationRunner({
   }
 
   // ── Synthesis view ──────────────────────────────────────────────────────────
-  if (artifact) {
+  if (artifact && looksLikeQuestion(artifact)) {
+    const questionLine = artifact.trim().split('\n').filter(l => l.includes('?'))[0] ?? artifact;
     return (
       <div>
-        <div className="mb-10 rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white/90 p-10">
-          <p className="eyebrow mb-3">{outputName}</p>
-          <div className="prose prose-sm max-w-none font-serif leading-relaxed text-[#1F1623]/85">
-            {artifact.split("\n").map((line, i) => {
-              if (line.startsWith("## ")) {
-                return (
-                  <h3 key={i} className="font-display mt-8 mb-2 text-xl tracking-wide text-[#1F1623]">
-                    {line.replace("## ", "")}
-                  </h3>
-                );
-              }
-              if (line.trim() === "") return <br key={i} />;
-              return <p key={i} className="mb-2">{line}</p>;
-            })}
-          </div>
-
-          <div className="mt-10 border-t border-[rgba(74,18,89,0.08)] pt-8">
-            <p className="eyebrow mb-4">Saved To</p>
-            <div className="space-y-2.5">
-              {PHASE1_SAVED_TO.map((dest) => (
-                <div key={dest} className="flex items-center gap-3">
-                  <span className="font-mono text-[#c9a84c]">✓</span>
-                  <span className="font-serif text-[15px] text-[#4A1259]/70">{dest}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        {error && <p className="mb-4 rounded-xl bg-red-50 px-5 py-3 text-sm text-red-600">{error}</p>}
+        <div className="mb-6 rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 p-8">
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#E0249C] mb-4">
+            Optional — add this before generating
+          </p>
+          <p className="font-serif text-[22px] italic leading-relaxed text-[#1F1623]/85 mb-6">
+            {questionLine}
+          </p>
+          <textarea
+            value={followUpAnswer}
+            onChange={(e) => setFollowUpAnswer(e.target.value)}
+            placeholder="Your answer — or leave blank and generate now"
+            rows={4}
+            className="w-full resize-none rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white px-5 py-3.5 font-serif text-[17px] text-[#1F1623] outline-none placeholder:text-[#4A1259]/30 focus:border-[#E0249C]/40"
+          />
         </div>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={generateWithOptionalAnswer}
+            disabled={generating}
+            className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white disabled:opacity-60"
+            style={{ background: "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)", boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)" }}
+          >
+            {generating ? "Generating..." : `Generate ${outputName} →`}
+          </button>
+          <button
+            onClick={resetModule}
+            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+          >
+            Start over
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-        {nextDecision && (
-          <div className="mb-6 rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-6">
-            <p className="eyebrow mb-2">Decision Installed</p>
-            <p className="font-serif text-[18px] italic text-[#1F1623]/90">{nextDecision}</p>
-          </div>
-        )}
-
-        <button
-          onClick={onComplete}
-          className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
+  if (artifact) {
+    const doneCount = (readProfile().completed_modules ?? []).filter((k) =>
+      k.startsWith("phase1_")
+    ).length;
+    const total = PHASES[0].modules.length;
+    const pct = Math.round((doneCount / total) * 100);
+    return (
+      <div>
+        <style>{`
+          @keyframes ggShimmer {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+          .gg-iridescent{background:linear-gradient(90deg,#E0249C,#c9a84c,#6EE7F9,#A78BFA,#F472B6,#E0249C);background-size:300% 300%;animation:ggShimmer 6s ease infinite;}
+        `}</style>
+        <div
+          className="mb-8 rounded-3xl border-2 p-12 text-center"
           style={{
-            background: "linear-gradient(135deg, #4A1259 0%, #E0249C 100%)",
-            boxShadow: "0 8px 32px -8px rgba(74,18,89,0.35)",
+            borderColor: "rgba(224,36,156,0.4)",
+            background:
+              "linear-gradient(180deg, rgba(255,253,248,0.95) 0%, rgba(224,36,156,0.05) 100%)",
+            boxShadow: "0 20px 60px -20px rgba(224,36,156,0.35)",
           }}
         >
-          Continue →
-        </button>
+          <p className="eyebrow mb-4" style={{ color: "#E0249C" }}>
+            ✦ Layer Decoded
+          </p>
+          <p
+            className="font-display tracking-wide text-[#1F1623]"
+            style={{ fontSize: "clamp(28px, 6vw, 44px)" }}
+          >
+            Another Piece of Your Code Recovered
+          </p>
+          <div
+            className="mx-auto mt-8 h-3 w-full max-w-lg overflow-hidden rounded-full"
+            style={{ background: "rgba(74,18,89,0.1)" }}
+          >
+            <div
+              className="gg-iridescent h-full rounded-full transition-all duration-700"
+              style={{ width: `${pct}%` }}
+            />
+          </div>
+          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/50">
+            {doneCount} of {total} layers decoded · saved to your Zone of Genius Code
+          </p>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4">
+          <button
+            onClick={onComplete}
+            className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+            style={{
+              fontSize: "clamp(16px, 3vw, 20px)",
+              background: "linear-gradient(135deg, #4A1259 0%, #E0249C 55%, #c9a84c 100%)",
+              boxShadow: "0 16px 50px -12px rgba(224,36,156,0.5)",
+            }}
+          >
+            Continue to the next layer →
+          </button>
+          <button
+            onClick={resetModule}
+            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+          >
+            Redo this element
+          </button>
+        </div>
       </div>
     );
   }
@@ -456,7 +622,7 @@ function ConversationRunner({
 
         <div className="mt-10 pt-8 border-t border-[rgba(74,18,89,0.08)]">
           <Link
-            to="/prison-break/"
+            to="/prison-break"
             className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
           >
             ← Back to Phase One
@@ -498,7 +664,7 @@ function ConversationRunner({
                     : "bg-[rgba(74,18,89,0.06)] text-[#1F1623]/90"
                 }`}
               >
-                {m.content}
+                {m.content.replace(/\[\[READY\]\]/g, "").trim()}
               </div>
             </div>
           ))}
@@ -573,8 +739,10 @@ function ConversationRunner({
 
       {canGenerate && (
         <div className="mt-8 border-t border-[rgba(74,18,89,0.08)] pt-8">
-          <p className="mb-3 font-serif text-[16px] italic text-[#4A1259]/60">
-            You've given the AI enough to build your {outputName}. Ready when you are.
+          <p className="mb-5 font-serif text-[22px] italic text-[#4A1259]/70">
+            {autoAdvance
+              ? "Delivered has what it needs from this one. Lock it in and keep moving, or keep going to make everything downstream even more personalized."
+              : `You've given Delivered enough to build the first version of your ${outputName}. Generate it now, or keep going to make every recommendation throughout Rare Breed OS™ even more personalized.`}
           </p>
           <button
             onClick={generate}
@@ -585,24 +753,38 @@ function ConversationRunner({
               boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)",
             }}
           >
-            {generating ? "Generating..." : `Generate ${outputName} →`}
+            {generating
+              ? autoAdvance ? "Locking it in..." : "Generating..."
+              : autoAdvance ? "Lock It In + Continue →" : `Generate ${outputName} →`}
           </button>
+          <div className="mt-6 rounded-2xl border border-[rgba(74,18,89,0.08)] bg-white/50 px-6 py-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/40 mb-2">Or keep going</p>
+            <p className="font-serif text-[18px] leading-relaxed text-[#1F1623]/70">
+              The more you share, the more specific your {outputName} becomes. Keep answering to go deeper — the AI will use everything. <span className="text-[#E0249C]/70 not-italic">Sweet spot: 8–12 responses.</span> Past that, you have more than enough.
+            </p>
+          </div>
         </div>
       )}
 
-      {!canGenerate && userTurns > 0 && (
-        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/30">
-          {4 - userTurns} more {4 - userTurns === 1 ? "response" : "responses"} before report unlocks
-        </p>
-      )}
+      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/40">
+        {userTurns} {userTurns === 1 ? "response" : "responses"} recorded
+        {!canGenerate && ` · ${8 - userTurns} more before generate unlocks`}
+      </p>
 
-      <div className="mt-10 pt-8 border-t border-[rgba(74,18,89,0.08)]">
+      <div className="mt-10 flex items-center justify-between gap-4 border-t border-[rgba(74,18,89,0.08)] pt-8">
         <Link
-          to="/prison-break/"
+          to="/prison-break"
           className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
         >
           ← Back to Phase One
         </Link>
+        <button
+          onClick={restartConversation}
+          disabled={loading}
+          className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors disabled:opacity-40"
+        >
+          ↻ Start this element over
+        </button>
       </div>
     </div>
   );
@@ -645,14 +827,6 @@ function ContextRunner({
           </p>
         </div>
       )}
-      {nextDecision && (
-        <div className="mb-8 rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-6">
-          <p className="eyebrow mb-2">Decision to Hold</p>
-          <p className="font-serif text-[18px] italic text-[#1F1623]/90">
-            {nextDecision}
-          </p>
-        </div>
-      )}
       <button
         onClick={handleContinue}
         className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
@@ -676,17 +850,23 @@ function PhaseOneModule() {
   const mod = getModule("prison-break", moduleNumber);
   const [profile, setProfile] = useState<UserProfile>({});
   const [done, setDone] = useState(false);
+  const [access, setAccess] = useState<boolean | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setProfile(readProfile());
+    getUserAccess().then((a) => setAccess(a.phase1));
   }, []);
+
+  if (access === null) return null;
+  if (!access) return <PhaseLockedScreen phase="prison-break" />;
 
   if (!mod) {
     return (
       <BrandShell>
         <div className="py-20 text-center">
           <p className="font-display text-2xl text-[#E0249C]">Module not found.</p>
-          <Link to="/prison-break/" className="mt-6 inline-block font-mono text-sm text-[#4A1259]/60 hover:text-[#E0249C]">
+          <Link to="/prison-break" className="mt-6 inline-block font-mono text-sm text-[#4A1259]/60 hover:text-[#E0249C]">
             Back to Phase One
           </Link>
         </div>
@@ -698,50 +878,77 @@ function PhaseOneModule() {
   const totalModules = phase.modules.length;
   const isComplete = done || isModuleComplete(`phase1_${mod.id}`);
   const nextModule = moduleNumber < totalModules ? moduleNumber + 1 : null;
+  // Intermediate reports generate silently and flow to the next module.
+  // Only the real deliverables pause to be seen.
+  const showsDeliverable = ["good-girl-os", "the-escape", "declaration"].includes(mod.id);
+  const completedNow = phase.modules.filter((m) =>
+    isModuleComplete(`phase1_${m.id}`)
+  ).length;
 
   function handleComplete() {
     setDone(true);
     setProfile(readProfile());
+    if (nextModule) {
+      navigate({ to: "/prison-break/$module", params: { module: String(nextModule) } });
+    } else {
+      navigate({ to: "/dash" });
+    }
   }
 
   return (
     <BrandShell hideStickyCta>
       {/* Header */}
       <div className="mb-10 mt-8">
-        <div className="mb-5 flex items-center gap-3">
+        {/* Program name — centered with back arrow */}
+        <div className="relative flex items-center justify-center mb-6">
           <Link
-            to="/prison-break/"
-            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/55 hover:text-[#E0249C] transition-colors"
+            to="/prison-break"
+            className="absolute left-0 font-mono text-[13px] text-[#4A1259]/45 hover:text-[#E0249C] transition-colors"
+            aria-label="Back to Good Girl Prison Break"
           >
-            ← Back
+            ←
           </Link>
-          <span className="font-mono text-[11px] text-[#4A1259]/25">/</span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40">
-            Module {mod.number}
-          </span>
+          <Link
+            to="/prison-break"
+            className="font-display text-shimmer hover:opacity-75 transition-opacity"
+            style={{ fontSize: "clamp(22px, 5vw, 42px)", letterSpacing: "0.1em" }}
+          >
+            Good Girl Prison Break™
+          </Link>
         </div>
 
-        <div className="mb-4 flex items-center gap-4">
-          <span className="font-mono text-[16px] tracking-[0.22em] text-[#E0249C]">
-            {mod.number.toString().padStart(2, "0")} / {totalModules.toString().padStart(2, "0")}
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <span className="font-mono text-[15px] tracking-[0.25em] text-[#4A1259]/50">
+            Layer {mod.number.toString().padStart(2, "0")} / {totalModules.toString().padStart(2, "0")}
           </span>
           {isComplete && (
-            <span className="rounded-full border border-[rgba(201,168,76,0.55)] px-3 py-1 font-mono text-[12px] uppercase tracking-[0.2em] text-[#c9a84c]">
-              Installed
+            <span className="rounded-full border border-[rgba(201,168,76,0.45)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]">
+              Decoded
             </span>
           )}
         </div>
 
-        <h1 className="font-display text-[24px] leading-[1.05] tracking-wide text-shimmer sm:text-[32px] md:text-[40px]">
+        <h1 className="font-display text-[24px] leading-[1.05] tracking-wide text-shimmer text-center sm:text-[32px] md:text-[40px]">
           {mod.name}
         </h1>
-        <p className="mt-4 font-serif text-[20px] font-light italic text-[#4A1259]/80">
+        <p className="mt-4 font-serif text-[40px] font-light italic leading-snug text-[#4A1259]/80 text-center">
           {mod.tagline}
         </p>
       </div>
 
-      {/* Progress strip */}
-      <div className="mb-12 grid grid-cols-7 gap-2">
+      {/* Progress toward her Zone of Genius Code™ */}
+      <div className="mb-2 flex items-baseline justify-between">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/50">
+          {completedNow} of {totalModules} complete
+        </p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">
+          → your Zone of Genius Code™
+        </p>
+      </div>
+      <div
+        className="mb-12 grid gap-2"
+        style={{ gridTemplateColumns: `repeat(${totalModules}, minmax(0, 1fr))` }}
+      >
         {phase.modules.map((m) => {
           const complete = isModuleComplete(`phase1_${m.id}`);
           const current = m.number === moduleNumber;
@@ -767,6 +974,7 @@ function PhaseOneModule() {
       {/* Module content — context modules auto-redirect, never render here */}
       {mod.type === "conversation" && (
         <ConversationRunner
+          key={mod.id}
           moduleId={mod.id}
           outputKey={mod.outputKey!}
           outputName={mod.outputName!}
@@ -777,60 +985,64 @@ function PhaseOneModule() {
           danasPrinciple={mod.danasPrinciple}
           nextDecision={mod.nextDecision}
           generatePrompt={mod.generatePrompt}
+          feedsInto={mod.feedsInto}
           profile={profile}
           onComplete={handleComplete}
+          autoAdvance={!showsDeliverable}
         />
       )}
 
       {mod.type === "synthesis" && (
         <SynthesisRunner
+          key={mod.id}
           moduleId={mod.id}
           outputKey={mod.outputKey!}
           outputName={mod.outputName!}
           nextDecision={mod.nextDecision}
           profile={profile}
           onComplete={handleComplete}
+          autoAdvance={!showsDeliverable}
         />
       )}
 
-      {/* Post-completion nav */}
-      {(done || isComplete) && (
-        <div className="mt-12 flex items-center gap-6 border-t border-[rgba(74,18,89,0.08)] pt-10">
-          {nextModule ? (
-            <Link
-              to="/prison-break/$module"
-              params={{ module: String(nextModule) }}
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
-              style={{
-                background:
-                  "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
-                boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)",
-              }}
-            >
-              Next: Module {nextModule} →
-            </Link>
-          ) : (
-            <Link
-              to="/ten-x-leap/$module"
-              params={{ module: "1" }}
-              className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
-              style={{
-                background:
-                  "linear-gradient(135deg, #4A1259 0%, #E0249C 100%)",
-                boxShadow: "0 8px 32px -8px rgba(74,18,89,0.35)",
-              }}
-            >
-              Enter Phase Two →
-            </Link>
-          )}
+      {/* Bottom nav — always visible */}
+      <div className="mt-12 flex flex-wrap items-center gap-4 border-t border-[rgba(74,18,89,0.08)] pt-10">
+        {moduleNumber > 1 && (
           <Link
-            to="/prison-break/"
-            className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/40 hover:text-[#E0249C]"
+            to="/prison-break/$module"
+            params={{ module: String(moduleNumber - 1) }}
+            className="inline-flex items-center gap-2 rounded-full border border-[rgba(74,18,89,0.2)] px-6 py-3 font-display text-[13px] tracking-[0.18em] text-[#4A1259]/70 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
           >
-            All Modules
+            ← Layer {moduleNumber - 1}
           </Link>
-        </div>
-      )}
+        )}
+        {(done || isComplete) && nextModule && (
+          <Link
+            to="/prison-break/$module"
+            params={{ module: String(nextModule) }}
+            className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
+            style={{
+              background: "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
+              boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)",
+            }}
+          >
+            Continue Building →
+          </Link>
+        )}
+        {(done || isComplete) && !nextModule && (
+          <Link
+            to="/ten-x-leap/$module"
+            params={{ module: "1" }}
+            className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
+            style={{
+              background: "linear-gradient(135deg, #4A1259 0%, #E0249C 100%)",
+              boxShadow: "0 8px 32px -8px rgba(74,18,89,0.35)",
+            }}
+          >
+            Enter Phase Two →
+          </Link>
+        )}
+      </div>
     </BrandShell>
   );
 }

@@ -276,7 +276,7 @@ function OSDashboard() {
       <div className="border-t border-[rgba(74,18,89,0.1)] pt-10">
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
-            { to: "/leap/installations/", label: "Installations" },
+            { to: "/leap/installations", label: "Installations" },
             { to: "/leap/decision-filter", label: "Decision Filter" },
             { to: "/leap/weekly-audit", label: "Weekly Audit" },
             { to: "/leap/updates", label: "OS Updates" },

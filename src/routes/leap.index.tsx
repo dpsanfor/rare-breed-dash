@@ -185,7 +185,7 @@ function LeapHome() {
         )}
         {!currentInstallation && (
           <Link
-            to="/leap/installations/"
+            to="/leap/installations"
             className="rounded-2xl border border-[#E0249C]/30 bg-[#E0249C]/5 p-7 transition-all hover:-translate-y-0.5 hover:border-[#E0249C]/60"
           >
             <p className="label-soft mb-2">Complete</p>

@@ -8,7 +8,7 @@ import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
 
 export const Route = createFileRoute("/rare-breed-club/")({
   head: () => ({
-    meta: [{ title: "Rare Breed Club™ · Build Suite" }],
+    meta: [{ title: "Delivered × Rare Breed Club · Build Suite" }],
   }),
   component: RareBreedClubIndex,
 });
@@ -21,22 +21,22 @@ const BUILDER_GROUPS = [
   },
   {
     label: "Identity & Positioning",
-    ids: ["dream-client", "messaging", "offer-suite", "curriculum", "framework"],
+    ids: ["dream-client", "offer-suite"],
     phase: "phase3",
   },
   {
-    label: "Market Intelligence",
-    ids: ["gumdrop-test-kitchen"],
+    label: "Your Method & IP",
+    ids: ["framework"],
     phase: "phase3",
   },
   {
-    label: "Content, Launches & Growth",
-    ids: ["sales-page", "email", "content-engine", "launch-planner"],
+    label: "Brand, Sales & Web",
+    ids: ["brand", "sales-page", "website"],
     phase: "phase3",
   },
   {
-    label: "Brand & Identity",
-    ids: ["brand"],
+    label: "Content, Email & Launch",
+    ids: ["content-engine", "launch-planner"],
     phase: "phase3",
   },
   {
@@ -72,10 +72,19 @@ function RareBreedClubIndex() {
   return (
     <BrandShell hideStickyCta>
       <div className="mb-12 mt-8">
-        <p className="eyebrow mb-2">Phase 03 · Rare Breed Club™</p>
-        <h1 className="font-display text-[24px] leading-[1.0] tracking-wide text-shimmer sm:text-[32px] md:text-[40px]">
-          You're finally living inside<br />the business you've been building toward.
+        <p className="eyebrow mb-3">Phase 03 · Build</p>
+        <h1
+          className="font-display text-shimmer leading-[0.92] tracking-wide"
+          style={{ fontSize: "clamp(44px, 9vw, 78px)" }}
+        >
+          Delivered × Rare Breed Club
         </h1>
+        <p
+          className="mt-5 max-w-2xl font-serif font-light italic text-[#4A1259]/80"
+          style={{ fontSize: "clamp(19px, 2.8vw, 26px)" }}
+        >
+          You're finally living inside the business you've been building toward.
+        </p>
         <p className="mt-6 max-w-xl font-serif text-xl font-light italic text-[#4A1259]/80">
           Every Studio reads your Operating Manual before generating anything. Rare Breed OS™ already knows who you are. You never start from scratch again.
         </p>
@@ -110,7 +119,7 @@ function RareBreedClubIndex() {
         <div className="mb-12">
           <div className="mb-1.5 flex items-center justify-between">
             <p className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/55">
-              {completedBuilders} of {phase3.modules.length} builders complete
+              {completedBuilders} of {phase3.modules.length} Studios complete
             </p>
           </div>
           <div className="relative h-[3px] w-full overflow-hidden rounded-full bg-[rgba(74,18,89,0.1)]">
@@ -159,11 +168,11 @@ function RareBreedClubIndex() {
                           {done ? "✓" : "OS"}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-display text-2xl tracking-[0.05em] text-[#1F1623]">
+                          <p className="font-display text-[32px] tracking-[0.05em] text-[#1F1623]">
                             {mod.outputName}
                           </p>
-                          <p className="mt-1 font-serif text-[32px] italic leading-snug text-[#4A1259]/70">
-                            Required input for every builder
+                          <p className="mt-1 font-serif text-2xl italic leading-snug text-[#4A1259]/70">
+                            Required input for every Studio
                           </p>
                         </div>
                         <span
@@ -199,10 +208,10 @@ function RareBreedClubIndex() {
                         {complete ? "✓" : mod.number.toString().padStart(2, "0")}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-display text-2xl tracking-[0.05em] text-[#1F1623]">
+                        <p className="font-display text-[32px] tracking-[0.05em] text-[#1F1623]">
                           {mod.name}
                         </p>
-                        <p className="mt-1 font-serif text-[32px] italic leading-snug text-[#4A1259]/70">
+                        <p className="mt-1 font-serif text-xl italic leading-snug text-[#4A1259]/70">
                           {mod.tagline}
                         </p>
                       </div>

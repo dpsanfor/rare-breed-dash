@@ -34,9 +34,14 @@ export async function syncProfileToSupabase(profile: UserProfile): Promise<void>
   });
 }
 
-export async function getUserAccess(): Promise<{ phase2: boolean; phase3: boolean }> {
+const OWNER_EMAIL = "dana@danahayes.com";
+const IS_LOCAL_DEV = typeof window !== "undefined" && window.location.hostname === "localhost";
+
+export async function getUserAccess(): Promise<{ phase1: boolean; phase2: boolean; phase3: boolean }> {
+  if (IS_LOCAL_DEV) return { phase1: true, phase2: true, phase3: true };
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { phase2: false, phase3: false };
+  if (!user) return { phase1: false, phase2: false, phase3: false };
+  if (user.email === OWNER_EMAIL) return { phase1: true, phase2: true, phase3: true };
 
   const { data } = await db
     .from("user_profiles")
@@ -44,8 +49,19 @@ export async function getUserAccess(): Promise<{ phase2: boolean; phase3: boolea
     .eq("id", user.id)
     .maybeSingle();
 
-  return {
-    phase2: data?.phase2_access ?? false,
-    phase3: data?.phase3_access ?? false,
-  };
+  // GGPB is free — any logged-in user gets phase 1
+  let phase1 = true;
+  let phase2 = data?.phase2_access ?? false;
+  let phase3 = data?.phase3_access ?? false;
+
+  const { data: purchases } = await db.from("purchases").select("product");
+  for (const p of purchases ?? []) {
+    if (p.product === "ten_x_leap") phase2 = true;
+    if (p.product === "rare_breed_club") {
+      phase2 = true;
+      phase3 = true;
+    }
+  }
+
+  return { phase1, phase2, phase3 };
 }

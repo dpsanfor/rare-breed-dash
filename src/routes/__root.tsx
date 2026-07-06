@@ -12,7 +12,7 @@ interface RouterContext {
 export const Route = createRootRouteWithContext<RouterContext>()({
   beforeLoad: ({ location }) => {
     if (location.pathname === '/' || location.pathname === '') {
-      throw redirect({ to: '/dash/' })
+      throw redirect({ to: '/dash' })
     }
   },
   component: RootComponent,

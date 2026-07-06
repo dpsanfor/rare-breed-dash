@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { PHASES } from "@/lib/program-data";
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
 import { BrandShell } from "@/components/brand/BrandShell";
+import { MicButton } from "@/components/MicButton";
+import { readProfile, saveArtifact, saveConversation, markModuleComplete, buildPhase2Context } from "@/lib/profile";
 import {
   type ChatMessage,
   generateConstitution,
@@ -95,6 +97,13 @@ function ConstitutionPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  // The element that comes right after the Constitution in the Leap sequence.
+  const leapModules =
+    PHASES.find((p) => p.id === "ten-x-leap")?.modules ?? [];
+  const constIndex = leapModules.findIndex((m) => m.id === "constitution");
+  const nextLeapModule =
+    constIndex >= 0 ? leapModules[constIndex + 1] : undefined;
+
   const userMessages = messages.filter((m) => m.role === "user").length;
   const canGenerate = userMessages >= 6;
 
@@ -109,26 +118,49 @@ function ConstitutionPage() {
   }, [phase]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("rb_constitution");
+    const p = readProfile();
+    const saved = p.constitution ?? localStorage.getItem("rb_constitution");
     if (saved) setSavedConstitution(saved);
+    // Restore an in-progress interview so answers survive across sessions.
+    const savedConvo = p.conversations?.["constitution"];
+    if (savedConvo && savedConvo.length) {
+      setMessages(savedConvo);
+      setPhase("interview");
+    }
   }, []);
 
   async function startInterview() {
     setPhase("interview");
     setSending(true);
     try {
-      const reply = await sendInterviewMessage({ data: { messages: [] } });
-      setMessages([{ role: "assistant", content: reply }]);
-    } catch {
+      const reply = await sendInterviewMessage({
+        data: { messages: [], context: buildPhase2Context(readProfile()) },
+      });
+      const next: ChatMessage[] = [{ role: "assistant", content: reply }];
+      setMessages(next);
+      saveConversation("constitution", next);
+    } catch (e) {
+      const detail = e instanceof Error ? e.message : String(e);
       setMessages([
         {
           role: "assistant",
           content:
-            "Something went wrong connecting to the interview. Check that your ANTHROPIC_API_KEY is set in Vercel.",
+            "Something went wrong connecting to the interview.\n\nActual error: " +
+            detail,
         },
       ]);
     }
     setSending(false);
+  }
+
+  async function restartInterview() {
+    const raw = localStorage.getItem("rare_breed_profile");
+    const p = raw ? JSON.parse(raw) : {};
+    if (p.conversations) delete p.conversations["constitution"];
+    localStorage.setItem("rare_breed_profile", JSON.stringify(p));
+    setMessages([]);
+    setInput("");
+    startInterview();
   }
 
   async function sendMessage() {
@@ -136,11 +168,19 @@ function ConstitutionPage() {
     const userMsg: ChatMessage = { role: "user", content: input.trim() };
     const updated = [...messages, userMsg];
     setMessages(updated);
+    saveConversation("constitution", updated);
     setInput("");
     setSending(true);
     try {
-      const reply = await sendInterviewMessage({ data: { messages: updated } });
-      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+      const reply = await sendInterviewMessage({ data: { messages: updated, context: buildPhase2Context(readProfile()) } });
+      setMessages((prev) => {
+        const next: ChatMessage[] = [
+          ...prev,
+          { role: "assistant", content: reply },
+        ];
+        saveConversation("constitution", next);
+        return next;
+      });
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -160,6 +200,11 @@ function ConstitutionPage() {
       setConstitutionText(text);
       setSections(parseConstitution(text));
       localStorage.setItem("rb_constitution", text);
+      // Write into the profile so Phase 2 unlocks and every downstream
+      // engine (Magic Gumdrop, Zone of Genius, Operating Manual) reads it.
+      saveArtifact("constitution", text);
+      saveConversation("constitution", messages);
+      markModuleComplete("phase2_constitution");
       setPhase("constitution");
     } catch {
       setConstitutionText(
@@ -171,10 +216,10 @@ function ConstitutionPage() {
 
   async function saveToSupabase() {
     try {
-      await supabase.from("leap_constitution").insert({
-        constitution_text: constitutionText,
-        messages: messages,
-      });
+      // saveArtifact writes to the profile, which auto-syncs to Supabase.
+      saveArtifact("constitution", constitutionText);
+      saveConversation("constitution", messages);
+      markModuleComplete("phase2_constitution");
       setSaved(true);
     } catch {
       setSaved(false);
@@ -311,23 +356,15 @@ function ConstitutionPage() {
               This is your living document. Return to it when clarity breaks
               down.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(201,168,76,0.45)] bg-[rgba(201,168,76,0.08)] px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#c9a84c]">
+                ✦ Saved to your Operating Manual
+              </span>
               <button
                 onClick={copyToClipboard}
                 className="rounded-full border border-[rgba(74,18,89,0.2)] bg-white/60 px-5 py-2.5 font-display text-[12px] tracking-[0.15em] text-[#4A1259]/70 hover:border-[#E0249C]/40 hover:text-[#E0249C]"
               >
                 {copied ? "Copied" : "Copy Text"}
-              </button>
-              <button
-                onClick={saveToSupabase}
-                disabled={saved}
-                className={`rounded-full border px-5 py-2.5 font-display text-[12px] tracking-[0.15em] transition ${
-                  saved
-                    ? "border-[#E0249C]/40 text-[#E0249C]/70"
-                    : "border-[rgba(74,18,89,0.2)] bg-white/60 text-[#4A1259]/70 hover:border-[#E0249C]/40 hover:text-[#E0249C]"
-                }`}
-              >
-                {saved ? "Saved to OS" : "Save to OS"}
               </button>
               <button
                 onClick={() => {
@@ -365,6 +402,34 @@ function ConstitutionPage() {
               need to remember who you are.
             </p>
           </div>
+
+          {/* Conclude the session and advance to the next element */}
+          {nextLeapModule && (
+            <div className="mt-10 text-center">
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.24em] text-[#c9a84c]">
+                ✦ Element Complete
+              </p>
+              <Link
+                to="/ten-x-leap/$module"
+                params={{ module: String(nextLeapModule.number) }}
+                className="inline-flex w-full max-w-md items-center justify-center gap-2 rounded-full px-8 py-5 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+                style={{
+                  fontSize: "clamp(16px, 3vw, 22px)",
+                  background:
+                    "linear-gradient(135deg, #4A1259 0%, #E0249C 55%, #c9a84c 100%)",
+                  boxShadow: "0 16px 50px -12px rgba(224,36,156,0.55)",
+                }}
+              >
+                Continue to {nextLeapModule.name} →
+              </Link>
+              <Link
+                to="/ten-x-leap"
+                className="mt-4 block font-mono text-[11px] uppercase tracking-[0.24em] text-[#4A1259]/40 hover:text-[#4A1259]/70"
+              >
+                ← Back to The 10X Leap
+              </Link>
+            </div>
+          )}
         </div>
       </BrandShell>
     );
@@ -381,6 +446,13 @@ function ConstitutionPage() {
             <p className="mt-1 font-mono text-[11px] text-[#4A1259]/40">
               {userMessages} responses recorded
             </p>
+            <button
+              onClick={restartInterview}
+              disabled={sending}
+              className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#E0249C] transition-colors disabled:opacity-40"
+            >
+              ↻ Start this element over
+            </button>
           </div>
           {canGenerate && (
             <button
@@ -447,6 +519,27 @@ function ConstitutionPage() {
           <div ref={messagesEndRef} />
         </div>
 
+        {/* You're in control of the ending: end + generate whenever ready */}
+        {canGenerate && (
+          <div className="mt-6 rounded-2xl border border-[rgba(201,168,76,0.45)] bg-[rgba(201,168,76,0.07)] p-6 text-center">
+            <p className="mb-4 font-serif text-lg italic leading-relaxed text-[#4A1259]/75">
+              You've gone deep enough to build it. Keep going if there's more, or end the interview and generate your Constitution whenever you're ready.
+            </p>
+            <button
+              onClick={handleGenerate}
+              className="inline-flex w-full max-w-md items-center justify-center gap-2 rounded-full px-8 py-4 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+              style={{
+                fontSize: "clamp(15px, 2.6vw, 19px)",
+                background:
+                  "linear-gradient(135deg, #4A1259 0%, #E0249C 55%, #c9a84c 100%)",
+                boxShadow: "0 12px 40px -10px rgba(224,36,156,0.5)",
+              }}
+            >
+              End Interview + Generate My Constitution →
+            </button>
+          </div>
+        )}
+
         {/* Input */}
         <div className="sticky bottom-8 mt-4">
           <div className="rounded-2xl border border-[rgba(74,18,89,0.15)] bg-[rgba(245,239,224,0.95)] p-1.5 shadow-[0_8px_40px_-12px_rgba(74,18,89,0.15)] backdrop-blur-xl">
@@ -466,15 +559,18 @@ function ConstitutionPage() {
             />
             <div className="flex items-center justify-between px-3 pb-2">
               <p className="font-mono text-[10px] text-[#4A1259]/30">
-                Enter to send · Shift+Enter for new line
+                Enter to send · Shift+Enter for new line · or tap the mic to speak
               </p>
-              <button
-                onClick={sendMessage}
-                disabled={!input.trim() || sending}
-                className="rounded-full border border-[#E0249C]/30 bg-[#E0249C]/10 px-4 py-1.5 font-display text-[11px] tracking-[0.15em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
-              >
-                Send →
-              </button>
+              <div className="flex items-center gap-2">
+                <MicButton value={input} onChange={setInput} className="!h-9 !w-9" />
+                <button
+                  onClick={sendMessage}
+                  disabled={!input.trim() || sending}
+                  className="rounded-full border border-[#E0249C]/30 bg-[#E0249C]/10 px-4 py-1.5 font-display text-[11px] tracking-[0.15em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
+                >
+                  Send →
+                </button>
+              </div>
             </div>
           </div>
 

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { BrandShell, VelvetCard } from "@/components/brand/BrandShell";
-import { Input, Textarea } from "./sexy-unicorn-offer";
+import { Input, Textarea } from "@/components/brand/fields";
 import { WIZARD_STEPS } from "@/lib/lexicon";
 
 export const Route = createFileRoute("/settings")({

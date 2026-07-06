@@ -4,17 +4,17 @@ import { type ReactNode } from "react";
 // Only use routes that exist in routeTree.gen.ts to avoid runtime Link errors.
 // New routes must be registered before adding here.
 const TOP_NAV = [
-  { to: "/prison-break/", label: "Become" },
-  { to: "/ten-x-leap/", label: "Build" },
-  { to: "/rare-breed-club/", label: "Refine" },
+  { to: "/prison-break", label: "Become" },
+  { to: "/ten-x-leap", label: "Build" },
+  { to: "/rare-breed-club", label: "Refine" },
 ];
 
 // Bottom nav uses Dana's three methodology verbs instead of phase names.
 // Logo (top-left) taps to /dash/ — no "Home" item needed.
 const BOTTOM_NAV = [
-  { to: "/prison-break/", label: "Become" },
-  { to: "/ten-x-leap/", label: "Build" },
-  { to: "/rare-breed-club/", label: "Refine" },
+  { to: "/prison-break", label: "Become" },
+  { to: "/ten-x-leap", label: "Build" },
+  { to: "/rare-breed-club", label: "Refine" },
 ];
 
 export function BrandShell({
@@ -51,7 +51,7 @@ export function BrandShell({
         />
         <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
           {/* Logo — 2× larger, "OPERATING SYSTEM™" spelled out */}
-          <Link to="/dash/" className="group flex items-center">
+          <Link to="/dash" className="group flex items-center">
             <div className="flex flex-col leading-none gap-[6px]">
               <span className="font-display text-[30px] tracking-[0.16em] text-shimmer leading-none">
                 RARE BREED
@@ -92,7 +92,7 @@ export function BrandShell({
             {BOTTOM_NAV.map((n) => {
               const active =
                 path === n.to ||
-                (n.to !== "/dash/" && path.startsWith(n.to));
+                (n.to !== "/dash" && path.startsWith(n.to));
               return (
                 <Link
                   key={n.to}

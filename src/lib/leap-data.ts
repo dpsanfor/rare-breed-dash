@@ -318,7 +318,7 @@ export const INSTALLATIONS: Installation[] = [
         prompt:
           "Write the rules of your Rare Breed life. This is your constitution — the document your future self returns to when clarity breaks down.",
         placeholder:
-          "I am a Rare Breed. This is how I operate:\n\n1. I make decisions from vision, not fear.\n2. I build from genius, not capability alone.\n3. I price from value, not apology.",
+          "I am a Delivered. This is how I operate:\n\n1. I make decisions from vision, not fear.\n2. I build from genius, not capability alone.\n3. I price from value, not apology.",
       },
       {
         key: "completion",

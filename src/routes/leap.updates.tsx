@@ -4,7 +4,7 @@ import { OS_UPDATES } from "@/lib/leap-data";
 
 export const Route = createFileRoute("/leap/updates")({
   head: () => ({
-    meta: [{ title: "OS Updates · Rare Breed Club" }],
+    meta: [{ title: "OS Updates · Delivered" }],
   }),
   component: UpdatesPage,
 });
@@ -13,7 +13,7 @@ function UpdatesPage() {
   return (
     <BrandShell hideStickyCta>
       <PageHeader
-        eyebrow="Rare Breed Club · Members Only"
+        eyebrow="Delivered · Members Only"
         title="OS Updates"
         subtitle="Monthly operating system updates. New frameworks, decision filter calibrations, identity upgrades."
       />

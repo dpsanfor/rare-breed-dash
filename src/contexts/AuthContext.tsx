@@ -16,11 +16,14 @@ const AuthContext = createContext<AuthContextType>({
   signOut: async () => {},
 });
 
+const IS_LOCAL_DEV = typeof window !== "undefined" && window.location.hostname === "localhost";
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(IS_LOCAL_DEV ? ({ email: "dana@danahayes.com", id: "local-dev" } as unknown as User) : null);
+  const [loading, setLoading] = useState(!IS_LOCAL_DEV);
 
   useEffect(() => {
+    if (IS_LOCAL_DEV) return;
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       if (session?.user) {

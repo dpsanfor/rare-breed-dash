@@ -9,22 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TestKitchenRouteImport } from './routes/test-kitchen'
-import { Route as SexyUnicornOfferRouteImport } from './routes/sexy-unicorn-offer'
+import { Route as ZoneOfGeniusCodeRouteImport } from './routes/zone-of-genius-code'
+import { Route as VoiceLibraryRouteImport } from './routes/voice-library'
 import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as RainbowRoadsRouteImport } from './routes/rainbow-roads'
+import { Route as RareBreedOperatingManualRouteImport } from './routes/rare-breed-operating-manual'
 import { Route as MetamorphosisRouteImport } from './routes/metamorphosis'
-import { Route as MagicGumdropRouteImport } from './routes/magic-gumdrop'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as BrandUnicornRouteImport } from './routes/brand-unicorn'
-import { Route as IndexRouteImport } from './routes/index'
 import { Route as TenXLeapIndexRouteImport } from './routes/ten-x-leap.index'
 import { Route as RareBreedClubIndexRouteImport } from './routes/rare-breed-club.index'
 import { Route as PrisonBreakIndexRouteImport } from './routes/prison-break.index'
 import { Route as OperatingManualIndexRouteImport } from './routes/operating-manual.index'
 import { Route as LeapIndexRouteImport } from './routes/leap.index'
-import { Route as GumdropTrailsIndexRouteImport } from './routes/gumdrop-trails.index'
 import { Route as DashIndexRouteImport } from './routes/dash.index'
+import { Route as TenXLeapUnlockRouteImport } from './routes/ten-x-leap.unlock'
 import { Route as TenXLeapModuleRouteImport } from './routes/ten-x-leap.$module'
 import { Route as RareBreedClubBuilderRouteImport } from './routes/rare-breed-club.$builder'
 import { Route as PrisonBreakModuleRouteImport } from './routes/prison-break.$module'
@@ -33,18 +30,17 @@ import { Route as LeapUpdatesRouteImport } from './routes/leap.updates'
 import { Route as LeapOsRouteImport } from './routes/leap.os'
 import { Route as LeapDecisionFilterRouteImport } from './routes/leap.decision-filter'
 import { Route as LeapConstitutionRouteImport } from './routes/leap.constitution'
-import { Route as GumdropTrailsIdRouteImport } from './routes/gumdrop-trails.$id'
 import { Route as LeapInstallationsIndexRouteImport } from './routes/leap.installations.index'
 import { Route as LeapInstallationsIdRouteImport } from './routes/leap.installations.$id'
 
-const TestKitchenRoute = TestKitchenRouteImport.update({
-  id: '/test-kitchen',
-  path: '/test-kitchen',
+const ZoneOfGeniusCodeRoute = ZoneOfGeniusCodeRouteImport.update({
+  id: '/zone-of-genius-code',
+  path: '/zone-of-genius-code',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SexyUnicornOfferRoute = SexyUnicornOfferRouteImport.update({
-  id: '/sexy-unicorn-offer',
-  path: '/sexy-unicorn-offer',
+const VoiceLibraryRoute = VoiceLibraryRouteImport.update({
+  id: '/voice-library',
+  path: '/voice-library',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsRoute = SettingsRouteImport.update({
@@ -52,34 +48,20 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RainbowRoadsRoute = RainbowRoadsRouteImport.update({
-  id: '/rainbow-roads',
-  path: '/rainbow-roads',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const RareBreedOperatingManualRoute =
+  RareBreedOperatingManualRouteImport.update({
+    id: '/rare-breed-operating-manual',
+    path: '/rare-breed-operating-manual',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const MetamorphosisRoute = MetamorphosisRouteImport.update({
   id: '/metamorphosis',
   path: '/metamorphosis',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MagicGumdropRoute = MagicGumdropRouteImport.update({
-  id: '/magic-gumdrop',
-  path: '/magic-gumdrop',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BrandUnicornRoute = BrandUnicornRouteImport.update({
-  id: '/brand-unicorn',
-  path: '/brand-unicorn',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TenXLeapIndexRoute = TenXLeapIndexRouteImport.update({
@@ -107,14 +89,14 @@ const LeapIndexRoute = LeapIndexRouteImport.update({
   path: '/leap/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GumdropTrailsIndexRoute = GumdropTrailsIndexRouteImport.update({
-  id: '/gumdrop-trails/',
-  path: '/gumdrop-trails/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DashIndexRoute = DashIndexRouteImport.update({
   id: '/dash/',
   path: '/dash/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TenXLeapUnlockRoute = TenXLeapUnlockRouteImport.update({
+  id: '/ten-x-leap/unlock',
+  path: '/ten-x-leap/unlock',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TenXLeapModuleRoute = TenXLeapModuleRouteImport.update({
@@ -157,11 +139,6 @@ const LeapConstitutionRoute = LeapConstitutionRouteImport.update({
   path: '/leap/constitution',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GumdropTrailsIdRoute = GumdropTrailsIdRouteImport.update({
-  id: '/gumdrop-trails/$id',
-  path: '/gumdrop-trails/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LeapInstallationsIndexRoute = LeapInstallationsIndexRouteImport.update({
   id: '/leap/installations/',
   path: '/leap/installations/',
@@ -174,16 +151,12 @@ const LeapInstallationsIdRoute = LeapInstallationsIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/brand-unicorn': typeof BrandUnicornRoute
   '/login': typeof LoginRoute
-  '/magic-gumdrop': typeof MagicGumdropRoute
   '/metamorphosis': typeof MetamorphosisRoute
-  '/rainbow-roads': typeof RainbowRoadsRoute
+  '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
   '/settings': typeof SettingsRoute
-  '/sexy-unicorn-offer': typeof SexyUnicornOfferRoute
-  '/test-kitchen': typeof TestKitchenRoute
-  '/gumdrop-trails/$id': typeof GumdropTrailsIdRoute
+  '/voice-library': typeof VoiceLibraryRoute
+  '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
   '/leap/constitution': typeof LeapConstitutionRoute
   '/leap/decision-filter': typeof LeapDecisionFilterRoute
   '/leap/os': typeof LeapOsRoute
@@ -192,8 +165,8 @@ export interface FileRoutesByFullPath {
   '/prison-break/$module': typeof PrisonBreakModuleRoute
   '/rare-breed-club/$builder': typeof RareBreedClubBuilderRoute
   '/ten-x-leap/$module': typeof TenXLeapModuleRoute
+  '/ten-x-leap/unlock': typeof TenXLeapUnlockRoute
   '/dash/': typeof DashIndexRoute
-  '/gumdrop-trails/': typeof GumdropTrailsIndexRoute
   '/leap/': typeof LeapIndexRoute
   '/operating-manual/': typeof OperatingManualIndexRoute
   '/prison-break/': typeof PrisonBreakIndexRoute
@@ -203,16 +176,12 @@ export interface FileRoutesByFullPath {
   '/leap/installations/': typeof LeapInstallationsIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/brand-unicorn': typeof BrandUnicornRoute
   '/login': typeof LoginRoute
-  '/magic-gumdrop': typeof MagicGumdropRoute
   '/metamorphosis': typeof MetamorphosisRoute
-  '/rainbow-roads': typeof RainbowRoadsRoute
+  '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
   '/settings': typeof SettingsRoute
-  '/sexy-unicorn-offer': typeof SexyUnicornOfferRoute
-  '/test-kitchen': typeof TestKitchenRoute
-  '/gumdrop-trails/$id': typeof GumdropTrailsIdRoute
+  '/voice-library': typeof VoiceLibraryRoute
+  '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
   '/leap/constitution': typeof LeapConstitutionRoute
   '/leap/decision-filter': typeof LeapDecisionFilterRoute
   '/leap/os': typeof LeapOsRoute
@@ -221,8 +190,8 @@ export interface FileRoutesByTo {
   '/prison-break/$module': typeof PrisonBreakModuleRoute
   '/rare-breed-club/$builder': typeof RareBreedClubBuilderRoute
   '/ten-x-leap/$module': typeof TenXLeapModuleRoute
+  '/ten-x-leap/unlock': typeof TenXLeapUnlockRoute
   '/dash': typeof DashIndexRoute
-  '/gumdrop-trails': typeof GumdropTrailsIndexRoute
   '/leap': typeof LeapIndexRoute
   '/operating-manual': typeof OperatingManualIndexRoute
   '/prison-break': typeof PrisonBreakIndexRoute
@@ -233,16 +202,12 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/brand-unicorn': typeof BrandUnicornRoute
   '/login': typeof LoginRoute
-  '/magic-gumdrop': typeof MagicGumdropRoute
   '/metamorphosis': typeof MetamorphosisRoute
-  '/rainbow-roads': typeof RainbowRoadsRoute
+  '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
   '/settings': typeof SettingsRoute
-  '/sexy-unicorn-offer': typeof SexyUnicornOfferRoute
-  '/test-kitchen': typeof TestKitchenRoute
-  '/gumdrop-trails/$id': typeof GumdropTrailsIdRoute
+  '/voice-library': typeof VoiceLibraryRoute
+  '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
   '/leap/constitution': typeof LeapConstitutionRoute
   '/leap/decision-filter': typeof LeapDecisionFilterRoute
   '/leap/os': typeof LeapOsRoute
@@ -251,8 +216,8 @@ export interface FileRoutesById {
   '/prison-break/$module': typeof PrisonBreakModuleRoute
   '/rare-breed-club/$builder': typeof RareBreedClubBuilderRoute
   '/ten-x-leap/$module': typeof TenXLeapModuleRoute
+  '/ten-x-leap/unlock': typeof TenXLeapUnlockRoute
   '/dash/': typeof DashIndexRoute
-  '/gumdrop-trails/': typeof GumdropTrailsIndexRoute
   '/leap/': typeof LeapIndexRoute
   '/operating-manual/': typeof OperatingManualIndexRoute
   '/prison-break/': typeof PrisonBreakIndexRoute
@@ -264,16 +229,12 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/brand-unicorn'
     | '/login'
-    | '/magic-gumdrop'
     | '/metamorphosis'
-    | '/rainbow-roads'
+    | '/rare-breed-operating-manual'
     | '/settings'
-    | '/sexy-unicorn-offer'
-    | '/test-kitchen'
-    | '/gumdrop-trails/$id'
+    | '/voice-library'
+    | '/zone-of-genius-code'
     | '/leap/constitution'
     | '/leap/decision-filter'
     | '/leap/os'
@@ -282,8 +243,8 @@ export interface FileRouteTypes {
     | '/prison-break/$module'
     | '/rare-breed-club/$builder'
     | '/ten-x-leap/$module'
+    | '/ten-x-leap/unlock'
     | '/dash/'
-    | '/gumdrop-trails/'
     | '/leap/'
     | '/operating-manual/'
     | '/prison-break/'
@@ -293,16 +254,12 @@ export interface FileRouteTypes {
     | '/leap/installations/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/brand-unicorn'
     | '/login'
-    | '/magic-gumdrop'
     | '/metamorphosis'
-    | '/rainbow-roads'
+    | '/rare-breed-operating-manual'
     | '/settings'
-    | '/sexy-unicorn-offer'
-    | '/test-kitchen'
-    | '/gumdrop-trails/$id'
+    | '/voice-library'
+    | '/zone-of-genius-code'
     | '/leap/constitution'
     | '/leap/decision-filter'
     | '/leap/os'
@@ -311,8 +268,8 @@ export interface FileRouteTypes {
     | '/prison-break/$module'
     | '/rare-breed-club/$builder'
     | '/ten-x-leap/$module'
+    | '/ten-x-leap/unlock'
     | '/dash'
-    | '/gumdrop-trails'
     | '/leap'
     | '/operating-manual'
     | '/prison-break'
@@ -322,16 +279,12 @@ export interface FileRouteTypes {
     | '/leap/installations'
   id:
     | '__root__'
-    | '/'
-    | '/brand-unicorn'
     | '/login'
-    | '/magic-gumdrop'
     | '/metamorphosis'
-    | '/rainbow-roads'
+    | '/rare-breed-operating-manual'
     | '/settings'
-    | '/sexy-unicorn-offer'
-    | '/test-kitchen'
-    | '/gumdrop-trails/$id'
+    | '/voice-library'
+    | '/zone-of-genius-code'
     | '/leap/constitution'
     | '/leap/decision-filter'
     | '/leap/os'
@@ -340,8 +293,8 @@ export interface FileRouteTypes {
     | '/prison-break/$module'
     | '/rare-breed-club/$builder'
     | '/ten-x-leap/$module'
+    | '/ten-x-leap/unlock'
     | '/dash/'
-    | '/gumdrop-trails/'
     | '/leap/'
     | '/operating-manual/'
     | '/prison-break/'
@@ -352,16 +305,12 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BrandUnicornRoute: typeof BrandUnicornRoute
   LoginRoute: typeof LoginRoute
-  MagicGumdropRoute: typeof MagicGumdropRoute
   MetamorphosisRoute: typeof MetamorphosisRoute
-  RainbowRoadsRoute: typeof RainbowRoadsRoute
+  RareBreedOperatingManualRoute: typeof RareBreedOperatingManualRoute
   SettingsRoute: typeof SettingsRoute
-  SexyUnicornOfferRoute: typeof SexyUnicornOfferRoute
-  TestKitchenRoute: typeof TestKitchenRoute
-  GumdropTrailsIdRoute: typeof GumdropTrailsIdRoute
+  VoiceLibraryRoute: typeof VoiceLibraryRoute
+  ZoneOfGeniusCodeRoute: typeof ZoneOfGeniusCodeRoute
   LeapConstitutionRoute: typeof LeapConstitutionRoute
   LeapDecisionFilterRoute: typeof LeapDecisionFilterRoute
   LeapOsRoute: typeof LeapOsRoute
@@ -370,8 +319,8 @@ export interface RootRouteChildren {
   PrisonBreakModuleRoute: typeof PrisonBreakModuleRoute
   RareBreedClubBuilderRoute: typeof RareBreedClubBuilderRoute
   TenXLeapModuleRoute: typeof TenXLeapModuleRoute
+  TenXLeapUnlockRoute: typeof TenXLeapUnlockRoute
   DashIndexRoute: typeof DashIndexRoute
-  GumdropTrailsIndexRoute: typeof GumdropTrailsIndexRoute
   LeapIndexRoute: typeof LeapIndexRoute
   OperatingManualIndexRoute: typeof OperatingManualIndexRoute
   PrisonBreakIndexRoute: typeof PrisonBreakIndexRoute
@@ -383,18 +332,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/test-kitchen': {
-      id: '/test-kitchen'
-      path: '/test-kitchen'
-      fullPath: '/test-kitchen'
-      preLoaderRoute: typeof TestKitchenRouteImport
+    '/zone-of-genius-code': {
+      id: '/zone-of-genius-code'
+      path: '/zone-of-genius-code'
+      fullPath: '/zone-of-genius-code'
+      preLoaderRoute: typeof ZoneOfGeniusCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sexy-unicorn-offer': {
-      id: '/sexy-unicorn-offer'
-      path: '/sexy-unicorn-offer'
-      fullPath: '/sexy-unicorn-offer'
-      preLoaderRoute: typeof SexyUnicornOfferRouteImport
+    '/voice-library': {
+      id: '/voice-library'
+      path: '/voice-library'
+      fullPath: '/voice-library'
+      preLoaderRoute: typeof VoiceLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings': {
@@ -404,11 +353,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/rainbow-roads': {
-      id: '/rainbow-roads'
-      path: '/rainbow-roads'
-      fullPath: '/rainbow-roads'
-      preLoaderRoute: typeof RainbowRoadsRouteImport
+    '/rare-breed-operating-manual': {
+      id: '/rare-breed-operating-manual'
+      path: '/rare-breed-operating-manual'
+      fullPath: '/rare-breed-operating-manual'
+      preLoaderRoute: typeof RareBreedOperatingManualRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/metamorphosis': {
@@ -418,32 +367,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MetamorphosisRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/magic-gumdrop': {
-      id: '/magic-gumdrop'
-      path: '/magic-gumdrop'
-      fullPath: '/magic-gumdrop'
-      preLoaderRoute: typeof MagicGumdropRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/brand-unicorn': {
-      id: '/brand-unicorn'
-      path: '/brand-unicorn'
-      fullPath: '/brand-unicorn'
-      preLoaderRoute: typeof BrandUnicornRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ten-x-leap/': {
@@ -481,18 +409,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeapIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/gumdrop-trails/': {
-      id: '/gumdrop-trails/'
-      path: '/gumdrop-trails'
-      fullPath: '/gumdrop-trails/'
-      preLoaderRoute: typeof GumdropTrailsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dash/': {
       id: '/dash/'
       path: '/dash'
       fullPath: '/dash/'
       preLoaderRoute: typeof DashIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ten-x-leap/unlock': {
+      id: '/ten-x-leap/unlock'
+      path: '/ten-x-leap/unlock'
+      fullPath: '/ten-x-leap/unlock'
+      preLoaderRoute: typeof TenXLeapUnlockRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ten-x-leap/$module': {
@@ -551,13 +479,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LeapConstitutionRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/gumdrop-trails/$id': {
-      id: '/gumdrop-trails/$id'
-      path: '/gumdrop-trails/$id'
-      fullPath: '/gumdrop-trails/$id'
-      preLoaderRoute: typeof GumdropTrailsIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/leap/installations/': {
       id: '/leap/installations/'
       path: '/leap/installations'
@@ -576,16 +497,12 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  BrandUnicornRoute: BrandUnicornRoute,
   LoginRoute: LoginRoute,
-  MagicGumdropRoute: MagicGumdropRoute,
   MetamorphosisRoute: MetamorphosisRoute,
-  RainbowRoadsRoute: RainbowRoadsRoute,
+  RareBreedOperatingManualRoute: RareBreedOperatingManualRoute,
   SettingsRoute: SettingsRoute,
-  SexyUnicornOfferRoute: SexyUnicornOfferRoute,
-  TestKitchenRoute: TestKitchenRoute,
-  GumdropTrailsIdRoute: GumdropTrailsIdRoute,
+  VoiceLibraryRoute: VoiceLibraryRoute,
+  ZoneOfGeniusCodeRoute: ZoneOfGeniusCodeRoute,
   LeapConstitutionRoute: LeapConstitutionRoute,
   LeapDecisionFilterRoute: LeapDecisionFilterRoute,
   LeapOsRoute: LeapOsRoute,
@@ -594,8 +511,8 @@ const rootRouteChildren: RootRouteChildren = {
   PrisonBreakModuleRoute: PrisonBreakModuleRoute,
   RareBreedClubBuilderRoute: RareBreedClubBuilderRoute,
   TenXLeapModuleRoute: TenXLeapModuleRoute,
+  TenXLeapUnlockRoute: TenXLeapUnlockRoute,
   DashIndexRoute: DashIndexRoute,
-  GumdropTrailsIndexRoute: GumdropTrailsIndexRoute,
   LeapIndexRoute: LeapIndexRoute,
   OperatingManualIndexRoute: OperatingManualIndexRoute,
   PrisonBreakIndexRoute: PrisonBreakIndexRoute,

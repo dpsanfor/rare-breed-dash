@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { BrandShell, PageHeader, VelvetCard } from "@/components/brand/BrandShell";
-import { Textarea } from "./sexy-unicorn-offer";
+import { Textarea } from "@/components/brand/fields";
 
 export const Route = createFileRoute("/metamorphosis")({
   component: MetamorphosisPage,

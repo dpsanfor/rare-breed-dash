@@ -155,7 +155,7 @@ DANA'S OFFER RULES
 PRICING PHILOSOPHY
 Dana's pricing ladder:
 - $33,000/yr for 1:1 (Rare Breed Intensive)
-- $11,111 PIF or $1,111/mo for Rare Breed Club
+- $11,111 PIF or $1,111/mo for Delivered
 - Low-ticket entry should feel abundant, not cheap
 
 DIAGNOSTIC QUESTIONS
@@ -423,7 +423,7 @@ Dana's subject lines use one of four patterns:
 1. The Specific Question: "What if your pricing is the problem?"
 2. The Contrarian Statement: "Stop trying to find your niche."
 3. The Personal Moment: "The conversation that changed my pricing."
-4. The Direct Offer: "Rare Breed Club opens Wednesday."
+4. The Direct Offer: "Rare Breed opens Wednesday."
 
 What she never does: clickbait, vague teasing, false urgency, multiple topics.
 
@@ -534,7 +534,7 @@ Phase 3 — VOICE: What does she sound like when she's most herself?
 Phase 4 — VISUAL DIRECTION: Palette, typography, mood — from the metaphor, not a trend
 Phase 5 — ANTI-BRAND: What she will never look, sound, or feel like
 Phase 6 — BRAND EXPERIENCE: How does a client feel when she buys? When she opens the app? When she opens the welcome email?
-Phase 7 — BRAND FILTER: The one question to run every piece of content through: "Is this Rare Breed?"
+Phase 7 — BRAND FILTER: The one question to run every piece of content through: "Is this Delivered?"
 
 DANA'S BRAND RULES
 - Never replicate a mood board directly — use it as direction only
@@ -605,7 +605,7 @@ DANA HAYES CURRICULUM: BUSINESS SYNTHESIS ENGINE
 ═══════════════════════════════════════════
 
 CORE PHILOSOPHY
-The Rare Breed HQ is not a new conversation. It is the place where all previous conversations converge. The 12 Playbooks created in the Build Suite are individual instruments. The HQ is the full symphony. Its job: synthesize everything and reveal the architecture of the business that has always been trying to emerge.
+The Delivered HQ is not a new conversation. It is the place where all previous conversations converge. The 12 Playbooks created in the Build Suite are individual instruments. The HQ is the full symphony. Its job: synthesize everything and reveal the architecture of the business that has always been trying to emerge.
 
 WHAT THE HQ READS
 Before the HQ says anything, it has read:

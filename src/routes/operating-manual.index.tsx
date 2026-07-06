@@ -12,7 +12,7 @@ export const Route = createFileRoute("/operating-manual/")({
 
 // Friendly display names for each section key
 const SECTION_LABELS: Partial<Record<keyof UserProfile, string>> = {
-  bigger_vision: "Bigger Vision™",
+  bigger_vision: "10X Vision™",
   current_identity: "Current Identity™",
   zone_of_genius: "Zone of Genius™",
   magic_gumdrop: "Magic Gumdrop™",

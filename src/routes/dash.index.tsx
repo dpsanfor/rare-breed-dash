@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
 import { PHASES } from "@/lib/program-data";
 import { readProfile, type UserProfile } from "@/lib/profile";
+import { getUserAccess } from "@/lib/supabase-profile";
 
 export const Route = createFileRoute("/dash/")({
   head: () => ({
@@ -112,12 +113,12 @@ function PhaseCard({
       {/* Phase name */}
       <p
         className="font-display leading-[0.88] tracking-[0.02em] mb-6"
-        style={{ fontSize: "clamp(26px, 6vw, 34px)", color: "#1F1623" }}
+        style={{ fontSize: "clamp(32px, 7.5vw, 46px)", color: "#1F1623" }}
       >
         {name}
       </p>
 
-      {/* Descriptor — large serif italic */}
+      {/* Descriptor */}
       <p
         className="font-serif italic leading-[1.25] mb-5"
         style={{
@@ -128,7 +129,7 @@ function PhaseCard({
         {descriptor}
       </p>
 
-      {/* Result — serif italic, secondary */}
+      {/* Result */}
       <p
         className="font-serif italic leading-[1.3] flex-1 mb-6"
         style={{
@@ -176,9 +177,25 @@ function PhaseCard({
       )}
 
       {isComplete && (
-        <p className="font-mono text-[11px] uppercase tracking-[0.18em] mt-auto" style={{ color: "rgba(201,168,76,0.7)" }}>
-          ✦ {total}/{total} installed
-        </p>
+        <div className="mt-auto">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4" style={{ color: "rgba(201,168,76,0.7)" }}>
+            ✦ {total}/{total} installed
+          </p>
+          {continueTo && (
+            <Link
+              to={continueTo as any}
+              params={continueParams as any}
+              className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+              style={{
+                color: "#1F1623",
+                border: "1.5px solid rgba(201,168,76,0.5)",
+                background: "rgba(201,168,76,0.08)",
+              }}
+            >
+              Revisit →
+            </Link>
+          )}
+        </div>
       )}
     </div>
   );
@@ -224,8 +241,6 @@ function FeaturedCard({
           background: "radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.18) 0%, transparent 55%), radial-gradient(ellipse at 85% 10%, rgba(217,70,239,0.35) 0%, transparent 45%), radial-gradient(ellipse at 15% 90%, rgba(192,132,252,0.3) 0%, transparent 45%)",
         }}
       />
-
-      {/* Left side glow */}
       <div
         className="pointer-events-none absolute inset-y-0 left-0 w-[50px] rounded-l-2xl"
         style={{
@@ -241,8 +256,6 @@ function FeaturedCard({
           animation: "rb-side-shimmer 3.2s ease-in-out infinite",
         }}
       />
-
-      {/* Right side glow */}
       <div
         className="pointer-events-none absolute inset-y-0 right-0 w-[50px] rounded-r-2xl"
         style={{
@@ -258,57 +271,27 @@ function FeaturedCard({
           animation: "rb-side-shimmer 3.2s ease-in-out infinite 1.6s",
         }}
       />
-
-      {/* Sparkle stars — left edge */}
       {[
         { top: "14%", delay: "0s", size: "11px" },
         { top: "38%", delay: "0.7s", size: "8px" },
         { top: "62%", delay: "1.3s", size: "10px" },
         { top: "84%", delay: "0.4s", size: "7px" },
       ].map((s, i) => (
-        <span
-          key={`sl-${i}`}
-          className="pointer-events-none absolute select-none"
-          style={{
-            top: s.top,
-            left: "6px",
-            fontSize: s.size,
-            color: i % 2 === 0 ? "#E0249C" : "#c9a84c",
-            animation: `rb-twinkle 2.2s ease-in-out infinite ${s.delay}`,
-            lineHeight: 1,
-          }}
-        >
-          ✦
-        </span>
+        <span key={`sl-${i}`} className="pointer-events-none absolute select-none" style={{ top: s.top, left: "6px", fontSize: s.size, color: i % 2 === 0 ? "#E0249C" : "#c9a84c", animation: `rb-twinkle 2.2s ease-in-out infinite ${s.delay}`, lineHeight: 1 }}>✦</span>
       ))}
-
-      {/* Sparkle stars — right edge */}
       {[
         { top: "22%", delay: "1.1s", size: "9px" },
         { top: "46%", delay: "0.3s", size: "11px" },
         { top: "70%", delay: "1.6s", size: "8px" },
         { top: "90%", delay: "0.8s", size: "10px" },
       ].map((s, i) => (
-        <span
-          key={`sr-${i}`}
-          className="pointer-events-none absolute select-none"
-          style={{
-            top: s.top,
-            right: "6px",
-            fontSize: s.size,
-            color: i % 2 === 0 ? "#c9a84c" : "#D946EF",
-            animation: `rb-twinkle 2.2s ease-in-out infinite ${s.delay}`,
-            lineHeight: 1,
-          }}
-        >
-          ✦
-        </span>
+        <span key={`sr-${i}`} className="pointer-events-none absolute select-none" style={{ top: s.top, right: "6px", fontSize: s.size, color: i % 2 === 0 ? "#c9a84c" : "#D946EF", animation: `rb-twinkle 2.2s ease-in-out infinite ${s.delay}`, lineHeight: 1 }}>✦</span>
       ))}
 
       {/* Phase label + badge */}
       <div className="flex items-center justify-between mb-5 relative">
         <p className="font-mono text-[11px] uppercase tracking-[0.28em] font-semibold" style={{ color: "rgba(31,22,35,0.6)" }}>
-          Phase 03 · Embody
+          Phase 03 · Build
         </p>
         {isComplete ? (
           <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "#c9a84c" }}>
@@ -332,12 +315,12 @@ function FeaturedCard({
       {/* Phase name — shimmer */}
       <p
         className="font-display text-shimmer leading-[0.88] tracking-[0.02em] mb-6 relative"
-        style={{ fontSize: "clamp(26px, 6vw, 34px)" }}
+        style={{ fontSize: "clamp(32px, 7.5vw, 46px)" }}
       >
-        Rare Breed Club™
+        Delivered × Rare Breed Club
       </p>
 
-      {/* Descriptor — large serif italic */}
+      {/* Descriptor */}
       <p
         className="font-serif italic leading-[1.25] mb-5 relative"
         style={{
@@ -348,7 +331,7 @@ function FeaturedCard({
         {descriptor}
       </p>
 
-      {/* Result — serif bold italic */}
+      {/* Result */}
       <p
         className="font-serif font-bold italic leading-[1.3] flex-1 mb-6 relative"
         style={{
@@ -392,10 +375,104 @@ function FeaturedCard({
           </Link>
         )}
         {isComplete && (
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: "#c9a84c" }}>
-            ✦ {total}/{total} installed
-          </p>
+          <>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4" style={{ color: "#c9a84c" }}>
+              ✦ {total}/{total} installed
+            </p>
+            {continueTo && (
+              <Link
+                to={continueTo as any}
+                params={continueParams as any}
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3.5 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5 active:scale-[0.98]"
+                style={{
+                  color: "#1F1623",
+                  border: "1.5px solid rgba(201,168,76,0.5)",
+                  background: "rgba(201,168,76,0.1)",
+                }}
+              >
+                Revisit →
+              </Link>
+            )}
+          </>
         )}
+      </div>
+    </div>
+  );
+}
+
+// ── LOCKED PHASE CARD (no access purchased yet) ──────────────────────────────
+function LockedPhaseCard({
+  phaseNum,
+  name,
+  tagline,
+  accent,
+  learnMoreHref,
+  enterTo,
+}: {
+  phaseNum: string;
+  name: string;
+  tagline: string;
+  accent: { color: string; bg: string; border: string; shadow: string };
+  learnMoreHref: string;
+  enterTo: string;
+}) {
+  return (
+    <div
+      className="flex flex-col rounded-2xl p-6 h-full"
+      style={{
+        minHeight: "640px",
+        background: accent.bg,
+        border: `1.5px solid ${accent.border}`,
+        opacity: 0.82,
+      }}
+    >
+      <div className="flex items-center justify-between mb-5">
+        <p
+          className="font-mono text-[11px] uppercase tracking-[0.28em] font-semibold"
+          style={{ color: accent.color }}
+        >
+          Phase {phaseNum}
+        </p>
+        <p className="font-mono text-[9px] uppercase tracking-[0.2em] rounded-full px-2 py-0.5" style={{ color: accent.color, border: `1px solid ${accent.border}` }}>
+          Not enrolled
+        </p>
+      </div>
+
+      <p
+        className="font-display leading-[0.88] tracking-[0.02em] mb-6"
+        style={{ fontSize: "clamp(32px, 7.5vw, 46px)", color: "#1F1623" }}
+      >
+        {name}
+      </p>
+
+      <p className="font-serif italic leading-[1.3] flex-1 mb-8 text-[#4A1259]/70" style={{ fontSize: "clamp(16px, 3.75vw, 20px)" }}>
+        {tagline}
+      </p>
+
+      <div className="mt-auto flex flex-col gap-3">
+        <a
+          href={learnMoreHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5"
+          style={{
+            background: `linear-gradient(135deg, ${accent.color} 0%, #c9a84c 100%)`,
+            boxShadow: accent.shadow,
+          }}
+        >
+          Learn More →
+        </a>
+        <Link
+          to={enterTo as any}
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5"
+          style={{
+            color: accent.color,
+            border: `1.5px solid ${accent.border}`,
+            background: "rgba(255,255,255,0.5)",
+          }}
+        >
+          Log In →
+        </Link>
       </div>
     </div>
   );
@@ -404,10 +481,12 @@ function FeaturedCard({
 function DashHome() {
   const [profile, setProfile] = useState<UserProfile>({});
   const [mounted, setMounted] = useState(false);
+  const [access, setAccess] = useState<{ phase1: boolean; phase2: boolean; phase3: boolean } | null>(null);
 
   useEffect(() => {
     setProfile(readProfile());
     setMounted(true);
+    getUserAccess().then(setAccess);
   }, []);
 
   const p1Ids = P1.map((m) => m.id);
@@ -454,7 +533,7 @@ function DashHome() {
       <div className="mb-8">
         <div className="grid grid-cols-3 gap-3 items-stretch">
           <PhaseCard
-            phaseNum="01 · Liberate"
+            phaseNum="01 · Discover"
             name="Good Girl Prison Break™"
             descriptor="Reveal the outdated operating system you've been living from—and get complete clarity on what deserves to be left behind and what deserves to be built."
             result="You leave knowing exactly what isn't yours, what you've outgrown, and which 20% of your work has been waiting to lead. Not a business plan. The clarity that makes every future business decision obvious."
@@ -462,32 +541,65 @@ function DashHome() {
             completed={p1Count}
             total={P1.length}
             accent={PHASE_ACCENTS.p1}
-            continueTo="/prison-break/"
+            continueTo="/prison-break"
             continueParams={undefined}
           />
-          <PhaseCard
-            phaseNum="02 · Create"
-            name="The 10X Leap™"
-            descriptor="Create the life and business that naturally emerge from your Zone of Genius. Every exercise becomes structured intelligence stored in your Rare Breed Operating Manual™."
-            result="You are not building assets. You are building the intelligence your future business will run from. When your Operating Manual is complete, Rare Breed OS™ brings the rest to life."
-            status={p2Status}
-            completed={p2Count}
-            total={P2.length}
-            accent={PHASE_ACCENTS.p2}
-            continueTo="/ten-x-leap/"
-            continueParams={undefined}
-          />
+          {access?.phase2 ? (
+            <PhaseCard
+              phaseNum="02 · Design"
+              name="The 10X Leap™"
+              descriptor="Create the life and business that naturally emerge from your Zone of Genius. Every exercise becomes structured intelligence stored in your Rare Breed Operating Manual™."
+              result="You are not building assets. You are building the intelligence your future business will run from. When your Operating Manual is complete, Rare Breed OS™ brings the rest to life."
+              status={p2Status}
+              completed={p2Count}
+              total={P2.length}
+              accent={PHASE_ACCENTS.p2}
+              continueTo="/ten-x-leap"
+              continueParams={undefined}
+            />
+          ) : (
+            <LockedPhaseCard
+              phaseNum="02 · Design"
+              name="10X Leap™"
+              tagline="Design your complete business around your Zone of Genius."
+              accent={PHASE_ACCENTS.p2}
+              learnMoreHref="https://danahayes.com/ten-x-leap"
+              enterTo="/ten-x-leap"
+            />
+          )}
           <FeaturedCard
             descriptor="Install your Rare Breed Operating Manual™ into Rare Breed OS™. Every Studio already knows who you are—and uses that intelligence to generate your messaging, offers, content, emails, launches, curriculum, brand, and business systems."
             result="Everything generated from your Operating Manual. Not from generic AI. Not from someone else's template. From your unique genius. Watch your business come to life."
             status={p3Status}
             completed={p3Count}
             total={P3.length}
-            continueTo="/rare-breed-club/"
+            continueTo="/rare-breed-club"
             continueParams={undefined}
           />
         </div>
       </div>
+
+      {/* Voice Library — always accessible, add to it anytime */}
+      <Link
+        to={"/voice-library" as any}
+        className="mb-8 flex items-center justify-between gap-4 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
+        style={{
+          borderColor: "rgba(224,36,156,0.25)",
+          background: "linear-gradient(135deg, rgba(224,36,156,0.05) 0%, rgba(201,168,76,0.05) 100%)",
+        }}
+      >
+        <div>
+          <p className="font-display text-xl tracking-[0.03em] text-[#1F1623]">
+            Your Voice Library
+          </p>
+          <p className="mt-1 font-serif text-sm italic text-[#4A1259]/60">
+            Add your real writing, transcripts, and testimonial screenshots anytime. The more you add, the more everything sounds like you.
+          </p>
+        </div>
+        <span className="flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">
+          Open →
+        </span>
+      </Link>
 
     </BrandShell>
   );

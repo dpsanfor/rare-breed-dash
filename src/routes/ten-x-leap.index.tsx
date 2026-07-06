@@ -38,12 +38,21 @@ function TenXLeapIndex() {
   return (
     <BrandShell hideStickyCta>
       <div className="mb-12 mt-8">
-        <p className="eyebrow mb-2">Phase 02 · The 10X Leap™</p>
-        <h1 className="font-display text-[24px] leading-[1.0] tracking-wide text-shimmer sm:text-[32px] md:text-[40px]">
-          Create the life and business<br />your Zone of Genius has been waiting for.
+        <p className="eyebrow mb-3">Phase 02 · Design</p>
+        <h1
+          className="font-display text-shimmer leading-[0.92] tracking-wide"
+          style={{ fontSize: "clamp(44px, 9vw, 78px)" }}
+        >
+          The 10X Leap™
         </h1>
+        <p
+          className="mt-5 max-w-2xl font-serif font-light italic text-[#4A1259]/80"
+          style={{ fontSize: "clamp(19px, 2.8vw, 26px)" }}
+        >
+          Create the life and business your Zone of Genius has been waiting for.
+        </p>
         <p className="mt-6 max-w-xl font-serif text-xl font-light italic text-[#4A1259]/80">
-          {completedCount} of {phase.modules.length} modules complete.
+          {completedCount} of {phase.modules.length} elements designed.
         </p>
       </div>
 
@@ -70,10 +79,27 @@ function TenXLeapIndex() {
               boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)",
             }}
           >
-            Continue Installation →
+            Continue Designing →
           </Link>
         </div>
       )}
+
+      {/* What this section is */}
+      <div className="mb-8 border-t border-[rgba(74,18,89,0.12)] pt-10">
+        <p className="eyebrow mb-3">The Elements</p>
+        <h2
+          className="font-display tracking-wide text-[#1F1623]"
+          style={{ fontSize: "clamp(28px, 5vw, 42px)" }}
+        >
+          Design the Eleven Elements of Your Rare Breed Operating Manual™
+        </h2>
+        <p
+          className="mt-3 max-w-2xl font-serif italic text-[#4A1259]/75"
+          style={{ fontSize: "clamp(17px, 2.4vw, 21px)" }}
+        >
+          Each element designs one part of your business from your Zone of Genius Code. Together they become your Rare Breed Operating Manual™: the complete operating system every Studio in Delivered reads before it builds a thing. You design it once here, and you never start from a blank page again.
+        </p>
+      </div>
 
       <div className="space-y-3">
         {phase.modules.map((mod) => {
@@ -113,10 +139,10 @@ function TenXLeapIndex() {
                 {complete ? "✓" : mod.number.toString().padStart(2, "0")}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-display text-2xl tracking-[0.05em] text-[#1F1623]">
+                <p className="font-display text-[32px] tracking-[0.05em] text-[#1F1623]">
                   {mod.name}
                 </p>
-                <p className="mt-1 font-serif text-[32px] italic leading-snug text-[#4A1259]/75">
+                <p className="mt-1 font-serif text-2xl italic leading-snug text-[#4A1259]/75">
                   {mod.tagline}
                 </p>
               </div>
@@ -131,7 +157,7 @@ function TenXLeapIndex() {
                         : "rgba(74,18,89,0.4)",
                   }}
                 >
-                  {complete ? "Installed" : isNext ? "Active" : "Queued"}
+                  {complete ? "Designed" : isNext ? "Active" : "Queued"}
                 </span>
               </div>
             </Link>
@@ -148,10 +174,10 @@ function TenXLeapIndex() {
           }}
         >
           <p className="font-mono uppercase tracking-[0.3em] text-[#E0249C] mb-4" style={{ fontSize: "12px" }}>
-            Your Operating Manual is Ready
+            Your Rare Breed Operating Manual™ Is Ready
           </p>
           <p className="font-display text-shimmer leading-[1.0] tracking-wide mb-6" style={{ fontSize: "clamp(28px, 6vw, 42px)" }}>
-            You've Built the Blueprint.
+            You've Built Your New Operating System.
             <br />
             Now It's Time to Bring It to Life.
           </p>
@@ -162,7 +188,7 @@ function TenXLeapIndex() {
             Instead of spending months figuring out what to sell, say, and build, you'll begin with a business generated from who you are — then continuously refine it as you grow.
           </p>
           <Link
-            to="/rare-breed-club/"
+            to={(completedCount === phase.modules.length ? "/rare-breed-operating-manual" : "/rare-breed-club") as any}
             className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display tracking-[0.18em] text-white"
             style={{
               fontSize: "clamp(14px, 3vw, 18px)",
@@ -170,7 +196,7 @@ function TenXLeapIndex() {
               boxShadow: "0 12px 40px -8px rgba(217,70,239,0.5)",
             }}
           >
-            {completedCount === phase.modules.length ? "Activate My Operating Manual™ →" : "Preview Rare Breed Club™ →"}
+            {completedCount === phase.modules.length ? "Reveal My Rare Breed Operating Manual™ →" : "Preview Delivered × Rare Breed Club →"}
           </Link>
         </div>
     </BrandShell>

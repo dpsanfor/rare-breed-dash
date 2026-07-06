@@ -64,7 +64,7 @@ function InstallationPage() {
   const totalExercises = exerciseSteps.length;
 
   async function advance() {
-    if (!step) return;
+    if (!installation || !step) return;
     setSaving(true);
 
     if (step.type === "exercise") {
@@ -96,7 +96,7 @@ function InstallationPage() {
       setStepIndex((i) => i + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      navigate({ to: "/leap/installations/" });
+      navigate({ to: "/leap/installations" });
     }
   }
 
@@ -107,7 +107,7 @@ function InstallationPage() {
         <div className="mx-auto max-w-2xl">
           <div className="mb-10 mt-8 flex items-center gap-3">
             <Link
-              to="/leap/installations/"
+              to="/leap/installations"
               className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#E0249C]"
             >
               ← Installations
@@ -208,7 +208,7 @@ function InstallationPage() {
                   : "Continue →"}
             </button>
             <Link
-              to="/leap/installations/"
+              to="/leap/installations"
               className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#1F1623]"
             >
               Back to Installations
@@ -229,7 +229,7 @@ function InstallationPage() {
             onClick={() =>
               stepIndex > 0
                 ? setStepIndex((i) => i - 1)
-                : navigate({ to: "/leap/installations/" })
+                : navigate({ to: "/leap/installations" })
             }
             className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#E0249C]"
           >
