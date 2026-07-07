@@ -15,6 +15,7 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RareBreedOperatingManualRouteImport } from './routes/rare-breed-operating-manual'
 import { Route as MetamorphosisRouteImport } from './routes/metamorphosis'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as TenXLeapIndexRouteImport } from './routes/ten-x-leap.index'
 import { Route as RareBreedClubIndexRouteImport } from './routes/rare-breed-club.index'
 import { Route as PrisonBreakIndexRouteImport } from './routes/prison-break.index'
@@ -62,6 +63,11 @@ const MetamorphosisRoute = MetamorphosisRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TenXLeapIndexRoute = TenXLeapIndexRouteImport.update({
@@ -151,6 +157,7 @@ const LeapInstallationsIdRoute = LeapInstallationsIdRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/admin': typeof AdminRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
@@ -176,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/leap/installations/': typeof LeapInstallationsIndexRoute
 }
 export interface FileRoutesByTo {
+  '/admin': typeof AdminRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
@@ -202,6 +210,7 @@ export interface FileRoutesByTo {
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/admin': typeof AdminRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
@@ -229,6 +238,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/admin'
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
@@ -254,6 +264,7 @@ export interface FileRouteTypes {
     | '/leap/installations/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/admin'
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
@@ -279,6 +290,7 @@ export interface FileRouteTypes {
     | '/leap/installations'
   id:
     | '__root__'
+    | '/admin'
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
@@ -305,6 +317,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AdminRoute: typeof AdminRoute
   LoginRoute: typeof LoginRoute
   MetamorphosisRoute: typeof MetamorphosisRoute
   RareBreedOperatingManualRoute: typeof RareBreedOperatingManualRoute
@@ -372,6 +385,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ten-x-leap/': {
@@ -497,6 +517,7 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  AdminRoute: AdminRoute,
   LoginRoute: LoginRoute,
   MetamorphosisRoute: MetamorphosisRoute,
   RareBreedOperatingManualRoute: RareBreedOperatingManualRoute,

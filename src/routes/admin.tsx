@@ -70,12 +70,12 @@ function AdminPage() {
         )}
 
         {!users && !error && (
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/40">Loading...</p>
+          <p className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/40">Loading...</p>
         )}
 
         {users && (
           <>
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/40 mb-6">
+            <p className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/40 mb-6">
               {users.length} account{users.length !== 1 ? "s" : ""}
             </p>
 
@@ -85,9 +85,9 @@ function AdminPage() {
                 className="grid grid-cols-3 gap-4 px-6 py-3"
                 style={{ background: "rgba(74,18,89,0.05)", borderBottom: "1px solid rgba(74,18,89,0.1)" }}
               >
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/50">Email</p>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/50">Joined</p>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/50">Last Sign In</p>
+                <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/50">Email</p>
+                <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/50">Joined</p>
+                <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/50">Last Sign In</p>
               </div>
 
               {users
@@ -102,7 +102,7 @@ function AdminPage() {
                     }}
                   >
                     <div className="flex items-center gap-2">
-                      <span className="font-serif text-[15px] text-[#1F1623]">{u.email}</span>
+                      <span className="font-serif text-[17px] text-[#1F1623]">{u.email}</span>
                       {u.email === ADMIN_EMAIL && (
                         <span className="rounded-full bg-[#E0249C]/10 px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.15em] text-[#E0249C]">you</span>
                       )}

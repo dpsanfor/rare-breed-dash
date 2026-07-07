@@ -28,7 +28,7 @@ function OperatingManualReveal() {
       {/* Eyebrow + title */}
       <div className="mb-8 mt-2">
         <p
-          className="font-mono text-[11px] uppercase tracking-[0.32em]"
+          className="font-mono text-[13px] uppercase tracking-[0.32em]"
           style={{ color: "rgba(201,168,76,0.85)" }}
         >
           ✦ Access Granted · The 10X Leap Complete
@@ -42,7 +42,7 @@ function OperatingManualReveal() {
           Operating Manual™
         </h1>
         <p
-          className="mt-4 font-mono text-[11px] uppercase tracking-[0.24em]"
+          className="mt-4 font-mono text-[13px] uppercase tracking-[0.24em]"
           style={{ color: "rgba(74,18,89,0.45)" }}
         >
           ✦ Saved · every element you designed is captured here
@@ -81,7 +81,7 @@ function OperatingManualReveal() {
         {!manualOpen && (
           <p
             className="px-8 pb-8 font-serif italic sm:px-10 sm:pb-10"
-            style={{ color: "rgba(255,255,255,0.6)", fontSize: "clamp(17px, 2.6vw, 21px)" }}
+            style={{ color: "rgba(255,255,255,0.6)", fontSize: "clamp(20px, 2.6vw, 21px)" }}
           >
             {manual
               ? "Open your Operating Manual to read the complete design of your business."
@@ -112,7 +112,7 @@ function OperatingManualReveal() {
       <p className="mb-12 -mt-6 text-center">
         <Link
           to={"/operating-manual" as any}
-          className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#1F1623]/50 hover:text-[#1F1623]/80"
+          className="font-mono text-[13px] uppercase tracking-[0.24em] text-[#1F1623]/50 hover:text-[#1F1623]/80"
         >
           View &amp; edit the full manual, section by section →
         </Link>
@@ -188,7 +188,7 @@ function OperatingManualReveal() {
         </Link>
         <Link
           to={"/ten-x-leap" as any}
-          className="mt-4 block text-center font-mono text-[11px] uppercase tracking-[0.24em] text-[#1F1623]/45 hover:text-[#1F1623]/70"
+          className="mt-4 block text-center font-mono text-[13px] uppercase tracking-[0.24em] text-[#1F1623]/45 hover:text-[#1F1623]/70"
         >
           ← Back to The 10X Leap
         </Link>

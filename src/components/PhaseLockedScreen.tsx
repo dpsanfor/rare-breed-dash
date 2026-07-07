@@ -50,12 +50,12 @@ function TenXLeapLockedScreen() {
 
         {/* Deliverables */}
         <div className="mb-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-5">Your Complete Business Design</p>
+          <p className="font-mono text-[12px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-5">Your Complete Business Design</p>
           <div className="space-y-3">
             {DELIVERABLES.map((item, i) => (
               <div key={item} className="flex items-center gap-4">
                 <span
-                  className="font-mono text-[10px] tracking-[0.15em] flex-shrink-0"
+                  className="font-mono text-[12px] tracking-[0.15em] flex-shrink-0"
                   style={{ color: i === DELIVERABLES.length - 1 ? "#c9a84c" : "#E0249C" }}
                 >
                   {i === DELIVERABLES.length - 1 ? "★" : `0${i + 1}`}
@@ -88,7 +88,7 @@ function TenXLeapLockedScreen() {
 
         {/* When finished */}
         <div className="mb-10 max-w-lg rounded-2xl p-6" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.05) 0%, rgba(224,36,156,0.05) 100%)", border: "1px solid rgba(224,36,156,0.15)" }}>
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-3">When You're Finished</p>
+          <p className="font-mono text-[12px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-3">When You're Finished</p>
           <p className="font-serif text-[17px] leading-relaxed text-[#4A1259]/80">
             You'll leave with a complete business operating manual — the intelligence that powers everything you create next. Then, if you choose, you'll import it into the Rare Breed Operating System, where your blueprint becomes high-converting sales pages, offers, content, launches, and business assets generated through Dana's proprietary framework.
           </p>
@@ -104,15 +104,15 @@ function TenXLeapLockedScreen() {
         >
           <div className="flex flex-wrap items-baseline gap-3 mb-2">
             <span className="font-display text-[42px] tracking-tight text-shimmer">$1,111</span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/45">one time</span>
-            <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E0249C]">First Round Pricing</span>
+            <span className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/45">one time</span>
+            <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[13px] uppercase tracking-[0.18em] text-[#E0249C]">First Round Pricing</span>
           </div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4A1259]/40 mb-4">Rises to $2,222 after July 12</p>
+          <p className="font-mono text-[13px] uppercase tracking-[0.18em] text-[#4A1259]/40 mb-4">Rises to $2,222 after July 12</p>
           <div className="space-y-2">
             {INCLUDES.map((item) => (
               <div key={item} className="flex items-center gap-2">
                 <span className="text-[#E0249C] text-[12px]">✓</span>
-                <span className="font-serif text-[15px] text-[#1F1623]/80">{item}</span>
+                <span className="font-serif text-[17px] text-[#1F1623]/80">{item}</span>
               </div>
             ))}
           </div>
@@ -184,25 +184,25 @@ function RareBreedClubLockedScreen() {
 
         {/* What's included */}
         <div className="mb-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-5">What's Included</p>
+          <p className="font-mono text-[12px] uppercase tracking-[0.25em] text-[#4A1259]/40 mb-5">What's Included</p>
 
           <div className="mb-6 rounded-2xl p-6 space-y-3" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(224,36,156,0.04) 100%)", border: "1px solid rgba(224,36,156,0.12)" }}>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C]/70 mb-3">3 Months Done-With-You</p>
+            <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#E0249C]/70 mb-3">3 Months Done-With-You</p>
             <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]/80">All 9 Rare Breed OS™ Studios powered by your Operating Manual™ and Zone of Genius Code™ — built 1:1 with Dana until your business is complete.</p>
           </div>
 
           <div className="mb-6 rounded-2xl p-6 space-y-2" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(224,36,156,0.04) 100%)", border: "1px solid rgba(224,36,156,0.12)" }}>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C]/70 mb-3">The 9 Studios</p>
+            <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#E0249C]/70 mb-3">The 9 Studios</p>
             {CLUB_STUDIOS.map((studio, i) => (
               <div key={studio} className="flex items-center gap-3">
-                <span className="font-mono text-[10px] text-[#E0249C] flex-shrink-0">{`0${i + 1}`}</span>
+                <span className="font-mono text-[12px] text-[#E0249C] flex-shrink-0">{`0${i + 1}`}</span>
                 <span className="font-serif text-[16px] text-[#1F1623]/80">{studio}</span>
               </div>
             ))}
           </div>
 
           <div className="rounded-2xl p-6" style={{ background: "linear-gradient(160deg, rgba(74,18,89,0.04) 0%, rgba(201,168,76,0.06) 100%)", border: "1px solid rgba(201,168,76,0.2)" }}>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] mb-3">12 Months RBC Access</p>
+            <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#c9a84c] mb-3">12 Months RBC Access</p>
             <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]/80">3 calls per month with Dana to mastermind, refine, and take it as far as possible as fast as possible — starting the day you begin your build, running alongside your entire 1:1 and continuing for a full year.</p>
           </div>
         </div>
@@ -217,9 +217,9 @@ function RareBreedClubLockedScreen() {
         >
           <div className="flex flex-wrap items-baseline gap-3 mb-2">
             <span className="font-display text-[42px] tracking-tight text-shimmer">$11,111</span>
-            <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E0249C]">First 5 Only</span>
+            <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[13px] uppercase tracking-[0.18em] text-[#E0249C]">First 5 Only</span>
           </div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#E0249C]">Doubles after the first 5 · By inquiry only</p>
+          <p className="font-mono text-[13px] uppercase tracking-[0.18em] text-[#E0249C]">Doubles after the first 5 · By inquiry only</p>
         </div>
 
         {/* CTAs */}
@@ -271,7 +271,7 @@ function GGPBLockedScreen() {
           Sign Up for Free →
         </a>
 
-        <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/30">
+        <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/30">
           Already signed up? Make sure you're logging in with the same email address you used to register.
           Need help?{" "}
           <a href="mailto:dana@danahayes.com" className="underline hover:text-[#E0249C]/60 transition-colors">

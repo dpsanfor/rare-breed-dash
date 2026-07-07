@@ -253,7 +253,7 @@ export function AvatarWizard({
           </p>
           <button
             onClick={onCancel}
-            className="text-[10px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.35)] hover:text-[rgba(240,223,160,0.6)] transition-colors"
+            className="text-[12px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.35)] hover:text-[rgba(240,223,160,0.6)] transition-colors"
           >
             ← Back to Hub
           </button>
@@ -344,12 +344,12 @@ export function AvatarWizard({
                         <p className="font-display text-xl text-rb-champagne">
                           {card.emoji} {card.name}
                         </p>
-                        <p className="mt-0.5 text-[10px] uppercase tracking-[0.2em] text-[rgba(240,223,160,0.4)]">
+                        <p className="mt-0.5 text-[12px] uppercase tracking-[0.2em] text-[rgba(240,223,160,0.4)]">
                           {card.title}
                         </p>
                       </div>
                       {sel && (
-                        <span className="shrink-0 rounded-full bg-rb-fuchsia px-2 py-0.5 text-[9px] uppercase tracking-[0.2em] text-rb-black">
+                        <span className="shrink-0 rounded-full bg-rb-fuchsia px-2 py-0.5 text-[13px] uppercase tracking-[0.2em] text-rb-black">
                           Selected
                         </span>
                       )}
@@ -379,7 +379,7 @@ export function AvatarWizard({
                     <div className="mt-4 flex items-center gap-2">
                       <button
                         onClick={() => { setRefiningCard(card); setRefineFeedback(""); setStep("refining"); }}
-                        className="rounded-full border border-[rgba(201,168,76,0.3)] px-4 py-1.5 text-[10px] uppercase tracking-[0.2em] text-[rgba(240,223,160,0.6)] hover:border-rb-gold hover:text-rb-champagne transition-colors"
+                        className="rounded-full border border-[rgba(201,168,76,0.3)] px-4 py-1.5 text-[12px] uppercase tracking-[0.2em] text-[rgba(240,223,160,0.6)] hover:border-rb-gold hover:text-rb-champagne transition-colors"
                       >
                         Refine her
                       </button>
@@ -389,7 +389,7 @@ export function AvatarWizard({
                             prev.includes(card.id) ? prev.filter((x) => x !== card.id) : [...prev, card.id]
                           )
                         }
-                        className={`rounded-full px-4 py-1.5 text-[10px] uppercase tracking-[0.2em] transition-all ${
+                        className={`rounded-full px-4 py-1.5 text-[12px] uppercase tracking-[0.2em] transition-all ${
                           sel
                             ? "bg-rb-fuchsia text-rb-black"
                             : "border border-[rgba(201,168,76,0.3)] text-[rgba(240,223,160,0.6)] hover:border-rb-fuchsia hover:text-rb-champagne"
@@ -419,7 +419,7 @@ export function AvatarWizard({
             <div className="flex items-center justify-between border-t border-[rgba(201,168,76,0.15)] pt-5">
               <button
                 onClick={() => setStep("brain_dump")}
-                className="text-[10px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
+                className="text-[12px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
               >
                 ← Back
               </button>
@@ -472,7 +472,7 @@ export function AvatarWizard({
             <div className="flex items-center justify-between border-t border-[rgba(201,168,76,0.15)] pt-5">
               <button
                 onClick={() => { setStep("cards"); setRefiningCard(null); }}
-                className="text-[10px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
+                className="text-[12px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
               >
                 ← Back to Avatars
               </button>
@@ -564,7 +564,7 @@ export function AvatarWizard({
 
             {/* REFERENCE SECTIONS — read only, used in sales page */}
             <div className="rounded-xl border border-[rgba(201,168,76,0.1)] bg-black/10 px-5 py-3">
-              <p className="text-[9px] uppercase tracking-[0.25em] text-[rgba(201,168,76,0.45)]">
+              <p className="text-[13px] uppercase tracking-[0.25em] text-[rgba(201,168,76,0.45)]">
                 The info below is saved to your Brand Unicorn and used automatically in your sales page, landing page, and launch plan inside the Test Kitchen.
               </p>
             </div>
@@ -591,13 +591,13 @@ export function AvatarWizard({
             <div className="flex items-center justify-between border-t border-[rgba(201,168,76,0.15)] pt-5">
               <button
                 onClick={() => setStep("cards")}
-                className="text-[10px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
+                className="text-[12px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
               >
                 ← Back
               </button>
               <div className="flex flex-col items-end gap-1">
                 {!canGenerateTagline && (
-                  <p className="text-[10px] italic text-[rgba(240,223,160,0.35)]">
+                  <p className="text-[12px] italic text-[rgba(240,223,160,0.35)]">
                     Pick one desire (pink), one vehicle (purple), and one outcome (gold) to continue
                   </p>
                 )}
@@ -635,19 +635,19 @@ export function AvatarWizard({
               </p>
               {taglineDesire && (
                 <div className="space-y-0.5">
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-rb-fuchsia">She wants to achieve</p>
+                  <p className="text-[13px] uppercase tracking-[0.2em] text-rb-fuchsia">She wants to achieve</p>
                   <p className="font-serif text-sm text-rb-champagne">{taglineDesire}</p>
                 </div>
               )}
               {taglineVehicle && (
                 <div className="space-y-0.5">
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-rb-amethyst">Without having to</p>
+                  <p className="text-[13px] uppercase tracking-[0.2em] text-rb-amethyst">Without having to</p>
                   <p className="font-serif text-sm text-rb-champagne">{taglineVehicle}</p>
                 </div>
               )}
               {taglineOutcome && (
                 <div className="space-y-0.5">
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-rb-gold">So that she can</p>
+                  <p className="text-[13px] uppercase tracking-[0.2em] text-rb-gold">So that she can</p>
                   <p className="font-serif text-sm text-rb-champagne">{taglineOutcome}</p>
                 </div>
               )}
@@ -709,7 +709,7 @@ export function AvatarWizard({
             <div className="flex items-center justify-between border-t border-[rgba(201,168,76,0.15)] pt-5">
               <button
                 onClick={() => setStep("full_profile")}
-                className="text-[10px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
+                className="text-[12px] uppercase tracking-[0.25em] text-[rgba(240,223,160,0.4)] hover:text-[rgba(240,223,160,0.7)] transition-colors"
               >
                 ← Back
               </button>
@@ -772,7 +772,7 @@ function TaglineSection({
             >
               <p className="font-serif text-base leading-relaxed text-rb-champagne">{item}</p>
               {isSel && (
-                <span className={`mt-2 inline-block rounded-full px-2.5 py-0.5 text-[9px] uppercase tracking-[0.2em] ${cls.tag}`}>
+                <span className={`mt-2 inline-block rounded-full px-2.5 py-0.5 text-[13px] uppercase tracking-[0.2em] ${cls.tag}`}>
                   ✓ Tagline pick
                 </span>
               )}
@@ -821,7 +821,7 @@ function ResonanceBtn({
     >
       <p className="font-serif text-base leading-relaxed text-rb-champagne">{text}</p>
       {chosen && (
-        <p className={`mt-1.5 text-[9px] uppercase tracking-[0.25em] ${highlight ? "text-rb-gold" : "text-rb-fuchsia"}`}>
+        <p className={`mt-1.5 text-[13px] uppercase tracking-[0.25em] ${highlight ? "text-rb-gold" : "text-rb-fuchsia"}`}>
           ✓ This one
         </p>
       )}

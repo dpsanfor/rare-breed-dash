@@ -143,7 +143,7 @@ function SynthesisRunner({
             <div className="mt-10 flex items-center justify-center gap-3">
               <span className="h-px w-12" style={{ background: "rgba(201,168,76,0.5)" }} />
               <span
-                className="font-mono text-[11px] uppercase tracking-[0.28em]"
+                className="font-mono text-[13px] uppercase tracking-[0.28em]"
                 style={{ color: "rgba(201,168,76,0.85)" }}
               >
                 Declared. Signed. Yours.
@@ -467,7 +467,7 @@ function ConversationRunner({
       <div>
         {error && <p className="mb-4 rounded-xl bg-red-50 px-5 py-3 text-sm text-red-600">{error}</p>}
         <div className="mb-6 rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 p-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#E0249C] mb-4">
+          <p className="font-mono text-[12px] uppercase tracking-[0.25em] text-[#E0249C] mb-4">
             Optional — add this before generating
           </p>
           <p className="font-serif text-[22px] italic leading-relaxed text-[#1F1623]/85 mb-6">
@@ -492,7 +492,7 @@ function ConversationRunner({
           </button>
           <button
             onClick={resetModule}
-            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
           >
             Start over
           </button>
@@ -540,7 +540,7 @@ function ConversationRunner({
               style={{ width: `${pct}%` }}
             />
           </div>
-          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/50">
+          <p className="mt-4 font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/50">
             {doneCount} of {total} layers decoded · saved to your Zone of Genius Code
           </p>
         </div>
@@ -550,7 +550,7 @@ function ConversationRunner({
             onClick={onComplete}
             className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
             style={{
-              fontSize: "clamp(16px, 3vw, 20px)",
+              fontSize: "clamp(18px, 3vw, 20px)",
               background: "linear-gradient(135deg, #4A1259 0%, #E0249C 55%, #c9a84c 100%)",
               boxShadow: "0 16px 50px -12px rgba(224,36,156,0.5)",
             }}
@@ -559,7 +559,7 @@ function ConversationRunner({
           </button>
           <button
             onClick={resetModule}
-            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
           >
             Redo this element
           </button>
@@ -611,7 +611,7 @@ function ConversationRunner({
 
         <button
           onClick={beginSession}
-          className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[15px] tracking-[0.18em] text-white"
+          className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[17px] tracking-[0.18em] text-white"
           style={{
             background: "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
             boxShadow: "0 12px 40px -8px rgba(224,36,156,0.45)",
@@ -623,7 +623,7 @@ function ConversationRunner({
         <div className="mt-10 pt-8 border-t border-[rgba(74,18,89,0.08)]">
           <Link
             to="/prison-break"
-            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
+            className="inline-flex items-center gap-1.5 font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
           >
             ← Back to Phase One
           </Link>
@@ -640,7 +640,7 @@ function ConversationRunner({
           className="h-2 w-2 rounded-full"
           style={{ background: "linear-gradient(135deg, #E0249C, #c9a84c)" }}
         />
-        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/55">
+        <p className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/55">
           Rare Breed AI
         </p>
       </div>
@@ -758,7 +758,7 @@ function ConversationRunner({
               : autoAdvance ? "Lock It In + Continue →" : `Generate ${outputName} →`}
           </button>
           <div className="mt-6 rounded-2xl border border-[rgba(74,18,89,0.08)] bg-white/50 px-6 py-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/40 mb-2">Or keep going</p>
+            <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/40 mb-2">Or keep going</p>
             <p className="font-serif text-[18px] leading-relaxed text-[#1F1623]/70">
               The more you share, the more specific your {outputName} becomes. Keep answering to go deeper — the AI will use everything. <span className="text-[#E0249C]/70 not-italic">Sweet spot: 8–12 responses.</span> Past that, you have more than enough.
             </p>
@@ -766,7 +766,7 @@ function ConversationRunner({
         </div>
       )}
 
-      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/40">
+      <p className="mt-4 font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/40">
         {userTurns} {userTurns === 1 ? "response" : "responses"} recorded
         {!canGenerate && ` · ${8 - userTurns} more before generate unlocks`}
       </p>
@@ -774,14 +774,14 @@ function ConversationRunner({
       <div className="mt-10 flex items-center justify-between gap-4 border-t border-[rgba(74,18,89,0.08)] pt-8">
         <Link
           to="/prison-break"
-          className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
+          className="inline-flex items-center gap-1.5 font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
         >
           ← Back to Phase One
         </Link>
         <button
           onClick={restartConversation}
           disabled={loading}
-          className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors disabled:opacity-40"
+          className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors disabled:opacity-40"
         >
           ↻ Start this element over
         </button>
@@ -918,11 +918,11 @@ function PhaseOneModule() {
         </div>
 
         <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="font-mono text-[15px] tracking-[0.25em] text-[#4A1259]/50">
+          <span className="font-mono text-[17px] tracking-[0.25em] text-[#4A1259]/50">
             Layer {mod.number.toString().padStart(2, "0")} / {totalModules.toString().padStart(2, "0")}
           </span>
           {isComplete && (
-            <span className="rounded-full border border-[rgba(201,168,76,0.45)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]">
+            <span className="rounded-full border border-[rgba(201,168,76,0.45)] px-3 py-1 font-mono text-[12px] uppercase tracking-[0.2em] text-[#c9a84c]">
               Decoded
             </span>
           )}
@@ -938,10 +938,10 @@ function PhaseOneModule() {
 
       {/* Progress toward her Zone of Genius Code™ */}
       <div className="mb-2 flex items-baseline justify-between">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/50">
+        <p className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/50">
           {completedNow} of {totalModules} complete
         </p>
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">
+        <p className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C]">
           → your Zone of Genius Code™
         </p>
       </div>

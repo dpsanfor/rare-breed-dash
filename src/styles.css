@@ -88,6 +88,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-weight: 300;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -163,7 +164,7 @@
 
   .eyebrow {
     font-family: var(--font-sans);
-    font-size: 14px;
+    font-size: clamp(13px, 3.5vw, 14px);
     font-weight: 700;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -172,7 +173,7 @@
 
   .label-soft {
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: clamp(13px, 3vw, 14px);
     font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -182,7 +183,7 @@
   /* Section label — does NOT use pink (pink reserved for interaction) */
   .label-section {
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: clamp(13px, 3vw, 14px);
     font-weight: 600;
     letter-spacing: 0.32em;
     text-transform: uppercase;

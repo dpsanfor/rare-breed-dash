@@ -57,7 +57,7 @@ function PrisonBreakIndex() {
         </h1>
         <p
           className="mt-5 max-w-2xl font-serif font-light italic text-[#4A1259]/80"
-          style={{ fontSize: "clamp(19px, 2.8vw, 26px)" }}
+          style={{ fontSize: "clamp(20px, 2.8vw, 26px)" }}
         >
           Discover the outdated operating system that has been running your life. Because until you can see the system, you can't choose a new one.
         </p>
@@ -120,7 +120,7 @@ function PrisonBreakIndex() {
                   className="flex w-full items-center gap-6 text-left"
                 >
                   <div
-                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[11px] tracking-[0.15em]"
+                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[13px] tracking-[0.15em]"
                     style={{ background: "rgba(224,36,156,0.12)", color: "#E0249C" }}
                   >
                     {call.number}
@@ -129,7 +129,7 @@ function PrisonBreakIndex() {
                     <p className="font-display text-lg tracking-[0.05em] text-[#1F1623]">{call.title}</p>
                     <p className="mt-0.5 font-serif text-sm italic text-[#4A1259]/55">{call.description}</p>
                   </div>
-                  <span className="flex-shrink-0 font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C]">
+                  <span className="flex-shrink-0 font-mono text-[12px] uppercase tracking-[0.2em] text-[#E0249C]">
                     {open ? "Close ▲" : "Watch ▾"}
                   </span>
                 </button>
@@ -165,7 +165,7 @@ function PrisonBreakIndex() {
         </h2>
         <p
           className="mt-3 max-w-2xl font-serif italic text-[#4A1259]/75"
-          style={{ fontSize: "clamp(17px, 2.4vw, 21px)" }}
+          style={{ fontSize: "clamp(20px, 2.4vw, 21px)" }}
         >
           Each layer is a guided conversation that decodes another part of the operating system you've been running on, and generates the Code that hands you your Zone of Genius Code at the end. Move through them in order, one act at a time.
         </p>
@@ -205,7 +205,7 @@ function PrisonBreakIndex() {
               }}
             >
               <div
-                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[11px] tracking-[0.15em]"
+                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[13px] tracking-[0.15em]"
                 style={{
                   background: complete
                     ? "linear-gradient(135deg, rgba(201,168,76,0.25), rgba(201,168,76,0.12))"
@@ -227,7 +227,7 @@ function PrisonBreakIndex() {
               </div>
               <div className="flex-shrink-0">
                 <span
-                  className="font-mono text-[9px] uppercase tracking-[0.2em]"
+                  className="font-mono text-[13px] uppercase tracking-[0.2em]"
                   style={{
                     color: complete
                       ? "#c9a84c"
@@ -271,7 +271,7 @@ function PrisonBreakIndex() {
           </p>
           <p
             className="mx-auto mt-4 max-w-xl font-serif italic"
-            style={{ color: "rgba(255,255,255,0.65)", fontSize: "clamp(17px, 2.6vw, 21px)" }}
+            style={{ color: "rgba(255,255,255,0.65)", fontSize: "clamp(20px, 2.6vw, 21px)" }}
           >
             Everything you surfaced across all ten modules, distilled into the one lane only you can own.
           </p>
@@ -324,7 +324,7 @@ function PrisonBreakIndex() {
             ["03", "The What Now", "your Manual is done. Here's your next move"],
           ].map(([n, t, d]) => (
             <div key={n} className="flex items-baseline gap-4">
-              <span className="font-mono text-[11px] tracking-[0.15em] text-[#E0249C]">{n}</span>
+              <span className="font-mono text-[13px] tracking-[0.15em] text-[#E0249C]">{n}</span>
               <p className="font-serif text-lg text-[#1F1623]/85">
                 <span className="font-display text-[17px] tracking-[0.05em]">{t}</span>
                 <span className="italic text-[#4A1259]/60"> · {d}</span>

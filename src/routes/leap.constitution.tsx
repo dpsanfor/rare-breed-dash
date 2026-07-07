@@ -61,7 +61,7 @@ function ConstitutionSection({
       }}
     >
       <div className="mb-5 flex items-baseline gap-4">
-        <span className="font-mono text-[11px] tracking-[0.3em] text-[#E0249C]/60">
+        <span className="font-mono text-[13px] tracking-[0.3em] text-[#E0249C]/60">
           {section.number.padStart(2, "0")}
         </span>
         <h3 className="font-display text-3xl tracking-wide text-shimmer md:text-4xl">
@@ -302,7 +302,7 @@ function ConstitutionPage() {
                   key={cat}
                   className="rounded-xl border border-[rgba(74,18,89,0.1)] bg-white/50 px-4 py-3"
                 >
-                  <span className="font-mono text-[9px] text-[#E0249C]/60">
+                  <span className="font-mono text-[13px] text-[#E0249C]/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="mt-1 font-serif text-sm italic text-[#1F1623]/70">
@@ -357,7 +357,7 @@ function ConstitutionPage() {
               down.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(201,168,76,0.45)] bg-[rgba(201,168,76,0.08)] px-5 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#c9a84c]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(201,168,76,0.45)] bg-[rgba(201,168,76,0.08)] px-5 py-2.5 font-mono text-[13px] uppercase tracking-[0.18em] text-[#c9a84c]">
                 ✦ Saved to your Operating Manual
               </span>
               <button
@@ -406,7 +406,7 @@ function ConstitutionPage() {
           {/* Conclude the session and advance to the next element */}
           {nextLeapModule && (
             <div className="mt-10 text-center">
-              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.24em] text-[#c9a84c]">
+              <p className="mb-4 font-mono text-[13px] uppercase tracking-[0.24em] text-[#c9a84c]">
                 ✦ Element Complete
               </p>
               <Link
@@ -414,7 +414,7 @@ function ConstitutionPage() {
                 params={{ module: String(nextLeapModule.number) }}
                 className="inline-flex w-full max-w-md items-center justify-center gap-2 rounded-full px-8 py-5 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
                 style={{
-                  fontSize: "clamp(16px, 3vw, 22px)",
+                  fontSize: "clamp(18px, 3vw, 22px)",
                   background:
                     "linear-gradient(135deg, #4A1259 0%, #E0249C 55%, #c9a84c 100%)",
                   boxShadow: "0 16px 50px -12px rgba(224,36,156,0.55)",
@@ -424,7 +424,7 @@ function ConstitutionPage() {
               </Link>
               <Link
                 to="/ten-x-leap"
-                className="mt-4 block font-mono text-[11px] uppercase tracking-[0.24em] text-[#4A1259]/40 hover:text-[#4A1259]/70"
+                className="mt-4 block font-mono text-[13px] uppercase tracking-[0.24em] text-[#4A1259]/40 hover:text-[#4A1259]/70"
               >
                 ← Back to The 10X Leap
               </Link>
@@ -443,13 +443,13 @@ function ConstitutionPage() {
         <div className="mb-10 mt-8 flex items-center justify-between">
           <div>
             <p className="eyebrow">OS Builder · Interview</p>
-            <p className="mt-1 font-mono text-[11px] text-[#4A1259]/40">
+            <p className="mt-1 font-mono text-[13px] text-[#4A1259]/40">
               {userMessages} responses recorded
             </p>
             <button
               onClick={restartInterview}
               disabled={sending}
-              className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#E0249C] transition-colors disabled:opacity-40"
+              className="mt-1 font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#E0249C] transition-colors disabled:opacity-40"
             >
               ↻ Start this element over
             </button>
@@ -474,7 +474,7 @@ function ConstitutionPage() {
           {messages.map((msg, i) =>
             msg.role === "assistant" ? (
               <div key={i}>
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C]/50">
+                <p className="mb-2 font-mono text-[12px] uppercase tracking-[0.2em] text-[#E0249C]/50">
                   Rare Breed OS
                 </p>
                 <div className="rounded-2xl border-l-2 border-[#E0249C]/30 bg-white/70 px-6 py-5">
@@ -497,7 +497,7 @@ function ConstitutionPage() {
           {/* Typing indicator */}
           {sending && (
             <div>
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C]/50">
+              <p className="mb-2 font-mono text-[12px] uppercase tracking-[0.2em] text-[#E0249C]/50">
                 Rare Breed OS
               </p>
               <div className="rounded-2xl border-l-2 border-[#E0249C]/30 bg-white/70 px-6 py-5">
@@ -558,7 +558,7 @@ function ConstitutionPage() {
               className="w-full resize-none rounded-xl bg-transparent px-4 py-3 font-serif text-base italic leading-relaxed text-[#1F1623] outline-none placeholder:text-[#4A1259]/30"
             />
             <div className="flex items-center justify-between px-3 pb-2">
-              <p className="font-mono text-[10px] text-[#4A1259]/30">
+              <p className="font-mono text-[12px] text-[#4A1259]/30">
                 Enter to send · Shift+Enter for new line · or tap the mic to speak
               </p>
               <div className="flex items-center gap-2">
@@ -566,7 +566,7 @@ function ConstitutionPage() {
                 <button
                   onClick={sendMessage}
                   disabled={!input.trim() || sending}
-                  className="rounded-full border border-[#E0249C]/30 bg-[#E0249C]/10 px-4 py-1.5 font-display text-[11px] tracking-[0.15em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
+                  className="rounded-full border border-[#E0249C]/30 bg-[#E0249C]/10 px-4 py-1.5 font-display text-[13px] tracking-[0.15em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
                 >
                   Send →
                 </button>
@@ -575,7 +575,7 @@ function ConstitutionPage() {
           </div>
 
           {!canGenerate && userMessages > 0 && (
-            <p className="mt-3 text-center font-mono text-[10px] text-[#4A1259]/35">
+            <p className="mt-3 text-center font-mono text-[12px] text-[#4A1259]/35">
               {6 - userMessages} more{" "}
               {6 - userMessages === 1 ? "response" : "responses"} before you
               can generate your Constitution

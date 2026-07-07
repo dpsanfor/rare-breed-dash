@@ -182,14 +182,14 @@ function AssetCard({
       {/* Header */}
       <div className="mb-4 flex items-center gap-2.5">
         {icon}
-        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#4A1259]/40">{label}</span>
+        <span className="font-mono text-[13px] uppercase tracking-[0.3em] text-[#4A1259]/40">{label}</span>
       </div>
 
       {/* Title */}
       <p className="font-serif text-[17px] font-semibold leading-snug text-[#1F1623]">{title}</p>
 
       {/* Status */}
-      <p className={`mt-3 font-mono text-[9px] uppercase tracking-[0.25em] ${doc ? "text-[#E0249C]" : "text-[#4A1259]/30"}`}>
+      <p className={`mt-3 font-mono text-[13px] uppercase tracking-[0.25em] ${doc ? "text-[#E0249C]" : "text-[#4A1259]/30"}`}>
         {doc ? "✦ Saved" : "Not yet generated"}
       </p>
 
@@ -210,7 +210,7 @@ function AssetCard({
           <button
             onClick={() => handleGenerate()}
             disabled={submitting}
-            className="mt-1 rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] transition-colors disabled:opacity-40"
+            className="mt-1 rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 text-left font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] transition-colors disabled:opacity-40"
           >
             Generate →
           </button>
@@ -222,19 +222,19 @@ function AssetCard({
         <div className="mt-4 flex flex-col gap-2">
           <button
             onClick={() => { setEditing((v) => !v); setEditText(currentText); }}
-            className="rounded-full border border-[rgba(74,18,89,0.18)] bg-white/60 px-4 py-2 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A1259]/55 hover:border-[#E0249C]/30 hover:text-[#E0249C] transition-colors"
+            className="rounded-full border border-[rgba(74,18,89,0.18)] bg-white/60 px-4 py-2 text-left font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/55 hover:border-[#E0249C]/30 hover:text-[#E0249C] transition-colors"
           >
             {editing ? "Close editor" : "Open / edit"}
           </button>
           <button
             onClick={() => downloadDoc(currentText, downloadTitle, downloadSlug)}
-            className="rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] transition-colors"
+            className="rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 text-left font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] transition-colors"
           >
             ↓ Download
           </button>
           <button
             onClick={() => setShowRefine((v) => !v)}
-            className="rounded-full border border-[rgba(74,18,89,0.18)] bg-white/60 px-4 py-2 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A1259]/55 hover:border-[#E0249C]/30 hover:text-[#E0249C] transition-colors"
+            className="rounded-full border border-[rgba(74,18,89,0.18)] bg-white/60 px-4 py-2 text-left font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/55 hover:border-[#E0249C]/30 hover:text-[#E0249C] transition-colors"
           >
             {showRefine ? "Cancel" : "Update with my finds"}
           </button>
@@ -256,7 +256,7 @@ function AssetCard({
 
           {showRefine && (
             <div className="mt-1 rounded-xl border border-[rgba(74,18,89,0.1)] bg-[rgba(74,18,89,0.03)] p-4">
-              <p className="mb-2 font-mono text-[9px] uppercase tracking-[0.18em] text-[#4A1259]/45">
+              <p className="mb-2 font-mono text-[13px] uppercase tracking-[0.18em] text-[#4A1259]/45">
                 Tell us what you actually found
               </p>
               <textarea
@@ -269,7 +269,7 @@ function AssetCard({
               <button
                 onClick={() => handleGenerate()}
                 disabled={!notes.trim() || submitting}
-                className="rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 font-mono text-[9px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] disabled:opacity-40"
+                className="rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] disabled:opacity-40"
               >
                 {submitting ? "Updating..." : "Regenerate →"}
               </button>

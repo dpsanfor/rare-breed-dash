@@ -327,11 +327,11 @@ function RareBreedClubBuilder() {
         </div>
 
         <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="font-mono text-[15px] tracking-[0.25em] text-[#4A1259]/50">
+          <span className="font-mono text-[17px] tracking-[0.25em] text-[#4A1259]/50">
             Builder {mod.number.toString().padStart(2, "0")} / {phase3.modules.length.toString().padStart(2, "0")}
           </span>
           {isComplete && (
-            <span className="rounded-full border border-[rgba(201,168,76,0.45)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]">
+            <span className="rounded-full border border-[rgba(201,168,76,0.45)] px-3 py-1 font-mono text-[12px] uppercase tracking-[0.2em] text-[#c9a84c]">
               Complete
             </span>
           )}
@@ -404,7 +404,7 @@ function RareBreedClubBuilder() {
           {isBrand && (
             <div className="mb-6">
               <div className="mb-5 flex items-center gap-4">
-                <span className="font-mono text-[9px] uppercase tracking-[0.35em] text-[#4A1259]/40">Brand Assets</span>
+                <span className="font-mono text-[13px] uppercase tracking-[0.35em] text-[#4A1259]/40">Brand Assets</span>
                 <div className="flex-1 border-t border-[rgba(74,18,89,0.08)]" />
               </div>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -417,13 +417,13 @@ function RareBreedClubBuilder() {
           <div className="mb-6 flex flex-wrap items-center gap-4">
             <button
               onClick={() => setShowArtifact((v) => !v)}
-              className="rounded-full border border-[rgba(74,18,89,0.25)] bg-white/70 px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/70 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+              className="rounded-full border border-[rgba(74,18,89,0.25)] bg-white/70 px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/70 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
             >
               {showArtifact ? "Hide it" : "Open / edit it"}
             </button>
             <button
               onClick={refineWithAI}
-              className="rounded-full border border-[rgba(224,36,156,0.4)] bg-[rgba(224,36,156,0.06)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.12)] transition-colors"
+              className="rounded-full border border-[rgba(224,36,156,0.4)] bg-[rgba(224,36,156,0.06)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.12)] transition-colors"
             >
               Refine with the AI
             </button>
@@ -476,7 +476,7 @@ function RareBreedClubBuilder() {
           <div className="mb-4 max-h-[480px] min-h-[280px] overflow-y-auto rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 p-6">
             {messages.length === 0 && loading && (
               <div className="flex flex-col items-start gap-3">
-                <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-[#E0249C]/70">
+                <p className="font-mono text-[13px] uppercase tracking-[0.25em] text-[#E0249C]/70">
                   Reading your Rare Breed Operating Manual...
                 </p>
                 <div className="flex items-center gap-1 text-[#4A1259]/40">
@@ -557,11 +557,11 @@ function RareBreedClubBuilder() {
                 <div className="flex items-center justify-between gap-3">
                   <button
                     onClick={() => brandFileRef.current?.click()}
-                    className="inline-flex items-center gap-2 rounded-full border border-[#E0249C]/30 bg-[#E0249C]/[0.08] px-4 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[#E0249C]/[0.15]"
+                    className="inline-flex items-center gap-2 rounded-full border border-[#E0249C]/30 bg-[#E0249C]/[0.08] px-4 py-2 font-mono text-[12px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[#E0249C]/[0.15]"
                   >
                     + Add reference images
                   </button>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#4A1259]/40">
+                  <span className="font-mono text-[12px] uppercase tracking-[0.18em] text-[#4A1259]/40">
                     {pendingImages.length > 0
                       ? `${pendingImages.length} attached · sends with your next message`
                       : brandImages.length > 0
@@ -580,7 +580,7 @@ function RareBreedClubBuilder() {
                         />
                         <button
                           onClick={() => removePendingImage(i)}
-                          className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#4A1259] text-[11px] leading-none text-white"
+                          className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#4A1259] text-[13px] leading-none text-white"
                         >
                           ×
                         </button>
@@ -673,7 +673,7 @@ function RareBreedClubBuilder() {
             </div>
           )}
 
-          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/40">
+          <p className="mt-6 font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/40">
             {userTurns} {userTurns === 1 ? "response" : "responses"} recorded
             {!canGenerate && ` · ${3 - userTurns} more before generate unlocks`}
           </p>
@@ -682,13 +682,13 @@ function RareBreedClubBuilder() {
             <button
               onClick={restartConversation}
               disabled={loading}
-              className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors disabled:opacity-40"
+              className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors disabled:opacity-40"
             >
               ↻ Start this element over
             </button>
             <Link
               to="/rare-breed-club"
-              className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
+              className="inline-flex items-center gap-1.5 font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
             >
               ← Back to Club
             </Link>

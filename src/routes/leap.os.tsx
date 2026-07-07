@@ -219,7 +219,7 @@ function OSDashboard() {
                 className="flex items-center gap-4 rounded-xl border border-[rgba(74,18,89,0.1)] bg-white/60 px-5 py-4"
               >
                 <span
-                  className="shrink-0 rounded-full border px-3 py-1 font-mono text-[9px] uppercase tracking-[0.2em]"
+                  className="shrink-0 rounded-full border px-3 py-1 font-mono text-[13px] uppercase tracking-[0.2em]"
                   style={{
                     borderColor: `${OUTPUT_COLORS[d.output] ?? "#c9a84c"}50`,
                     color: OUTPUT_COLORS[d.output] ?? "#c9a84c",

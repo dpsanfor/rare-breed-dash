@@ -555,7 +555,7 @@ ${positioning ? `
       {/* Header */}
       <div className="mb-4 flex items-center gap-2.5">
         <PaletteIcon />
-        <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-[#4A1259]/40">Mood Board</span>
+        <span className="font-mono text-[13px] uppercase tracking-[0.3em] text-[#4A1259]/40">Mood Board</span>
       </div>
 
       {/* Brand name */}
@@ -567,19 +567,19 @@ ${positioning ? `
       )}
 
       {/* Status */}
-      <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.25em] text-[#E0249C]">✦ Ready</p>
+      <p className="mt-3 font-mono text-[13px] uppercase tracking-[0.25em] text-[#E0249C]">✦ Ready</p>
 
       {/* Action buttons */}
       <div className="mt-4 flex flex-col gap-2">
         <button
           onClick={openLive}
-          className="rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] transition-colors"
+          className="rounded-full border border-[#E0249C]/40 bg-[rgba(224,36,156,0.08)] px-4 py-2 text-left font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.16)] transition-colors"
         >
           ↗ Open
         </button>
         <button
           onClick={() => setExpanded((v) => !v)}
-          className="rounded-full border border-[rgba(74,18,89,0.18)] bg-white/60 px-4 py-2 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#4A1259]/55 hover:border-[#E0249C]/30 hover:text-[#E0249C] transition-colors"
+          className="rounded-full border border-[rgba(74,18,89,0.18)] bg-white/60 px-4 py-2 text-left font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/55 hover:border-[#E0249C]/30 hover:text-[#E0249C] transition-colors"
         >
           ↓ Download {expanded ? "▴" : "▾"}
         </button>
@@ -589,14 +589,14 @@ ${positioning ? `
         <div className="mt-2 flex flex-col gap-1.5 pl-1">
           <button
             onClick={downloadHtml}
-            className="text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#4A1259]/50 hover:text-[#E0249C] transition-colors"
+            className="text-left font-mono text-[13px] uppercase tracking-[0.18em] text-[#4A1259]/50 hover:text-[#E0249C] transition-colors"
           >
             → HTML file
           </button>
           <button
             onClick={downloadPng}
             disabled={downloading}
-            className="text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#4A1259]/50 hover:text-[#E0249C] transition-colors disabled:opacity-40"
+            className="text-left font-mono text-[13px] uppercase tracking-[0.18em] text-[#4A1259]/50 hover:text-[#E0249C] transition-colors disabled:opacity-40"
           >
             {downloading ? "Building..." : "→ PNG image"}
           </button>

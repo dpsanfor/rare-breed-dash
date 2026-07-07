@@ -114,10 +114,10 @@ function Phase2SynthesisRunner({
                 className="flex items-center justify-between rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white px-6 py-4 hover:-translate-y-0.5 transition-all"
               >
                 <div>
-                  <p className="font-display text-[15px] tracking-[0.05em] text-[#1F1623]">Dead Weight Audit</p>
+                  <p className="font-display text-[17px] tracking-[0.05em] text-[#1F1623]">Dead Weight Audit</p>
                   <p className="font-serif text-[13px] italic text-[#4A1259]/55">Good Girl Prison Break™ · Layer 03</p>
                 </div>
-                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">Go →</span>
+                <span className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C]">Go →</span>
               </Link>
             )}
             {missingVision && (
@@ -127,10 +127,10 @@ function Phase2SynthesisRunner({
                 className="flex items-center justify-between rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white px-6 py-4 hover:-translate-y-0.5 transition-all"
               >
                 <div>
-                  <p className="font-display text-[15px] tracking-[0.05em] text-[#1F1623]">10X Vision</p>
+                  <p className="font-display text-[17px] tracking-[0.05em] text-[#1F1623]">10X Vision</p>
                   <p className="font-serif text-[13px] italic text-[#4A1259]/55">The 10X Leap™ · Element 01</p>
                 </div>
-                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">Go →</span>
+                <span className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C]">Go →</span>
               </Link>
             )}
           </div>
@@ -205,7 +205,7 @@ function Phase2SynthesisRunner({
                 localStorage.setItem('rare_breed_profile', JSON.stringify(p));
                 setArtifact(null);
               }}
-              className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+              className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
             >
               Redo this module
             </button>
@@ -518,7 +518,7 @@ function Phase2ConversationRunner({
       <div>
         {error && <p className="mb-4 rounded-xl bg-red-50 px-5 py-3 text-sm text-red-600">{error}</p>}
         <div className="mb-6 rounded-2xl border border-[rgba(74,18,89,0.12)] bg-white/80 p-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#E0249C] mb-4">
+          <p className="font-mono text-[12px] uppercase tracking-[0.25em] text-[#E0249C] mb-4">
             Optional — add this before generating
           </p>
           <p className="font-serif text-[22px] italic leading-relaxed text-[#1F1623]/85 mb-6">
@@ -543,7 +543,7 @@ function Phase2ConversationRunner({
           </button>
           <button
             onClick={resetModule}
-            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
           >
             Start over
           </button>
@@ -590,7 +590,7 @@ function Phase2ConversationRunner({
             onClick={onComplete}
             className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
             style={{
-              fontSize: "clamp(16px, 3vw, 20px)",
+              fontSize: "clamp(18px, 3vw, 20px)",
               background: "linear-gradient(135deg, #4A1259 0%, #E0249C 55%, #c9a84c 100%)",
               boxShadow: "0 16px 50px -12px rgba(224,36,156,0.5)",
             }}
@@ -599,7 +599,7 @@ function Phase2ConversationRunner({
           </button>
           <button
             onClick={resetModule}
-            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
           >
             Redo this element
           </button>
@@ -643,7 +643,7 @@ function Phase2ConversationRunner({
                 </li>
               ))}
             </ul>
-            <p className="font-serif text-[15px] italic text-[#4A1259]/50">
+            <p className="font-serif text-[17px] italic text-[#4A1259]/50">
               This module contributes directly to your Rare Breed Operating Manual™.
             </p>
           </div>
@@ -651,7 +651,7 @@ function Phase2ConversationRunner({
 
         <button
           onClick={beginSession}
-          className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[15px] tracking-[0.18em] text-white"
+          className="inline-flex items-center gap-2 rounded-full px-10 py-5 font-display text-[17px] tracking-[0.18em] text-white"
           style={{
             background: "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
             boxShadow: "0 12px 40px -8px rgba(224,36,156,0.45)",
@@ -663,7 +663,7 @@ function Phase2ConversationRunner({
         <div className="mt-10 pt-8 border-t border-[rgba(74,18,89,0.08)]">
           <Link
             to="/ten-x-leap"
-            className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
+            className="inline-flex items-center gap-1.5 font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
           >
             ← Back to Phase Two
           </Link>
@@ -680,7 +680,7 @@ function Phase2ConversationRunner({
           className="h-2 w-2 rounded-full"
           style={{ background: "linear-gradient(135deg, #E0249C, #c9a84c)" }}
         />
-        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/55">
+        <p className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/55">
           Rare Breed AI
         </p>
       </div>
@@ -820,7 +820,7 @@ function Phase2ConversationRunner({
             {generating ? "Generating..." : `Generate ${outputName} →`}
           </button>
           <div className="mt-6 rounded-2xl border border-[rgba(74,18,89,0.08)] bg-white/50 px-6 py-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#4A1259]/40 mb-2">Or keep going</p>
+            <p className="font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/40 mb-2">Or keep going</p>
             <p className="font-serif text-[18px] leading-relaxed text-[#1F1623]/70">
               The more you share, the more specific your {outputName} becomes. Keep answering to go deeper — the AI will use everything. <span className="text-[#E0249C]/70 not-italic">Sweet spot: 8–12 responses.</span> Past that, you have more than enough.
             </p>
@@ -828,7 +828,7 @@ function Phase2ConversationRunner({
         </div>
       )}
 
-      <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/40">
+      <p className="mt-4 font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/40">
         {userTurns} {userTurns === 1 ? "response" : "responses"} recorded
         {!canGenerate && ` · ${8 - userTurns} more before generate unlocks`}
       </p>
@@ -836,14 +836,14 @@ function Phase2ConversationRunner({
       <div className="mt-10 flex items-center justify-between gap-4 border-t border-[rgba(74,18,89,0.08)] pt-8">
         <Link
           to="/ten-x-leap"
-          className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
+          className="inline-flex items-center gap-1.5 font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors"
         >
           ← Back to Phase Two
         </Link>
         <button
           onClick={restartConversation}
           disabled={loading}
-          className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors disabled:opacity-40"
+          className="font-mono text-[13px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:text-[#E0249C] transition-colors disabled:opacity-40"
         >
           ↻ Start this element over
         </button>
@@ -1034,11 +1034,11 @@ function PhaseTwoModule() {
         </div>
 
         <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="font-mono text-[15px] tracking-[0.25em] text-[#4A1259]/50">
+          <span className="font-mono text-[17px] tracking-[0.25em] text-[#4A1259]/50">
             Element {mod.number.toString().padStart(2, "0")} / {totalModules.toString().padStart(2, "0")}
           </span>
           {isComplete && (
-            <span className="rounded-full border border-[rgba(201,168,76,0.45)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]">
+            <span className="rounded-full border border-[rgba(201,168,76,0.45)] px-3 py-1 font-mono text-[12px] uppercase tracking-[0.2em] text-[#c9a84c]">
               Designed
             </span>
           )}

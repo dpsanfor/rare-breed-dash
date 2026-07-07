@@ -86,7 +86,7 @@ function LoginPage() {
       <p className="font-display text-[52px] leading-none tracking-[0.1em] text-shimmer">
         RARE BREED
       </p>
-      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.3em] text-[#4A1259]/45">
+      <p className="mt-2 font-mono text-[13px] uppercase tracking-[0.3em] text-[#4A1259]/45">
         Operating System™
       </p>
     </div>
@@ -103,7 +103,7 @@ function LoginPage() {
           <p className="font-serif text-[18px] italic leading-relaxed text-[#4A1259]/70 mb-8">
             We sent a reset link to <span className="font-semibold not-italic text-[#4A1259]">{email}</span>.
           </p>
-          <button onClick={() => { setMode("signin"); reset(); }} className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]/70 hover:text-[#E0249C] transition-colors">
+          <button onClick={() => { setMode("signin"); reset(); }} className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C]/70 hover:text-[#E0249C] transition-colors">
             Back to sign in
           </button>
         </div>
@@ -148,10 +148,10 @@ function LoginPage() {
           )}
 
           {error && (
-            <p className="font-mono text-[11px] text-red-500 text-center px-2">{error}</p>
+            <p className="font-mono text-[13px] text-red-500 text-center px-2">{error}</p>
           )}
           {success && (
-            <p className="font-mono text-[11px] text-green-600 text-center px-2">{success}</p>
+            <p className="font-mono text-[13px] text-green-600 text-center px-2">{success}</p>
           )}
 
           <button
@@ -178,7 +178,7 @@ function LoginPage() {
           {!isForgot && (
             <button
               onClick={() => { setMode(isSignup ? "signin" : "signup"); reset(); }}
-              className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#4A1259]/70 transition-colors"
+              className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/45 hover:text-[#4A1259]/70 transition-colors"
             >
               {isSignup ? "Already have an account? Sign in" : "New here? Create an account"}
             </button>
@@ -186,7 +186,7 @@ function LoginPage() {
           {!isSignup && (
             <button
               onClick={() => { setMode(isForgot ? "signin" : "forgot"); reset(); }}
-              className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#4A1259]/55 transition-colors"
+              className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#4A1259]/55 transition-colors"
             >
               {isForgot ? "Back to sign in" : "Forgot password?"}
             </button>

@@ -47,7 +47,7 @@ function TenXLeapIndex() {
         </h1>
         <p
           className="mt-5 max-w-2xl font-serif font-light italic text-[#4A1259]/80"
-          style={{ fontSize: "clamp(19px, 2.8vw, 26px)" }}
+          style={{ fontSize: "clamp(20px, 2.8vw, 26px)" }}
         >
           Create the life and business your Zone of Genius has been waiting for.
         </p>
@@ -95,7 +95,7 @@ function TenXLeapIndex() {
         </h2>
         <p
           className="mt-3 max-w-2xl font-serif italic text-[#4A1259]/75"
-          style={{ fontSize: "clamp(17px, 2.4vw, 21px)" }}
+          style={{ fontSize: "clamp(20px, 2.4vw, 21px)" }}
         >
           Each element designs one part of your business from your Zone of Genius Code. Together they become your Rare Breed Operating Manual™: the complete operating system every Studio in Delivered reads before it builds a thing. You design it once here, and you never start from a blank page again.
         </p>

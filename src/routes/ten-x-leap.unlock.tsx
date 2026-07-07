@@ -39,13 +39,13 @@ function TenXLeapUnlock() {
 
         <p
           className="mx-auto mt-5 max-w-xl font-serif font-light italic text-[#4A1259]/80"
-          style={{ fontSize: "clamp(19px, 2.8vw, 26px)" }}
+          style={{ fontSize: "clamp(20px, 2.8vw, 26px)" }}
         >
           This is where you take your Zone of Genius Code and design the exact business
           you're here to build. Down to the last decision.
         </p>
 
-        <p className="mx-auto mt-6 max-w-lg font-serif leading-relaxed text-[#1F1623]/70" style={{ fontSize: "clamp(16px, 2.4vw, 19px)" }}>
+        <p className="mx-auto mt-6 max-w-lg font-serif leading-relaxed text-[#1F1623]/70" style={{ fontSize: "clamp(18px, 2.4vw, 19px)" }}>
           The 10X Leap is a premium enrollment. Get access below, or log in if you're
           already in.
         </p>
@@ -58,7 +58,7 @@ function TenXLeapUnlock() {
             rel="noopener noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-full px-8 py-5 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
             style={{
-              fontSize: "clamp(17px, 3vw, 22px)",
+              fontSize: "clamp(20px, 3vw, 22px)",
               background: "linear-gradient(135deg, #4A1259 0%, #E0249C 55%, #c9a84c 100%)",
               boxShadow: "0 16px 50px -12px rgba(224,36,156,0.55)",
             }}
@@ -82,7 +82,7 @@ function TenXLeapUnlock() {
 
         <Link
           to={"/prison-break" as any}
-          className="mt-8 inline-block font-mono text-[11px] uppercase tracking-[0.24em] text-[#1F1623]/45 hover:text-[#1F1623]/70"
+          className="mt-8 inline-block font-mono text-[13px] uppercase tracking-[0.24em] text-[#1F1623]/45 hover:text-[#1F1623]/70"
         >
           ← Back to Good Girl Prison Break
         </Link>

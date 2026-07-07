@@ -90,7 +90,7 @@ function ManualSection({
     <div className="group border-b border-[rgba(74,18,89,0.07)] pb-10 last:border-0">
       <div className="flex items-start justify-between gap-4 mb-4">
         <div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#4A1259]/35 mb-1.5">
+          <p className="font-mono text-[13px] uppercase tracking-[0.3em] text-[#4A1259]/35 mb-1.5">
             {label}
           </p>
           {!editing && (
@@ -102,7 +102,7 @@ function ManualSection({
           {isProtected && !unlocked && value && (
             <button
               onClick={() => setUnlocked(true)}
-              className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/25 opacity-0 group-hover:opacity-100 transition-opacity hover:text-[#c9a84c]"
+              className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/25 opacity-0 group-hover:opacity-100 transition-opacity hover:text-[#c9a84c]"
             >
               unlock
             </button>
@@ -113,7 +113,7 @@ function ManualSection({
                 setDraft(value ?? "");
                 setEditing(true);
               }}
-              className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/25 opacity-0 group-hover:opacity-100 transition-opacity hover:text-[#E0249C]"
+              className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/25 opacity-0 group-hover:opacity-100 transition-opacity hover:text-[#E0249C]"
             >
               Edit
             </button>
@@ -139,7 +139,7 @@ function ManualSection({
           <div className="flex items-center gap-4">
             <button
               onClick={handleSave}
-              className="rounded-full px-5 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-white transition-all hover:-translate-y-0.5"
+              className="rounded-full px-5 py-2 font-mono text-[12px] uppercase tracking-[0.2em] text-white transition-all hover:-translate-y-0.5"
               style={{
                 background: "linear-gradient(135deg, #E0249C, #c9a84c)",
                 boxShadow: "0 4px 16px -4px rgba(224,36,156,0.4)",
@@ -152,11 +152,11 @@ function ManualSection({
                 setDraft(value ?? "");
                 setEditing(false);
               }}
-              className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#4A1259]/60"
+              className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/35 hover:text-[#4A1259]/60"
             >
               Cancel
             </button>
-            <span className="font-mono text-[9px] text-[#4A1259]/20 tracking-[0.1em]">
+            <span className="font-mono text-[13px] text-[#4A1259]/20 tracking-[0.1em]">
               esc to cancel
             </span>
           </div>
@@ -244,7 +244,7 @@ function OperatingManualPage() {
       {/* ── POSITIONING ──────────────────────────────────── */}
       <div className="mb-2">
         <p
-          className="font-mono text-[10px] uppercase tracking-[0.3em] mb-8"
+          className="font-mono text-[12px] uppercase tracking-[0.3em] mb-8"
           style={{ color: "rgba(74,18,89,0.2)" }}
         >
           Positioning
@@ -259,7 +259,7 @@ function OperatingManualPage() {
       {/* ── OPERATING PRINCIPLES ─────────────────────────── */}
       <div className="mb-2">
         <p
-          className="font-mono text-[10px] uppercase tracking-[0.3em] mb-8"
+          className="font-mono text-[12px] uppercase tracking-[0.3em] mb-8"
           style={{ color: "rgba(74,18,89,0.2)" }}
         >
           Operating Principles
@@ -273,7 +273,7 @@ function OperatingManualPage() {
       {/* ── NON-NEGOTIABLES ──────────────────────────────── */}
       <div className="mb-2">
         <p
-          className="font-mono text-[10px] uppercase tracking-[0.3em] mb-8"
+          className="font-mono text-[12px] uppercase tracking-[0.3em] mb-8"
           style={{ color: "rgba(74,18,89,0.2)" }}
         >
           Non-Negotiables™
@@ -299,15 +299,15 @@ function OperatingManualPage() {
             background: "linear-gradient(135deg, rgba(201,168,76,0.04) 0%, rgba(255,255,255,0.6) 100%)",
           }}
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[#c9a84c]/60 mb-5">
+          <p className="font-mono text-[13px] uppercase tracking-[0.28em] text-[#c9a84c]/60 mb-5">
             Last Updated
           </p>
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/30 mb-1.5">
+              <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/30 mb-1.5">
                 Evolution Session
               </p>
-              <p className="font-serif text-[15px] text-[#1F1623]/70">
+              <p className="font-serif text-[17px] text-[#1F1623]/70">
                 {updatedAt
                   ? updatedAt.toLocaleDateString("en-US", {
                       month: "long",
@@ -318,10 +318,10 @@ function OperatingManualPage() {
               </p>
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/30 mb-1.5">
+              <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/30 mb-1.5">
                 Next Review
               </p>
-              <p className="font-serif text-[15px] text-[#1F1623]/70">
+              <p className="font-serif text-[17px] text-[#1F1623]/70">
                 {nextReview
                   ? nextReview.toLocaleDateString("en-US", {
                       month: "long",

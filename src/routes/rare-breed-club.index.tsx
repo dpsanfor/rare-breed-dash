@@ -81,7 +81,7 @@ function RareBreedClubIndex() {
         </h1>
         <p
           className="mt-5 max-w-2xl font-serif font-light italic text-[#4A1259]/80"
-          style={{ fontSize: "clamp(19px, 2.8vw, 26px)" }}
+          style={{ fontSize: "clamp(20px, 2.8vw, 26px)" }}
         >
           You're finally living inside the business you've been building toward.
         </p>

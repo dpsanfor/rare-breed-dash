@@ -93,18 +93,18 @@ function PhaseCard({
       {/* Phase label + status */}
       <div className="flex items-center justify-between mb-5">
         <p
-          className="font-mono text-[11px] uppercase tracking-[0.28em] font-semibold"
+          className="font-mono text-[13px] uppercase tracking-[0.28em] font-semibold"
           style={{ color: isComplete ? "rgba(201,168,76,0.8)" : accent.color }}
         >
           Phase {phaseNum}
         </p>
         {isComplete && (
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "#c9a84c" }}>
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em]" style={{ color: "#c9a84c" }}>
             ✦ Done
           </p>
         )}
         {isActive && completed > 0 && (
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: accent.color }}>
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em]" style={{ color: accent.color }}>
             ○ Active
           </p>
         )}
@@ -122,7 +122,7 @@ function PhaseCard({
       <p
         className="font-serif italic leading-[1.25] mb-5"
         style={{
-          fontSize: "clamp(16px, 3.75vw, 21px)",
+          fontSize: "clamp(18px, 3.75vw, 21px)",
           color: isComplete ? "rgba(74,18,89,0.6)" : "#1F1623",
         }}
       >
@@ -133,7 +133,7 @@ function PhaseCard({
       <p
         className="font-serif italic leading-[1.3] flex-1 mb-6"
         style={{
-          fontSize: "clamp(16px, 3.75vw, 21px)",
+          fontSize: "clamp(18px, 3.75vw, 21px)",
           color: isComplete ? "rgba(74,18,89,0.4)" : "#1F1623",
         }}
       >
@@ -152,12 +152,12 @@ function PhaseCard({
               />
             ))}
             {total > 8 && (
-              <span className="font-mono text-[10px]" style={{ color: "rgba(74,18,89,0.4)" }}>
+              <span className="font-mono text-[12px]" style={{ color: "rgba(74,18,89,0.4)" }}>
                 +{total - 8}
               </span>
             )}
           </div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(74,18,89,0.5)" }}>
+          <p className="font-mono text-[13px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(74,18,89,0.5)" }}>
             {completed}/{total} · {pct}%
           </p>
           {continueTo && (
@@ -178,7 +178,7 @@ function PhaseCard({
 
       {isComplete && (
         <div className="mt-auto">
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4" style={{ color: "rgba(201,168,76,0.7)" }}>
+          <p className="font-mono text-[13px] uppercase tracking-[0.18em] mb-4" style={{ color: "rgba(201,168,76,0.7)" }}>
             ✦ {total}/{total} installed
           </p>
           {continueTo && (
@@ -292,16 +292,16 @@ function FeaturedCard({
 
       {/* Phase label + badge */}
       <div className="flex items-center justify-between mb-5 relative">
-        <p className="font-mono text-[11px] uppercase tracking-[0.28em] font-semibold" style={{ color: "rgba(31,22,35,0.6)" }}>
+        <p className="font-mono text-[13px] uppercase tracking-[0.28em] font-semibold" style={{ color: "rgba(31,22,35,0.6)" }}>
           Phase 03 · Build
         </p>
         {isComplete ? (
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: "#c9a84c" }}>
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em]" style={{ color: "#c9a84c" }}>
             ✦ Installed
           </p>
         ) : (
           <p
-            className="font-mono text-[9px] uppercase tracking-[0.2em] rounded-full px-2 py-0.5"
+            className="font-mono text-[13px] uppercase tracking-[0.2em] rounded-full px-2 py-0.5"
             style={{
               color: "#fff",
               background: "linear-gradient(135deg, #E0249C, #D946EF)",
@@ -326,7 +326,7 @@ function FeaturedCard({
       <p
         className="font-serif italic leading-[1.25] mb-5 relative"
         style={{
-          fontSize: "clamp(16px, 3.75vw, 21px)",
+          fontSize: "clamp(18px, 3.75vw, 21px)",
           color: isComplete ? "rgba(74,18,89,0.6)" : "#1F1623",
         }}
       >
@@ -337,7 +337,7 @@ function FeaturedCard({
       <p
         className="font-serif font-bold italic leading-[1.3] flex-1 mb-6 relative"
         style={{
-          fontSize: "clamp(16px, 3.75vw, 21px)",
+          fontSize: "clamp(18px, 3.75vw, 21px)",
           color: isComplete ? "rgba(74,18,89,0.4)" : "rgba(31,22,35,0.82)",
         }}
       >
@@ -381,12 +381,12 @@ function FeaturedCard({
                 />
               ))}
               {total > 8 && (
-                <span className="font-mono text-[10px]" style={{ color: "rgba(31,22,35,0.7)" }}>
+                <span className="font-mono text-[12px]" style={{ color: "rgba(31,22,35,0.7)" }}>
                   +{total - 8}
                 </span>
               )}
             </div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(31,22,35,0.65)" }}>
+            <p className="font-mono text-[13px] uppercase tracking-[0.15em] mb-4" style={{ color: "rgba(31,22,35,0.65)" }}>
               {completed}/{total} · {pct}%
             </p>
             {continueTo && !isComplete && (
@@ -404,7 +404,7 @@ function FeaturedCard({
             )}
             {isComplete && (
               <>
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] mb-4" style={{ color: "#c9a84c" }}>
+                <p className="font-mono text-[13px] uppercase tracking-[0.18em] mb-4" style={{ color: "#c9a84c" }}>
                   ✦ {total}/{total} installed
                 </p>
                 {continueTo && (
@@ -457,12 +457,12 @@ function LockedPhaseCard({
     >
       <div className="flex items-center justify-between mb-5">
         <p
-          className="font-mono text-[11px] uppercase tracking-[0.28em] font-semibold"
+          className="font-mono text-[13px] uppercase tracking-[0.28em] font-semibold"
           style={{ color: accent.color }}
         >
           Phase {phaseNum}
         </p>
-        <p className="font-mono text-[9px] uppercase tracking-[0.2em] rounded-full px-2 py-0.5" style={{ color: accent.color, border: `1px solid ${accent.border}` }}>
+        <p className="font-mono text-[13px] uppercase tracking-[0.2em] rounded-full px-2 py-0.5" style={{ color: accent.color, border: `1px solid ${accent.border}` }}>
           Not enrolled
         </p>
       </div>
@@ -474,7 +474,7 @@ function LockedPhaseCard({
         {name}
       </p>
 
-      <p className="font-serif italic leading-[1.3] mb-6 text-[#4A1259]/70" style={{ fontSize: "clamp(16px, 3.75vw, 20px)" }}>
+      <p className="font-serif italic leading-[1.3] mb-6 text-[#4A1259]/70" style={{ fontSize: "clamp(18px, 3.75vw, 20px)" }}>
         {tagline}
       </p>
 
@@ -577,7 +577,7 @@ function DashHome() {
         </h1>
         <p
           className="font-mono uppercase tracking-[0.32em] mt-3"
-          style={{ fontSize: "clamp(11px, 2.2vw, 14px)", color: "rgba(74,18,89,0.45)" }}
+          style={{ fontSize: "clamp(13px, 2.2vw, 14px)", color: "rgba(74,18,89,0.45)" }}
         >
           identity x business builder
         </p>
@@ -666,7 +666,7 @@ function DashHome() {
               Add your real writing, transcripts, and testimonial screenshots anytime. The more you add, the more everything sounds like you.
             </p>
           </div>
-          <span className="flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">
+          <span className="flex-shrink-0 font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C]">
             Open →
           </span>
         </div>

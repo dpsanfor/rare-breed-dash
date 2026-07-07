@@ -159,7 +159,7 @@ function VoiceLibraryPage() {
       <div className="mx-auto max-w-3xl">
         <div className="mb-10 mt-4">
           <p
-            className="font-mono text-[11px] uppercase tracking-[0.32em]"
+            className="font-mono text-[13px] uppercase tracking-[0.32em]"
             style={{ color: "rgba(224,36,156,0.85)" }}
           >
             Rare Breed OS™ · Your Voice
@@ -191,7 +191,7 @@ function VoiceLibraryPage() {
                   {f.label}
                 </p>
                 {savedKey === f.key && (
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#c9a84c]">
+                  <span className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#c9a84c]">
                     ✦ Saved
                   </span>
                 )}
@@ -204,7 +204,7 @@ function VoiceLibraryPage() {
                 onChange={(e) => update(f.key, e.target.value)}
                 placeholder={f.placeholder}
                 rows={6}
-                className="w-full resize-y rounded-xl border border-[rgba(74,18,89,0.15)] bg-white/80 px-4 py-3 font-serif text-[15px] leading-relaxed text-[#1F1623] outline-none placeholder:text-[#4A1259]/30 focus:border-[#E0249C]/40"
+                className="w-full resize-y rounded-xl border border-[rgba(74,18,89,0.15)] bg-white/80 px-4 py-3 font-serif text-[17px] leading-relaxed text-[#1F1623] outline-none placeholder:text-[#4A1259]/30 focus:border-[#E0249C]/40"
               />
             </div>
           ))}
@@ -242,7 +242,7 @@ function VoiceLibraryPage() {
             <p className="font-serif text-lg italic text-[#4A1259]/70">
               {dragging ? "Drop them here" : "Drag files here, or click to open files from your computer"}
             </p>
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/40">
+            <p className="mt-2 font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/40">
               Documents, transcripts, and testimonial screenshots
             </p>
           </div>
@@ -276,11 +276,11 @@ function VoiceLibraryPage() {
                   />
                   <button
                     onClick={() => removeImage(i)}
-                    className="absolute right-2 top-2 rounded-full bg-black/50 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-white opacity-0 transition-opacity group-hover:opacity-100"
+                    className="absolute right-2 top-2 rounded-full bg-black/50 px-2 py-1 font-mono text-[12px] uppercase tracking-[0.15em] text-white opacity-0 transition-opacity group-hover:opacity-100"
                   >
                     Remove
                   </button>
-                  <p className="truncate px-3 py-2 font-mono text-[10px] text-[#4A1259]/50">
+                  <p className="truncate px-3 py-2 font-mono text-[12px] text-[#4A1259]/50">
                     {img.name}
                   </p>
                 </div>
@@ -309,11 +309,11 @@ function VoiceLibraryPage() {
         <div className="mt-10 mb-6 flex items-center justify-between gap-4">
           <Link
             to={"/dash" as any}
-            className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#4A1259]/45 hover:text-[#E0249C]"
+            className="font-mono text-[13px] uppercase tracking-[0.24em] text-[#4A1259]/45 hover:text-[#E0249C]"
           >
             ← Back to Dashboard
           </Link>
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#4A1259]/40">
+          <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/40">
             Everything here saves automatically
           </p>
         </div>

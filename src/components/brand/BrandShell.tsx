@@ -65,7 +65,7 @@ export function BrandShell({
                 RARE BREED
               </span>
               <span
-                className="font-mono text-[15px] uppercase tracking-[0.45em] leading-none"
+                className="font-mono text-[17px] uppercase tracking-[0.45em] leading-none"
                 style={{ color: "rgba(74,18,89,0.78)" }}
               >
                 Operating System™
@@ -75,7 +75,7 @@ export function BrandShell({
 
           <button
             onClick={handleSignOut}
-            className="font-mono text-[10px] uppercase tracking-[0.2em] transition-colors hover:text-[#E0249C]"
+            className="font-mono text-[12px] uppercase tracking-[0.2em] transition-colors hover:text-[#E0249C]"
             style={{ color: "rgba(74,18,89,0.35)" }}
           >
             Sign Out

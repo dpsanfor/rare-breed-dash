@@ -57,7 +57,7 @@ function ZoneOfGeniusCodePage() {
       {/* Eyebrow */}
       <div className="mb-8 mt-2">
         <p
-          className="font-mono text-[11px] uppercase tracking-[0.32em]"
+          className="font-mono text-[13px] uppercase tracking-[0.32em]"
           style={{ color: "rgba(201,168,76,0.85)" }}
         >
           ✦ Access Granted · Good Girl Prison Break Complete
@@ -71,7 +71,7 @@ function ZoneOfGeniusCodePage() {
           Genius Code™
         </h1>
         <p
-          className="mt-4 font-mono text-[11px] uppercase tracking-[0.24em]"
+          className="mt-4 font-mono text-[13px] uppercase tracking-[0.24em]"
           style={{ color: "rgba(74,18,89,0.45)" }}
         >
           ✦ Saved to your record · flows into The 10X Leap
@@ -115,7 +115,7 @@ function ZoneOfGeniusCodePage() {
         {!codeOpen && (
           <p
             className="px-8 pb-8 font-serif italic sm:px-10 sm:pb-10"
-            style={{ color: "rgba(255,255,255,0.6)", fontSize: "clamp(17px, 2.6vw, 21px)" }}
+            style={{ color: "rgba(255,255,255,0.6)", fontSize: "clamp(20px, 2.6vw, 21px)" }}
           >
             {code
               ? "Open your Code to read it in full."
@@ -130,7 +130,7 @@ function ZoneOfGeniusCodePage() {
             {code ? (
               <pre
                 className="zog-iridescent whitespace-pre-wrap break-words font-mono leading-relaxed"
-                style={{ fontSize: "clamp(16px, 2.9vw, 22px)", margin: 0 }}
+                style={{ fontSize: "clamp(18px, 2.9vw, 22px)", margin: 0 }}
               >
                 {codeLines.join("\n")}
               </pre>
@@ -226,7 +226,7 @@ function ZoneOfGeniusCodePage() {
         </Link>
         <Link
           to={"/prison-break" as any}
-          className="mt-4 block text-center font-mono text-[11px] uppercase tracking-[0.24em] text-[#1F1623]/45 hover:text-[#1F1623]/70"
+          className="mt-4 block text-center font-mono text-[13px] uppercase tracking-[0.24em] text-[#1F1623]/45 hover:text-[#1F1623]/70"
         >
           ← Back to Good Girl Prison Break
         </Link>

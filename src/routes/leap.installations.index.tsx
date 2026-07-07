@@ -81,7 +81,7 @@ function InstallationsPage() {
       <div className="mb-6 flex justify-end">
         <button
           onClick={toggleAdmin}
-          className={`rounded-full border px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] transition-colors ${
+          className={`rounded-full border px-4 py-1.5 font-mono text-[13px] uppercase tracking-[0.2em] transition-colors ${
             adminMode
               ? "border-[#E0249C]/50 bg-[#E0249C]/10 text-[#E0249C]"
               : "border-[rgba(74,18,89,0.2)] text-[#4A1259]/40 hover:border-[rgba(74,18,89,0.4)] hover:text-[#4A1259]/70"
@@ -172,7 +172,7 @@ function InstallationsPage() {
                       </span>
                     )}
                     {status === "installing" && (
-                      <span className="font-mono text-[11px] text-[#E0249C]">
+                      <span className="font-mono text-[13px] text-[#E0249C]">
                         {pct}%
                       </span>
                     )}

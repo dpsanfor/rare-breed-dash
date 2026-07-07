@@ -119,7 +119,7 @@ function DecisionFilterPage() {
               if (decisionText.trim()) setPhase("questions");
             }}
             disabled={!decisionText.trim()}
-            className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-display text-[15px] tracking-[0.2em] text-white transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-40"
+            className="inline-flex items-center gap-3 rounded-full px-8 py-4 font-display text-[17px] tracking-[0.2em] text-white transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-40"
             style={{
               background:
                 "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",

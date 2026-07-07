@@ -35,7 +35,7 @@ function UpdatesPage() {
                 </h3>
               </div>
               {i === 0 && (
-                <span className="rounded-full border border-[#E0249C]/40 bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.25em] text-[#E0249C]">
+                <span className="rounded-full border border-[#E0249C]/40 bg-[#E0249C]/10 px-3 py-1 font-mono text-[13px] uppercase tracking-[0.25em] text-[#E0249C]">
                   Current
                 </span>
               )}
@@ -43,7 +43,7 @@ function UpdatesPage() {
 
             {i === 0 && (
               <div className="mb-6">
-                <p className="font-mono text-[10px] text-[#4A1259]/40">
+                <p className="font-mono text-[12px] text-[#4A1259]/40">
                   Installing...
                 </p>
                 <div className="mt-2 flex items-center gap-2">
@@ -59,7 +59,7 @@ function UpdatesPage() {
                       />
                     ))}
                   </div>
-                  <span className="font-mono text-[10px] text-[#E0249C]/60">
+                  <span className="font-mono text-[12px] text-[#E0249C]/60">
                     64%
                   </span>
                 </div>
