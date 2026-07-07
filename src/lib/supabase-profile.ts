@@ -63,5 +63,20 @@ export async function getUserAccess(): Promise<{ phase1: boolean; phase2: boolea
     }
   }
 
+  // Also check email_grants (covers buyers who paid before creating an account)
+  if (user.email && (!phase2 || !phase3)) {
+    const { data: grants } = await db
+      .from("email_grants")
+      .select("product")
+      .eq("email", user.email);
+    for (const g of grants ?? []) {
+      if (g.product === "ten_x_leap") phase2 = true;
+      if (g.product === "rare_breed_club") {
+        phase2 = true;
+        phase3 = true;
+      }
+    }
+  }
+
   return { phase1, phase2, phase3 };
 }
