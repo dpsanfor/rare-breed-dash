@@ -219,7 +219,7 @@ function RareBreedClubLockedScreen() {
             <span className="font-display text-[42px] tracking-tight text-shimmer">$11,111</span>
             <span className="rounded-full bg-[#E0249C]/10 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#E0249C]">First 5 Only</span>
           </div>
-          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#4A1259]/40">Doubles after the first 5 · By inquiry only</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#E0249C]">Doubles after the first 5 · By inquiry only</p>
         </div>
 
         {/* CTAs */}
