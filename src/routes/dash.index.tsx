@@ -437,12 +437,14 @@ function LockedPhaseCard({
   tagline,
   accent,
   enterTo,
+  learnMoreUrl,
 }: {
   phaseNum: string;
   name: string;
   tagline: string;
   accent: { color: string; bg: string; border: string; shadow: string };
   enterTo: string;
+  learnMoreUrl?: string;
 }) {
   return (
     <div
@@ -489,16 +491,31 @@ function LockedPhaseCard({
       </div>
 
       <div className="mt-auto flex flex-col gap-3">
-        <Link
-          to={enterTo as any}
-          className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5"
-          style={{
-            background: `linear-gradient(135deg, ${accent.color} 0%, #c9a84c 100%)`,
-            boxShadow: accent.shadow,
-          }}
-        >
-          Learn More →
-        </Link>
+        {learnMoreUrl ? (
+          <a
+            href={learnMoreUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5"
+            style={{
+              background: `linear-gradient(135deg, ${accent.color} 0%, #c9a84c 100%)`,
+              boxShadow: accent.shadow,
+            }}
+          >
+            Learn More →
+          </a>
+        ) : (
+          <Link
+            to={enterTo as any}
+            className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] text-white transition-all hover:-translate-y-0.5"
+            style={{
+              background: `linear-gradient(135deg, ${accent.color} 0%, #c9a84c 100%)`,
+              boxShadow: accent.shadow,
+            }}
+          >
+            Learn More →
+          </Link>
+        )}
         <Link
           to={"/login" as any}
           className="inline-flex w-full items-center justify-center gap-1.5 rounded-full py-3 font-display text-[14px] tracking-[0.12em] transition-all hover:-translate-y-0.5"
@@ -601,6 +618,7 @@ function DashHome() {
               tagline="Design your complete business around your Zone of Genius."
               accent={PHASE_ACCENTS.p2}
               enterTo="/ten-x-leap"
+              learnMoreUrl="https://www.the10xleap.com/"
             />
           )}
           {access?.phase3 ? (

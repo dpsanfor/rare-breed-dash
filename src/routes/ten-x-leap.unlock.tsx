@@ -52,8 +52,10 @@ function TenXLeapUnlock() {
 
         {/* Options */}
         <div className="mx-auto mt-10 max-w-md space-y-4">
-          <Link
-            to={"/ten-x-leap" as any}
+          <a
+            href="https://www.the10xleap.com/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-full px-8 py-5 font-display tracking-[0.14em] text-white transition-all hover:-translate-y-0.5 active:scale-[0.98]"
             style={{
               fontSize: "clamp(17px, 3vw, 22px)",
@@ -62,7 +64,7 @@ function TenXLeapUnlock() {
             }}
           >
             Learn More About The 10X Leap →
-          </Link>
+          </a>
 
           <button
             onClick={enterLeap}
