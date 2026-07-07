@@ -631,23 +631,27 @@ function DashHome() {
       {/* Voice Library — always accessible, add to it anytime */}
       <Link
         to={"/voice-library" as any}
-        className="mb-8 flex w-full items-center justify-between gap-4 rounded-2xl border p-6 transition-all hover:-translate-y-0.5"
-        style={{
-          borderColor: "rgba(224,36,156,0.25)",
-          background: "linear-gradient(135deg, rgba(224,36,156,0.05) 0%, rgba(201,168,76,0.05) 100%)",
-        }}
+        className="mb-8 block transition-all hover:-translate-y-0.5"
       >
-        <div>
-          <p className="font-display text-xl tracking-[0.03em] text-[#1F1623]">
-            Your Voice Library
-          </p>
-          <p className="mt-1 font-serif text-sm italic text-[#4A1259]/60">
-            Add your real writing, transcripts, and testimonial screenshots anytime. The more you add, the more everything sounds like you.
-          </p>
+        <div
+          className="flex items-center justify-between gap-4 rounded-2xl border p-6"
+          style={{
+            borderColor: "rgba(224,36,156,0.25)",
+            background: "linear-gradient(135deg, rgba(224,36,156,0.05) 0%, rgba(201,168,76,0.05) 100%)",
+          }}
+        >
+          <div>
+            <p className="font-display text-xl tracking-[0.03em] text-[#1F1623]">
+              Your Voice Library
+            </p>
+            <p className="mt-1 font-serif text-sm italic text-[#4A1259]/60">
+              Add your real writing, transcripts, and testimonial screenshots anytime. The more you add, the more everything sounds like you.
+            </p>
+          </div>
+          <span className="flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">
+            Open →
+          </span>
         </div>
-        <span className="flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] text-[#E0249C]">
-          Open →
-        </span>
       </Link>
 
     </BrandShell>
