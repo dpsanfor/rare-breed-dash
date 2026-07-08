@@ -24,20 +24,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (IS_LOCAL_DEV) return;
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        loadUserProfile().then((profile) => {
-          if (profile) writeProfile(profile);
-        });
-      }
-      setLoading(false);
-    });
 
+    // onAuthStateChange fires immediately with the current session from localStorage,
+    // so we use it as the single source of truth instead of calling getSession separately.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setUser(session?.user ?? null);
-        if (session?.user && event === "SIGNED_IN") {
+        setLoading(false);
+
+        if (session?.user && (event === "SIGNED_IN" || event === "INITIAL_SESSION" || event === "TOKEN_REFRESHED")) {
           loadUserProfile().then((profile) => {
             if (profile) writeProfile(profile);
           });
