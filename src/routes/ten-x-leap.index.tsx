@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
 import { PHASES } from "@/lib/program-data";
-import { readProfile } from "@/lib/profile";
-import { getUserAccess } from "@/lib/supabase-profile";
+import { readProfile, writeProfile } from "@/lib/profile";
+import { getUserAccess, loadUserProfile } from "@/lib/supabase-profile";
 import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -37,6 +37,8 @@ function TenXLeapIndex() {
   const [completedKeys, setCompletedKeys] = useState<string[]>([]);
   const [access, setAccess] = useState<boolean | null>(null);
   const [copied, setCopied] = useState(false);
+  const [restoring, setRestoring] = useState(false);
+  const [restoreMsg, setRestoreMsg] = useState<string | null>(null);
   const phase = PHASES[1];
 
   useEffect(() => {
@@ -45,20 +47,54 @@ function TenXLeapIndex() {
     getUserAccess().then((a) => setAccess(a.phase2));
   }, []);
 
-  function copyElements() {
-    const profile = readProfile();
+  async function restoreFromCloud() {
+    setRestoring(true);
+    setRestoreMsg(null);
+    try {
+      const remote = await loadUserProfile();
+      if (!remote) {
+        setRestoreMsg("Nothing found in the cloud for this account.");
+      } else {
+        const hasData = ELEMENT_KEYS.some(({ key }) => !!(remote as any)[key]);
+        if (!hasData) {
+          setRestoreMsg("Your cloud profile exists but has no completed elements saved.");
+        } else {
+          writeProfile(remote);
+          setCompletedKeys(remote.completed_modules ?? []);
+          setRestoreMsg("Restored. Click Copy All Elements now.");
+        }
+      }
+    } catch {
+      setRestoreMsg("Restore failed — try refreshing and trying again.");
+    } finally {
+      setRestoring(false);
+    }
+  }
+
+  async function copyElements() {
+    let profile = readProfile();
+    const hasLocal = ELEMENT_KEYS.some(({ key }) => !!(profile as any)[key]);
+
+    if (!hasLocal) {
+      // Try cloud before giving up
+      const remote = await loadUserProfile();
+      if (remote) {
+        writeProfile(remote);
+        profile = readProfile();
+      }
+    }
+
     const lines: string[] = ["MY 10X LEAP ELEMENTS\n"];
     for (const { key, label } of ELEMENT_KEYS) {
-      const val = profile[key as keyof typeof profile] as string | undefined;
+      const val = (profile as any)[key] as string | undefined;
       if (val) lines.push(`## ${label}\n${val}`);
     }
     if (lines.length === 1) {
-      lines.push("(No elements completed yet.)");
+      lines.push("(No elements completed yet — your data may not have been saved to the cloud from the previous domain.)");
     }
-    navigator.clipboard.writeText(lines.join("\n\n---\n\n")).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    });
+    await navigator.clipboard.writeText(lines.join("\n\n---\n\n"));
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
   }
 
   if (access === null) return null;
@@ -121,9 +157,20 @@ function TenXLeapIndex() {
         </div>
       )}
 
-      {/* Copy elements to clipboard — owner only */}
+      {/* Copy / restore elements — owner only */}
       {isOwner && (
-        <div className="mb-8 flex justify-end">
+        <div className="mb-8 flex flex-wrap items-center justify-end gap-3">
+          {restoreMsg && (
+            <p className="font-mono text-[11px] text-[#4A1259]/55">{restoreMsg}</p>
+          )}
+          <button
+            onClick={restoreFromCloud}
+            disabled={restoring}
+            className="inline-flex items-center gap-2 rounded-full border px-5 py-2 font-mono text-[12px] uppercase tracking-[0.2em] transition-all disabled:opacity-40"
+            style={{ borderColor: "rgba(74,18,89,0.2)", color: "rgba(74,18,89,0.45)" }}
+          >
+            {restoring ? "Restoring..." : "Restore from cloud"}
+          </button>
           <button
             onClick={copyElements}
             className="inline-flex items-center gap-2 rounded-full border px-5 py-2 font-mono text-[12px] uppercase tracking-[0.2em] transition-all"
