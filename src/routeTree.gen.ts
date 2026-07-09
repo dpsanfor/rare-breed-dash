@@ -24,6 +24,7 @@ import { Route as OperatingManualIndexRouteImport } from './routes/operating-man
 import { Route as LeapIndexRouteImport } from './routes/leap.index'
 import { Route as DashIndexRouteImport } from './routes/dash.index'
 import { Route as TenXLeapUnlockRouteImport } from './routes/ten-x-leap.unlock'
+import { Route as TenXLeapReviewRouteImport } from './routes/ten-x-leap.review'
 import { Route as TenXLeapModuleRouteImport } from './routes/ten-x-leap.$module'
 import { Route as RareBreedClubBuilderRouteImport } from './routes/rare-breed-club.$builder'
 import { Route as PrisonBreakModuleRouteImport } from './routes/prison-break.$module'
@@ -111,6 +112,11 @@ const TenXLeapUnlockRoute = TenXLeapUnlockRouteImport.update({
   path: '/ten-x-leap/unlock',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TenXLeapReviewRoute = TenXLeapReviewRouteImport.update({
+  id: '/ten-x-leap/review',
+  path: '/ten-x-leap/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TenXLeapModuleRoute = TenXLeapModuleRouteImport.update({
   id: '/ten-x-leap/$module',
   path: '/ten-x-leap/$module',
@@ -179,6 +185,7 @@ export interface FileRoutesByFullPath {
   '/prison-break/$module': typeof PrisonBreakModuleRoute
   '/rare-breed-club/$builder': typeof RareBreedClubBuilderRoute
   '/ten-x-leap/$module': typeof TenXLeapModuleRoute
+  '/ten-x-leap/review': typeof TenXLeapReviewRoute
   '/ten-x-leap/unlock': typeof TenXLeapUnlockRoute
   '/dash/': typeof DashIndexRoute
   '/leap/': typeof LeapIndexRoute
@@ -206,6 +213,7 @@ export interface FileRoutesByTo {
   '/prison-break/$module': typeof PrisonBreakModuleRoute
   '/rare-breed-club/$builder': typeof RareBreedClubBuilderRoute
   '/ten-x-leap/$module': typeof TenXLeapModuleRoute
+  '/ten-x-leap/review': typeof TenXLeapReviewRoute
   '/ten-x-leap/unlock': typeof TenXLeapUnlockRoute
   '/dash': typeof DashIndexRoute
   '/leap': typeof LeapIndexRoute
@@ -234,6 +242,7 @@ export interface FileRoutesById {
   '/prison-break/$module': typeof PrisonBreakModuleRoute
   '/rare-breed-club/$builder': typeof RareBreedClubBuilderRoute
   '/ten-x-leap/$module': typeof TenXLeapModuleRoute
+  '/ten-x-leap/review': typeof TenXLeapReviewRoute
   '/ten-x-leap/unlock': typeof TenXLeapUnlockRoute
   '/dash/': typeof DashIndexRoute
   '/leap/': typeof LeapIndexRoute
@@ -263,6 +272,7 @@ export interface FileRouteTypes {
     | '/prison-break/$module'
     | '/rare-breed-club/$builder'
     | '/ten-x-leap/$module'
+    | '/ten-x-leap/review'
     | '/ten-x-leap/unlock'
     | '/dash/'
     | '/leap/'
@@ -290,6 +300,7 @@ export interface FileRouteTypes {
     | '/prison-break/$module'
     | '/rare-breed-club/$builder'
     | '/ten-x-leap/$module'
+    | '/ten-x-leap/review'
     | '/ten-x-leap/unlock'
     | '/dash'
     | '/leap'
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/prison-break/$module'
     | '/rare-breed-club/$builder'
     | '/ten-x-leap/$module'
+    | '/ten-x-leap/review'
     | '/ten-x-leap/unlock'
     | '/dash/'
     | '/leap/'
@@ -345,6 +357,7 @@ export interface RootRouteChildren {
   PrisonBreakModuleRoute: typeof PrisonBreakModuleRoute
   RareBreedClubBuilderRoute: typeof RareBreedClubBuilderRoute
   TenXLeapModuleRoute: typeof TenXLeapModuleRoute
+  TenXLeapReviewRoute: typeof TenXLeapReviewRoute
   TenXLeapUnlockRoute: typeof TenXLeapUnlockRoute
   DashIndexRoute: typeof DashIndexRoute
   LeapIndexRoute: typeof LeapIndexRoute
@@ -463,6 +476,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TenXLeapUnlockRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ten-x-leap/review': {
+      id: '/ten-x-leap/review'
+      path: '/ten-x-leap/review'
+      fullPath: '/ten-x-leap/review'
+      preLoaderRoute: typeof TenXLeapReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ten-x-leap/$module': {
       id: '/ten-x-leap/$module'
       path: '/ten-x-leap/$module'
@@ -553,6 +573,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrisonBreakModuleRoute: PrisonBreakModuleRoute,
   RareBreedClubBuilderRoute: RareBreedClubBuilderRoute,
   TenXLeapModuleRoute: TenXLeapModuleRoute,
+  TenXLeapReviewRoute: TenXLeapReviewRoute,
   TenXLeapUnlockRoute: TenXLeapUnlockRoute,
   DashIndexRoute: DashIndexRoute,
   LeapIndexRoute: LeapIndexRoute,

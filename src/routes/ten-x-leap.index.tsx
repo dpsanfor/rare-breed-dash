@@ -84,6 +84,29 @@ function TenXLeapIndex() {
         </div>
       )}
 
+      {/* Talk to Your OS */}
+      <div className="mb-8">
+        <Link
+          to="/ten-x-leap/review"
+          className="flex items-center justify-between rounded-2xl p-6 transition-all hover:-translate-y-0.5"
+          style={{
+            background: "linear-gradient(135deg, rgba(74,18,89,0.07) 0%, rgba(192,132,252,0.06) 100%)",
+            border: "1px solid rgba(74,18,89,0.2)",
+          }}
+        >
+          <div>
+            <p className="eyebrow mb-1">New</p>
+            <p className="font-display text-[22px] tracking-[0.05em] text-[#1F1623]">Talk to Your OS</p>
+            <p className="mt-1 font-serif text-[17px] italic text-[#4A1259]/65">
+              Free-form coaching with all {completedCount} of your completed elements loaded at once.
+            </p>
+          </div>
+          <span className="ml-4 flex-shrink-0 font-mono text-[13px] uppercase tracking-[0.2em] text-[#E0249C]">
+            Open →
+          </span>
+        </Link>
+      </div>
+
       {/* What this section is */}
       <div className="mb-8 border-t border-[rgba(74,18,89,0.12)] pt-10">
         <p className="eyebrow mb-3">The Elements</p>
