@@ -5,6 +5,24 @@ import { PHASES } from "@/lib/program-data";
 import { readProfile } from "@/lib/profile";
 import { getUserAccess } from "@/lib/supabase-profile";
 import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
+import { useAuth } from "@/contexts/AuthContext";
+
+const OWNER_EMAIL = "dana@danahayes.com";
+const IS_LOCAL_DEV = typeof window !== "undefined" && window.location.hostname === "localhost";
+
+const ELEMENT_KEYS: { key: string; label: string }[] = [
+  { key: "bigger_vision", label: "10X Vision" },
+  { key: "release_plan", label: "Dead Weight Release Plan" },
+  { key: "constitution", label: "Rare Breed Constitution" },
+  { key: "zone_of_genius", label: "Zone of Genius" },
+  { key: "ten_x_business", label: "10X Business Concept" },
+  { key: "living_proof", label: "Living Proof" },
+  { key: "ten_x_calendar", label: "10X Calendar" },
+  { key: "dream_client_decision", label: "Dream Client Decision" },
+  { key: "offer_map", label: "Offer Ecosystem Map" },
+  { key: "brand_direction", label: "Brand Direction" },
+  { key: "operating_manual", label: "Rare Breed Operating Manual" },
+];
 
 export const Route = createFileRoute("/ten-x-leap/")({
   head: () => ({
@@ -14,8 +32,11 @@ export const Route = createFileRoute("/ten-x-leap/")({
 });
 
 function TenXLeapIndex() {
+  const { user } = useAuth();
+  const isOwner = IS_LOCAL_DEV || user?.email === OWNER_EMAIL;
   const [completedKeys, setCompletedKeys] = useState<string[]>([]);
   const [access, setAccess] = useState<boolean | null>(null);
+  const [copied, setCopied] = useState(false);
   const phase = PHASES[1];
 
   useEffect(() => {
@@ -23,6 +44,22 @@ function TenXLeapIndex() {
     setCompletedKeys(profile.completed_modules ?? []);
     getUserAccess().then((a) => setAccess(a.phase2));
   }, []);
+
+  function copyElements() {
+    const profile = readProfile();
+    const lines: string[] = ["MY 10X LEAP ELEMENTS\n"];
+    for (const { key, label } of ELEMENT_KEYS) {
+      const val = profile[key as keyof typeof profile] as string | undefined;
+      if (val) lines.push(`## ${label}\n${val}`);
+    }
+    if (lines.length === 1) {
+      lines.push("(No elements completed yet.)");
+    }
+    navigator.clipboard.writeText(lines.join("\n\n---\n\n")).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    });
+  }
 
   if (access === null) return null;
   if (!access) return <PhaseLockedScreen phase="10x-leap" />;
@@ -81,6 +118,23 @@ function TenXLeapIndex() {
           >
             Continue Designing →
           </Link>
+        </div>
+      )}
+
+      {/* Copy elements to clipboard — owner only */}
+      {isOwner && (
+        <div className="mb-8 flex justify-end">
+          <button
+            onClick={copyElements}
+            className="inline-flex items-center gap-2 rounded-full border px-5 py-2 font-mono text-[12px] uppercase tracking-[0.2em] transition-all"
+            style={{
+              borderColor: copied ? "rgba(22,163,74,0.4)" : "rgba(74,18,89,0.2)",
+              color: copied ? "#16a34a" : "rgba(74,18,89,0.5)",
+              background: copied ? "rgba(22,163,74,0.06)" : "transparent",
+            }}
+          >
+            {copied ? "Copied ✓" : "Copy all elements"}
+          </button>
         </div>
       )}
 
