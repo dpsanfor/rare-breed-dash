@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ZoneOfGeniusCodeRouteImport } from './routes/zone-of-genius-code'
 import { Route as VoiceLibraryRouteImport } from './routes/voice-library'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RareBreedOperatingManualRouteImport } from './routes/rare-breed-operating-manual'
 import { Route as MetamorphosisRouteImport } from './routes/metamorphosis'
 import { Route as LoginRouteImport } from './routes/login'
@@ -49,6 +50,11 @@ const VoiceLibraryRoute = VoiceLibraryRouteImport.update({
 const SettingsRoute = SettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RareBreedOperatingManualRoute =
@@ -174,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/voice-library': typeof VoiceLibraryRoute
   '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/voice-library': typeof VoiceLibraryRoute
   '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
@@ -231,6 +239,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/voice-library': typeof VoiceLibraryRoute
   '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
@@ -261,6 +270,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
+    | '/reset-password'
     | '/settings'
     | '/voice-library'
     | '/zone-of-genius-code'
@@ -289,6 +299,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
+    | '/reset-password'
     | '/settings'
     | '/voice-library'
     | '/zone-of-genius-code'
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
+    | '/reset-password'
     | '/settings'
     | '/voice-library'
     | '/zone-of-genius-code'
@@ -346,6 +358,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   MetamorphosisRoute: typeof MetamorphosisRoute
   RareBreedOperatingManualRoute: typeof RareBreedOperatingManualRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SettingsRoute: typeof SettingsRoute
   VoiceLibraryRoute: typeof VoiceLibraryRoute
   ZoneOfGeniusCodeRoute: typeof ZoneOfGeniusCodeRoute
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rare-breed-operating-manual': {
@@ -562,6 +582,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   MetamorphosisRoute: MetamorphosisRoute,
   RareBreedOperatingManualRoute: RareBreedOperatingManualRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SettingsRoute: SettingsRoute,
   VoiceLibraryRoute: VoiceLibraryRoute,
   ZoneOfGeniusCodeRoute: ZoneOfGeniusCodeRoute,
