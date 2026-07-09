@@ -27,7 +27,13 @@ function LoginPage() {
         return;
       }
       if (event === "SIGNED_IN" && session && mode !== "reset-password") {
-        navigate({ to: "/dash" });
+        const returnUrl = sessionStorage.getItem("rb_post_login_url");
+        if (returnUrl) {
+          sessionStorage.removeItem("rb_post_login_url");
+          window.location.href = returnUrl;
+        } else {
+          navigate({ to: "/dash" });
+        }
       }
     });
 
@@ -98,7 +104,7 @@ function LoginPage() {
         if (signInErr) {
           setSuccess("Account created. Check your email to confirm before signing in.");
         } else {
-          navigate({ to: "/dash" });
+          redirectAfterLogin();
         }
       }
       return;
@@ -113,6 +119,16 @@ function LoginPage() {
           ? "Incorrect email or password."
           : error.message
       );
+    } else {
+      redirectAfterLogin();
+    }
+  }
+
+  function redirectAfterLogin() {
+    const returnUrl = sessionStorage.getItem("rb_post_login_url");
+    if (returnUrl) {
+      sessionStorage.removeItem("rb_post_login_url");
+      window.location.href = returnUrl;
     } else {
       navigate({ to: "/dash" });
     }

@@ -15,6 +15,7 @@ import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as RareBreedOperatingManualRouteImport } from './routes/rare-breed-operating-manual'
 import { Route as MetamorphosisRouteImport } from './routes/metamorphosis'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as GrantAccessRouteImport } from './routes/grant-access'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as TenXLeapIndexRouteImport } from './routes/ten-x-leap.index'
 import { Route as RareBreedClubIndexRouteImport } from './routes/rare-breed-club.index'
@@ -63,6 +64,11 @@ const MetamorphosisRoute = MetamorphosisRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GrantAccessRoute = GrantAccessRouteImport.update({
+  id: '/grant-access',
+  path: '/grant-access',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -158,6 +164,7 @@ const LeapInstallationsIdRoute = LeapInstallationsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
+  '/grant-access': typeof GrantAccessRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
@@ -184,6 +191,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
+  '/grant-access': typeof GrantAccessRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
@@ -211,6 +219,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/admin': typeof AdminRoute
+  '/grant-access': typeof GrantAccessRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
   '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
@@ -239,6 +248,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/admin'
+    | '/grant-access'
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
@@ -265,6 +275,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/admin'
+    | '/grant-access'
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
@@ -291,6 +302,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/admin'
+    | '/grant-access'
     | '/login'
     | '/metamorphosis'
     | '/rare-breed-operating-manual'
@@ -318,6 +330,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
+  GrantAccessRoute: typeof GrantAccessRoute
   LoginRoute: typeof LoginRoute
   MetamorphosisRoute: typeof MetamorphosisRoute
   RareBreedOperatingManualRoute: typeof RareBreedOperatingManualRoute
@@ -385,6 +398,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/grant-access': {
+      id: '/grant-access'
+      path: '/grant-access'
+      fullPath: '/grant-access'
+      preLoaderRoute: typeof GrantAccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -518,6 +538,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
+  GrantAccessRoute: GrantAccessRoute,
   LoginRoute: LoginRoute,
   MetamorphosisRoute: MetamorphosisRoute,
   RareBreedOperatingManualRoute: RareBreedOperatingManualRoute,
