@@ -476,17 +476,17 @@ export const PHASES: Phase[] = [
         nextDecision: "Would I post what this machine writes without editing it?",
         generatePrompt:
           "I'm ready. Generate my Brand Direction based on everything we've discussed.",
-        feedsInto: "Module 11 brings every decision together: your 10X Vision, Rare Breed Constitution, Zone of Genius, the business you're here to build, your Proof, your Calendar, Dream Client, Offer Map, and Brand Direction, synthesized into your Rare Breed Operating Manual™.",
+        feedsInto: "Module 11 brings every decision together: your 10X Vision, Rare Breed Constitution, Zone of Genius, the business you're here to build, your Proof, your Calendar, Dream Client, Offer Map, and Brand Direction, synthesized into your X Factor Operating Manual™.",
       },
       {
         id: "operating-manual",
         number: 11,
         name: "The Operating Manual",
-        tagline: "Every decision synthesized into one document. You walk away with your Rare Breed Operating Manual™: the complete design of your business, ready to plug into the Club.",
+        tagline: "Every decision synthesized into one document. You walk away with your X Factor Operating Manual™: the complete design of your business, ready to plug into the Club.",
         purpose:
-          "Bring everything you've created together into one living blueprint — your Rare Breed Operating Manual™. This becomes the intelligence Rare Breed OS™ uses to generate your messaging, offers, content, launches, and business when you activate it inside Delivered. So that you only have to think deeply once. After that, Rare Breed OS™ brings your business to life from your unique genius — not a blank page.",
+          "Bring everything you've created together into one living blueprint — your X Factor Operating Manual™. This becomes the intelligence Rare Breed OS™ uses to generate your messaging, offers, content, launches, and business when you activate it inside Delivered. So that you only have to think deeply once. After that, Rare Breed OS™ brings your business to life from your unique genius — not a blank page.",
         type: "synthesis",
-        outputName: "Rare Breed Operating Manual",
+        outputName: "X Factor Operating Manual",
         outputKey: "operating_manual",
         nextDecision:
           "What is the first move I make from this operating manual this week?",

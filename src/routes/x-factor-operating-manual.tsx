@@ -4,9 +4,9 @@ import { BrandShell } from "@/components/brand/BrandShell";
 import { Markdown } from "@/components/Markdown";
 import { readProfile, type UserProfile } from "@/lib/profile";
 
-export const Route = createFileRoute("/rare-breed-operating-manual")({
+export const Route = createFileRoute("/x-factor-operating-manual")({
   head: () => ({
-    meta: [{ title: "Your Rare Breed Operating Manual™" }],
+    meta: [{ title: "Your X Factor Operating Manual™" }],
   }),
   component: OperatingManualReveal,
 });
@@ -37,7 +37,7 @@ function OperatingManualReveal() {
           className="font-display text-shimmer leading-[0.9] tracking-[0.03em] mt-4"
           style={{ fontSize: "clamp(40px, 9vw, 72px)" }}
         >
-          Your Delivered
+          Your X Factor
           <br />
           Operating Manual™
         </h1>
@@ -68,7 +68,7 @@ function OperatingManualReveal() {
             className="font-mono text-[12px] uppercase tracking-[0.28em]"
             style={{ color: "rgba(255,255,255,0.5)" }}
           >
-            rare_breed.operating_manual
+            x_factor.operating_manual
           </span>
           <span
             className="font-mono text-[12px] uppercase tracking-[0.24em]"
@@ -86,7 +86,7 @@ function OperatingManualReveal() {
             {manual
               ? "Open your Operating Manual to read the complete design of your business."
               : mounted
-                ? "Complete all eleven elements of The 10X Leap to generate your Rare Breed Operating Manual."
+                ? "Complete all eleven elements of The 10X Leap to generate your X Factor Operating Manual."
                 : "Loading your Operating Manual..."}
           </p>
         )}
@@ -96,12 +96,12 @@ function OperatingManualReveal() {
             {manual ? (
               <Markdown
                 text={manual}
-                className="prose prose-sm max-w-none font-serif leading-relaxed"
+                className="prose prose-sm prose-invert max-w-none font-serif leading-relaxed [&_h1]:text-[#F0DFA0] [&_h2]:text-[#F0DFA0] [&_h3]:text-[#C9A84C] [&_strong]:text-white [&_p]:text-[rgba(245,239,224,0.85)] [&_li]:text-[rgba(245,239,224,0.85)]"
               />
             ) : (
               <p className="font-serif italic" style={{ color: "rgba(255,255,255,0.6)" }}>
                 {mounted
-                  ? "Complete all eleven elements of The 10X Leap to generate your Rare Breed Operating Manual."
+                  ? "Complete all eleven elements of The 10X Leap to generate your X Factor Operating Manual."
                   : "Loading..."}
               </p>
             )}
@@ -122,7 +122,7 @@ function OperatingManualReveal() {
       <div className="space-y-6">
         <SynopsisCard label="What it is" accent="#E0249C">
           <p>
-            Your Rare Breed Operating Manual is the complete design of your business,
+            Your X Factor Operating Manual is the complete design of your business,
             pulled from every element you built across The 10X Leap and written into
             one living document.
           </p>
@@ -157,7 +157,7 @@ function OperatingManualReveal() {
         >
           <p>This is where your operating system becomes a living business.</p>
           <p>
-            You hand your Rare Breed Operating Manual to the Studios, and they
+            You hand your X Factor Operating Manual to the Studios, and they
             generate the actual assets, built from your genius instead of a generic
             template. You stop being the bottleneck. You stop rebuilding every six
             months. Your business finally runs on a system that is unmistakably yours.

@@ -313,7 +313,7 @@ function PrisonBreakIndex() {
               The 10X Leap™
             </p>
             <p className="max-w-xl font-serif text-xl italic leading-relaxed text-[#4A1259]/75 mb-6">
-              Good Girl Prison Break hands you your Zone of Genius Code™. The 10X Leap is the design tool that turns it into your complete business: eleven elements, one Rare Breed Operating Manual™. And Dana is beside you on three live calls while you build.
+              Good Girl Prison Break hands you your Zone of Genius Code™. The 10X Leap is the design tool that turns it into your complete business: eleven elements, one X Factor Operating Manual™. And Dana is beside you on three live calls while you build.
             </p>
           </>
         )}

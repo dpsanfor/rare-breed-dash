@@ -10,10 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ZoneOfGeniusCodeRouteImport } from './routes/zone-of-genius-code'
+import { Route as XFactorOperatingManualRouteImport } from './routes/x-factor-operating-manual'
 import { Route as VoiceLibraryRouteImport } from './routes/voice-library'
 import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as RareBreedOperatingManualRouteImport } from './routes/rare-breed-operating-manual'
 import { Route as MetamorphosisRouteImport } from './routes/metamorphosis'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as GrantAccessRouteImport } from './routes/grant-access'
@@ -42,6 +42,11 @@ const ZoneOfGeniusCodeRoute = ZoneOfGeniusCodeRouteImport.update({
   path: '/zone-of-genius-code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const XFactorOperatingManualRoute = XFactorOperatingManualRouteImport.update({
+  id: '/x-factor-operating-manual',
+  path: '/x-factor-operating-manual',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VoiceLibraryRoute = VoiceLibraryRouteImport.update({
   id: '/voice-library',
   path: '/voice-library',
@@ -57,12 +62,6 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RareBreedOperatingManualRoute =
-  RareBreedOperatingManualRouteImport.update({
-    id: '/rare-breed-operating-manual',
-    path: '/rare-breed-operating-manual',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const MetamorphosisRoute = MetamorphosisRouteImport.update({
   id: '/metamorphosis',
   path: '/metamorphosis',
@@ -179,10 +178,10 @@ export interface FileRoutesByFullPath {
   '/grant-access': typeof GrantAccessRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
-  '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
   '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/voice-library': typeof VoiceLibraryRoute
+  '/x-factor-operating-manual': typeof XFactorOperatingManualRoute
   '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
   '/leap/constitution': typeof LeapConstitutionRoute
   '/leap/decision-filter': typeof LeapDecisionFilterRoute
@@ -208,10 +207,10 @@ export interface FileRoutesByTo {
   '/grant-access': typeof GrantAccessRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
-  '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
   '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/voice-library': typeof VoiceLibraryRoute
+  '/x-factor-operating-manual': typeof XFactorOperatingManualRoute
   '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
   '/leap/constitution': typeof LeapConstitutionRoute
   '/leap/decision-filter': typeof LeapDecisionFilterRoute
@@ -238,10 +237,10 @@ export interface FileRoutesById {
   '/grant-access': typeof GrantAccessRoute
   '/login': typeof LoginRoute
   '/metamorphosis': typeof MetamorphosisRoute
-  '/rare-breed-operating-manual': typeof RareBreedOperatingManualRoute
   '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
   '/voice-library': typeof VoiceLibraryRoute
+  '/x-factor-operating-manual': typeof XFactorOperatingManualRoute
   '/zone-of-genius-code': typeof ZoneOfGeniusCodeRoute
   '/leap/constitution': typeof LeapConstitutionRoute
   '/leap/decision-filter': typeof LeapDecisionFilterRoute
@@ -269,10 +268,10 @@ export interface FileRouteTypes {
     | '/grant-access'
     | '/login'
     | '/metamorphosis'
-    | '/rare-breed-operating-manual'
     | '/reset-password'
     | '/settings'
     | '/voice-library'
+    | '/x-factor-operating-manual'
     | '/zone-of-genius-code'
     | '/leap/constitution'
     | '/leap/decision-filter'
@@ -298,10 +297,10 @@ export interface FileRouteTypes {
     | '/grant-access'
     | '/login'
     | '/metamorphosis'
-    | '/rare-breed-operating-manual'
     | '/reset-password'
     | '/settings'
     | '/voice-library'
+    | '/x-factor-operating-manual'
     | '/zone-of-genius-code'
     | '/leap/constitution'
     | '/leap/decision-filter'
@@ -327,10 +326,10 @@ export interface FileRouteTypes {
     | '/grant-access'
     | '/login'
     | '/metamorphosis'
-    | '/rare-breed-operating-manual'
     | '/reset-password'
     | '/settings'
     | '/voice-library'
+    | '/x-factor-operating-manual'
     | '/zone-of-genius-code'
     | '/leap/constitution'
     | '/leap/decision-filter'
@@ -357,10 +356,10 @@ export interface RootRouteChildren {
   GrantAccessRoute: typeof GrantAccessRoute
   LoginRoute: typeof LoginRoute
   MetamorphosisRoute: typeof MetamorphosisRoute
-  RareBreedOperatingManualRoute: typeof RareBreedOperatingManualRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SettingsRoute: typeof SettingsRoute
   VoiceLibraryRoute: typeof VoiceLibraryRoute
+  XFactorOperatingManualRoute: typeof XFactorOperatingManualRoute
   ZoneOfGeniusCodeRoute: typeof ZoneOfGeniusCodeRoute
   LeapConstitutionRoute: typeof LeapConstitutionRoute
   LeapDecisionFilterRoute: typeof LeapDecisionFilterRoute
@@ -391,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ZoneOfGeniusCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/x-factor-operating-manual': {
+      id: '/x-factor-operating-manual'
+      path: '/x-factor-operating-manual'
+      fullPath: '/x-factor-operating-manual'
+      preLoaderRoute: typeof XFactorOperatingManualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/voice-library': {
       id: '/voice-library'
       path: '/voice-library'
@@ -410,13 +416,6 @@ declare module '@tanstack/react-router' {
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rare-breed-operating-manual': {
-      id: '/rare-breed-operating-manual'
-      path: '/rare-breed-operating-manual'
-      fullPath: '/rare-breed-operating-manual'
-      preLoaderRoute: typeof RareBreedOperatingManualRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/metamorphosis': {
@@ -581,10 +580,10 @@ const rootRouteChildren: RootRouteChildren = {
   GrantAccessRoute: GrantAccessRoute,
   LoginRoute: LoginRoute,
   MetamorphosisRoute: MetamorphosisRoute,
-  RareBreedOperatingManualRoute: RareBreedOperatingManualRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SettingsRoute: SettingsRoute,
   VoiceLibraryRoute: VoiceLibraryRoute,
+  XFactorOperatingManualRoute: XFactorOperatingManualRoute,
   ZoneOfGeniusCodeRoute: ZoneOfGeniusCodeRoute,
   LeapConstitutionRoute: LeapConstitutionRoute,
   LeapDecisionFilterRoute: LeapDecisionFilterRoute,

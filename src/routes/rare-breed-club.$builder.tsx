@@ -477,7 +477,7 @@ function RareBreedClubBuilder() {
             {messages.length === 0 && loading && (
               <div className="flex flex-col items-start gap-3">
                 <p className="font-mono text-[13px] uppercase tracking-[0.25em] text-[#E0249C]/70">
-                  Reading your Rare Breed Operating Manual...
+                  Reading your X Factor Operating Manual...
                 </p>
                 <div className="flex items-center gap-1 text-[#4A1259]/40">
                   <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-current" style={{ animationDelay: "0ms" }} />

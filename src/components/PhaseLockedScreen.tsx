@@ -9,14 +9,14 @@ const DELIVERABLES = [
   "Your Dream Client Decision",
   "Your Offer Ecosystem Map",
   "Your Brand Direction",
-  "Your Rare Breed Operating Manual™",
+  "Your X Factor Operating Manual™",
 ];
 
 const INCLUDES = [
   "Complete 10X Leap™ Builder",
   "AI-Guided Business Design Intensive",
   "All Design Elements",
-  "Rare Breed Operating Manual™",
+  "X Factor Operating Manual™",
   "Lifetime Updates",
   "Three Live Support Calls with Dana",
 ];
@@ -175,7 +175,7 @@ function RareBreedClubLockedScreen() {
         </p>
 
         <p className="font-serif text-[22px] leading-relaxed text-[#4A1259]/70 mb-10 max-w-xl">
-          3 months of done-with-you business building — 1:1 with Dana — using Rare Breed OS™ with all 9 Studios powered by your Rare Breed Operating Manual™ and Zone of Genius Code™. Your most complete, most aligned business, built out as fast as possible. Most clients are done in 2 weeks. You have up to 3 months.
+          3 months of done-with-you business building — 1:1 with Dana — using Rare Breed OS™ with all 9 Studios powered by your X Factor Operating Manual™ and Zone of Genius Code™. Your most complete, most aligned business, built out as fast as possible. Most clients are done in 2 weeks. You have up to 3 months.
         </p>
 
         <div className="mb-10 max-w-xl">
