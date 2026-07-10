@@ -23,6 +23,13 @@ function OperatingManualReveal() {
 
   const manual = profile.operating_manual;
 
+  const isStale = Boolean(
+    manual &&
+    profile.leap_last_updated_at &&
+    profile.manual_generated_at &&
+    new Date(profile.leap_last_updated_at) > new Date(profile.manual_generated_at)
+  );
+
   return (
     <BrandShell hideStickyCta>
       {/* Eyebrow + title */}
@@ -48,6 +55,36 @@ function OperatingManualReveal() {
           ✦ Saved · every element you designed is captured here
         </p>
       </div>
+
+      {/* Stale notice — shown when an element was updated after the manual was generated */}
+      {isStale && (
+        <div
+          className="mb-6 flex flex-col gap-4 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between"
+          style={{
+            background: "linear-gradient(135deg, rgba(224,36,156,0.10) 0%, rgba(74,18,89,0.10) 100%)",
+            border: "1px solid rgba(224,36,156,0.35)",
+          }}
+        >
+          <div>
+            <p className="font-mono text-[12px] uppercase tracking-[0.28em]" style={{ color: "#E0249C" }}>
+              ✦ Your manual is out of date
+            </p>
+            <p className="mt-1 font-serif italic" style={{ color: "rgba(31,22,35,0.7)", fontSize: "clamp(16px,2.2vw,18px)" }}>
+              You've updated one or more elements since this was generated. Regenerate to reflect your latest design.
+            </p>
+          </div>
+          <Link
+            to={"/ten-x-leap/11" as any}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[13px] tracking-[0.18em] text-white transition-all hover:-translate-y-0.5"
+            style={{
+              background: "linear-gradient(135deg, #E0249C 0%, #c9a84c 100%)",
+              boxShadow: "0 8px 28px -8px rgba(224,36,156,0.45)",
+            }}
+          >
+            Regenerate Manual →
+          </Link>
+        </div>
+      )}
 
       {/* The Manual, an openable card */}
       <div

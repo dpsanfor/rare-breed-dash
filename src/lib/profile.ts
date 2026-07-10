@@ -66,6 +66,10 @@ export interface UserProfile {
   current_focus?: string;
   operating_manual_updated_at?: string;
 
+  // Staleness tracking — compare these to know if the manual needs regenerating
+  manual_generated_at?: string;   // set when operating_manual is saved
+  leap_last_updated_at?: string;  // set when any of the 10 source elements are saved
+
   // Background intelligence (continuously refined across all engines)
   discernment_signals?: string;
   decision_filters?: string;
@@ -142,8 +146,21 @@ export function writeProfile(update: Partial<UserProfile>): UserProfile {
   return merged;
 }
 
+const LEAP_ELEMENT_KEYS = new Set([
+  "bigger_vision", "release_plan", "constitution", "zone_of_genius",
+  "ten_x_business", "living_proof", "ten_x_calendar", "dream_client_decision",
+  "offer_map", "brand_direction",
+]);
+
 export function saveArtifact(key: keyof UserProfile, value: string): void {
-  writeProfile({ [key]: value } as Partial<UserProfile>);
+  const now = new Date().toISOString();
+  const extra: Partial<UserProfile> =
+    key === "operating_manual"
+      ? { manual_generated_at: now }
+      : LEAP_ELEMENT_KEYS.has(key as string)
+        ? { leap_last_updated_at: now }
+        : {};
+  writeProfile({ [key]: value, ...extra } as Partial<UserProfile>);
 }
 
 export function saveModuleInputs(
