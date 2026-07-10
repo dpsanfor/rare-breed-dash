@@ -283,7 +283,7 @@ export const PHASES: Phase[] = [
       {
         id: "release-80",
         number: 2,
-        name: "The Dead Weight Release Plan",
+        name: "Dead Weight Release Plan",
         tagline: "Every release named, dated, and marked delegate or eliminate. You walk away with your Dead Weight Release Plan.",
         purpose:
           "Phase One identified what you've outgrown. This module decides. Using your Dead Weight Audit, you build a Release Plan and commit to it. So that you enter Phase Two unburdened by what was never yours to carry, and your new operating system has actual room to run.",
@@ -296,12 +296,12 @@ export const PHASES: Phase[] = [
       {
         id: "constitution",
         number: 3,
-        name: "The Rare Breed Constitution",
+        name: "Rare Breed Constitution™",
         tagline: "The AI interviews you like Dana would and extracts your principles, standards, and decision filters. You walk away with your Rare Breed Constitution™: the decision filter that makes every hard business call obvious, so you stop second-guessing yourself and run the whole business on your standards instead of everyone else's.",
         purpose:
           "This is the interview. The AI interviews you exactly like Dana Hayes, reflecting patterns, challenging comfort, digging beneath surface answers. So that you leave with your Rare Breed Constitution: a clear, documented operating system you can make decisions from. Starting immediately.",
         type: "context",
-        outputName: "Rare Breed Constitution",
+        outputName: "Rare Breed Constitution™",
         outputKey: "constitution",
         nextDecision: "Am I making decisions from my old OS or my new one?",
         feedsInto: "Your Constitution is the identity your genius grows from. Module 4 uses it to define your Zone of Genius: the work only you can own.",
@@ -335,14 +335,14 @@ export const PHASES: Phase[] = [
       {
         id: "ten-x-business",
         number: 5,
-        name: "The Business You're Here to Build",
+        name: "10X Business Concept",
         tagline: "Turn your Zone of Genius into the actual business only you could build: the core idea, the transformation, and the mechanism only you run. You walk away with your 10X Business Concept.",
         purpose:
           "Your genius is decided. Now you name the business it's here to build. This is the connective idea between who you are and what you sell: the one clear concept of the business, the transformation it creates and for whom, and the signature mechanism only you run. This is where the real ideation happens, so Delivered has a fully-formed business to bring to life instead of inferring it from pieces.",
         danasPrinciple:
           "You are not here to build a business you're capable of. You are here to build the one only you could.",
         type: "conversation",
-        outputName: "Your 10X Business Concept",
+        outputName: "10X Business Concept",
         outputKey: "ten_x_business",
         futureUse: "Your 10X Business Concept is the idea every downstream decision serves. Your Dream Client, your Offer Map, and every Studio in Delivered build the business you name here.",
         openingQuestion: "Now that you've named the work only you can do, let's name what it's here to build. In one sentence, if you weren't allowed to be modest: what is the business you're actually here to create?",
@@ -368,7 +368,7 @@ export const PHASES: Phase[] = [
         danasPrinciple:
           "You are the proof. Your experience isn't the backstory to the offer. It's the reason the offer is worth paying for.",
         type: "conversation",
-        outputName: "Your Proof",
+        outputName: "Living Proof",
         outputKey: "living_proof",
         futureUse: "Your Proof is what every sales Studio in Delivered reads before it writes: your Sales Page, your Emails, and your Content all build belief from your real evidence, never invented wins.",
         openingQuestion: "Before we gather the evidence, let's name the belief. What have you personally walked through, or figured out, that your dream client is still stuck inside of right now?",
@@ -396,7 +396,7 @@ export const PHASES: Phase[] = [
         outputName: "10X Calendar",
         outputKey: "ten_x_calendar",
         futureUse: "Your 10X Calendar governs the Offer Map and every launch the Club ever plans. If a promise doesn't fit the calendar, the promise changes. Never the calendar.",
-        openingQuestion: "Be honest with me. How many TRUE free days did you take last quarter? Days with no work of any kind. No email, no voice memos, no 'just one quick thing.'",
+        openingQuestion: "Before we start — pull up your actual calendar. You'll want it open as we go through this so everything we design is based on reality, not memory. Once you have it in front of you, tell me: how many TRUE free days did you take last quarter? Days with no work of any kind. No email, no voice memos, no 'just one quick thing.'",
         mission: [
           "your three day types, named in YOUR words (this is identity architecture, not time management)",
           "the ideal week that makes 10X possible (not the week you currently have)",
@@ -435,7 +435,7 @@ export const PHASES: Phase[] = [
       {
         id: "offer-map",
         number: 9,
-        name: "The Offer Map",
+        name: "Offer Ecosystem Map",
         tagline: "Your flagship and your gumdrop trail: names, promises, prices, capacity-checked. You walk away with your Offer Ecosystem Map.",
         purpose:
           "The shape, not the copy (the Club's Studios build every offer out completely). Your flagship gets built from your Zone of Genius, priced from Wanted Money, and checked against your 10X Calendar's capacity number. Your gumdrop trail leads unicorns to it. And the ascension logic makes upgrading structural: each step hands her the exact thing the next step requires.",
@@ -481,7 +481,7 @@ export const PHASES: Phase[] = [
       {
         id: "operating-manual",
         number: 11,
-        name: "The Operating Manual",
+        name: "X Factor Operating Manual™",
         tagline: "Every decision synthesized into one document. You walk away with your X Factor Operating Manual™: the complete design of your business, ready to plug into the Club.",
         purpose:
           "Bring everything you've created together into one living blueprint — your X Factor Operating Manual™. This becomes the intelligence Rare Breed OS™ uses to generate your messaging, offers, content, launches, and business when you activate it inside Delivered. So that you only have to think deeply once. After that, Rare Breed OS™ brings your business to life from your unique genius — not a blank page.",
