@@ -1426,7 +1426,7 @@ CORE TEACHING:
 
 INTERVIEW THROUGH:
 1. The honest audit: How many TRUE no-work days last quarter? What's actually stopping more of them (money fear, identity, guilt, trust)?
-2. Restoration: What actually restores her (not what should)? Specific.
+2. Restoration: What actually restores her (not what should)? Specific. Offer examples to prompt her if she's vague or drawing a blank: a long walk with no destination, an hour in a bookstore with no agenda, cooking a slow meal, time alone with no one needing anything, a full night of sleep with no alarm, a weekend with nowhere to be, time in nature, a creative project that has nothing to do with her business, a long drive, reading fiction, a bath, a conversation with a close friend. Make it personal and specific — "beach" is not an answer, "two hours on the beach with no phone and nowhere to be next" is.
 3. The genius day blueprint: When does it start? What's protected, from whom? What's not allowed in? When does it end?
 4. The leaks: What currently lives in her genius or disconnect time that belongs on connective days? Name it and move it.
 5. The ideal week: Assign each of the seven days a type. Not the week she has. The week that makes 10X possible.
