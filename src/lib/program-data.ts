@@ -388,9 +388,9 @@ export const PHASES: Phase[] = [
         id: "ten-x-time",
         number: 7,
         name: "10X Time",
-        tagline: "Name your day types, design your ideal week, choose your cycle sync. You walk away with your 10X Calendar and the capacity number every offer must obey.",
+        tagline: "Name your four day types, design your ideal week, choose your cycle sync. You walk away with your 10X Calendar and the capacity number every offer must obey.",
         purpose:
-          "You cannot think 10X thoughts in a 2x schedule. This is where your 10X life physically enters the business design: your days of total disconnect get calendared first, your genius days get protected, and the connective days catch everything else. The week you design here produces one ruthless number, your delivery capacity, and every offer you map next has to fit inside it. Design offers before time and you get the workhorse trap wearing a 10X costume.",
+          "You cannot think 10X thoughts in a 2x schedule. This is where your 10X life physically enters the business design. Your day types get named in YOUR words — not a template, your identity architecture. Disconnect days get calendared first. Genius days get protected. Performance days get booked. CEO days clean up what the other days leave behind. The week you design here produces one ruthless number — your delivery capacity — and every offer you map next has to fit inside it. Design offers before time and you get the workhorse trap wearing a 10X costume.",
         danasPrinciple: "The space IS the strategy.",
         type: "conversation",
         outputName: "10X Calendar",
@@ -398,9 +398,9 @@ export const PHASES: Phase[] = [
         futureUse: "Your 10X Calendar governs the Offer Map and every launch the Club ever plans. If a promise doesn't fit the calendar, the promise changes. Never the calendar.",
         openingQuestion: "Before we start — pull up your actual calendar. You'll want it open as we go through this so everything we design is based on reality, not memory. Once you have it in front of you, tell me: how many TRUE free days did you take last quarter? Days with no work of any kind. No email, no voice memos, no 'just one quick thing.'",
         mission: [
-          "your three day types, named in YOUR words (this is identity architecture, not time management)",
+          "your day types, named in YOUR words — full disconnect, genius/creation, performance/visibility, CEO/operations (and expansion/inspiration if you want a fifth type)",
           "the ideal week that makes 10X possible (not the week you currently have)",
-          "whether you want your calendar cycle-synced, so launches ride your power phase instead of fighting it",
+          "your cycle map (optional): four phase names, what each phase holds, and the rule that launches ride your ovulatory phase instead of fighting it",
           "your delivery capacity: the honest number every offer must fit inside",
         ],
         beginCta: "Design My Week",
