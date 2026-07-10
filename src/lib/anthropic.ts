@@ -3996,7 +3996,7 @@ Write this section as a copywriting brief any AI can generate from directly. Inc
 ## OFFER ECOSYSTEM MAP
 Write this section so an AI can build a sales page, email sequence, or launch plan directly from it. Include:
 - The flagship offer: name, transformation promise, who it is for, delivery format, price, and capacity (how many people / hours)
-- The gumdrop trail: each entry-point or ascension offer, in the order a client would encounter them, with name, promise, and price
+- Entry-point and ascension offers: each offer in the order a client would encounter them, with name, promise, and price
 - The ascension logic: how a client moves from the first thing they buy to the flagship
 - The constraint: every offer listed here has been verified to fit inside her delivery capacity. No new offer gets proposed unless it fits.
 

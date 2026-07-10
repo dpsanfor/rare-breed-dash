@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
 import { Markdown } from "@/components/Markdown";
-import { readProfile, type UserProfile } from "@/lib/profile";
+import { readProfile, saveArtifact, buildPhase2Context, type UserProfile } from "@/lib/profile";
+import { generateOperatingManual } from "@/lib/anthropic";
 
 export const Route = createFileRoute("/x-factor-operating-manual")({
   head: () => ({
@@ -15,6 +16,8 @@ function OperatingManualReveal() {
   const [profile, setProfile] = useState<UserProfile>({});
   const [mounted, setMounted] = useState(false);
   const [manualOpen, setManualOpen] = useState(false);
+  const [regenerating, setRegenerating] = useState(false);
+  const [regenError, setRegenError] = useState<string | null>(null);
 
   useEffect(() => {
     setProfile(readProfile());
@@ -23,12 +26,30 @@ function OperatingManualReveal() {
 
   const manual = profile.operating_manual;
 
+  // Stale if: elements updated after manual was generated, OR manual exists but
+  // was generated before timestamp tracking was added (no manual_generated_at)
   const isStale = Boolean(
-    manual &&
-    profile.leap_last_updated_at &&
-    profile.manual_generated_at &&
-    new Date(profile.leap_last_updated_at) > new Date(profile.manual_generated_at)
+    manual && (
+      !profile.manual_generated_at ||
+      (profile.leap_last_updated_at &&
+        new Date(profile.leap_last_updated_at) > new Date(profile.manual_generated_at))
+    )
   );
+
+  async function regenerate() {
+    setRegenerating(true);
+    setRegenError(null);
+    try {
+      const ctx = buildPhase2Context(profile);
+      const result = await generateOperatingManual({ data: { context: ctx } });
+      saveArtifact("operating_manual", result);
+      setProfile(readProfile());
+    } catch (e) {
+      setRegenError(e instanceof Error ? e.message : "Regeneration failed. Try again.");
+    } finally {
+      setRegenerating(false);
+    }
+  }
 
   return (
     <BrandShell hideStickyCta>
@@ -56,7 +77,7 @@ function OperatingManualReveal() {
         </p>
       </div>
 
-      {/* Stale notice — shown when an element was updated after the manual was generated */}
+      {/* Stale / regen notice */}
       {isStale && (
         <div
           className="mb-6 flex flex-col gap-4 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between"
@@ -67,22 +88,29 @@ function OperatingManualReveal() {
         >
           <div>
             <p className="font-mono text-[12px] uppercase tracking-[0.28em]" style={{ color: "#E0249C" }}>
-              ✦ Your manual is out of date
+              {regenerating ? "✦ Regenerating your manual..." : "✦ Your manual needs an update"}
             </p>
             <p className="mt-1 font-serif italic" style={{ color: "rgba(31,22,35,0.7)", fontSize: "clamp(16px,2.2vw,18px)" }}>
-              You've updated one or more elements since this was generated. Regenerate to reflect your latest design.
+              {regenerating
+                ? "Pulling everything from your elements and rewriting your manual. This takes about 30 seconds."
+                : "Your elements have been updated since this was generated. Click to rebuild your manual from your latest design."}
             </p>
+            {regenError && (
+              <p className="mt-2 font-mono text-[12px]" style={{ color: "#E0249C" }}>{regenError}</p>
+            )}
           </div>
-          <Link
-            to={"/ten-x-leap/11" as any}
-            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[13px] tracking-[0.18em] text-white transition-all hover:-translate-y-0.5"
+          <button
+            type="button"
+            onClick={regenerate}
+            disabled={regenerating}
+            className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[13px] tracking-[0.18em] text-white transition-all hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
             style={{
               background: "linear-gradient(135deg, #E0249C 0%, #c9a84c 100%)",
               boxShadow: "0 8px 28px -8px rgba(224,36,156,0.45)",
             }}
           >
-            Regenerate Manual →
-          </Link>
+            {regenerating ? "Regenerating..." : "Regenerate Manual →"}
+          </button>
         </div>
       )}
 
