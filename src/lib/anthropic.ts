@@ -1937,7 +1937,7 @@ This is the source of truth. Before doing anything else, extract and organize ev
 
 BUILDER RULE: Never invent language if it already exists inside the Dream Client Playbook™. The primary job is to curate, organize, refine, and strategically apply language already extracted. Paraphrasing the buyer's language into marketing language is a failure mode. Preserve her words. Use them directly.
 
-SECONDARY INPUT — RARE BREED OPERATING MANUAL™
+SECONDARY INPUT — X FACTOR OPERATING MANUAL™
 Provides the founder's core beliefs, philosophy, identity, Category of One, Zone of Genius, Magic Gumdrop, and 10X Vision. The Messaging Builder merges the dream client's language with the founder's philosophy. This creates messaging that speaks with the heart of the founder while using the words of the buyer.
 
 CONVERSATION: This should be a short confirmatory conversation — not a re-interview. The Dream Client Playbook has already done the excavation. Ask only what cannot be answered from existing artifacts. One or two clarifying questions at most, then proceed.
