@@ -3919,70 +3919,127 @@ ${SOPHIA_AVATAR}
 
 ${DANA_REASONING_BASE}
 
-PURPOSE: This is the master artifact. The permanent source of truth. Every AI Builder inside Delivered will reference this document before generating any business asset. It should be comprehensive enough that no Builder ever needs to ask the user to start over.
+PURPOSE: This is the master artifact. The permanent source of truth. Every AI Builder inside Delivered will reference this document before generating any business asset. It must be comprehensive enough that no Builder ever needs to ask her to start over — and specific enough that any AI reading it could generate her offers, content, emails, sales pages, and messaging without asking for clarification.
+
+Write it as an AI-ready intelligence document, not a reflection summary. Every section should be specific, named, and framed so that an AI builder reading it for the first time knows exactly what to generate and how.
 
 EVERYTHING FROM PHASE TWO:
 ${context}
 
 REPORT FORMAT:
-## RARE BREED OPERATING MANUAL™
-[One sentence introduction. Who this belongs to and what it represents.]
+
+## X FACTOR OPERATING MANUAL™
+[One sentence. Who this belongs to. What it is.]
+
+---
+
+## HOW TO USE THIS DOCUMENT
+Write this section explicitly as an instruction to any AI builder reading the manual. Include:
+- What this document is and what it contains
+- The order in which to read it before generating anything
+- The most important rule: generate from her Zone of Genius, write to her Dream Client, stay inside her offer architecture, match her voice brief exactly
+- The rule about proof: never invent or embellish results. Use only what is documented in her Living Proof section.
+- The rule about her calendar: never propose a delivery model that exceeds her stated delivery capacity.
+- A one-sentence statement of what this founder is building and for whom, so any AI has immediate orientation before reading further.
+
+---
 
 ## IDENTITY
-[Who she is becoming. 5-8 declarative sentences. Present tense. No hedging. Specific to her answers.]
+[Who she is. 5-8 declarative sentences. Present tense. No hedging. Written specifically from her answers, not generic founder language. This is the orientation for any AI that generates content as or for her.]
 
 ## WHO SHE IS NOT
-[What she has consciously released. 4-6 declarations.]
+[What she has consciously released and refuses to be. 4-6 declarations. These are the rails — no AI-generated content should position her as any of these things.]
 
 ## CORE BELIEFS
-[12-15 distilled principles. Each starting with "I believe". From her conversations — not generic.]
+[12-15 distilled principles, each starting with "I believe". Pulled from her conversations, not generic. These are the worldview every piece of content she creates expresses.]
 
 ## DECISION FILTERS
-[6-8 questions she runs every major decision through. Starting with "Does this", "Will this", or "Am I".]
+[6-8 questions she runs every major business decision through. Starting with "Does this", "Will this", or "Am I". Any AI helping her evaluate an idea should run it through these first.]
 
 ## STANDARDS
-[8-10 non-negotiables. Starting with "I only", "I do not", "I always", or "I refuse to".]
+[8-10 non-negotiables. Starting with "I only", "I do not", "I always", or "I refuse to". These apply to clients, pricing, content, partnerships, and delivery — any AI building an offer or campaign for her must comply.]
 
-## LEADERSHIP PHILOSOPHY
-[How she leads. Who thrives in her rooms. Who is not ready for her work. What she refuses to compromise.]
+---
 
 ## ZONE OF GENIUS™
-[The complete decision, from the Zone of Genius artifact: the 2-3 activities that are truly hers, the body of work they become, and the market position that work claims. The work everything gets organized around.]
+[The complete decision: the 2-3 activities that are truly hers, what makes them hers specifically, the body of work they become, and the market position that work claims. This is the only lens through which her business gets built. If a proposed offer, piece of content, or business direction does not live inside this Zone, it does not belong in her business.]
 
 ## 10X VISION™
-[The fully realized life and business she is building. Present tense. From the 10X Vision artifact.]
+[The fully realized life and business she is building. Present tense. Specific and vivid. This is the destination every AI builder points toward when generating strategy, offers, or messaging. If a recommendation does not move her toward this vision, it does not belong.]
+
+---
 
 ## 10X CALENDAR
-[Her three day types (her names), her ideal week, and her delivery capacity number. From the 10X Calendar artifact. Every offer must fit inside it.]
+Write this section so a scheduling AI or launch planner can work directly from it. Include:
+- Her day type names (her words), what is ALLOWED and REFUSED on each type
+- Her ideal week: which day type falls on which day of the week
+- Her disconnect protocol: how many full-disconnect days per year, what restores her, the rule that they are calendared first
+- Her delivery capacity: the exact number of hours per week available for live client delivery. State it as a hard cap — no offer gets designed that exceeds it.
+- Her cycle map (include only if she opted in): her four phase names, what each phase holds, and the hard rule that cart-opens and live launch events are scheduled in her high-energy phase, never in her low-energy or rest phase. Omit this subsection entirely if she did not opt in.
 
 ## DREAM CLIENT DECISION
-[The one woman this business exists to serve: who she is, what she already knows, what she desires, what she'd pay premium for. From the Dream Client Decision artifact.]
+Write this section as a copywriting brief any AI can generate from directly. Include:
+- Who she is (demographics, career stage, income level, where she is in her journey)
+- What she already knows and believes when she arrives — so no AI-generated content has to explain basics or talk down to her
+- Her inner monologue: the exact words she uses to describe her problem to herself (these are the words to mirror in copy)
+- What she desires, in her own language — not what she needs
+- What she would pay premium for, specifically
+- Her biggest objections and the exact reframe that dissolves each one
+- Her buying trigger: the one sentence that makes her say "this is for me"
+- The rule: write to her desire, never her deficiency. She is not broken. She is ready.
+
+## LIVING PROOF
+[Her documented results and client wins, from her Living Proof artifact. These are the only proof claims any AI-generated content is permitted to use. No Studio invents results. No copywriter embellishes. If the proof isn't here, it doesn't appear in the copy.]
+
+---
 
 ## OFFER ECOSYSTEM MAP
-[The flagship, the gumdrop trail, and the ascension logic. Names, promises, prices. From the Offer Ecosystem Map artifact.]
+Write this section so an AI can build a sales page, email sequence, or launch plan directly from it. Include:
+- The flagship offer: name, transformation promise, who it is for, delivery format, price, and capacity (how many people / hours)
+- The gumdrop trail: each entry-point or ascension offer, in the order a client would encounter them, with name, promise, and price
+- The ascension logic: how a client moves from the first thing they buy to the flagship
+- The constraint: every offer listed here has been verified to fit inside her delivery capacity. No new offer gets proposed unless it fits.
+
+---
 
 ## BRAND DIRECTION
-[The name decision and equity list, the taste map, her voice markers (signature phrases, never-words, rhythm), and the proof inventory rule: no Studio invents or embellishes proof. From the Brand Direction artifact.]
+
+### Name and Equity
+[Her brand name decision: is she the brand, or does the brand have its own name? What existing equity (handles, podcast, list, named offers) transfers forward? What gets retired?]
+
+### Voice Brief
+Write this section as a direct instruction to any AI generating content for or as her. Include:
+- Her signature phrases and power words (to use as anchors and closers)
+- Her banned words and structures (exact list — these never appear in her content)
+- Her rhythm: how her sentences move (short declarative truths, longer teaching lines, never the same length twice in a row)
+- Her tone markers: what she always sounds like (direct, warm, declarative, specific) and what she never sounds like (soft, generic, coach-speak, corporate)
+- Voice samples: 3-5 lines written in her exact voice, pulled from her conversations, that any AI can use as a tonal benchmark before generating
+- The rule: never write to a general audience. Name the specific woman.
+
+### Taste Map
+[Her visual and aesthetic direction: what she is drawn to, what she refuses, the references and words she used to describe her brand feeling. An AI building creative direction or a design brief reads this first.]
+
+---
 
 ## CORE TEACHINGS
-[The 5-7 foundational ideas she returns to repeatedly. What she is known for teaching.]
+[The 5-7 foundational ideas she returns to and is known for. Each one named and described in 2-3 sentences. These are the intellectual territory her content lives inside — any AI generating content should stay within this territory unless she explicitly expands it.]
 
-## LEGACY
-[What she wants her work to have changed thirty years from now. Specific.]
+## LEADERSHIP PHILOSOPHY
+[How she leads. Who thrives in her rooms. Who is not ready for her work. What she refuses to compromise as a leader. Any AI building a sales page or program description for her reads this to understand how to position her authority.]
 
 ## BUSINESS PHILOSOPHY
-[How she thinks about business. Her relationship with money, clients, growth, service. From her conversations.]
+[How she thinks about business: her relationship with money, clients, growth, service, and boundaries. This informs every business recommendation any AI makes for her.]
 
 ## CORE VALUES
-[6-8 values. Named. Described in one sentence each.]
+[6-8 values. Named. Described in one sentence each. These are non-negotiable in any business asset, campaign, or partnership an AI helps her build.]
 
-## NON-NEGOTIABLES
-[Everything she will not compromise. Clients. Pricing. Work style. Boundaries. Standards.]
+## LEGACY
+[What she wants her work to have changed thirty years from now. Specific. This is the north star — any AI helping her make a long-term business decision should check it against this first.]
 
 ---
 
 Close with exactly:
-"You have successfully installed your Rare Breed Operating System and created your Operating Manual. This document is the foundation of the business only you could build. Inside Delivered, your Operating Manual powers an entire suite of AI builders that transform your identity into a complete business."`;
+"You have successfully installed your Rare Breed Operating System and created your X Factor Operating Manual. This document is the intelligence that every AI builder you work with reads before generating anything for your business. You only have to think this deeply once. From here, everything gets built from your genius."`;
 }
 
 // ─── SERVER FUNCTIONS ────────────────────────────────────────────────────────
