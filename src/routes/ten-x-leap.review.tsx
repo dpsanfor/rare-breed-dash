@@ -43,7 +43,7 @@ function OSReviewPage() {
   const context = buildPhase2Context(profile);
 
   const completedCount = Object.keys(profile).filter((k) =>
-    ["bigger_vision", "release_plan", "constitution", "zone_of_genius", "ten_x_business", "living_proof", "ten_x_calendar", "dream_client_decision", "offer_map", "brand_direction", "operating_manual"].includes(k) && profile[k as keyof typeof profile]
+    ["bigger_vision", "release_plan", "constitution", "zone_of_genius", "ten_x_business", "the_method", "signature_stories", "living_proof", "ten_x_calendar", "dream_client_decision", "offer_map", "brand_direction", "teaching_pillars", "operating_manual"].includes(k) && profile[k as keyof typeof profile]
   ).length;
 
   async function beginSession() {
