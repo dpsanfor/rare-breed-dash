@@ -356,63 +356,11 @@ export const PHASES: Phase[] = [
         nextDecision: "Is this the business only I could build, or one anyone could?",
         generatePrompt:
           "I'm ready. Generate my 10X Business Concept based on everything we've discussed.",
-        feedsInto: "Module 6 extracts the HOW behind your genius: the proprietary method that turns your Zone of Genius into something unmistakably yours.",
-      },
-      {
-        id: "the-method",
-        number: 6,
-        name: "The Method™",
-        tagline: "Name the HOW that no one else can replicate. You walk away with your Method™: the proprietary process, named phases, and signature vocabulary that make your work undeniable.",
-        purpose:
-          "Anyone can do what you do. No one can do it the way you do it. This element surfaces the mechanism beneath your genius — the specific way you move someone from their before state to their after state — and names it as yours. Not invented here. Discovered. You have been running this method with every client who got a real result. Your Method™ document makes it visible, nameable, and replicable — so every sales page, offer description, and piece of content can explain the HOW, not just the WHAT.",
-        danasPrinciple:
-          "The method is what makes the claim defensible and the offer irreplaceable.",
-        type: "conversation",
-        outputName: "The Method™",
-        outputKey: "the_method",
-        futureUse: "Your Method™ is what every AI builder references when writing a sales page, program description, or curriculum outline. It is what separates a sales page that converts from one that sounds like everyone else.",
-        openingQuestion: "Your Zone of Genius is decided. Now I want to understand the HOW. Walk me through the last client who got a real result from working with you — not the highlight reel, the actual work. What happened first?",
-        mission: [
-          "the name of your method: the phrase that makes it unmistakably yours",
-          "the mechanism: the specific principle that makes it work when everything else doesn't",
-          "the phases or movements a client travels through, named in your vocabulary",
-          "the language that belongs to you: the words and concepts only you use this way",
-        ],
-        beginCta: "Name My Method",
-        nextDecision: "Can I explain what makes my work different in one sentence that no one else could say?",
-        generatePrompt:
-          "I'm ready. Generate my Method™ based on everything we've discussed.",
-        feedsInto: "Module 7 captures the stories that prove your method works — the narratives that power every sales page, launch email, and piece of content you will ever create.",
-      },
-      {
-        id: "signature-stories",
-        number: 7,
-        name: "Signature Stories",
-        tagline: "Capture your origin, your wall, your crossing, and your best client transformations in full detail. You walk away with your Story Bank — the only stories any AI is permitted to use.",
-        purpose:
-          "Data tells. Story sells. Every premium offer, every launch email, every piece of content that has ever converted was built on a story someone couldn't forget. This element captures your 4-6 most powerful stories — in full, in your voice, with real specifics — so that every AI builder that works with you has a story bank to pull from instead of generic language or invented proof.",
-        danasPrinciple:
-          "Your story is not the backstory to your offer. It is the reason your offer is worth paying for.",
-        type: "conversation",
-        outputName: "Story Bank",
-        outputKey: "signature_stories",
-        futureUse: "Your Story Bank is the only source of proof any AI builder is permitted to use. Sales pages, launch emails, content — all pull from these documented stories. Nothing is invented. Nothing is genericized.",
-        openingQuestion: "Before we gather the stories, let's name what they prove. Your Method™ gets clients to a specific result. What is the one result you are most proud of having created for someone? Tell me about that person — who were they when they found you?",
-        mission: [
-          "your origin story: what your life and business looked like before you understood what your method was built on",
-          "your wall story: the specific moment everything broke, shifted, or became undeniable",
-          "your crossing story: the decision or action that turned the wall into the beginning",
-          "2-3 client transformation stories with real before, real work, and real after",
-        ],
-        beginCta: "Capture My Stories",
-        nextDecision: "Does my story make the offer feel inevitable, or does it make me sound like everyone else?",
-        generatePrompt:
-          "I'm ready. Generate my Story Bank based on everything we've discussed.",
-        feedsInto: "Module 8 turns your stories and proof into the evidence your offers are worth premium money.",
+        feedsInto: "Module 6 turns your lived experience into proof: the evidence that makes the business you just named worth premium money.",
       },
       {
         id: "living-proof",
-        number: 9,
+        number: 6,
         name: "Living Proof",
         tagline: "See that your lived experience IS the credential, then capture the evidence that makes your offers worth premium money. You walk away with your Proof.",
         purpose:
@@ -434,11 +382,11 @@ export const PHASES: Phase[] = [
         nextDecision: "Do I believe my experience is worth paying for? (It is.)",
         generatePrompt:
           "I'm ready. Generate my Proof based on everything we've discussed.",
-        feedsInto: "Module 10 designs the container your business runs inside: the week, the day types, and the calendar your 10X life requires, before any offer gets designed.",
+        feedsInto: "Module 7 designs the container your business runs inside: the week, the day types, and the calendar your 10X life requires, before any offer gets designed.",
       },
       {
         id: "ten-x-time",
-        number: 10,
+        number: 7,
         name: "10X Time",
         tagline: "Name your four day types, design your ideal week, choose your cycle sync. You walk away with your 10X Calendar and the capacity number every offer must obey.",
         purpose:
@@ -459,11 +407,11 @@ export const PHASES: Phase[] = [
         nextDecision: "What gets calendared FIRST from now on?",
         generatePrompt:
           "I'm ready. Generate my 10X Calendar based on everything we've discussed.",
-        feedsInto: "With the container built, Module 11 decides exactly who the business serves: your Dream Client Decision.",
+        feedsInto: "With the container built, Module 8 decides exactly who the business serves: your Dream Client Decision.",
       },
       {
         id: "dream-client-decision",
-        number: 11,
+        number: 8,
         name: "Dream Client Decision",
         tagline: "The one woman this business exists to serve, decided once. You walk away with your Dream Client Decision, the page every Club asset gets written to.",
         purpose:
@@ -482,11 +430,11 @@ export const PHASES: Phase[] = [
         nextDecision: "Does everything I build from here speak to her?",
         generatePrompt:
           "I'm ready. Generate my Dream Client Decision based on everything we've discussed.",
-        feedsInto: "Module 12 maps the offers she ascends through: your flagship and the ascension logic that connects them.",
+        feedsInto: "Module 9 maps the offers she ascends through: your gumdrop trail, your flagship, and the logic that connects them.",
       },
       {
         id: "offer-map",
-        number: 12,
+        number: 9,
         name: "Offer Ecosystem Map",
         tagline: "Your flagship and your gumdrop trail: names, promises, prices, capacity-checked. You walk away with your Offer Ecosystem Map.",
         purpose:
@@ -505,11 +453,11 @@ export const PHASES: Phase[] = [
         nextDecision: "Which offer gets designed first, and which gets released?",
         generatePrompt:
           "I'm ready. Generate my Offer Ecosystem Map based on everything we've discussed.",
-        feedsInto: "Module 13 captures what no AI can derive: your name, your taste, and your actual voice. The raw material every Studio needs before it writes a word as you.",
+        feedsInto: "Module 10 captures what no AI can derive: your name, your taste, and your actual voice. The raw material every Studio needs before it writes a word as you.",
       },
       {
         id: "brand-direction",
-        number: 13,
+        number: 10,
         name: "Brand Direction",
         tagline: "The three things no AI can invent: your name, your taste, and your voice. You walk away with your Brand Direction, used by every Studio that writes as you.",
         purpose:
@@ -528,37 +476,11 @@ export const PHASES: Phase[] = [
         nextDecision: "Would I post what this machine writes without editing it?",
         generatePrompt:
           "I'm ready. Generate my Brand Direction based on everything we've discussed.",
-        feedsInto: "Module 14 documents your content DNA: the 5-7 ideas you are known for teaching, your POV on the industry, and the signature concepts that make your content unmistakable.",
-      },
-      {
-        id: "teaching-pillars",
-        number: 14,
-        name: "Teaching Pillars & POV",
-        tagline: "Name the 5-7 ideas you are known for teaching, what you stand against, and the concepts only you own. You walk away with your Content DNA.",
-        purpose:
-          "The coaches who become unmistakable are not known for what they do. They are known for what they teach, what they stand for, and what they refuse to stand behind. By now you have your Constitution, your Method, your Zone of Genius, your Dream Client, and your Brand Direction. This element organizes everything you already teach into named pillars — with your specific POV on each — and documents the signature concepts that belong to you. So that an AI generating a Reel, a podcast episode, or a launch email always knows which pillar to build from, what your take is, and what you refuse to say.",
-        danasPrinciple:
-          "Your content isn't what you post. It's the intellectual territory only you own.",
-        type: "conversation",
-        outputName: "Content DNA",
-        outputKey: "teaching_pillars",
-        futureUse: "Every content generator in Delivered reads your Content DNA before writing anything. It ensures your Reels, podcast scripts, emails, and launches always live inside your intellectual territory — never outside it.",
-        openingQuestion: "Your Constitution has your 'I believe' statements. Those aren't just your principles — they're the seeds of your content pillars. I want to start with the one you come back to most. Which belief do you find yourself teaching, posting about, or talking about in every single conversation?",
-        mission: [
-          "your 5-7 core teaching pillars, named in your words with your specific POV on each",
-          "what you stand against: the beliefs, advice, or practices in your industry you publicly disagree with",
-          "your signature concepts: the ideas, distinctions, and named frameworks that belong to you",
-          "the content you never create: the topics and angles you refuse to center",
-        ],
-        beginCta: "Name My Pillars",
-        nextDecision: "Does every piece of content I create live inside one of these pillars?",
-        generatePrompt:
-          "I'm ready. Generate my Content DNA based on everything we've discussed.",
-        feedsInto: "Module 15 synthesizes every decision from all 14 elements into your X Factor Operating Manual™ — the complete design of your business, ready to generate everything.",
+        feedsInto: "Module 11 brings every decision together: your 10X Vision, Rare Breed Constitution, Zone of Genius, the business you're here to build, your Proof, your Calendar, Dream Client, Offer Map, and Brand Direction, synthesized into your X Factor Operating Manual™.",
       },
       {
         id: "operating-manual",
-        number: 15,
+        number: 11,
         name: "X Factor Operating Manual™",
         tagline: "Every decision synthesized into one document. You walk away with your X Factor Operating Manual™: the complete design of your business, ready to plug into the Club.",
         purpose:
