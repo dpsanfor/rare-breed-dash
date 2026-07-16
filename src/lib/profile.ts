@@ -23,13 +23,10 @@ export interface UserProfile {
   ten_x_business?: string;
   living_proof?: string;
   category_of_one?: string;
-  the_method?: string;
-  signature_stories?: string;
   ten_x_calendar?: string;
   dream_client_decision?: string;
   offer_map?: string;
   brand_direction?: string;
-  teaching_pillars?: string;
   operating_manual?: string;
 
   // Voice Library (persistent — she can keep adding samples over time)
@@ -151,9 +148,8 @@ export function writeProfile(update: Partial<UserProfile>): UserProfile {
 
 const LEAP_ELEMENT_KEYS = new Set([
   "bigger_vision", "release_plan", "constitution", "zone_of_genius",
-  "ten_x_business", "the_method", "signature_stories", "living_proof",
+  "ten_x_business", "living_proof",
   "ten_x_calendar", "dream_client_decision", "offer_map", "brand_direction",
-  "teaching_pillars",
 ]);
 
 export function saveArtifact(key: keyof UserProfile, value: string): void {
@@ -285,15 +281,12 @@ export function buildPhase2Context(profile: UserProfile): string {
   if (profile.magic_gumdrop) parts.push(`MAGIC GUMDROP:\n${profile.magic_gumdrop}`);
   if (profile.zone_of_genius) parts.push(`ZONE OF GENIUS:\n${profile.zone_of_genius}`);
   if (profile.ten_x_business) parts.push(`THE BUSINESS SHE'S HERE TO BUILD (10X BUSINESS CONCEPT):\n${profile.ten_x_business}`);
-  if (profile.the_method) parts.push(`HER METHOD (proprietary process, named phases, mechanism, and vocabulary):\n${profile.the_method}`);
-  if (profile.signature_stories) parts.push(`SIGNATURE STORIES (origin, wall, crossing, and client transformations — the only stories any AI is permitted to use):\n${profile.signature_stories}`);
   if (profile.living_proof) parts.push(`LIVING PROOF (her evidence and walking testimony for sales):\n${profile.living_proof}`);
   if (profile.category_of_one) parts.push(`CATEGORY OF ONE:\n${profile.category_of_one}`);
   if (profile.ten_x_calendar) parts.push(`10X CALENDAR:\n${profile.ten_x_calendar}`);
   if (profile.dream_client_decision) parts.push(`DREAM CLIENT DECISION:\n${profile.dream_client_decision}`);
   if (profile.offer_map) parts.push(`OFFER ECOSYSTEM MAP:\n${profile.offer_map}`);
   if (profile.brand_direction) parts.push(`BRAND DIRECTION:\n${profile.brand_direction}`);
-  if (profile.teaching_pillars) parts.push(`TEACHING PILLARS & POV (her content DNA, what she stands for, what she refuses):\n${profile.teaching_pillars}`);
   if (profile.operating_manual) parts.push(`X FACTOR OPERATING MANUAL:\n${profile.operating_manual}`);
 
   const voice = [
