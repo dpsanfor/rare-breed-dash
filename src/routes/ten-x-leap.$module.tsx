@@ -998,7 +998,7 @@ function PhaseTwoModule() {
 
   const phase = PHASES[1];
   const totalModules = phase.modules.length;
-  const isComplete = done || isModuleComplete(`phase2_${mod.id}`);
+  const isComplete = done || mod.type === "anchor" || isModuleComplete(`phase2_${mod.id}`);
   const nextModule = moduleNumber < totalModules ? moduleNumber + 1 : null;
 
   function handleComplete() {
@@ -1077,6 +1077,69 @@ function PhaseTwoModule() {
       </div>
 
       {/* Module content */}
+      {mod.type === "anchor" && (
+        <div className="space-y-8">
+          <div
+            className="rounded-3xl overflow-hidden"
+            style={{
+              background: "radial-gradient(120% 120% at 0% 0%, #2A0E33 0%, #170820 55%, #0D0512 100%)",
+              border: "1px solid rgba(201,168,76,0.35)",
+              boxShadow: "0 24px 80px -24px rgba(201,168,76,0.3)",
+            }}
+          >
+            <div className="p-8 sm:p-10">
+              <p className="font-mono text-[12px] uppercase tracking-[0.28em] mb-4" style={{ color: "rgba(201,168,76,0.8)" }}>
+                ✦ Your Anchor · From Good Girl Prison Break
+              </p>
+              {profile.zog_code ? (
+                <>
+                  <h2 className="font-display text-shimmer-gold mb-6" style={{ fontSize: "clamp(26px, 5vw, 38px)", letterSpacing: "0.04em" }}>
+                    Zone of Genius Code
+                  </h2>
+                  <div
+                    className="font-serif leading-relaxed whitespace-pre-wrap"
+                    style={{ color: "rgba(245,239,224,0.9)", fontSize: "clamp(17px, 2.2vw, 20px)" }}
+                  >
+                    {profile.zog_code}
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <h2 className="font-display mb-4" style={{ fontSize: "clamp(24px, 4vw, 34px)", color: "rgba(255,255,255,0.85)" }}>
+                    Zone of Genius Code Not Yet Set
+                  </h2>
+                  <p className="font-serif italic mb-6" style={{ color: "rgba(255,255,255,0.55)", fontSize: "clamp(17px, 2.2vw, 20px)" }}>
+                    Your Zone of Genius Code is generated in Good Girl Prison Break. Complete Phase One first — then return here and your Code will appear automatically.
+                  </p>
+                  <Link
+                    to="/prison-break"
+                    className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
+                    style={{
+                      background: "linear-gradient(135deg, #E0249C 0%, #ec4899 50%, #c9a84c 100%)",
+                      boxShadow: "0 8px 32px -8px rgba(224,36,156,0.4)",
+                    }}
+                  >
+                    Go to Good Girl Prison Break →
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {profile.zog_code && (
+            <div
+              className="rounded-2xl p-6"
+              style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(74,18,89,0.12)" }}
+            >
+              <p className="font-mono text-[12px] uppercase tracking-[0.24em] text-[#4A1259]/50 mb-3">How your AI uses this</p>
+              <p className="font-serif text-[18px] leading-relaxed text-[#1F1623]/80">
+                Every element of the 10X Leap runs through this Code. When you drift back toward what you are capable of, your AI will catch it. When your answers come from your genius, your AI will confirm it. This is the lens — everything else is built through it.
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
       {mod.type === "context" && (
         <Phase2ContextRunner
           key={mod.id}

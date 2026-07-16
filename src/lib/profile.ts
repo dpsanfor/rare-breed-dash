@@ -148,7 +148,7 @@ export function writeProfile(update: Partial<UserProfile>): UserProfile {
 
 const LEAP_ELEMENT_KEYS = new Set([
   "bigger_vision", "release_plan", "constitution", "zone_of_genius",
-  "ten_x_business", "living_proof",
+  "ten_x_business",
   "ten_x_calendar", "dream_client_decision", "offer_map", "brand_direction",
 ]);
 
