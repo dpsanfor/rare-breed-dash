@@ -16,7 +16,6 @@ const ELEMENT_KEYS: { key: string; label: string }[] = [
   { key: "constitution", label: "Rare Breed Constitution" },
   { key: "zone_of_genius", label: "Zone of Genius" },
   { key: "ten_x_business", label: "10X Business Concept" },
-  { key: "living_proof", label: "Living Proof" },
   { key: "ten_x_calendar", label: "10X Calendar" },
   { key: "dream_client_decision", label: "Dream Client Decision" },
   { key: "offer_map", label: "Offer Ecosystem Map" },
@@ -35,15 +34,18 @@ function TenXLeapIndex() {
   const { user } = useAuth();
   const isOwner = IS_LOCAL_DEV || user?.email === OWNER_EMAIL;
   const [completedKeys, setCompletedKeys] = useState<string[]>([]);
+  const [hasZogCode, setHasZogCode] = useState(false);
   const [access, setAccess] = useState<boolean | null>(null);
   const [copied, setCopied] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [restoreMsg, setRestoreMsg] = useState<string | null>(null);
+  const [openReplay, setOpenReplay] = useState<string | null>(null);
   const phase = PHASES[1];
 
   useEffect(() => {
     const profile = readProfile();
     setCompletedKeys(profile.completed_modules ?? []);
+    setHasZogCode(!!profile.zog_code);
     getUserAccess().then((a) => setAccess(a.phase2));
   }, []);
 
@@ -100,13 +102,11 @@ function TenXLeapIndex() {
   if (access === null) return null;
   if (!access) return <PhaseLockedScreen phase="10x-leap" />;
 
-  const completedCount = phase.modules.filter((m) =>
-    completedKeys.includes(`phase2_${m.id}`)
-  ).length;
+  const isModuleDone = (m: typeof phase.modules[0]) =>
+    m.type === "anchor" ? hasZogCode : completedKeys.includes(`phase2_${m.id}`);
 
-  const nextIncomplete = phase.modules.find(
-    (m) => !completedKeys.includes(`phase2_${m.id}`)
-  );
+  const completedCount = phase.modules.filter(isModuleDone).length;
+  const nextIncomplete = phase.modules.find((m) => !isModuleDone(m));
 
   return (
     <BrandShell hideStickyCta>
@@ -185,6 +185,62 @@ function TenXLeapIndex() {
         </div>
       )}
 
+      {/* Call Replays */}
+      <div className="mb-12">
+        <p className="eyebrow mb-5">Call Replays</p>
+        <div className="space-y-3">
+          {[
+            { number: "01", title: "How It Works and How to Get the Most Out of the 10X Leap", description: "The orientation call — everything you need to know before you begin designing.", videoId: "PLACEHOLDER" },
+          ].map((call) => {
+            const open = openReplay === call.number;
+            return (
+              <div
+                key={call.number}
+                className="rounded-2xl border p-6"
+                style={{
+                  borderColor: "rgba(224,36,156,0.2)",
+                  background: "linear-gradient(135deg, rgba(224,36,156,0.05) 0%, rgba(74,18,89,0.04) 100%)",
+                }}
+              >
+                <button
+                  onClick={() => setOpenReplay(open ? null : call.number)}
+                  className="flex w-full items-center gap-6 text-left"
+                >
+                  <div
+                    className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-mono text-[13px] tracking-[0.15em]"
+                    style={{ background: "rgba(224,36,156,0.12)", color: "#E0249C" }}
+                  >
+                    {call.number}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-display text-lg tracking-[0.05em] text-[#1F1623]">{call.title}</p>
+                    <p className="mt-0.5 font-serif text-sm italic text-[#4A1259]/55">{call.description}</p>
+                  </div>
+                  <span className="flex-shrink-0 font-mono text-[12px] uppercase tracking-[0.2em] text-[#E0249C]">
+                    {open ? "Close ▲" : "Watch ▾"}
+                  </span>
+                </button>
+                {open && (
+                  <div
+                    className="mt-5 overflow-hidden rounded-xl bg-black"
+                    style={{ aspectRatio: "16 / 9" }}
+                  >
+                    <iframe
+                      src={`https://www.youtube.com/embed/${call.videoId}`}
+                      title={call.title}
+                      className="h-full w-full"
+                      style={{ border: 0 }}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       {/* What this section is */}
       <div className="mb-8 border-t border-[rgba(74,18,89,0.12)] pt-10">
         <p className="eyebrow mb-3">The Elements</p>
@@ -192,19 +248,19 @@ function TenXLeapIndex() {
           className="font-display tracking-wide text-[#1F1623]"
           style={{ fontSize: "clamp(28px, 5vw, 42px)" }}
         >
-          Design the Eleven Elements of Your 1010X Factor Operating Manual™
+          Design the Eleven Elements of Your 10X Factor Operating Manual™
         </h2>
         <p
           className="mt-3 max-w-2xl font-serif italic text-[#4A1259]/75"
           style={{ fontSize: "clamp(20px, 2.4vw, 21px)" }}
         >
-          Each element designs one part of your business from your Zone of Genius Code. Together they become your 1010X Factor Operating Manual™: the complete operating system every Studio in Delivered reads before it builds a thing. You design it once here, and you never start from a blank page again.
+          Each element designs one part of your business from your Zone of Genius Code. Together they become your 10X Factor Operating Manual™: the complete operating system every Studio in Delivered reads before it builds a thing. You design it once here, and you never start from a blank page again.
         </p>
       </div>
 
       <div className="space-y-3">
         {phase.modules.map((mod) => {
-          const complete = completedKeys.includes(`phase2_${mod.id}`);
+          const complete = isModuleDone(mod);
           const isNext = nextIncomplete?.id === mod.id;
           return (
             <Link
@@ -275,7 +331,7 @@ function TenXLeapIndex() {
           }}
         >
           <p className="font-mono uppercase tracking-[0.3em] text-[#E0249C] mb-4" style={{ fontSize: "12px" }}>
-            Your 1010X Factor Operating Manual™ Is Ready
+            Your 10X Factor Operating Manual™ Is Ready
           </p>
           <p className="font-display text-shimmer leading-[1.0] tracking-wide mb-6" style={{ fontSize: "clamp(28px, 6vw, 42px)" }}>
             You've Built Your New Operating System.
@@ -297,7 +353,7 @@ function TenXLeapIndex() {
               boxShadow: "0 12px 40px -8px rgba(217,70,239,0.5)",
             }}
           >
-            {completedCount === phase.modules.length ? "Reveal My 1010X Factor Operating Manual™ →" : "Preview Delivered × Rare Breed Club →"}
+            {completedCount === phase.modules.length ? "Reveal My 10X Factor Operating Manual™ →" : "Preview Delivered × Rare Breed Club →"}
           </Link>
         </div>
     </BrandShell>
