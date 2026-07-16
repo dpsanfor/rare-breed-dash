@@ -190,7 +190,7 @@ function TenXLeapIndex() {
         <p className="eyebrow mb-5">Call Replays</p>
         <div className="space-y-3">
           {[
-            { number: "01", title: "How It Works and How to Get the Most Out of the 10X Leap", description: "The orientation call — everything you need to know before you begin designing.", videoId: "PLACEHOLDER" },
+            { number: "01", title: "How It Works and How to Get the Most Out of the 10X Leap", description: "The orientation call — everything you need to know before you begin designing.", videoId: "YWJo8_lwEig" },
           ].map((call) => {
             const open = openReplay === call.number;
             return (
