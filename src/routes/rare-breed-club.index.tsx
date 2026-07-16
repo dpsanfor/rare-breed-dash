@@ -233,7 +233,7 @@ function RareBreedClubIndex() {
       <div className="mt-16 rounded-2xl border border-[rgba(74,18,89,0.1)] bg-white/60 p-8">
         <p className="eyebrow mb-3">How this works</p>
         <p className="font-serif text-lg leading-relaxed italic text-[#4A1259]/75">
-          Every Studio reads your complete X Factor Operating Manual before generating anything. Each completed Studio makes the next one smarter. You are not filling out forms. You are building a living business powered by your own identity.
+          Every Studio reads your complete 10X Factor Operating Manual before generating anything. Each completed Studio makes the next one smarter. You are not filling out forms. You are building a living business powered by your own identity.
         </p>
       </div>
     </BrandShell>

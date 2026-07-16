@@ -604,7 +604,7 @@ function ConversationRunner({
               ))}
             </ul>
             <p className="font-serif text-[18px] italic text-[#4A1259]/50">
-              This module contributes directly to your X Factor Operating Manual™.
+              This module contributes directly to your 1010X Factor Operating Manual™.
             </p>
           </div>
         )}

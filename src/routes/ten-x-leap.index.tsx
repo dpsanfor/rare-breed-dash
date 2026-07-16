@@ -21,7 +21,7 @@ const ELEMENT_KEYS: { key: string; label: string }[] = [
   { key: "dream_client_decision", label: "Dream Client Decision" },
   { key: "offer_map", label: "Offer Ecosystem Map" },
   { key: "brand_direction", label: "Brand Direction" },
-  { key: "operating_manual", label: "X Factor Operating Manual" },
+  { key: "operating_manual", label: "10X Factor Operating Manual" },
 ];
 
 export const Route = createFileRoute("/ten-x-leap/")({
@@ -192,13 +192,13 @@ function TenXLeapIndex() {
           className="font-display tracking-wide text-[#1F1623]"
           style={{ fontSize: "clamp(28px, 5vw, 42px)" }}
         >
-          Design the Eleven Elements of Your X Factor Operating Manual™
+          Design the Eleven Elements of Your 1010X Factor Operating Manual™
         </h2>
         <p
           className="mt-3 max-w-2xl font-serif italic text-[#4A1259]/75"
           style={{ fontSize: "clamp(20px, 2.4vw, 21px)" }}
         >
-          Each element designs one part of your business from your Zone of Genius Code. Together they become your X Factor Operating Manual™: the complete operating system every Studio in Delivered reads before it builds a thing. You design it once here, and you never start from a blank page again.
+          Each element designs one part of your business from your Zone of Genius Code. Together they become your 1010X Factor Operating Manual™: the complete operating system every Studio in Delivered reads before it builds a thing. You design it once here, and you never start from a blank page again.
         </p>
       </div>
 
@@ -275,7 +275,7 @@ function TenXLeapIndex() {
           }}
         >
           <p className="font-mono uppercase tracking-[0.3em] text-[#E0249C] mb-4" style={{ fontSize: "12px" }}>
-            Your X Factor Operating Manual™ Is Ready
+            Your 1010X Factor Operating Manual™ Is Ready
           </p>
           <p className="font-display text-shimmer leading-[1.0] tracking-wide mb-6" style={{ fontSize: "clamp(28px, 6vw, 42px)" }}>
             You've Built Your New Operating System.
@@ -297,7 +297,7 @@ function TenXLeapIndex() {
               boxShadow: "0 12px 40px -8px rgba(217,70,239,0.5)",
             }}
           >
-            {completedCount === phase.modules.length ? "Reveal My X Factor Operating Manual™ →" : "Preview Delivered × Rare Breed Club →"}
+            {completedCount === phase.modules.length ? "Reveal My 1010X Factor Operating Manual™ →" : "Preview Delivered × Rare Breed Club →"}
           </Link>
         </div>
     </BrandShell>

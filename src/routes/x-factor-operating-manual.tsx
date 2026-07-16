@@ -7,7 +7,7 @@ import { generateOperatingManual } from "@/lib/anthropic";
 
 export const Route = createFileRoute("/x-factor-operating-manual")({
   head: () => ({
-    meta: [{ title: "Your X Factor Operating Manual™" }],
+    meta: [{ title: "Your 1010X Factor Operating Manual™" }],
   }),
   component: OperatingManualReveal,
 });
@@ -151,7 +151,7 @@ function OperatingManualReveal() {
             {manual
               ? "Open your Operating Manual to read the complete design of your business."
               : mounted
-                ? "Complete all eleven elements of The 10X Leap to generate your X Factor Operating Manual."
+                ? "Complete all eleven elements of The 10X Leap to generate your 10X Factor Operating Manual."
                 : "Loading your Operating Manual..."}
           </p>
         )}
@@ -166,7 +166,7 @@ function OperatingManualReveal() {
             ) : (
               <p className="font-serif italic" style={{ color: "rgba(255,255,255,0.6)" }}>
                 {mounted
-                  ? "Complete all eleven elements of The 10X Leap to generate your X Factor Operating Manual."
+                  ? "Complete all eleven elements of The 10X Leap to generate your 10X Factor Operating Manual."
                   : "Loading..."}
               </p>
             )}
@@ -187,7 +187,7 @@ function OperatingManualReveal() {
       <div className="space-y-6">
         <SynopsisCard label="What it is" accent="#E0249C">
           <p>
-            Your X Factor Operating Manual is the complete design of your business,
+            Your 10X Factor Operating Manual is the complete design of your business,
             pulled from every element you built across The 10X Leap and written into
             one living document.
           </p>
@@ -222,7 +222,7 @@ function OperatingManualReveal() {
         >
           <p>This is where your operating system becomes a living business.</p>
           <p>
-            You hand your X Factor Operating Manual to the Studios, and they
+            You hand your 10X Factor Operating Manual to the Studios, and they
             generate the actual assets, built from your genius instead of a generic
             template. You stop being the bottleneck. You stop rebuilding every six
             months. Your business finally runs on a system that is unmistakably yours.

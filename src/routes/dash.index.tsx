@@ -480,7 +480,7 @@ function LockedPhaseCard({
 
       <div className="flex-1 space-y-4 mb-8">
         <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]">
-          Five AI-guided design phases that transform your Zone of Genius into a complete business blueprint — your X Factor Operating Manual™.
+          Five AI-guided design phases that transform your Zone of Genius into a complete business blueprint — your 1010X Factor Operating Manual™.
         </p>
         <p className="font-serif text-[17px] leading-relaxed text-[#1F1623]">
           Every future offer, client, launch, and piece of content built from the same foundation.
@@ -602,7 +602,7 @@ function DashHome() {
             <PhaseCard
               phaseNum="02 · Design"
               name="The 10X Leap™"
-              descriptor="Create the life and business that naturally emerge from your Zone of Genius. Every exercise becomes structured intelligence stored in your X Factor Operating Manual™."
+              descriptor="Create the life and business that naturally emerge from your Zone of Genius. Every exercise becomes structured intelligence stored in your 1010X Factor Operating Manual™."
               result="You are not building assets. You are building the intelligence your future business will run from. When your Operating Manual is complete, Rare Breed OS™ brings the rest to life."
               status={p2Status}
               completed={p2Count}
@@ -623,7 +623,7 @@ function DashHome() {
           )}
           {access?.phase3 ? (
             <FeaturedCard
-              descriptor="Install your X Factor Operating Manual™ into Rare Breed OS™. Every Studio already knows who you are—and uses that intelligence to generate your messaging, offers, content, emails, launches, curriculum, brand, and business systems."
+              descriptor="Install your 1010X Factor Operating Manual™ into Rare Breed OS™. Every Studio already knows who you are—and uses that intelligence to generate your messaging, offers, content, emails, launches, curriculum, brand, and business systems."
               result="Everything generated from your Operating Manual. Not from generic AI. Not from someone else's template. From your unique genius. Watch your business come to life."
               status={p3Status}
               completed={p3Count}
@@ -633,7 +633,7 @@ function DashHome() {
             />
           ) : (
             <FeaturedCard
-              descriptor="Your X Factor Operating Manual™ plugs into twelve AI Studios that already know who you are — generating your messaging, offers, sales pages, content, launches, and brand from one source."
+              descriptor="Your 1010X Factor Operating Manual™ plugs into twelve AI Studios that already know who you are — generating your messaging, offers, sales pages, content, launches, and brand from one source."
               result="You did the deep thinking once. You never start from a blank page again."
               status={p3Status}
               completed={p3Count}

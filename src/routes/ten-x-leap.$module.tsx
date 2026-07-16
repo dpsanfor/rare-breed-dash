@@ -577,7 +577,7 @@ function Phase2ConversationRunner({
             className="mx-auto mt-5 max-w-lg font-serif italic text-[#4A1259]/80"
             style={{ fontSize: "clamp(18px, 2.8vw, 23px)" }}
           >
-            Saved to your X Factor Operating Manual™.
+            Saved to your 1010X Factor Operating Manual™.
           </p>
           <p className="mx-auto mt-4 max-w-md font-serif leading-relaxed text-[#1F1623]/55">
             Every element you design flows into your Operating Manual. You'll see it
@@ -644,7 +644,7 @@ function Phase2ConversationRunner({
               ))}
             </ul>
             <p className="font-serif text-[17px] italic text-[#4A1259]/50">
-              This module contributes directly to your X Factor Operating Manual™.
+              This module contributes directly to your 1010X Factor Operating Manual™.
             </p>
           </div>
         )}

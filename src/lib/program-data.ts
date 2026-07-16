@@ -474,17 +474,17 @@ export const PHASES: Phase[] = [
         nextDecision: "Does this brand make my dream client feel something before I say a word?",
         generatePrompt:
           "I'm ready. Generate my 10X Brand Direction based on everything we've discussed.",
-        feedsInto: "Element 11 synthesizes every decision you've made into your X Factor Operating Manual™ — the complete design of your business, ready to build from.",
+        feedsInto: "Element 11 synthesizes every decision you've made into your 1010X Factor Operating Manual™ — the complete design of your business, ready to build from.",
       },
       {
         id: "operating-manual",
         number: 11,
-        name: "X Factor Operating Manual™",
-        tagline: "Every decision synthesized into one document. You walk away with your X Factor Operating Manual™: the complete design of your business, ready to plug into the Club.",
+        name: "1010X Factor Operating Manual™",
+        tagline: "Every decision synthesized into one document. You walk away with your 1010X Factor Operating Manual™: the complete design of your business, ready to plug into the Club.",
         purpose:
-          "Bring everything you've created together into one living blueprint — your X Factor Operating Manual™. This becomes the intelligence Rare Breed OS™ uses to generate your messaging, offers, content, launches, and business when you activate it inside Delivered. So that you only have to think deeply once. After that, Rare Breed OS™ brings your business to life from your unique genius — not a blank page.",
+          "Bring everything you've created together into one living blueprint — your 1010X Factor Operating Manual™. This becomes the intelligence Rare Breed OS™ uses to generate your messaging, offers, content, launches, and business when you activate it inside Delivered. So that you only have to think deeply once. After that, Rare Breed OS™ brings your business to life from your unique genius — not a blank page.",
         type: "synthesis",
-        outputName: "X Factor Operating Manual",
+        outputName: "10X Factor Operating Manual",
         outputKey: "operating_manual",
         nextDecision:
           "What is the first move I make from this operating manual this week?",
