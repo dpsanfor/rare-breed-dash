@@ -4021,9 +4021,6 @@ Write this section as a direct instruction to any AI generating content for or a
 
 ---
 
-## CORE TEACHINGS
-[The 5-7 foundational ideas she returns to and is known for. Each one named and described in 2-3 sentences. These are the intellectual territory her content lives inside — any AI generating content should stay within this territory unless she explicitly expands it.]
-
 ## LEADERSHIP PHILOSOPHY
 [How she leads. Who thrives in her rooms. Who is not ready for her work. What she refuses to compromise as a leader. Any AI building a sales page or program description for her reads this to understand how to position her authority.]
 

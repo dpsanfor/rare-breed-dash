@@ -148,8 +148,8 @@ export function writeProfile(update: Partial<UserProfile>): UserProfile {
 
 const LEAP_ELEMENT_KEYS = new Set([
   "bigger_vision", "release_plan", "constitution", "zone_of_genius",
-  "ten_x_business", "living_proof", "ten_x_calendar", "dream_client_decision",
-  "offer_map", "brand_direction",
+  "ten_x_business", "living_proof",
+  "ten_x_calendar", "dream_client_decision", "offer_map", "brand_direction",
 ]);
 
 export function saveArtifact(key: keyof UserProfile, value: string): void {
@@ -287,7 +287,7 @@ export function buildPhase2Context(profile: UserProfile): string {
   if (profile.dream_client_decision) parts.push(`DREAM CLIENT DECISION:\n${profile.dream_client_decision}`);
   if (profile.offer_map) parts.push(`OFFER ECOSYSTEM MAP:\n${profile.offer_map}`);
   if (profile.brand_direction) parts.push(`BRAND DIRECTION:\n${profile.brand_direction}`);
-  if (profile.operating_manual) parts.push(`RARE BREED OPERATING MANUAL:\n${profile.operating_manual}`);
+  if (profile.operating_manual) parts.push(`X FACTOR OPERATING MANUAL:\n${profile.operating_manual}`);
 
   const voice = [
     profile.voice_emails && `EMAILS SHE'S PROUD OF:\n${profile.voice_emails}`,
