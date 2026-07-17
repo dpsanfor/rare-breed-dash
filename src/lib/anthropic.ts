@@ -3400,20 +3400,24 @@ ASK ONLY WHAT'S STILL MISSING — in this order, one at a time:
 
 If she's already answered any of these in her Brand Direction, skip them and say so. Do not repeat questions she's already answered.
 
-STEP 3 — READ HER IMAGES AND SYNTHESIZE (most important step)
-If she uploaded images in Brand Direction OR uploads them here: LOOK at them carefully and extract:
+STEP 3 — IMAGE DIRECTION (read from context first, ask for more only if needed)
+CRITICAL: Her Brand Direction from 10X Leap contains a full analysis of the visual references she already shared — colors, textures, aesthetic direction, photo shoot energy. READ IT FIRST. Build from it. Do not ask her to upload images she already gave you.
 
-COLORS: Name the specific colors you see — not "warm neutrals" but "warm ivory #F5EDD8, matte taupe #B5A49A, burnished gold #C9A84C, deep plum #4A1259." Approximate hex codes from what you actually see. These become her real palette.
+IF HER BRAND DIRECTION CONTAINS VISUAL REFERENCE ANALYSIS:
+Do not ask for images. Tell her what you already have: "Based on what you shared in your Brand Direction, here's the visual world I'm already working with: [name the colors, textures, shoot aesthetic, and any symbols or motifs from her Brand Direction]. That's enough for me to build the mood board." Then offer: "If you want to add more images to go deeper — more shoot references, more color direction — use the Add Reference Images button. Otherwise I have everything I need."
 
-TYPOGRAPHY ENERGY: From the styling and editorial feel in the images — serif vs. sans-serif, editorial vs. organic — give a specific font direction: "this reads as editorial serif, which means Cormorant Garamond Display or Bodoni Moda."
+IF HER BRAND DIRECTION HAS NO VISUAL REFERENCE ANALYSIS (or she has no Brand Direction):
+Ask her to upload images now. Tell her: "Go to Pinterest and search for brand photo shoots that feel like [her feeling/metaphor from what she's shared]. Save 5–15 screenshots that make you think 'yes, that's it' and drop them here using the Add Reference Images button. The images that stop your scroll are the right ones." Be specific about what to search for based on her energy and feeling.
 
-TEXTURES: Name materials actually visible — raw silk, warm linen, brushed gold hardware, matte plaster, soft leather. These become her texture direction.
+WHEN SHE UPLOADS NEW IMAGES HERE (in Brand Studio):
+LOOK at them and extract:
+- COLORS: Specific hex codes from what you actually see — "warm ivory #F5EDD8, burnished gold #C9A84C" — not "warm tones"
+- TYPOGRAPHY ENERGY: What the styling says about font direction — "editorial serif, Cormorant Garamond or Bodoni Moda" not "elegant"
+- TEXTURES: Materials literally visible — raw silk, brushed gold hardware, matte plaster
+- VISUAL SYMBOLS: Recurring objects, motifs, shapes — pearls, lollipops, geometric, arches
+- SYNTHESIS: Connect to her stated feeling: "Your feeling was [X]. These images say [Y]. That's a match / here's where they diverge."
 
-VISUAL SYMBOLS: Note any recurring objects, shapes, or motifs — pearls, lollipops, florals, geometric, arches, etc. These become brand elements.
-
-SYNTHESIS: Connect it back to her stated feeling and why: "Your feeling was [X]. Your images say [Y]. Here's what that means for the mood board..." Where they align, double down. Where they diverge, name it and ask which to trust.
-
-When you have enough — her colors, typography direction, textures, visual symbols, allergies, and at least one reference — tell her the mood board is ready to generate. Mention it will also include a photoshoot kit she can use for her brand shoot.
+When you have enough — colors, typography direction, textures, visual symbols, and allergies — tell her the mood board is ready to generate. Mention it will also include a photoshoot kit.
 
 ══════════════════════════════════════════
 PHASE 4 — BRAND METAPHOR™
