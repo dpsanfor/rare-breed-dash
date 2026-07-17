@@ -1687,23 +1687,54 @@ FOLLOW-UP LOGIC:
 - She gives a metaphor for one thing but not the other → "That's your energy metaphor. Now let's find the transformation one. If someone who worked with you for a year made a before-and-after image — no words, just images — what would those two images be?"
 
 REPORT FORMAT:
+This report is not just a summary — it is a BUILDER BRIEF. Every section must be specific enough that an AI could pick it up, paste it into a prompt, and build an accurate mood board, brand guide, or visual identity from it without asking a single follow-up question. Write it like a designer brief and a founder's manifesto combined.
+
 ## RARE BREED PRINCIPLE
 "Your brand is not what it looks like. It is what it feels like."
 
 ## THE WHY
-[The mission behind the X Factor. Why she applies her genius in this specific way. What she wants to change. What it means to her when her client gets the outcome. Personal, deep, true.]
+[The mission behind the X Factor — personal, emotional, true. Why she applies her genius in this specific way, to this specific person. What she wants to change. What it means to her when her client gets the outcome. 3–5 sentences, her words as much as possible.]
 
 ## THE FEELING
-[How she wants people to feel at the end of working with her. The emotion, the state of being. Her three-second page feeling. Written in her own words and images as much as possible.]
+[How she wants people to feel at the end of working with her: the emotion, the state of being. Her three-second-page feeling: what hits before a word is read. Written in her words, in imagery and sensation. 2–4 sentences.]
 
-## THE METAPHOR
-[The image, scene, or feeling that captures the transformation she creates or the energy she brings. Her own words. If multiple emerged, capture them all.]
+## THE ENERGY METAPHOR
+[The image, object, creature, or place that captures the energy she IS as a presence. Specific — not "powerful woman" but "a velvet room" or "a double espresso in a glass cup." If multiple emerged, keep them all. Explain why each one is right for her.]
+
+## THE TRANSFORMATION METAPHOR
+[The before-and-after in images, not words. What does her client's world look like after? What visual captures the shift? Specific imagery — not "confident" but "walking into the room first."]
 
 ## THE VISUAL WORLD
-[Drawn to: references, textures, colors, eras, spaces, women, aesthetic direction. Refuses: the named allergies. The direction the Studios will build from.]
+
+### Color Palette Direction
+[4–6 color directions with approximate hex codes and where each lives. Pull from her image references where possible: "warm ivory #F5EDD8 — the wall tone in her editorial references. Deep burgundy #6B1A2A — the velvet she's drawn to. Tarnished gold #C9A84C — the hardware, the edge, the shimmer." If she named specific colors, use them verbatim. Include what to avoid.]
+
+### Texture & Material Direction
+[Named materials and surfaces: raw silk, linen, stone, burnished leather, matte plaster, iridescent foil, glass, water, velvet. What each feels like and where it belongs in her brand (website background, packaging, photography props, welcome gifts). What to avoid.]
+
+### Aesthetic Era & Energy
+[The era, world, or aesthetic direction: vintage Palm Springs, contemporary editorial, old money European, dark academia, etc. What she'd want her sales page mistaken for. What photographer or brand she admires. What a woman in her world looks like and wears.]
+
+### Photo Shoot Direction
+[What her brand shoot needs to incorporate: settings, styling, wardrobe energy, lighting, poses, props, mood. What kind of shoot she's drawn to — editorial, intimate, fashion-forward, natural, moody, sun-drenched. Reference any specific shoot ideas or styles she shared. This is the brief a photographer picks up and executes from.]
+
+### Aesthetic Allergies
+[What she refuses, specifically named: corporate beige, boho earth-mama, bro-marketing black-and-red, millennial pink, clinical white, etc. Equally important as what she loves.]
 
 ## THE VOICE
-[Signature phrases (verbatim). Never-words. Rhythm notes. Openings and signoffs. Profanity level. Quote her actual lines where possible.]
+[Signature phrases verbatim. Words she'd never use. Rhythm notes: punchy vs. flowing, short sentences vs. long. Profanity level. How she opens, how she closes. Quote her actual lines where possible. Enough for any AI writer to sound like her on her best day.]
+
+## AI BUILDER BRIEF
+This section is written directly for an AI that will be asked to build visual assets (mood board, brand kit, social templates, website direction) from this document. It summarizes the complete brand in builder-ready language:
+
+"Build from these parameters:
+- Brand energy: [one sentence — the energy metaphor translated to a brand direction]
+- Color palette: [list hex codes with labels]
+- Textures: [bullet list of specific materials]
+- Typography energy: [font personality — serif vs. sans, editorial vs. approachable, weight, whether to use script, etc.]
+- Photo shoot aesthetic: [one sentence a photographer could use as a brief]
+- What it should feel like to land on her page: [the three-second feeling]
+- What to never build: [aesthetic allergies, one sentence]"
 
 ## REFLECTION
 End with exactly:
