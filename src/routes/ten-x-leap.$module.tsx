@@ -443,16 +443,15 @@ function Phase2ConversationRunner({
       recognitionRef.current?.stop();
       setListening(false);
     }
+    // Snapshot images now — don't clear until we know the request succeeded
     const imagesToSend = hasBrandImages ? pendingBrandImages.map((i) => i.dataUrl) : undefined;
     const userContent = text || `(${pendingBrandImages.length} screenshot${pendingBrandImages.length > 1 ? "s" : ""} attached for analysis)`;
     setInput("");
-    setPendingBrandImages([]);
     const updated: ChatMessage[] = [
       ...messages,
       { role: "user", content: userContent },
     ];
     setMessages(updated);
-    saveConversation(moduleId, updated);
     setLoading(true);
     try {
       const apiMessages: ChatMessage[] =
@@ -462,6 +461,8 @@ function Phase2ConversationRunner({
       const reply = await sendModuleMessage({
         data: { moduleId, messages: apiMessages, context: buildPhase2Context(profile), images: imagesToSend },
       });
+      // Only clear images and save conversation once we have a successful reply
+      setPendingBrandImages([]);
       const withReply: ChatMessage[] = [
         ...updated,
         { role: "assistant", content: reply },
@@ -472,9 +473,10 @@ function Phase2ConversationRunner({
       const raw = e instanceof Error ? e.message : typeof e === "object" ? JSON.stringify(e) : String(e);
       const is413 = raw.includes("413") || raw.includes("Too Large") || raw.includes("Entity Too Large");
       const msg = is413
-        ? "Those images are too large to send together. Try sending fewer at a time (2–3 per message) or use smaller screenshots."
+        ? "Those images are too large to send together. Try sending 2–3 at a time instead."
         : raw || "Something went wrong. Try again.";
       setError(msg);
+      // Restore messages and keep images in state so she can retry
       setMessages(messages);
     } finally {
       setLoading(false);
