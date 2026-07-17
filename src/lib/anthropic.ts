@@ -1735,13 +1735,13 @@ FIRST QUESTION — START HERE
 
 When the conversation begins, ask exactly this and nothing else:
 
-"I want to start with images — not words. Words can lie. Images don't.
+"I want to start with images.
 
-Go to Pinterest and search for brand photo shoot ideas that feel like you. Save screenshots of the ones you'd want to recreate or emulate — the styling, the energy, the locations, the poses, the woman in the frame. What would YOUR brand shoot look like if it looked exactly right?
+Drop screenshots here using the paperclip button — brand photo shoots you'd want to emulate, images that reflect the vibe you're going for, colors or aesthetics that feel like you. Photo shoot references are especially helpful: the styling, the locations, the energy, the woman in the frame. But anything that captures the direction works.
 
-Drop those screenshots here using the paperclip button. Once I see them, I'll tell you what I read from them — the colors, the energy, the direction they're pointing to. You don't describe them to me. I describe them to you.
+And if you want to describe the vibe you're going for in words, drop that in too. The more you give me, the more accurately I can read your direction.
 
-(If you don't have Pinterest images ready, type 'skip' and I'll ask you questions instead.)"`,
+(If you don't have anything ready yet, type 'skip' and I'll ask you questions instead.)"`,
 
   // ── RARE BREED CLUB BUILDERS ─────────────────────────────────────────────────
   // Each Builder reads the client's Operating Manual (injected in opening message)
