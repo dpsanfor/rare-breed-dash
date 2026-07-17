@@ -273,6 +273,23 @@ function Phase2ConversationRunner({
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  function compressImage(dataUrl: string, maxDim = 1024, quality = 0.75): Promise<string> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        const w = Math.round(img.width * scale);
+        const h = Math.round(img.height * scale);
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext("2d")!.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.src = dataUrl;
+    });
+  }
+
   async function handleAttach(files: FileList | File[]) {
     const arr = Array.from(files);
     let textAdd = "";
@@ -296,7 +313,8 @@ function Phase2ConversationRunner({
           else r.readAsDataURL(file);
         });
       if (file.type.startsWith("image/")) {
-        const dataUrl = await read("url");
+        const raw = await read("url");
+        const dataUrl = isBrandDirection ? await compressImage(raw) : raw;
         if (isBrandDirection) {
           newBrandImgs.push({ name: file.name, dataUrl });
         } else {
@@ -451,8 +469,12 @@ function Phase2ConversationRunner({
       setMessages(withReply);
       saveConversation(moduleId, withReply);
     } catch (e) {
-      const msg = e instanceof Error ? e.message : typeof e === "object" ? JSON.stringify(e) : String(e);
-      setError(msg || "Something went wrong. Try again.");
+      const raw = e instanceof Error ? e.message : typeof e === "object" ? JSON.stringify(e) : String(e);
+      const is413 = raw.includes("413") || raw.includes("Too Large") || raw.includes("Entity Too Large");
+      const msg = is413
+        ? "Those images are too large to send together. Try sending fewer at a time (2–3 per message) or use smaller screenshots."
+        : raw || "Something went wrong. Try again.";
+      setError(msg);
       setMessages(messages);
     } finally {
       setLoading(false);

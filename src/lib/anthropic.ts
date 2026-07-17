@@ -1737,9 +1737,9 @@ When the conversation begins, ask exactly this and nothing else:
 
 "I want to start with images.
 
-Drop screenshots here using the paperclip button — brand photo shoots you'd want to emulate, images that reflect the vibe you're going for, colors or aesthetics that feel like you. Photo shoot references are especially helpful: the styling, the locations, the energy, the woman in the frame. But anything that captures the direction works.
+Go to Pinterest and search for brand photo shoots you'd want to emulate — the styling, the locations, the energy, the woman in the frame. Screenshot the ones that feel like you and drop them here using the paperclip button. Any other images that reflect the vibe you're going for work too: colors, aesthetics, spaces, anything that captures the direction.
 
-And if you want to describe the vibe you're going for in words, drop that in too. The more you give me, the more accurately I can read your direction.
+And if you want to describe the vibe you're going for in words, add that too. The more you give me, the more accurately I can read your direction.
 
 (If you don't have anything ready yet, type 'skip' and I'll ask you questions instead.)"`,
 
