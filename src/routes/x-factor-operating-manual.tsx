@@ -7,7 +7,7 @@ import { generateOperatingManual } from "@/lib/anthropic";
 
 export const Route = createFileRoute("/x-factor-operating-manual")({
   head: () => ({
-    meta: [{ title: "Your 1010X Factor Operating Manual™" }],
+    meta: [{ title: "Your 10X Factor Operating Manual™" }],
   }),
   component: OperatingManualReveal,
 });
