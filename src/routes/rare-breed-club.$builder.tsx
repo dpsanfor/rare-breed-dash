@@ -203,6 +203,32 @@ function RareBreedClubBuilder() {
     initConversation(readProfile(), mod.id);
   }
 
+  function startOverCompletely() {
+    if (!mod) return;
+    if (!window.confirm("This will wipe your entire Brand Studio — the mood board, photoshoot assets, and the full conversation. Start completely fresh?")) return;
+    const raw = localStorage.getItem('rare_breed_profile');
+    const p = raw ? JSON.parse(raw) : {};
+    // Clear conversation
+    if (p.conversations) delete p.conversations[mod.id];
+    // Clear artifact
+    delete p[mod.outputKey];
+    // For Brand Studio: also clear photoshoot assets and images
+    if (isBrand) {
+      delete p.brand_photoshoot_outfits;
+      delete p.brand_photoshoot_shotlist;
+      delete p.brand_images;
+    }
+    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    setArtifact(null);
+    setMessages([]);
+    setInput("");
+    setShowArtifact(false);
+    setDone(false);
+    setRefining(false);
+    setBrandImages([]);
+    initConversation(readProfile(), mod.id);
+  }
+
   if (!mod) {
     return (
       <BrandShell>
@@ -426,6 +452,12 @@ function RareBreedClubBuilder() {
               className="rounded-full border border-[rgba(224,36,156,0.4)] bg-[rgba(224,36,156,0.06)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#E0249C] hover:bg-[rgba(224,36,156,0.12)] transition-colors"
             >
               Refine with the AI
+            </button>
+            <button
+              onClick={startOverCompletely}
+              className="rounded-full border border-[rgba(74,18,89,0.15)] bg-white/60 px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/40 hover:border-red-300 hover:text-red-400 transition-colors"
+            >
+              ↺ Start over completely
             </button>
           </div>
 
