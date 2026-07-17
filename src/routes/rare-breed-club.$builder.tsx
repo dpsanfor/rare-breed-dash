@@ -259,6 +259,21 @@ function RareBreedClubBuilder() {
     });
   }
 
+  function compressImage(dataUrl: string, maxDim = 1024, quality = 0.75): Promise<string> {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.src = dataUrl;
+    });
+  }
+
   // Add reference images: keep them for the next send (so the AI sees them) and
   // save them to the brand library for future reference.
   async function addBrandImages(files: FileList | File[]) {
@@ -266,7 +281,11 @@ function RareBreedClubBuilder() {
     const imgs = Array.from(files).filter((f) => f.type.startsWith("image/"));
     if (!imgs.length) return;
     const loaded: { name: string; dataUrl: string }[] = [];
-    for (const f of imgs) loaded.push({ name: f.name, dataUrl: await readAsDataURL(f) });
+    for (const f of imgs) {
+      const raw = await readAsDataURL(f);
+      const dataUrl = await compressImage(raw);
+      loaded.push({ name: f.name, dataUrl });
+    }
     const nextPending = [...pendingImages, ...loaded];
     setPendingImages(nextPending);
     const nextLibrary = [...brandImages, ...loaded];
@@ -293,20 +312,20 @@ function RareBreedClubBuilder() {
     }
     setInput("");
     const outgoingImages = pendingImages.map((i) => i.dataUrl);
-    setPendingImages([]);
     const userContent = text || `Here are ${outgoingImages.length} reference image${outgoingImages.length > 1 ? "s" : ""} for my brand. Read them and tell me what you see.`;
     const updated: ChatMessage[] = [...messages, { role: "user", content: userContent }];
     setMessages(updated);
-    saveConversation(mod!.id, updated);
     setLoading(true);
     try {
       const reply = await sendModuleMessage({ data: { moduleId: mod!.id, messages: updated, context: buildStudioContext(readProfile(), mod!.id), images: outgoingImages.length ? outgoingImages : undefined } });
+      setPendingImages([]);
       const withReply: ChatMessage[] = [...updated, { role: "assistant", content: reply }];
       setMessages(withReply);
       saveConversation(mod!.id, withReply);
     } catch (e) {
-      const msg = e instanceof Error ? e.message : typeof e === "object" ? JSON.stringify(e) : String(e);
-      setError(msg || "Something went wrong. Try again.");
+      const raw = e instanceof Error ? e.message : typeof e === "object" ? JSON.stringify(e) : String(e);
+      const is413 = raw.includes("413") || raw.includes("Too Large");
+      setError(is413 ? "Those images are too large to send together. Try 2–3 at a time." : raw || "Something went wrong. Try again.");
       setMessages(messages);
     } finally {
       setLoading(false);
