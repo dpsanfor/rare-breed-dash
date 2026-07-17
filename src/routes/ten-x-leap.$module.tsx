@@ -268,6 +268,7 @@ function Phase2ConversationRunner({
     const art = p[outputKey as keyof UserProfile] as string | undefined;
     return !!(saved?.length || art);
   });
+  const [pendingBrandImages, setPendingBrandImages] = useState<{ name: string; dataUrl: string }[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -275,13 +276,15 @@ function Phase2ConversationRunner({
   async function handleAttach(files: FileList | File[]) {
     const arr = Array.from(files);
     let textAdd = "";
+    const isBrandDirection = moduleId === "brand-direction";
     const existing = readProfile();
-    let imgs: { name: string; dataUrl: string }[] = [];
+    let voiceImgs: { name: string; dataUrl: string }[] = [];
     try {
-      imgs = existing.voice_images ? JSON.parse(existing.voice_images) : [];
+      voiceImgs = existing.voice_images ? JSON.parse(existing.voice_images) : [];
     } catch {
-      imgs = [];
+      voiceImgs = [];
     }
+    const newBrandImgs: { name: string; dataUrl: string }[] = [];
     let imgAdded = 0;
     const skipped: string[] = [];
     for (const file of arr) {
@@ -293,7 +296,12 @@ function Phase2ConversationRunner({
           else r.readAsDataURL(file);
         });
       if (file.type.startsWith("image/")) {
-        imgs.push({ name: file.name, dataUrl: await read("url") });
+        const dataUrl = await read("url");
+        if (isBrandDirection) {
+          newBrandImgs.push({ name: file.name, dataUrl });
+        } else {
+          voiceImgs.push({ name: file.name, dataUrl });
+        }
         imgAdded++;
       } else if (
         file.type.startsWith("text/") ||
@@ -313,14 +321,18 @@ function Phase2ConversationRunner({
     }
     if (textAdd) setInput((prev) => (prev + textAdd).trim());
     if (imgAdded) {
-      const json = JSON.stringify(imgs);
-      if (json.length < 4_000_000) saveArtifact("voice_images", json);
-      setInput((prev) =>
-        (
-          prev +
-          `\n\n(Attached ${imgAdded} testimonial screenshot${imgAdded > 1 ? "s" : ""}, saved to my Voice Library.)`
-        ).trim()
-      );
+      if (isBrandDirection) {
+        setPendingBrandImages((prev) => [...prev, ...newBrandImgs]);
+      } else {
+        const json = JSON.stringify(voiceImgs);
+        if (json.length < 4_000_000) saveArtifact("voice_images", json);
+        setInput((prev) =>
+          (
+            prev +
+            `\n\n(Attached ${imgAdded} testimonial screenshot${imgAdded > 1 ? "s" : ""}, saved to my Voice Library.)`
+          ).trim()
+        );
+      }
     }
   }
   const recognitionRef = useRef<any>(null);
@@ -406,15 +418,20 @@ function Phase2ConversationRunner({
 
   async function send() {
     const text = input.trim();
-    if (!text || loading) return;
+    const hasBrandImages = moduleId === "brand-direction" && pendingBrandImages.length > 0;
+    if (!text && !hasBrandImages) return;
+    if (loading) return;
     if (listening) {
       recognitionRef.current?.stop();
       setListening(false);
     }
+    const imagesToSend = hasBrandImages ? pendingBrandImages.map((i) => i.dataUrl) : undefined;
+    const userContent = text || `(${pendingBrandImages.length} screenshot${pendingBrandImages.length > 1 ? "s" : ""} attached for analysis)`;
     setInput("");
+    setPendingBrandImages([]);
     const updated: ChatMessage[] = [
       ...messages,
-      { role: "user", content: text },
+      { role: "user", content: userContent },
     ];
     setMessages(updated);
     saveConversation(moduleId, updated);
@@ -425,7 +442,7 @@ function Phase2ConversationRunner({
           ? [{ role: "user", content: "I'm ready to begin." }, ...updated]
           : updated;
       const reply = await sendModuleMessage({
-        data: { moduleId, messages: apiMessages, context: buildPhase2Context(profile) },
+        data: { moduleId, messages: apiMessages, context: buildPhase2Context(profile), images: imagesToSend },
       });
       const withReply: ChatMessage[] = [
         ...updated,
@@ -725,6 +742,31 @@ function Phase2ConversationRunner({
         <p className="mb-3 rounded-xl bg-red-50 px-4 py-2.5 text-sm text-red-600">{error}</p>
       )}
 
+      {pendingBrandImages.length > 0 && (
+        <div className="mb-3 flex flex-wrap gap-2 rounded-2xl border border-[rgba(201,168,76,0.3)] bg-[rgba(201,168,76,0.06)] p-3">
+          <p className="w-full font-mono text-[11px] uppercase tracking-[0.18em] text-[#c9a84c] mb-1">
+            {pendingBrandImages.length} screenshot{pendingBrandImages.length > 1 ? "s" : ""} ready — press Continue to send for analysis
+          </p>
+          {pendingBrandImages.map((img, i) => (
+            <div key={i} className="relative">
+              <img
+                src={img.dataUrl}
+                alt={img.name}
+                className="h-20 w-20 rounded-xl object-cover"
+                style={{ border: "1px solid rgba(201,168,76,0.25)" }}
+              />
+              <button
+                onClick={() => setPendingBrandImages((prev) => prev.filter((_, j) => j !== i))}
+                className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-white font-mono text-[11px] leading-none"
+                style={{ background: "#E0249C" }}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="flex gap-3">
         <textarea
           ref={inputRef}
@@ -775,7 +817,7 @@ function Phase2ConversationRunner({
           </button>
           <button
             onClick={send}
-            disabled={!input.trim() || loading}
+            disabled={(!input.trim() && pendingBrandImages.length === 0) || loading}
             className="rounded-2xl border border-[#E0249C]/30 bg-[#E0249C]/10 px-5 py-2 font-display text-sm tracking-[0.12em] text-[#E0249C] hover:bg-[#E0249C]/20 disabled:opacity-40"
           >
             Continue

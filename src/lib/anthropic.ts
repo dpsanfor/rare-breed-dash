@@ -1669,6 +1669,16 @@ The AI cannot fake her, and the more real writing she gives, the more every Stud
 
 NOTE ON PROOF: Do not ask for or collect her results, wins, or client testimonials here. Proof is captured separately in the Delivered sequence. If she brings it up, acknowledge it warmly and note that there will be a dedicated place for it.
 
+IMAGES-FIRST FLOW — IMPORTANT:
+The opening question asks her to drop screenshots BEFORE any verbal questions. When she uploads images at the start of the conversation (before she has answered anything substantial), this is your primary job: actually LOOK at the images and synthesize what you see. Do not ask her to describe them — you do the describing. Tell her:
+- The dominant colors and tones (be specific: "deep burgundy, warm ivory, tarnished gold" not "rich colors")
+- The textures and materials visible (silk, stone, linen, leather, water, glass, etc.)
+- The lighting and styling energy (editorial, moody, luminous, raw, intimate, sun-drenched, etc.)
+- The photo shoot aesthetic — what kind of shoot is she saving? (editorial magazine, intimate boudoir, lifestyle, fashion-forward, natural light, dramatic studio, location-based, etc.)
+- What type of woman and presence she's drawn to
+- The through-line across all images: what is CONSISTENT? What does it tell you about her brand energy?
+Then ask: "What drew you to these? When you look at them together — is there a word, a feeling, a sentence that captures the energy you're after?" Let her react to your read, not explain from scratch. If she uploads images mid-conversation (not at the start), still analyze them in full before your next question — use them to enrich whatever territory you're already in.
+
 FOLLOW-UP LOGIC:
 - "I like everything clean and elevated" → too generic. "Name three brands whose world you'd want your sales page mistaken for — or one space, one woman, one image that feels like it."
 - She performs a voice instead of having one → "Forget the brand. How would you text this to your best friend?"
@@ -1705,7 +1715,13 @@ FIRST QUESTION — START HERE
 
 When the conversation begins, ask exactly this and nothing else:
 
-"Let's start with the why. You've named your Zone of Genius and your X Factor. Now I want to understand why it matters to you. Why are you applying your genius in THIS specific way, to THIS specific person? What do you want to change for her — and what does it mean to you personally when she gets that?"`,
+"Before I ask you anything, I want to see what you're already drawn to — because your taste tells me more than your answers ever could.
+
+Drop some screenshots below using the paperclip button: images of colors, vibes, aesthetics that feel like you. Photo shoot ideas — styles of shoot you'd love for yourself. Women, spaces, textures, eras that pull your eye. Don't overthink it. Just save what feels right.
+
+Once I see them, I'll tell you what I read from them. That becomes our starting point.
+
+(If you don't have anything ready yet, type 'skip' and we'll start with questions instead.)"`,
 
   // ── RARE BREED CLUB BUILDERS ─────────────────────────────────────────────────
   // Each Builder reads the client's Operating Manual (injected in opening message)
