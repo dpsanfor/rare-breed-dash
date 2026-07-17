@@ -742,7 +742,7 @@ function Phase2ConversationRunner({
               handleAttach(e.dataTransfer.files);
             }
           }}
-          placeholder="Type, speak, or drop files here (documents, transcripts, testimonial screenshots)..."
+          placeholder={moduleId === "brand-direction" ? "Type, speak, or drop files here (Pinterest images, mood board references, inspiration photos)..." : "Type, speak, or drop files here (documents, transcripts, testimonial screenshots)..."}
           rows={3}
           className="flex-1 resize-none rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white/80 px-5 py-3.5 font-serif text-[17px] text-[#1F1623] outline-none placeholder:text-[#4A1259]/30 focus:border-[#E0249C]/40"
         />
@@ -782,7 +782,7 @@ function Phase2ConversationRunner({
           </button>
           <button
             onClick={() => fileInputRef.current?.click()}
-            title="Attach files: documents, transcripts, testimonial screenshots"
+            title={moduleId === "brand-direction" ? "Attach files: Pinterest images, mood board references, inspiration photos" : "Attach files: documents, transcripts, testimonial screenshots"}
             className="flex items-center justify-center rounded-2xl border border-[rgba(74,18,89,0.2)] bg-white/70 px-4 py-2 transition-all hover:border-[#E0249C]/40"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(74,18,89,0.55)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
