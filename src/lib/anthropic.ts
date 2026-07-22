@@ -4227,6 +4227,9 @@ async function callAnthropic(params: {
     apiMessages = msgs;
   }
 
+  const today = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  const systemWithDate = `TODAY'S DATE: ${today}. All timelines, deadlines, calendar dates, and date-specific action items must use dates from ${today} forward. Never suggest or reference dates in the past.\n\n${params.system}`;
+
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
@@ -4237,7 +4240,7 @@ async function callAnthropic(params: {
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
       max_tokens: params.maxTokens ?? 800,
-      system: params.system,
+      system: systemWithDate,
       messages: apiMessages,
     }),
   });
