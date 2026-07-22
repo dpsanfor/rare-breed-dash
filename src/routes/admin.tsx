@@ -14,9 +14,12 @@ interface AdminUser {
   created_at: string;
   last_sign_in_at: string | null;
   confirmed: boolean;
+  phase2_access: boolean;
+  phase3_access: boolean;
 }
 
 type GrantProduct = "ten_x_leap" | "rare_breed_club";
+type Filter = "all" | "phase2" | "phase3";
 
 function fmt(iso: string | null) {
   if (!iso) return "—";
@@ -34,6 +37,7 @@ function AdminPage() {
 
   const [users, setUsers] = useState<AdminUser[] | null>(null);
   const [usersError, setUsersError] = useState<string | null>(null);
+  const [filter, setFilter] = useState<Filter>("all");
 
   // Grant access state
   const [grantEmail, setGrantEmail] = useState("");
@@ -83,6 +87,8 @@ function AdminPage() {
         const note = data.hasAccount ? " (account updated immediately)" : " (will activate when they sign up)";
         setGrantResult({ ok: true, msg: `${productLabel} access granted to ${grantEmail.trim()}${note}.` });
         setGrantEmail("");
+        // Refresh the list
+        fetch("/api/admin-users").then((r) => r.json()).then((d) => { if (d.users) setUsers(d.users); });
       } else {
         setGrantResult({ ok: false, msg: data.message ?? "Something went wrong." });
       }
@@ -96,7 +102,6 @@ function AdminPage() {
   const [magicLink, setMagicLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
-  // Fetch magic link from server (key stays server-side)
   useEffect(() => {
     if (!isAdmin || IS_LOCAL_DEV) return;
     supabase.auth.getSession().then(async ({ data: { session } }) => {
@@ -119,6 +124,22 @@ function AdminPage() {
   }
 
   if (loading || !isAdmin) return null;
+
+  const leapCount = users?.filter((u) => u.phase2_access).length ?? 0;
+  const clubCount = users?.filter((u) => u.phase3_access).length ?? 0;
+  const totalCount = users?.length ?? 0;
+
+  const filteredUsers = (users ?? []).filter((u) => {
+    if (filter === "phase2") return u.phase2_access;
+    if (filter === "phase3") return u.phase3_access;
+    return true;
+  }).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+  const FILTERS: { key: Filter; label: string; count: number }[] = [
+    { key: "all", label: "All accounts", count: totalCount },
+    { key: "phase2", label: "10X Leap", count: leapCount },
+    { key: "phase3", label: "Rare Breed Club", count: clubCount },
+  ];
 
   return (
     <BrandShell hideStickyCta>
@@ -253,42 +274,114 @@ function AdminPage() {
 
           {users && (
             <>
-              <p className="font-mono text-[13px] uppercase tracking-[0.2em] text-[#4A1259]/40 mb-4">
-                {users.length} account{users.length !== 1 ? "s" : ""}
-              </p>
+              {/* Filter tabs */}
+              <div className="mb-5 flex flex-wrap gap-2">
+                {FILTERS.map(({ key, label, count }) => (
+                  <button
+                    key={key}
+                    onClick={() => setFilter(key)}
+                    className="rounded-full px-4 py-2 font-mono text-[12px] uppercase tracking-[0.18em] transition-all"
+                    style={{
+                      background: filter === key ? "rgba(224,36,156,0.1)" : "rgba(74,18,89,0.04)",
+                      border: `1px solid ${filter === key ? "rgba(224,36,156,0.35)" : "rgba(74,18,89,0.12)"}`,
+                      color: filter === key ? "#E0249C" : "rgba(74,18,89,0.5)",
+                    }}
+                  >
+                    {label} · {count}
+                  </button>
+                ))}
+              </div>
 
               <div className="rounded-2xl border border-[rgba(74,18,89,0.12)] overflow-hidden">
+                {/* Header */}
                 <div
-                  className="grid grid-cols-3 gap-4 px-6 py-3"
-                  style={{ background: "rgba(74,18,89,0.05)", borderBottom: "1px solid rgba(74,18,89,0.1)" }}
+                  className="grid gap-4 px-6 py-3"
+                  style={{
+                    gridTemplateColumns: "1fr auto auto auto auto",
+                    background: "rgba(74,18,89,0.05)",
+                    borderBottom: "1px solid rgba(74,18,89,0.1)",
+                  }}
                 >
-                  <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/50">Email</p>
-                  <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/50">Joined</p>
-                  <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-[#4A1259]/50">Last Sign In</p>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/50">Email</p>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/50 text-center">10X Leap</p>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/50 text-center">Club</p>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/50">Joined</p>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/50">Last seen</p>
                 </div>
 
-                {users
-                  .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-                  .map((u, i) => (
-                    <div
-                      key={u.id}
-                      className="grid grid-cols-3 gap-4 px-6 py-4"
-                      style={{
-                        borderBottom: i < users.length - 1 ? "1px solid rgba(74,18,89,0.07)" : "none",
-                        background: u.email === ADMIN_EMAIL ? "rgba(224,36,156,0.03)" : "transparent",
-                      }}
-                    >
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className="font-serif text-[15px] text-[#1F1623] truncate">{u.email}</span>
-                        {u.email === ADMIN_EMAIL && (
-                          <span className="shrink-0 rounded-full bg-[#E0249C]/10 px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.15em] text-[#E0249C]">you</span>
-                        )}
-                      </div>
-                      <span className="font-mono text-[13px] text-[#4A1259]/60">{fmt(u.created_at)}</span>
-                      <span className="font-mono text-[13px] text-[#4A1259]/60">{fmt(u.last_sign_in_at)}</span>
+                {filteredUsers.length === 0 && (
+                  <div className="px-6 py-8 text-center">
+                    <p className="font-serif italic text-[#4A1259]/40">No members match this filter.</p>
+                  </div>
+                )}
+
+                {filteredUsers.map((u, i) => (
+                  <div
+                    key={u.id}
+                    className="grid gap-4 px-6 py-4 items-center"
+                    style={{
+                      gridTemplateColumns: "1fr auto auto auto auto",
+                      borderBottom: i < filteredUsers.length - 1 ? "1px solid rgba(74,18,89,0.07)" : "none",
+                      background: u.email === ADMIN_EMAIL ? "rgba(224,36,156,0.03)" : "transparent",
+                    }}
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="font-serif text-[15px] text-[#1F1623] truncate">{u.email}</span>
+                      {u.email === ADMIN_EMAIL && (
+                        <span className="shrink-0 rounded-full bg-[#E0249C]/10 px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.15em] text-[#E0249C]">you</span>
+                      )}
+                      {!u.confirmed && (
+                        <span className="shrink-0 rounded-full bg-amber-50 border border-amber-200 px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.15em] text-amber-600">unverified</span>
+                      )}
                     </div>
-                  ))}
+
+                    {/* 10X Leap dot */}
+                    <div className="flex justify-center">
+                      {u.phase2_access ? (
+                        <span
+                          className="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px]"
+                          style={{ background: "rgba(224,36,156,0.15)", color: "#E0249C" }}
+                          title="Has 10X Leap access"
+                        >
+                          ✓
+                        </span>
+                      ) : (
+                        <span
+                          className="inline-flex h-5 w-5 items-center justify-center rounded-full"
+                          style={{ background: "rgba(74,18,89,0.06)" }}
+                          title="No 10X Leap access"
+                        />
+                      )}
+                    </div>
+
+                    {/* Club dot */}
+                    <div className="flex justify-center">
+                      {u.phase3_access ? (
+                        <span
+                          className="inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px]"
+                          style={{ background: "rgba(201,168,76,0.2)", color: "#c9a84c" }}
+                          title="Has Rare Breed Club access"
+                        >
+                          ✓
+                        </span>
+                      ) : (
+                        <span
+                          className="inline-flex h-5 w-5 items-center justify-center rounded-full"
+                          style={{ background: "rgba(74,18,89,0.06)" }}
+                          title="No Club access"
+                        />
+                      )}
+                    </div>
+
+                    <span className="font-mono text-[12px] text-[#4A1259]/55 whitespace-nowrap">{fmt(u.created_at)}</span>
+                    <span className="font-mono text-[12px] text-[#4A1259]/55 whitespace-nowrap">{fmt(u.last_sign_in_at)}</span>
+                  </div>
+                ))}
               </div>
+
+              <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#4A1259]/35">
+                Showing {filteredUsers.length} of {totalCount} accounts
+              </p>
             </>
           )}
         </section>
