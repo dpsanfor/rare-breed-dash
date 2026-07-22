@@ -36,6 +36,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           loadUserProfile().then((profile) => {
             if (profile) writeProfile(profile);
           });
+          // On every sign-in, check email_grants and permanently activate any
+          // access that was granted before this account was created (e.g. bought
+          // the 10X Leap before signing up on rarebreedos.com).
+          if (session.access_token) {
+            fetch("/api/activate-access", {
+              method: "POST",
+              headers: { Authorization: `Bearer ${session.access_token}` },
+            }).catch(() => {});
+          }
         }
         if (event === "SIGNED_OUT") {
           localStorage.removeItem("rb_profile");
