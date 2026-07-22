@@ -27,6 +27,19 @@ export const Route = createFileRoute("/ten-x-leap/$module")({
   component: PhaseTwoModule,
 });
 
+function downloadArtifact(content: string, outputName: string) {
+  const filename = `rare-breed-${outputName.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.txt`;
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 // ─── SYNTHESIS RUNNER (Phase 2) ───────────────────────────────────────────────
 
 function Phase2SynthesisRunner({
@@ -183,7 +196,7 @@ function Phase2SynthesisRunner({
 
       {artifact && (
         <div className="mt-8">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               onClick={onComplete}
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white"
@@ -193,6 +206,12 @@ function Phase2SynthesisRunner({
               }}
             >
               Continue →
+            </button>
+            <button
+              onClick={() => downloadArtifact(artifact!, outputName)}
+              className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+            >
+              ↓ Download
             </button>
             <button
               onClick={() => {
@@ -637,6 +656,12 @@ function Phase2ConversationRunner({
             }}
           >
             Continue to the next element →
+          </button>
+          <button
+            onClick={() => downloadArtifact(artifact!, outputName)}
+            className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
+          >
+            ↓ Download
           </button>
           <button
             onClick={resetModule}
