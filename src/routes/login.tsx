@@ -16,6 +16,9 @@ function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const params = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
+  const isNewBuyer = params.get("welcome") === "1";
   // Tracks whether we're in a recovery flow so SIGNED_IN doesn't redirect
   const inRecovery = useRef(false);
 
@@ -162,6 +165,23 @@ function LoginPage() {
     <div className={containerClass} style={containerStyle}>
       <div className="max-w-md w-full">
         {logo}
+
+        {isNewBuyer && (
+          <div
+            className="mb-6 rounded-2xl p-5 text-center"
+            style={{
+              background: "linear-gradient(135deg, rgba(224,36,156,0.08) 0%, rgba(201,168,76,0.08) 100%)",
+              border: "1px solid rgba(224,36,156,0.25)",
+            }}
+          >
+            <p className="font-display text-[18px] tracking-wide text-[#1F1623] mb-1">
+              You're in. 🎉
+            </p>
+            <p className="font-serif text-[15px] italic text-[#4A1259]/70">
+              Log in or create your account below to access the 10X Leap. Your access is already waiting.
+            </p>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="rounded-2xl border border-[rgba(74,18,89,0.15)] bg-white/80 overflow-hidden">
