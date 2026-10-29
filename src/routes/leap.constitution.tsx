@@ -3,7 +3,7 @@ import { PHASES } from "@/lib/program-data";
 import { useEffect, useRef, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
 import { MicButton } from "@/components/MicButton";
-import { readProfile, saveArtifact, saveConversation, markModuleComplete, buildPhase2Context } from "@/lib/profile";
+import { readProfile, saveArtifact, saveConversation, markModuleComplete, buildPhase2Context, clearModuleProgress } from "@/lib/profile";
 import {
   type ChatMessage,
   generateConstitution,
@@ -154,10 +154,7 @@ function ConstitutionPage() {
   }
 
   async function restartInterview() {
-    const raw = localStorage.getItem("rare_breed_profile");
-    const p = raw ? JSON.parse(raw) : {};
-    if (p.conversations) delete p.conversations["constitution"];
-    localStorage.setItem("rare_breed_profile", JSON.stringify(p));
+    clearModuleProgress({ conversationId: "constitution" });
     setMessages([]);
     setInput("");
     startInterview();

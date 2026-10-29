@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { BrandShell } from "@/components/brand/BrandShell";
-import { readProfile, saveConversation, buildPhase2Context } from "@/lib/profile";
+import { readProfile, saveConversation, buildPhase2Context, clearModuleProgress } from "@/lib/profile";
 import { sendOSChatMessage, type ChatMessage } from "@/lib/anthropic";
 import { getUserAccess } from "@/lib/supabase-profile";
 import { PhaseLockedScreen } from "@/components/PhaseLockedScreen";
@@ -85,10 +85,7 @@ function OSReviewPage() {
   }
 
   function clearSession() {
-    const raw = localStorage.getItem("rare_breed_profile");
-    const p = raw ? JSON.parse(raw) : {};
-    if (p.conversations) delete p.conversations[MODULE_ID];
-    localStorage.setItem("rare_breed_profile", JSON.stringify(p));
+    clearModuleProgress({ conversationId: MODULE_ID });
     setMessages([]);
     setStarted(false);
   }

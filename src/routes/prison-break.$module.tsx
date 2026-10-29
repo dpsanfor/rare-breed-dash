@@ -9,6 +9,7 @@ import {
   saveConversation,
   markModuleComplete,
   isModuleComplete,
+  clearModuleProgress,
   buildPhase1Context,
   type UserProfile,
 } from "@/lib/profile";
@@ -68,10 +69,14 @@ function SynthesisRunner({
     if (existing) setArtifact(existing);
   }, [existing]);
 
-  async function generate() {
+  // `regenerate` = second round: rebuild from her latest answers and show the
+  // new version instead of auto-advancing past it.
+  async function generate(regenerate = false) {
     setGenerating(true);
     setError(null);
     try {
+      // Read fresh so answers redone earlier in this session are included.
+      const profile = readProfile();
       let result = "";
       if (moduleId === "language-detection") {
         const conversations = profile.conversations ?? {};
@@ -96,7 +101,7 @@ function SynthesisRunner({
       }
       saveArtifact(outputKey as keyof UserProfile, result);
       markModuleComplete(`phase1_${moduleId}`);
-      if (autoAdvance) {
+      if (autoAdvance && !regenerate) {
         onComplete();
         return;
       }
@@ -109,6 +114,15 @@ function SynthesisRunner({
   }
 
   const complete = !!artifact;
+  const regenerateButton = (
+    <button
+      onClick={() => generate(true)}
+      disabled={generating}
+      className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors disabled:opacity-50"
+    >
+      {generating ? "Regenerating..." : "↻ Regenerate from my latest answers"}
+    </button>
+  );
   const isDeclaration = moduleId === "declaration";
 
   return (
@@ -189,7 +203,7 @@ function SynthesisRunner({
 
       {!artifact && (
         <button
-          onClick={generate}
+          onClick={() => generate()}
           disabled={generating}
           className="inline-flex items-center gap-2 rounded-full px-8 py-4 font-display text-[13px] tracking-[0.18em] text-white disabled:opacity-60"
           style={{
@@ -223,8 +237,11 @@ function SynthesisRunner({
           >
             ↓ Download
           </button>
+          {regenerateButton}
         </div>
       )}
+
+      {complete && isDeclaration && <div className="mt-6 flex justify-center">{regenerateButton}</div>}
     </div>
   );
 }
@@ -424,21 +441,15 @@ function ConversationRunner({
   }
 
   function resetModule() {
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    delete p[outputKey];
-    if (p.completed_modules) {
-      p.completed_modules = p.completed_modules.filter((k: string) => k !== `phase1_${moduleId}`);
-    }
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({
+      outputKeys: [outputKey as keyof UserProfile],
+      moduleKey: `phase1_${moduleId}`,
+    });
     setArtifact(null);
   }
 
   async function restartConversation() {
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    if (p.conversations) delete p.conversations[moduleId];
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({ conversationId: moduleId });
     setMessages([]);
     setInput("");
     await initConversation();
@@ -452,10 +463,7 @@ function ConversationRunner({
   async function generateWithOptionalAnswer() {
     setGenerating(true);
     setError(null);
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    delete p[outputKey];
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({ outputKeys: [outputKey as keyof UserProfile] });
     try {
       const extra = followUpAnswer.trim();
       let finalMessages = messages;

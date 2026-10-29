@@ -12,6 +12,7 @@ import {
   markModuleComplete,
   isModuleComplete,
   buildStudioContext,
+  clearModuleProgress,
   type UserProfile,
 } from "@/lib/profile";
 import { sendModuleMessage, generateModuleReport, type ChatMessage } from "@/lib/anthropic";
@@ -194,10 +195,7 @@ function RareBreedClubBuilder() {
 
   async function restartConversation() {
     if (!mod) return;
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    if (p.conversations) delete p.conversations[mod.id];
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({ conversationId: mod.id });
     setMessages([]);
     setInput("");
     initConversation(readProfile(), mod.id);
@@ -206,19 +204,16 @@ function RareBreedClubBuilder() {
   function startOverCompletely() {
     if (!mod) return;
     if (!window.confirm("This will wipe your entire Brand Studio — the mood board, photoshoot assets, and the full conversation. Start completely fresh?")) return;
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    // Clear conversation
-    if (p.conversations) delete p.conversations[mod.id];
-    // Clear artifact
-    delete p[mod.outputKey];
-    // For Brand Studio: also clear photoshoot assets and images
-    if (isBrand) {
-      delete p.brand_photoshoot_outfits;
-      delete p.brand_photoshoot_shotlist;
-      delete p.brand_images;
-    }
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({
+      conversationId: mod.id,
+      // Brand Studio also clears its photoshoot assets and images
+      outputKeys: [
+        mod.outputKey as keyof UserProfile,
+        ...(isBrand
+          ? (["brand_photoshoot_outfits", "brand_photoshoot_shotlist", "brand_images"] as const)
+          : []),
+      ],
+    });
     setArtifact(null);
     setMessages([]);
     setInput("");

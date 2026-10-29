@@ -11,6 +11,7 @@ import {
   isModuleComplete,
   buildPhase1Context,
   buildPhase2Context,
+  clearModuleProgress,
   type UserProfile,
 } from "@/lib/profile";
 import {
@@ -215,13 +216,10 @@ function Phase2SynthesisRunner({
             </button>
             <button
               onClick={() => {
-                const raw = localStorage.getItem('rare_breed_profile');
-                const p = raw ? JSON.parse(raw) : {};
-                delete p[outputKey];
-                if (p.completed_modules) {
-                  p.completed_modules = p.completed_modules.filter((k: string) => k !== `phase2_${moduleId}`);
-                }
-                localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+                clearModuleProgress({
+                  outputKeys: [outputKey as keyof UserProfile],
+                  moduleKey: `phase2_${moduleId}`,
+                });
                 setArtifact(null);
               }}
               className="rounded-full border border-[rgba(74,18,89,0.2)] px-5 py-2.5 font-mono text-[12px] uppercase tracking-[0.22em] text-[#4A1259]/60 hover:border-[#E0249C]/40 hover:text-[#E0249C] transition-colors"
@@ -520,21 +518,15 @@ function Phase2ConversationRunner({
   }
 
   function resetModule() {
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    delete p[outputKey];
-    if (p.completed_modules) {
-      p.completed_modules = p.completed_modules.filter((k: string) => k !== `phase2_${moduleId}`);
-    }
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({
+      outputKeys: [outputKey as keyof UserProfile],
+      moduleKey: `phase2_${moduleId}`,
+    });
     setArtifact(null);
   }
 
   async function restartConversation() {
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    if (p.conversations) delete p.conversations[moduleId];
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({ conversationId: moduleId });
     setMessages([]);
     setInput("");
     await initConversation();
@@ -548,10 +540,7 @@ function Phase2ConversationRunner({
   async function generateWithOptionalAnswer() {
     setGenerating(true);
     setError(null);
-    const raw = localStorage.getItem('rare_breed_profile');
-    const p = raw ? JSON.parse(raw) : {};
-    delete p[outputKey];
-    localStorage.setItem('rare_breed_profile', JSON.stringify(p));
+    clearModuleProgress({ outputKeys: [outputKey as keyof UserProfile] });
     try {
       const extra = followUpAnswer.trim();
       let finalMessages = messages;

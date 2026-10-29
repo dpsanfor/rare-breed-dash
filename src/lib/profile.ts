@@ -183,6 +183,26 @@ export function saveConversation(
   });
 }
 
+// writeProfile only merges, so removals (redo / start over) go through here.
+export function clearModuleProgress(opts: {
+  outputKeys?: (keyof UserProfile)[];
+  moduleKey?: string;
+  conversationId?: string;
+}): void {
+  const current = readProfile();
+  const next: UserProfile = { ...current };
+  for (const key of opts.outputKeys ?? []) delete next[key];
+  if (opts.moduleKey && next.completed_modules) {
+    next.completed_modules = next.completed_modules.filter((k) => k !== opts.moduleKey);
+  }
+  if (opts.conversationId && next.conversations) {
+    const { [opts.conversationId]: _removed, ...rest } = next.conversations;
+    next.conversations = rest;
+  }
+  localStorage.setItem(PROFILE_KEY, JSON.stringify(next));
+  bgSync(next);
+}
+
 export function markModuleComplete(moduleKey: string): void {
   writeProfile({ completed_modules: [moduleKey] });
 }
