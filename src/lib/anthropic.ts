@@ -4252,8 +4252,17 @@ async function callAnthropic(params: {
 
   const json = (await res.json()) as {
     content: Array<{ type: string; text: string }>;
+    stop_reason?: string;
   };
-  return sanitizeHumanCopy(json.content[0]?.text ?? "");
+  let text = json.content[0]?.text ?? "";
+  // Hit the token cap: drop the half-finished paragraph rather than show a
+  // report that stops mid-sentence.
+  if (json.stop_reason === "max_tokens") {
+    console.warn(`callAnthropic hit max_tokens (${params.maxTokens ?? 800})`);
+    const cut = text.lastIndexOf("\n\n");
+    if (cut > text.length * 0.5) text = text.slice(0, cut);
+  }
+  return sanitizeHumanCopy(text);
 }
 
 // Build an enriched system prompt: base prompt + global curriculum + module-specific curriculum.
@@ -4552,10 +4561,12 @@ ${data.context}`;
       "I'm ready. Generate my report based on everything we've discussed.";
     // A generated final playbook should never truncate. Club docs are long
     // (the Dream Client + Messaging doc especially), so give them full room.
+    // GGPB reports quote her answers and run long on a second round.
+    const isPhase1Report = PHASE1_MODULE_KEYS.includes(data.moduleId);
     return callAnthropic({
       system,
       messages: [...data.messages, { role: "user", content: prompt }],
-      maxTokens: isClubReport ? 8000 : 3000,
+      maxTokens: isClubReport || isPhase1Report ? 8000 : 3000,
     });
   });
 
@@ -4566,7 +4577,7 @@ export const generateLanguageReport = createServerFn({ method: "POST" })
     callAnthropic({
       system: buildLanguageSystem(data.previousText),
       messages: [{ role: "user", content: "Generate my Programming Report." }],
-      maxTokens: 2500,
+      maxTokens: 8000,
     })
   );
 
@@ -4576,7 +4587,7 @@ export const generateGoodGirlOS = createServerFn({ method: "POST" })
     callAnthropic({
       system: buildGoodGirlOSSystem(data.phase1Context),
       messages: [{ role: "user", content: "Generate my Good Girl Operating System." }],
-      maxTokens: 4000,
+      maxTokens: 8000,
     })
   );
 
@@ -4616,7 +4627,7 @@ export const generateDeclaration = createServerFn({ method: "POST" })
     callAnthropic({
       system: buildDeclarationSystem(data.phase1Context),
       messages: [{ role: "user", content: "Generate my Prison Break Declaration." }],
-      maxTokens: 2500,
+      maxTokens: 6000,
     })
   );
 

@@ -41,6 +41,21 @@ function downloadArtifact(content: string, outputName: string) {
   URL.revokeObjectURL(url);
 }
 
+// Context for (re)generating a layer: only what she's done BEFORE it. On a
+// second round, her old version of this layer and of later layers would
+// otherwise be fed back in, crowding out her new answers.
+function contextBefore(profile: UserProfile, moduleId: string): UserProfile {
+  const modules = PHASES[0].modules;
+  const idx = modules.findIndex((m) => m.id === moduleId);
+  if (idx < 0) return profile;
+  const trimmed: UserProfile = { ...profile, conversations: { ...profile.conversations } };
+  for (const m of modules.slice(idx)) {
+    if (m.outputKey) delete trimmed[m.outputKey as keyof UserProfile];
+    if (m.id !== moduleId) delete trimmed.conversations![m.id];
+  }
+  return trimmed;
+}
+
 // ─── SYNTHESIS MODULE RUNNER ──────────────────────────────────────────────────
 
 function SynthesisRunner({
@@ -76,7 +91,7 @@ function SynthesisRunner({
     setError(null);
     try {
       // Read fresh so answers redone earlier in this session are included.
-      const profile = readProfile();
+      const profile = contextBefore(readProfile(), moduleId);
       let result = "";
       if (moduleId === "language-detection") {
         const conversations = profile.conversations ?? {};
@@ -424,7 +439,7 @@ function ConversationRunner({
     setError(null);
     try {
       const result = await generateModuleReport({
-        data: { moduleId, messages, generatePrompt, context: buildPhase1Context(profile) },
+        data: { moduleId, messages, generatePrompt, context: buildPhase1Context(contextBefore(readProfile(), moduleId)) },
       });
       saveArtifact(outputKey as keyof UserProfile, result);
       markModuleComplete(`phase1_${moduleId}`);
@@ -472,7 +487,7 @@ function ConversationRunner({
         setMessages(finalMessages);
         saveConversation(moduleId, finalMessages);
       }
-      const result = await generateModuleReport({ data: { moduleId, messages: finalMessages, generatePrompt, context: buildPhase1Context(profile) } });
+      const result = await generateModuleReport({ data: { moduleId, messages: finalMessages, generatePrompt, context: buildPhase1Context(contextBefore(readProfile(), moduleId)) } });
       saveArtifact(outputKey as keyof UserProfile, result);
       markModuleComplete(`phase1_${moduleId}`);
       if (autoAdvance) {
